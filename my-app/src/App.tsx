@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+import { useEffect } from "react";
 import "./App.css";
-import Login from "./page/login/Login";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import Doashboard from "./page/admin/Doashboard";
-import Register from "./page/register/Register";
 import { useSelector } from "react-redux";
 import { StateStore } from "./store/redux/Store";
-import ManagerUserA from "./page/userA/ManagerUserA";
-import ManagerUserB from "./page/userB/ManagerUserB";
-import Navbar from "./component/NavBar/Navbar";
+import { lazy, Suspense } from "react";
+import LoadingCpn from "./component/spin/LoadingCpn";
+
+const Navbar = lazy(() => import("./component/NavBar/Navbar"));
+const Login = lazy(() => import("./page/login/Login"));
+const Register = lazy(() => import("./page/register/Register"));
+const ManagerUserA = lazy(() => import("./page/admin/userA/ManagerUserA"));
+const ManagerUserB = lazy(() => import("./page/admin/userB/ManagerUserB"));
+const Admin = lazy(() => import("./page/admin/Admin"));
 
 function App() {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
@@ -24,17 +26,27 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Routes>
-          <Route path="/" element={<Navbar />} />
-          <Route
-            path="/admin"
-            element={getUser ? <Doashboard /> : <Navigate to="/login" />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/admin/userA" element={getUser ? <ManagerUserA /> : <Navigate to="/login" />} />
-          <Route path="/admin/userB" element={getUser ? <ManagerUserB /> : <Navigate to="/login" />} />
-        </Routes>
+        <Suspense fallback={<LoadingCpn />}>
+          <Routes>
+            <Route path="/" element={<Navbar />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/admin/userA"
+              element={getUser ? <ManagerUserA /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/admin/userB"
+              element={getUser ? <ManagerUserB /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/admin"
+              element={
+                getUser ? <Admin ifoUser={getUser} /> : <Navigate to="/login" />
+              }
+            />
+          </Routes>
+        </Suspense>
       </Router>
     </div>
   );

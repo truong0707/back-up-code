@@ -2,12 +2,14 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { userLoginReduder, userRegisterReducer } from "./reducers/userReducer";
-import { /* deleteUserReducer */ listDataUserReducer } from "./reducers/dataUserReducer";
+import { /* deleteUserReducer */ addDataUserReducer, listDataUserReducer, updateUserReducer } from "./reducers/dataUserReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReduder,
   userRegister: userRegisterReducer,
   dataUsers: listDataUserReducer,
+  updateDataUser: updateUserReducer,
+  addDataUser: addDataUserReducer
 });
 
 const middleware = [thunk];
@@ -18,10 +20,13 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   : null;
 
 export interface StateStore {
+  addDataUser: any;
+  updateDataUser: any;
   userLogin: {
     loading: boolean;
     userInfo: {
       name?: string;
+      email?: string;
     };
     error: boolean;
   };

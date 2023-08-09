@@ -1,0 +1,20 @@
+$primary-color-text-form: #001529;
+$primary-bg-form: #fff;
+$box-sadow-default: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+.titleForm {
+    color: $primary-color-text-form;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.formLR {
+    margin: auto;
+    background: $primary-bg-form;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: $box-sadow-default;
+    margin-top: 10px;
+}

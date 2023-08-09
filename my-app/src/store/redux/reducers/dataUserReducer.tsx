@@ -1,4 +1,7 @@
 import {
+  ADD_USER_FAIL,
+  ADD_USER_RESQUEST,
+  ADD_USER_SUCCESS,
   DELETE_USER_FAIL,
   DELETE_USER_RESQUEST,
   DELETE_USER_SUCCESS,
@@ -22,10 +25,6 @@ export function listDataUserReducer(
       return { ...state, loading: false, listDataUsers: action.payload };
     case GET_DATA_USER_FAIL:
       return { loading: false, error: action.payload };
-    // case DELETE_USER_RESQUEST:
-    //   return { loading: true };
-    // case DELETE_USER_SUCCESS:
-    //   return {...state, loading: false, listDataUsers: action.payload};
     default:
       return state;
   }
@@ -48,17 +47,34 @@ export function deleteUserReducer(
   }
 }
 
-/* delete data users */
+/* update data users */
 export function updateUserReducer(
   state = {},
   action: { type: any; payload: any }
 ) {
   switch (action.type) {
     case UPDATE_USER_RESQUEST:
-      return { loading: true  };
+      return { loading: true };
     case UPDATE_USER_SUCCESS:
-      return { ...state, loading: true };
+      return { ...state, loading: true, msg: action.payload };
     case UPDATE_USER_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+/* add data users */
+export function addDataUserReducer(
+  state = {},
+  action: { type: any; payload: any }
+) {
+  switch (action.type) {
+    case ADD_USER_RESQUEST:
+      return { loading: true };
+    case ADD_USER_SUCCESS:
+      return { ...state, loading: true, msg: action.payload };
+    case ADD_USER_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

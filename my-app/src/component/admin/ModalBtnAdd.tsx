@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Space } from "antd";
-import { updateDataUser } from "../../store/redux/actions/dataUserActions";
+import { addDataUser, updateDataUser } from "../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
 
-export default function ModalBtnUpdate(props: any) {
+export default function ModalBtnAdd(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
   const updateDataUserStore = useSelector(
-    (state: StateStore) => state.updateDataUser
+    (state: StateStore) => state.addDataUser
   );
   const dispatch = useDispatch();
 
@@ -48,23 +48,25 @@ export default function ModalBtnUpdate(props: any) {
       message.error("Số điện thoại phải là 1 number!");
     } else {
       /* Bắn dispatch */
-      const updateUserPromise = updateDataUser(
-        `${props.idUser}`,
-        `${inputs.email}`,
+      const addUserPromise = addDataUser(
         `${inputs.name}`,
-        `${inputs.numberPhone}`
+        `${inputs.email}`,
+        `${inputs.numberPhone}`,
+        `${inputs.password}`
       );
-      updateUserPromise(dispatch);
+      addUserPromise(dispatch);
 
-      const alertSuccess = updateDataUserStore.msg ? (
-        <>{message.success(`Lưu thành công!`)}</>
-      ) : null;
-
-      const alertErr =
-        updateDataUserStore && updateDataUserStore.error ? (
-          <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
+      const alertSuccess =
+        updateDataUserStore && updateDataUserStore.msg ? (
+          <>{message.success(`Lưu thành công!`)}</>
         ) : null;
     }
+    console.log(updateDataUserStore, 'updateDataUserStore')
+
+    const alertErr =
+      updateDataUserStore && updateDataUserStore.error ? (
+        <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
+      ) : null;
   };
 
   useEffect(() => {}, [dispatch]);
@@ -72,11 +74,11 @@ export default function ModalBtnUpdate(props: any) {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Cập nhật
+        {props.contentBtnAdd ? <>{props.contentBtnAdd}</> : "Thêm"}
       </Button>
 
       <Modal
-        title="Cập nhật thông tin"
+        title="Thêm người dùng"
         open={isModalOpen}
         onOk={handleOK}
         onCancel={handleCancel}
@@ -97,7 +99,7 @@ export default function ModalBtnUpdate(props: any) {
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder="Nhập name"
+              placeholder="Nhập tên"
             />
           </Form.Item>
 
@@ -128,6 +130,19 @@ export default function ModalBtnUpdate(props: any) {
               name="numberPhone"
               onChange={handleInputChange}
               placeholder="Nhập số điện thoại"
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            label="password"
+            rules={[{ required: true }, { type: "string", min: 6 }]}
+          >
+            <Input
+              type="password"
+              name="password"
+              onChange={handleInputChange}
+              placeholder="Nhập mật khẩu"
             />
           </Form.Item>
 

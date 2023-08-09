@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../store/redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import Styles from "./Login.module.scss";
+import Styles from "./Form.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StateStore } from "../../store/redux/Store";
 
 export interface TypeObjectInput {
+  email?: string;
   name?: string;
   password?: string;
   comfirmPass?: string;
+  numberPhone?: string
 }
 
 export interface TypeError {
@@ -24,7 +26,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
-  const { /* error, loading, */ userInfo } = userLogin;
+  const { error, /* loading, */ userInfo } = userLogin;
   const redirect = location.search ? location.search.split("=")[1] : "/admin"; // cut path
 
   /* handle navigate khi Login */
@@ -41,7 +43,7 @@ export default function Login() {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Đăng nhập thất bại:", errorInfo);
+    // console.log("Đăng nhập thất bại:", errorInfo);
   };
 
   type FieldType = {
@@ -52,8 +54,8 @@ export default function Login() {
 
   return (
     <>
-      {/* <h1 className={Styles.Login}>đâsd</h1> */}
-      <div className={Styles.formLogin}>
+      <h1 className={Styles.titleForm}>Đăng nhập</h1>
+      <div className={Styles.formLR}>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -85,22 +87,19 @@ export default function Login() {
             valuePropName="checked"
             wrapperCol={{ offset: 8, span: 16 }}
           >
-            <Checkbox>Remember me</Checkbox>
-            {/* <Link to={"/register"}>
-            <p>Chưa có tk? Register here</p>
-          </Link> */}
+            <Checkbox>Ghi nhớ tài khoản</Checkbox>
             <p>
               <Link
                 to={redirect ? `/register?redirect=${redirect}` : "/register"}
               >
-                Create Account
+                Tạo tài khoản
               </Link>
             </p>
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Login
+              Đăng nhập
             </Button>
           </Form.Item>
         </Form>
