@@ -5,6 +5,7 @@ import LoadingCpn from "../spin/LoadingCpn";
 import Styles from "./Admin.module.scss";
 import { StateStore } from "../../store/redux/Store";
 import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
+import AlertNotificate from "../alert/AlertNotificate";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
@@ -18,13 +19,12 @@ interface MyCRUDUserProps {
 }
 
 export default function CRUDUser(props: MyCRUDUserProps) {
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
+  const { msgDeleteError, msgDeleteSuccess } = dataUsers;
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-
-  }, [dispatch])
-
-
+  useEffect(() => {}, [dispatch]);
 
   return (
     <>
@@ -34,6 +34,16 @@ export default function CRUDUser(props: MyCRUDUserProps) {
         </Space>
 
         <Divider orientation="left">{props.title}</Divider>
+
+        <div style={{ width: "99%" }}>
+          {msgDeleteError ? (
+            <>
+              <AlertNotificate msg={msgDeleteError} type={"error"} />
+            </>
+          ) : msgDeleteSuccess ? (
+            <>{alert(msgDeleteSuccess)}</>
+          ) : null}
+        </div>
 
         <Row style={{ textAlign: "center" }}>
           {props.titleCate.map((result: any, index: number) => (

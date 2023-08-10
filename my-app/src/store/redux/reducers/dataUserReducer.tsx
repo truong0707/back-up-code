@@ -25,50 +25,39 @@ export function listDataUserReducer(
       return { ...state, loading: false, listDataUsers: action.payload };
     case GET_DATA_USER_FAIL:
       return { loading: false, error: action.payload };
-    // case DELETE_USER_RESQUEST:
-    //   return { ...state };
-    // case DELETE_USER_SUCCESS:
-    //   return { ...state };
-    // case DELETE_USER_FAIL:
-    //   return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-}
-
-// /* delete data users */
-export function deleteUserReducer(
-  state = {},
-  action: { type: any; payload: any }
-) {
-  switch (action.type) {
     case DELETE_USER_RESQUEST:
-      return { loading: true , msg: action.payload };
+      return { ...state };
     case DELETE_USER_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, msgDeleteSuccess: "Xóa thành công" };
     case DELETE_USER_FAIL:
-      return { loading: false, error: action.payload };
+      return { ...state, msgUpdateError: action.payload };
+    case UPDATE_USER_RESQUEST:
+      return { ...state };
+    case UPDATE_USER_SUCCESS:
+      return { ...state, msgUpdateSuccess: true };
+    case UPDATE_USER_FAIL:
+      return { ...state, msgUpdateError: action.payload };
     default:
       return state;
   }
 }
 
-/* update data users */
-export function updateUserReducer(
-  state = {},
-  action: { type: any; payload: any }
-) {
-  switch (action.type) {
-    case UPDATE_USER_RESQUEST:
-      return { loading: true };
-    case UPDATE_USER_SUCCESS:
-      return { ...state, loading: true, msg: action.payload };
-    case UPDATE_USER_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-}
+// /* update data users */
+// export function updateUserReducer(
+//   state = {},
+//   action: { type: any; payload: any }
+// ) {
+//   switch (action.type) {
+//     case UPDATE_USER_RESQUEST:
+//       return { loading: true };
+//     case UPDATE_USER_SUCCESS:
+//       return { ...state, loading: true, msg: action.payload };
+//     case UPDATE_USER_FAIL:
+//       return { loading: false, error: action.payload };
+//     default:
+//       return state;
+//   }
+// }
 
 /* add data users */
 export function addDataUserReducer(

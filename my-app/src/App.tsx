@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { StateStore } from "./store/redux/Store";
 import { lazy, Suspense } from "react";
 import LoadingCpn from "./component/spin/LoadingCpn";
-import I18n from "./component/I18n";
+import './i18n/i18n';
 
 const Navbar = lazy(() => import("./component/NavBar/Navbar"));
 const Login = lazy(() => import("./page/login/Login"));
@@ -21,13 +21,9 @@ const Admin = lazy(() => import("./page/admin/Admin"));
 
 function App() {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
-  const ss = useSelector((state: StateStore) => state);
-
-  useEffect(() => {}, [ss]);
 
   return (
     <div className="App">
-      {/* <I18n /> */}
       <Router>
         <Suspense fallback={<LoadingCpn />}>
           <Routes>

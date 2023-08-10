@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../store/redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Styles from "./Form.module.scss";

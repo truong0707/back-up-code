@@ -18,7 +18,7 @@ export default function AlertNotificate(props: myAlertNotiProps) {
             showIcon
           />
         ) : (
-          <Alert message="Success Tips" type="success" showIcon />
+          <Alert message={`${props.msg}`} type="success" showIcon />
         )}
         {/* <Alert message="Informational Notes" type="info" showIcon />
         <Alert message="Warning" type="warning" showIcon closable />

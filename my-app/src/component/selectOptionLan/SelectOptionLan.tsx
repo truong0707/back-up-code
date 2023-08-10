@@ -1,23 +1,50 @@
-import React from 'react';
-import { Select, Space } from 'antd';
+import React from "react";
+import { Select, Space } from "antd";
+import { useTranslation, Trans } from "react-i18next";
 
-const handleChange = (value: string) => {
-  console.log(`selected ${value}`);
+
+const lngs: any = {
+  en: { nativeName: "English" },
+  vi: { nativeName: "Tiếng việt" },
 };
 
-const SelectOptionLan: React.FC = () => (
-  <Space wrap>
-    <Select
-      defaultValue="lucy"
-      style={{ width: 120 }}
-      onChange={handleChange}
-      options={[
-        { value: 'vienamese', label: 'Tiếng việt' },
-        { value: 'lucy', label: 'Tiếng anh' },
-        // { value: 'disabled', label: 'Disabled', disabled: true },
-      ]}
-    />
-  </Space>
-);
+export default function SelectOptionLan() {
+  const { t, i18n } = useTranslation();
 
-export default SelectOptionLan;
+  // const handleChange = (value: string) => {
+  //   console.log(`selected ${value}`);
+  //   i18n.changeLanguage(lng);
+  // };
+
+  return (
+    <Space wrap>
+      {Object.keys(lngs).map((lng) => (
+        <button
+          type="submit"
+          key={lng}
+          onClick={() => i18n.changeLanguage(lng)}
+          disabled={i18n.resolvedLanguage === lng}
+        >
+          {lngs[lng].nativeName}
+        </button>
+      ))}
+
+      <p>
+        <Trans i18nKey="decription">Edit</Trans>
+      </p>
+
+      {t("learn")}
+
+      {/* <Select
+        defaultValue="lucy"
+        style={{ width: 120 }}
+        onChange={handleChange}
+        options={[
+          { value: "vienamese", label: "Tiếng việt" },
+          { value: "lucy", label: "Tiếng anh" },
+          // { value: 'disabled', label: 'Disabled', disabled: true },
+        ]}
+      /> */}
+    </Space>
+  );
+}

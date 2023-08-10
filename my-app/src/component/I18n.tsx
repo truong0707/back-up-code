@@ -1,19 +1,16 @@
-import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 
 const lngs: any = {
   en: { nativeName: "English" },
-  de: { nativeName: "Deutsch" },
+  vi: { nativeName: "Deutsch" },
 };
 
 export default function I18n() {
   const { t, i18n } = useTranslation();
 
-  console.log(i18n, "idad");
-
   return (
     <div>
-      <p>
+      {/* <p>
         {Object.keys(lngs).map((lng) => (
           <button
             type="submit"
@@ -24,13 +21,10 @@ export default function I18n() {
             {lngs[lng].nativeName}
           </button>
         ))}
-      </p>
+      </p> */}
 
-      <p>
-        <Trans i18nKey="decription">Edit</Trans>
-      </p>
-
-      {t("learn")}
+      {/*  */}
+    
     </div>
   );
 }

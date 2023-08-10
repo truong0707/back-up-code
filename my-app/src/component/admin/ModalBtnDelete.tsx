@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../store/redux/Store";
 
 export default function ModalBtn(props: any) {
-  const ss = useSelector((state: StateStore) => state.deleteDataUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 

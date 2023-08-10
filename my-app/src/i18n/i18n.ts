@@ -13,14 +13,14 @@ i18next
     resources: {
       en: {
         translation: {
-          learn: "learn ss",
+          learn: "learn",
           decription: "Edit",
         },
       },
-      de: {
+      vi: {
         translation: {
-          learn: "lerne ss",
-          decription: "Edittier",
+          learn: "Học",
+          decription: "Chỉnh sửa",
         },
       },
     },

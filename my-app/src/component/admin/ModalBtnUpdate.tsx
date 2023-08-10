@@ -5,13 +5,14 @@ import { Button, Form, Input, message, Space } from "antd";
 import { updateDataUser } from "../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
+import AlertNotificate from "../alert/AlertNotificate";
 
 export default function ModalBtnUpdate(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
-  const updateDataUserStore = useSelector(
-    (state: StateStore) => state.updateDataUser
-  );
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
+
+  console.log(dataUsers, "updateDataUserStore");
   const dispatch = useDispatch();
 
   /* handle change input */
@@ -56,13 +57,9 @@ export default function ModalBtnUpdate(props: any) {
       );
       updateUserPromise(dispatch);
 
-      const alertSuccess = updateDataUserStore.msg ? (
-        <>{message.success(`Lưu thành công!`)}</>
-      ) : null;
-
       const alertErr =
-        updateDataUserStore && updateDataUserStore.error ? (
-          <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
+        dataUsers.msgUpdateError && dataUsers.msgUpdateError ? (
+          <>{message.error(`Lưu thất bại!- ${dataUsers.msgUpdateError}`)}</>
         ) : null;
     }
   };
@@ -81,6 +78,7 @@ export default function ModalBtnUpdate(props: any) {
         onOk={handleOK}
         onCancel={handleCancel}
       >
+        {dataUsers.msgUpdateSuccess ? <AlertNotificate msg={"Update thành công"} type={""}/> : null}
         {/* Form update  */}
         <Form
           form={form}
