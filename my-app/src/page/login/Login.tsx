@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Alert, Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../store/redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Styles from "./Form.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StateStore } from "../../store/redux/Store";
+import AlertNotificate from "../../component/alert/AlertNotificate";
 
 export interface TypeObjectInput {
   email?: string;
   name?: string;
   password?: string;
   comfirmPass?: string;
-  numberPhone?: string
+  numberPhone?: string;
 }
 
 export interface TypeError {
@@ -54,7 +55,14 @@ export default function Login() {
 
   return (
     <>
-      <h1 className={Styles.titleForm}>Đăng nhập</h1>
+      <div style={{ margin: "auto", width: "32%" }}>
+        {error ? (
+          <AlertNotificate msg={`${error}`} type="error" />
+        ) : (
+          <h1 className={Styles.titleForm}>Đăng nhập</h1>
+        )}
+      </div>
+
       <div className={Styles.formLR}>
         <Form
           name="basic"

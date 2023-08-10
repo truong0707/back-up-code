@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { StateStore } from "./store/redux/Store";
 import { lazy, Suspense } from "react";
 import LoadingCpn from "./component/spin/LoadingCpn";
+import I18n from "./component/I18n";
 
 const Navbar = lazy(() => import("./component/NavBar/Navbar"));
 const Login = lazy(() => import("./page/login/Login"));
@@ -18,6 +19,7 @@ const ManagerUserA = lazy(() => import("./page/admin/userA/ManagerUserA"));
 const ManagerUserB = lazy(() => import("./page/admin/userB/ManagerUserB"));
 const Admin = lazy(() => import("./page/admin/Admin"));
 
+
 function App() {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
 
@@ -25,6 +27,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <I18n/> */}
       <Router>
         <Suspense fallback={<LoadingCpn />}>
           <Routes>

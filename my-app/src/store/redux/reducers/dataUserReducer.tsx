@@ -37,9 +37,9 @@ export function deleteUserReducer(
 ) {
   switch (action.type) {
     case DELETE_USER_RESQUEST:
-      return { loading: true /* listDataUsers: [] */ };
+      return { loading: true , msg: action.payload };
     case DELETE_USER_SUCCESS:
-      return { ...state, loading: true /* listDataUsers: action.payload */ };
+      return { ...state, loading: true };
     case DELETE_USER_FAIL:
       return { loading: false, error: action.payload };
     default:

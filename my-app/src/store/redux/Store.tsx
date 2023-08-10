@@ -2,13 +2,14 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { userLoginReduder, userRegisterReducer } from "./reducers/userReducer";
-import { /* deleteUserReducer */ addDataUserReducer, listDataUserReducer, updateUserReducer } from "./reducers/dataUserReducer";
+import { /* deleteUserReducer */ addDataUserReducer, deleteUserReducer, listDataUserReducer, updateUserReducer } from "./reducers/dataUserReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReduder,
   userRegister: userRegisterReducer,
   dataUsers: listDataUserReducer,
   updateDataUser: updateUserReducer,
+  deleteDataUser: deleteUserReducer,
   addDataUser: addDataUserReducer
 });
 

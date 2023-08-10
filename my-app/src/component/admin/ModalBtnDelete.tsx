@@ -1,9 +1,11 @@
 import React, {useState } from "react";
 import { Button, Modal } from "antd";
 import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { StateStore } from "../../store/redux/Store";
 
 export default function ModalBtn(props: any) {
+  const ss = useSelector((state: StateStore) => state); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,6 +20,7 @@ export default function ModalBtn(props: any) {
 
     const deleteUserPromise = deleteDataUser(props.id);
     deleteUserPromise(dispatch);
+    console.log(ss, "ss")
   };
 
   const handleCancel = () => {

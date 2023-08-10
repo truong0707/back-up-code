@@ -2,6 +2,7 @@ import MasterLayoutDoashBoard from "../../layouts/MasterLayoutDoashBoard";
 import { Button, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/redux/actions/userActions";
+import SelectOptionLan from "../../component/selectOptionLan/SelectOptionLan";
 
 interface MypropsAmin {
   ifoUser: {
@@ -26,6 +27,8 @@ export default function Admin(props: MypropsAmin) {
           <p>
             Chào : <b>{props.ifoUser.email}</b>
           </p>
+
+          <SelectOptionLan/>
           <Button onClick={handleLogOut} type="primary">Đăng Xuất</Button>
         </Space>
       </MasterLayoutDoashBoard>

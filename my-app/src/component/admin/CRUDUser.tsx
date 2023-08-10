@@ -1,8 +1,9 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { Col, Divider, Row, Space } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../spin/LoadingCpn";
 import Styles from "./Admin.module.scss";
+import { StateStore } from "../../store/redux/Store";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
@@ -12,7 +13,7 @@ interface MyCRUDUserProps {
   title: String;
   data: [];
   titleCate: any;
-  contentBtnAdd?: string,
+  contentBtnAdd?: string;
 }
 
 export default function CRUDUser(props: MyCRUDUserProps) {
@@ -24,7 +25,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
     <>
       <Suspense fallback={<LoadingCpn />}>
         <Space>
-          <ModalBtnAdd  contentBtnAdd={props.contentBtnAdd} />
+          <ModalBtnAdd contentBtnAdd={props.contentBtnAdd} />
         </Space>
 
         <Divider orientation="left">{props.title}</Divider>
@@ -32,6 +33,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
         <Row style={{ textAlign: "center" }}>
           {props.titleCate.map((result: any, index: number) => (
             <Col
+              key={index}
               className={Styles.Col_cate}
               span={result.span}
               order={index}
@@ -40,7 +42,6 @@ export default function CRUDUser(props: MyCRUDUserProps) {
             </Col>
           ))}
         </Row>
-
 
         {/* show data */}
         {props.data.map((data: any) => (
