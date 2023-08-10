@@ -21,7 +21,7 @@ export function login(email?: string, password?: string) {
       };
       // call api
       const { data } = await axios.post(
-        `http://localhost:3002/login`,
+        `http://localhost:3000/login`,
         { email, password },
         config
       );
