@@ -4,9 +4,12 @@ import Styles from "./ManagerUserA.module.scss";
 import { listDataUser } from "../../../store/redux/actions/dataUserActions";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
+import { useTranslation } from "react-i18next";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserA() {
+  const { t } = useTranslation(['homeAdmin', 'adminManagerA']);
+
   const dataUsers = useSelector((state: any) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { loading, error, listDataUsers } = dataUsers;
 
@@ -37,7 +40,7 @@ export default function ManagerUserA() {
     },
   ];
 
-  
+
 
   useEffect(() => {
     const productListPromise = listDataUser();
@@ -55,7 +58,7 @@ export default function ManagerUserA() {
             <Suspense fallback={<LoadingCpn />}>
               {/* Tái sử dụng CRUD component */}
               <CRUDUser
-                title={"Bảng quản lý A"}
+                title={`${t('admin managerA.manager_boardA'), 'A'}`}
                 data={listDataUsers}
                 titleCate={titleCateTable}
                 contentBtnAdd={"Thêm người dùng loại A"}

@@ -9,7 +9,7 @@ const lngs: any = {
 };
 
 export default function SelectOptionLan() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(['homeAdmin']);
 
   // const handleChange = (value: string) => {
   //   console.log(`selected ${value}`);
@@ -29,11 +29,12 @@ export default function SelectOptionLan() {
         </button>
       ))}
 
-      <p>
-        <Trans i18nKey="decription">Edit</Trans>
+      {/* <p>
+        <Trans i18nKey="admin home.hi">Edit</Trans>
       </p>
 
-      {t("learn")}
+      {t('admin home.hi')} */}
+      {t('admin managerA.manager_boardA')}
 
       {/* <Select
         defaultValue="lucy"
