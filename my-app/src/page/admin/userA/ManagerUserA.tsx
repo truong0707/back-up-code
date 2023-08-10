@@ -7,6 +7,13 @@ import LoadingCpn from "../../../component/spin/LoadingCpn";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserA() {
+  const dataUsers = useSelector((state: any) => state.dataUsers); // lấy dữ liệu từ kho redux
+  const { loading, error, listDataUsers } = dataUsers;
+
+  const deleteDataUsers = useSelector((state: any) => state); // lấy dữ liệu từ kho redux
+  const { loadingDelete } = deleteDataUsers;
+  const dispatch = useDispatch();
+
   const titleCateTable = [
     {
       nameCate: "id",
@@ -30,14 +37,13 @@ export default function ManagerUserA() {
     },
   ];
 
-  const dataUsers = useSelector((state: any) => state.dataUsers); // lấy dữ liệu từ kho redux
-  const { loading, error, listDataUsers } = dataUsers;
-  const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const productListPromise = listDataUser();
     productListPromise(dispatch);
-  }, [dispatch]);
+    console.log(loadingDelete, 'loadingDelete')
+  }, [dispatch, loadingDelete]);
 
   return (
     <MasterLayoutDoashBoard>

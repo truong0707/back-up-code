@@ -19,15 +19,15 @@ const ManagerUserA = lazy(() => import("./page/admin/userA/ManagerUserA"));
 const ManagerUserB = lazy(() => import("./page/admin/userB/ManagerUserB"));
 const Admin = lazy(() => import("./page/admin/Admin"));
 
-
 function App() {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
+  const ss = useSelector((state: StateStore) => state);
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, [ss]);
 
   return (
     <div className="App">
-      {/* <I18n/> */}
+      {/* <I18n /> */}
       <Router>
         <Suspense fallback={<LoadingCpn />}>
           <Routes>

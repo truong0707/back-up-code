@@ -21,6 +21,7 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   : null;
 
 export interface StateStore {
+  deleteDataUser: any;
   addDataUser: any;
   updateDataUser: any;
   userLogin: {

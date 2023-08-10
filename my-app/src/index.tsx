@@ -4,13 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import store from './store/redux/Store';
+import store from "./store/redux/Store";
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store} >
+  <Provider store={store}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

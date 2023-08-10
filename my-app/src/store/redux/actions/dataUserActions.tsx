@@ -13,14 +13,14 @@ import {
   UPDATE_USER_RESQUEST,
   UPDATE_USER_SUCCESS,
 } from "../constants/dataUserContans";
-import axios from "axios";
+import userServices from "../../../services/user";
 
 export function listDataUser() {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: GET_DATA_USER_RESQUEST });
-      const { data } = await axios.get(`http://localhost:3000/users`); // call data
-      dispatch({ type: GET_DATA_USER_SUCCESS, payload: data }); // khi mà success thì send data
+      const { data } = await userServices.getUserApi();
+      dispatch({ type: GET_DATA_USER_SUCCESS, payload: data });
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -40,12 +40,17 @@ export function listDataUser() {
 }
 
 /* delete user */
-export function deleteDataUser(id: Number) {
+export function deleteDataUser(id: string) {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: DELETE_USER_RESQUEST });
-      const { data } = await axios.delete(`http://localhost:3000/users/${id}`); // call data
+      const { data } = await userServices.deleteUserApi(id);
       dispatch({ type: DELETE_USER_SUCCESS, payload: data });
+
+      /* refresh data */
+      const dataRefresh = await userServices.getUserApi();
+      dispatch({ type: GET_DATA_USER_RESQUEST });
+      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -66,7 +71,7 @@ export function deleteDataUser(id: Number) {
 
 /* update user */
 export function updateDataUser(
-  id: String,
+  id: string,
   email: string,
   name: string,
   numberPhone: string
@@ -74,17 +79,18 @@ export function updateDataUser(
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: UPDATE_USER_RESQUEST });
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.put(
-        `http://localhost:3000/users/${id}`,
-        { name, email, numberPhone },
-        config
-      ); // call data
+      const { data } = await userServices.updateUserApi(
+        id,
+        name,
+        email,
+        numberPhone
+      );
       dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
+
+      /* refresh data */
+      const dataRefresh = await userServices.getUserApi();
+      dispatch({ type: GET_DATA_USER_RESQUEST });
+      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -113,17 +119,18 @@ export function addDataUser(
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: ADD_USER_RESQUEST });
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        `http://localhost:3000/users`,
-        { name, email, numberPhone, password },
-        config
-      ); // call data
+      const { data } = await userServices.addUserApi(
+        name,
+        email,
+        numberPhone,
+        password
+      );
       dispatch({ type: ADD_USER_SUCCESS, payload: data });
+
+      /* refresh data */
+      const dataRefresh = await userServices.getUserApi();
+      dispatch({ type: GET_DATA_USER_RESQUEST });
+      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
     } catch (error: any) {
       if (error.message) {
         dispatch({

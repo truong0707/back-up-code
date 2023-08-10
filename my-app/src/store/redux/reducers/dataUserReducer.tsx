@@ -25,12 +25,18 @@ export function listDataUserReducer(
       return { ...state, loading: false, listDataUsers: action.payload };
     case GET_DATA_USER_FAIL:
       return { loading: false, error: action.payload };
+    // case DELETE_USER_RESQUEST:
+    //   return { ...state };
+    // case DELETE_USER_SUCCESS:
+    //   return { ...state };
+    // case DELETE_USER_FAIL:
+    //   return { loading: false, error: action.payload };
     default:
       return state;
   }
 }
 
-/* delete data users */
+// /* delete data users */
 export function deleteUserReducer(
   state = {},
   action: { type: any; payload: any }
@@ -39,7 +45,7 @@ export function deleteUserReducer(
     case DELETE_USER_RESQUEST:
       return { loading: true , msg: action.payload };
     case DELETE_USER_SUCCESS:
-      return { ...state, loading: true };
+      return { ...state, loading: false };
     case DELETE_USER_FAIL:
       return { loading: false, error: action.payload };
     default:

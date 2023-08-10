@@ -1,9 +1,10 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Col, Divider, Row, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../spin/LoadingCpn";
 import Styles from "./Admin.module.scss";
 import { StateStore } from "../../store/redux/Store";
+import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
@@ -19,7 +20,11 @@ interface MyCRUDUserProps {
 export default function CRUDUser(props: MyCRUDUserProps) {
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+
+  }, [dispatch])
+
+
 
   return (
     <>
@@ -67,6 +72,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
                   /* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */ id={
                     data.id
                   }
+                  // handleDelete={handleDelete}
                   email={data.email}
                 />
                 <ModalBtnUpdate idUser={data.id} />

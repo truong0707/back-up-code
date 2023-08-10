@@ -1,6 +1,6 @@
 import MasterLayoutDoashBoard from "../../layouts/MasterLayoutDoashBoard";
 import { Button, Space } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../store/redux/actions/userActions";
 import SelectOptionLan from "../../component/selectOptionLan/SelectOptionLan";
 
@@ -11,7 +11,6 @@ interface MypropsAmin {
 }
 
 export default function Admin(props: MypropsAmin) {
-  // const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
   const dispatch = useDispatch();
 
   /* Submit Login */

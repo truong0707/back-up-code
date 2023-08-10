@@ -9,22 +9,14 @@ import {
 } from "../constants/UserContants";
 import axios from "axios";
 import { Dispatch } from "redux";
+import userServices from "../../../services/user";
 
 /* Login */
-export function login(email?: string, password?: string) {
+export function login(email: string, password: string) {
   return async (dispatch: Dispatch<UserDispatchTypes>) => {
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      // call api
-      const { data } = await axios.post(
-        `http://localhost:3000/login`,
-        { email, password },
-        config
-      );
+      const { data } = await userServices.userLoginApi(email, password)
+
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
       /// save localStorage
@@ -59,27 +51,16 @@ export const logout = () => (dispatch: Dispatch) => {
 // register
 export const register =
   (
-    name?: string,
-    email?: string,
-    password?: string,
-    confirmPass?: string,
-    numberPhone?: number
+    name: string,
+    email: string,
+    password: string,
+    confirmPass: string,
+    numberPhone: string
   ) =>
   async (dispatch: Dispatch) => {
     try {
-      dispatch({ type: USER_REGISTER_RESQUEST });
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      // call api
-      const { data } = await axios.post(
-        `http://localhost:3000/register`,
-        { name, email, password, confirmPass, numberPhone },
-        config
-      );
+      dispatch({ type: USER_REGISTER_RESQUEST }); 
+      const { data } = await userServices.userRegisterApi(name, email, password, confirmPass, numberPhone)
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 
       /// save localStorage

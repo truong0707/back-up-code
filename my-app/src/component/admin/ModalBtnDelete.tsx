@@ -1,14 +1,13 @@
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../store/redux/Store";
 
 export default function ModalBtn(props: any) {
-  const ss = useSelector((state: StateStore) => state); 
+  const ss = useSelector((state: StateStore) => state.deleteDataUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -20,12 +19,15 @@ export default function ModalBtn(props: any) {
 
     const deleteUserPromise = deleteDataUser(props.id);
     deleteUserPromise(dispatch);
-    console.log(ss, "ss")
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <>
@@ -39,7 +41,9 @@ export default function ModalBtn(props: any) {
         onOk={handleDelete}
         onCancel={handleCancel}
       >
-        <p>Bạn có chắc muốn xóa user: <b>{props.email}</b> không?</p>
+        <p>
+          Bạn có chắc muốn xóa user: <b>{props.email}</b> không?
+        </p>
       </Modal>
     </>
   );
