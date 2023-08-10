@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { StateStore } from "../../store/redux/Store";
 import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "../login/Form.module.scss";
+import AlertNotificate from "../../component/alert/AlertNotificate";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -50,7 +51,14 @@ export default function Register() {
 
   return (
     <>
-      <h1 className={Styles.titleForm}>Đăng ký</h1>
+
+      <div style={{ margin: "auto", width: "32%" }}>
+        {error ? (
+          <AlertNotificate msg={`${error}`} type="error" />
+        ) : (
+          <h1 className={Styles.titleForm}>Đăng Ký</h1>
+        )}
+      </div>
 
       <div className={Styles.formLR}>
         <Form
