@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 import { useDispatch } from "react-redux";
@@ -24,10 +24,6 @@ export default function ModalBtn(props: any) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  useEffect(() => {
-    
-  }, [])
 
   return (
     <>

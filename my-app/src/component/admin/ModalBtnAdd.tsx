@@ -6,8 +6,10 @@ import { addDataUser } from "../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
 import { useTranslation } from "react-i18next";
+import AlertNotificate from "../alert/AlertNotificate";
 
 export default function ModalBtnAdd(props: any) {
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
   const updateDataUserStore = useSelector(
@@ -58,10 +60,10 @@ export default function ModalBtnAdd(props: any) {
       );
       addUserPromise(dispatch);
 
-      const alertSuccess =
-        updateDataUserStore && updateDataUserStore.msg ? (
-          <>{message.success(`Lưu thành công!`)}</>
-        ) : null;
+      // const alertSuccess =
+      //   updateDataUserStore && updateDataUserStore.msg ? (
+      //     <>{message.success(`Lưu thành công!`)}</>
+      //   ) : null;
     }
 
     const alertErr =
@@ -84,6 +86,9 @@ export default function ModalBtnAdd(props: any) {
         onOk={handleOK}
         onCancel={handleCancel}
       >
+        {dataUsers.msgAddSuccess ? (
+          <AlertNotificate msg={"Add thành công"} type={""} />
+        ) : null}
         {/* Form update  */}
         <Form
           form={form}

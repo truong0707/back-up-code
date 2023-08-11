@@ -1,6 +1,6 @@
 import React from "react";
-import { Select, Space } from "antd";
-import { useTranslation, Trans } from "react-i18next";
+import { Select, /* Space */ } from "antd";
+import { useTranslation, /* Trans */ } from "react-i18next";
 
 // const lngs: any = {
 //   en: { nativeName: "English" },
@@ -8,7 +8,7 @@ import { useTranslation, Trans } from "react-i18next";
 // };
 
 export default function SelectOptionLan() {
-  const { t, i18n } = useTranslation(["homeAdmin"]);
+  const { i18n } = useTranslation(["homeAdmin"]);
 
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
@@ -18,7 +18,7 @@ export default function SelectOptionLan() {
     <Select
       showSearch
       style={{ width: 200 }}
-      placeholder="Search to Select"
+      placeholder="Chọn ngôn ngữ"
       optionFilterProp="children"
       filterOption={(input, option) => (option?.label ?? "").includes(input)}
       filterSort={(optionA, optionB) =>

@@ -37,40 +37,12 @@ export function listDataUserReducer(
       return { ...state, msgUpdateSuccess: true };
     case UPDATE_USER_FAIL:
       return { ...state, msgUpdateError: action.payload };
-    default:
-      return state;
-  }
-}
-
-// /* update data users */
-// export function updateUserReducer(
-//   state = {},
-//   action: { type: any; payload: any }
-// ) {
-//   switch (action.type) {
-//     case UPDATE_USER_RESQUEST:
-//       return { loading: true };
-//     case UPDATE_USER_SUCCESS:
-//       return { ...state, loading: true, msg: action.payload };
-//     case UPDATE_USER_FAIL:
-//       return { loading: false, error: action.payload };
-//     default:
-//       return state;
-//   }
-// }
-
-/* add data users */
-export function addDataUserReducer(
-  state = {},
-  action: { type: any; payload: any }
-) {
-  switch (action.type) {
     case ADD_USER_RESQUEST:
-      return { loading: true };
+      return { ...state };
     case ADD_USER_SUCCESS:
-      return { ...state, loading: true, msg: action.payload };
+      return { ...state, msgAddSuccess: true };
     case ADD_USER_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, msgAddError: action.payload };
     default:
       return state;
   }

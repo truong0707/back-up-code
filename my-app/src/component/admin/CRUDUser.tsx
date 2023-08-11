@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { Col, Divider, Row, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../spin/LoadingCpn";
@@ -20,9 +20,7 @@ interface MyCRUDUserProps {
 export default function CRUDUser(props: MyCRUDUserProps) {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
   const { msgDeleteError, msgDeleteSuccess } = dataUsers;
-
   const dispatch = useDispatch();
-
   useEffect(() => {}, [dispatch]);
 
   return (

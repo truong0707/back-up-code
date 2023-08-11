@@ -7,7 +7,6 @@ import {
   USER_REGISTER_SUCCESS,
   UserDispatchTypes,
 } from "../constants/UserContants";
-import axios from "axios";
 import { Dispatch } from "redux";
 import userServices from "../../../services/user";
 
