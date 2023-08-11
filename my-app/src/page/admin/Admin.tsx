@@ -13,7 +13,7 @@ interface MypropsAmin {
 
 export default function Admin(props: MypropsAmin) {
   const dispatch = useDispatch();
-  const { t } = useTranslation(['homeAdmin']);
+  const { t } = useTranslation(['homeAdmin', 'adminManagerA']);
 
   /* Submit Login */
   const handleLogOut = (values: any) => {

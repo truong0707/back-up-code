@@ -25,7 +25,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-
   const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
   const { error, /* loading, */ userInfo } = userLogin;
   const redirect = location.search ? location.search.split("=")[1] : "/admin"; // cut path
@@ -38,14 +37,15 @@ export default function Login() {
   }, [userInfo, navigate, redirect]);
 
   /* Submit Login */
-  const handleSubmitLogin = (values: any) => {
+  const handleSubmitLogin = (values: {
+    username: string;
+    password: string;
+  }) => {
     const loginPromise = login(values.username, values.password);
     loginPromise(dispatch);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    // console.log("Đăng nhập thất bại:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo: any) => {};
 
   type FieldType = {
     username?: string;
@@ -97,9 +97,7 @@ export default function Login() {
           >
             <Checkbox>Ghi nhớ tài khoản</Checkbox>
             <p>
-              <Link
-                to={redirect ? `/register?redirect=${redirect}` : "/register"}
-              >
+              <Link to={redirect ? `/register?redirect=` : "/register"}>
                 Tạo tài khoản
               </Link>
             </p>

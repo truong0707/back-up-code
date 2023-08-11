@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,6 +9,7 @@ import { StateStore } from "./store/redux/Store";
 import { lazy, Suspense } from "react";
 import LoadingCpn from "./component/spin/LoadingCpn";
 import './i18n/i18n';
+import "./App.css";
 
 const Navbar = lazy(() => import("./component/NavBar/Navbar"));
 const Login = lazy(() => import("./page/login/Login"));
@@ -50,5 +49,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Space } from "antd";
-import { addDataUser, updateDataUser } from "../../store/redux/actions/dataUserActions";
+import { addDataUser } from "../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
+import { useTranslation } from "react-i18next";
 
 export default function ModalBtnAdd(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +14,7 @@ export default function ModalBtnAdd(props: any) {
     (state: StateStore) => state.addDataUser
   );
   const dispatch = useDispatch();
+  const { t } = useTranslation(['homeAdmin']);
 
   /* handle change input */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +80,7 @@ export default function ModalBtnAdd(props: any) {
       </Button>
 
       <Modal
-        title="Thêm người dùng"
+        title={`${t(`admin home.add_user`)}`}
         open={isModalOpen}
         onOk={handleOK}
         onCancel={handleCancel}
@@ -91,21 +93,21 @@ export default function ModalBtnAdd(props: any) {
           autoComplete="off"
         >
           <Form.Item
-            name="name"
-            label="Name"
+            name={`${t(`admin home.name`)}`}
+            label={`${t(`admin home.name`)}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder="Nhập tên"
+              placeholder={`${t(`admin home.name`)}`}
             />
           </Form.Item>
 
           <Form.Item
-            name="email"
-            label="Email"
+            name={`${t(`admin home.email`)}`}
+            label={`${t(`admin home.email`)}`}
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
@@ -116,40 +118,40 @@ export default function ModalBtnAdd(props: any) {
               type="email"
               name="email"
               onChange={handleInputChange}
-              placeholder="Nhập email"
+              placeholder={`${t(`admin home.email`)}`}
             />
           </Form.Item>
 
           <Form.Item
-            name="phoneNumber"
-            label="phoneNumber"
+            name={`${t(`admin home.phoneNumber`)}`}
+            label={`${t(`admin home.phoneNumber`)}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="numberPhone"
               name="numberPhone"
               onChange={handleInputChange}
-              placeholder="Nhập số điện thoại"
+              placeholder={`${t(`admin home.phoneNumber`)}`}
             />
           </Form.Item>
 
           <Form.Item
-            name="password"
-            label="password"
+            name={`${t(`admin home.password`)}`}
+            label={`${t(`admin home.password`)}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="password"
               name="password"
               onChange={handleInputChange}
-              placeholder="Nhập mật khẩu"
+              placeholder={`${t(`admin home.password`)}`}
             />
           </Form.Item>
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                Submit
+                {t(`admin home.submit`)}
               </Button>
             </Space>
           </Form.Item>

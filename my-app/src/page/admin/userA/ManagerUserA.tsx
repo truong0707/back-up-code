@@ -8,11 +8,9 @@ import { useTranslation } from "react-i18next";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserA() {
-  const { t } = useTranslation(['homeAdmin', 'adminManagerA']);
-
+  const { t } = useTranslation(['homeAdmin']);
   const dataUsers = useSelector((state: any) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { loading, error, listDataUsers } = dataUsers;
-
   const deleteDataUsers = useSelector((state: any) => state); // lấy dữ liệu từ kho redux
   const { loadingDelete } = deleteDataUsers;
   const dispatch = useDispatch();
@@ -23,19 +21,19 @@ export default function ManagerUserA() {
       span: 1,
     },
     {
-      nameCate: "Tên",
+      nameCate: `${t('admin home.name')} A`,
       span: 6,
     },
     {
-      nameCate: "Email",
+      nameCate: `${t('admin home.email')} A`,
       span: 6,
     },
     {
-      nameCate: "Sô điện thoại",
+      nameCate: `${t('admin home.phoneNumber')} A`,
       span: 6,
     },
     {
-      nameCate: "Tùy chọn",
+      nameCate: `${t('admin home.option')} A`,
       span: 5,
     },
   ];
@@ -45,7 +43,6 @@ export default function ManagerUserA() {
   useEffect(() => {
     const productListPromise = listDataUser();
     productListPromise(dispatch);
-    console.log(loadingDelete, 'loadingDelete')
   }, [dispatch, loadingDelete]);
 
   return (
@@ -58,10 +55,10 @@ export default function ManagerUserA() {
             <Suspense fallback={<LoadingCpn />}>
               {/* Tái sử dụng CRUD component */}
               <CRUDUser
-                title={`${t('admin managerA.manager_boardA'), 'A'}`}
+                title={`${t('admin home.table_manager_type')} A`}
                 data={listDataUsers}
                 titleCate={titleCateTable}
-                contentBtnAdd={"Thêm người dùng loại A"}
+                contentBtnAdd={`${t('admin home.add_user_type')} A`}
               />
             </Suspense>
           ) : (

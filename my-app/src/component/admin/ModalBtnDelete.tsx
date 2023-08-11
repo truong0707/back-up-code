@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
-import { useDispatch, useSelector } from "react-redux";
-import { StateStore } from "../../store/redux/Store";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function ModalBtn(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const { t } = useTranslation(['homeAdmin']);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -31,17 +32,17 @@ export default function ModalBtn(props: any) {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Xóa user
+        {t('admin home.delete')}
       </Button>
 
       <Modal
-        title="Xóa người dùng này?"
+        title={t('admin home.delete_user')}
         open={isModalOpen}
         onOk={handleDelete}
         onCancel={handleCancel}
       >
         <p>
-          Bạn có chắc muốn xóa user: <b>{props.email}</b> không?
+          {t(`admin home.want_delete_user`)} <b>{props.email}</b>?
         </p>
       </Modal>
     </>

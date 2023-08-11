@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../spin/LoadingCpn";
 import Styles from "./Admin.module.scss";
 import { StateStore } from "../../store/redux/Store";
-import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 import AlertNotificate from "../alert/AlertNotificate";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));

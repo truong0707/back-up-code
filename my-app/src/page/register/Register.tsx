@@ -11,20 +11,20 @@ export default function Register() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-
   const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
   const { error, /*  loading, */ userInfo } = userLogin;
-  const redirect = location.search ? location.search.split("=")[1] : "/"; // cut path
+  const redirect = location.search ? location.search.split("=")[1] : "/admin"; // cut path
 
-  /* handle navigate khi regis */
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect + "login");
-    }
-  }, [userInfo, navigate, redirect]);
+  useEffect(() => {}, [userInfo, navigate, redirect]);
 
   /* SUbmit */
-  const handleSubmitRegister = (values: any) => {
+  const handleSubmitRegister = (values: {
+    name: string;
+    email: string;
+    password: string;
+    confirmPass: string;
+    numberPhone: string;
+  }) => {
     const registerPromise = register(
       values.name,
       values.email,
@@ -36,9 +36,7 @@ export default function Register() {
     registerPromise(dispatch);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    // console.log("Đăng nhập thất bại:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo: any) => {};
 
   type FieldType = {
     name?: string;
@@ -51,7 +49,6 @@ export default function Register() {
 
   return (
     <>
-
       <div style={{ margin: "auto", width: "32%" }}>
         {error ? (
           <AlertNotificate msg={`${error}`} type="error" />
@@ -84,7 +81,7 @@ export default function Register() {
             name="email"
             rules={[{ required: true, message: "Please input your email!" }]}
           >
-            <Input />
+            <Input type="email" />
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -94,7 +91,7 @@ export default function Register() {
               { required: true, message: "Please input your number phone!" },
             ]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
 
           <Form.Item<FieldType>

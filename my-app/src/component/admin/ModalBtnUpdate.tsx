@@ -6,14 +6,14 @@ import { updateDataUser } from "../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../alert/AlertNotificate";
+import { useTranslation } from "react-i18next";
 
 export default function ModalBtnUpdate(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
-
-  console.log(dataUsers, "updateDataUserStore");
   const dispatch = useDispatch();
+  const { t } = useTranslation(["homeAdmin"]);
 
   /* handle change input */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,16 +69,18 @@ export default function ModalBtnUpdate(props: any) {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Cập nhật
+        {t("admin home.update")}
       </Button>
 
       <Modal
-        title="Cập nhật thông tin"
+        title={`${t("admin home.update_info")}`}
         open={isModalOpen}
         onOk={handleOK}
         onCancel={handleCancel}
       >
-        {dataUsers.msgUpdateSuccess ? <AlertNotificate msg={"Update thành công"} type={""}/> : null}
+        {dataUsers.msgUpdateSuccess ? (
+          <AlertNotificate msg={"Update thành công"} type={""} />
+        ) : null}
         {/* Form update  */}
         <Form
           form={form}
@@ -87,21 +89,21 @@ export default function ModalBtnUpdate(props: any) {
           autoComplete="off"
         >
           <Form.Item
-            name="name"
-            label="Name"
+            name={`${t("admin home.name")}`}
+            label={`${t("admin home.name")}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder="Nhập name"
+              placeholder={`${t('admin home.name')}`}
             />
           </Form.Item>
 
           <Form.Item
-            name="email"
-            label="Email"
+            name={`${t("admin home.email")}`}
+            label={`${t("admin home.email")}`}
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
@@ -112,27 +114,27 @@ export default function ModalBtnUpdate(props: any) {
               type="email"
               name="email"
               onChange={handleInputChange}
-              placeholder="Nhập email"
+              placeholder={`${t('admin home.email')}`}
             />
           </Form.Item>
 
           <Form.Item
-            name="phoneNumber"
-            label="phoneNumber"
+            name={`${t("admin home.phoneNumber")}`}
+            label={`${t("admin home.phoneNumber")}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="numberPhone"
               name="numberPhone"
               onChange={handleInputChange}
-              placeholder="Nhập số điện thoại"
+              placeholder={`${t('admin home.phoneNumber')}`}
             />
           </Form.Item>
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                Submit
+                {t("admin home.submit")}
               </Button>
             </Space>
           </Form.Item>

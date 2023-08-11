@@ -1,0 +1,23 @@
+{
+  "admin home": {
+    "admin" : "Quản trị",
+    "hi_user": "Chào người dùng",
+    "log_out": "Đăng xuất",
+    "manager_users_type" : "Quản lý người dùng loại",
+    "table_manager_type" : "Bảng quản lý người dùng loại",
+    "name": "Tên",
+    "email": "Email",
+    "phoneNumber" : "Số điện thoại",
+    "password" : "Mật khẩu",
+    "option" : "Lựa chọn",
+    "delete" : "Xóa",
+    "update" : "Cập nhật",
+    "add_user_type" : "Thêm người dùng loại",
+    "delete_user" : "Xóa người dùng này?",
+    "want_delete_user": "Bạn muốn xóa người dùng này:",
+    "submit": "Nhập",
+    "add_user": "Thêm người dùng",
+    "ok" : "Đồng ý",
+    "update_info" : "Cập nhật thông tin"
+  }
+}
