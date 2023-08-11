@@ -14,7 +14,7 @@ export default function ModalBtnAdd(props: any) {
     (state: StateStore) => state.addDataUser
   );
   const dispatch = useDispatch();
-  const { t } = useTranslation(['homeAdmin']);
+  const { t } = useTranslation(["homeAdmin"]);
 
   /* handle change input */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,6 @@ export default function ModalBtnAdd(props: any) {
           <>{message.success(`Lưu thành công!`)}</>
         ) : null;
     }
-    console.log(updateDataUserStore, 'updateDataUserStore')
 
     const alertErr =
       updateDataUserStore && updateDataUserStore.error ? (
