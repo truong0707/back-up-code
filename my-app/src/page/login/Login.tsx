@@ -6,6 +6,7 @@ import Styles from "./Form.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../../component/alert/AlertNotificate";
+import { useTranslation } from "react-i18next";
 
 export interface TypeObjectInput {
   email?: string;
@@ -28,6 +29,7 @@ export default function Login() {
   const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
   const { error, /* loading, */ userInfo } = userLogin;
   const redirect = location.search ? location.search.split("=")[1] : "/admin"; // cut path
+  const { t } = useTranslation('loginAndRegis');
 
   /* handle navigate khi Login */
   useEffect(() => {
@@ -59,7 +61,7 @@ export default function Login() {
         {error ? (
           <AlertNotificate msg={`${error}`} type="error" />
         ) : (
-          <h1 className={Styles.titleForm}>Đăng nhập</h1>
+          <h1 className={Styles.titleForm}>{t('login and regis.login')}</h1>
         )}
       </div>
 
@@ -75,7 +77,7 @@ export default function Login() {
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label="Username"
+            label={`${t('login and regis.username')}`}
             name="username"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
@@ -83,7 +85,7 @@ export default function Login() {
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Password"
+            label={`${t('login and regis.password')}`}
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
@@ -98,14 +100,14 @@ export default function Login() {
             <Checkbox>Ghi nhớ tài khoản</Checkbox>
             <p>
               <Link to={redirect ? `/register?redirect=` : "/register"}>
-                Tạo tài khoản
+                {t('login and regis.create_account')}
               </Link>
             </p>
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Đăng nhập
+            {t('login and regis.login')}
             </Button>
           </Form.Item>
         </Form>

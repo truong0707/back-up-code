@@ -38,11 +38,11 @@ export function listDataUserReducer(
     case UPDATE_USER_FAIL:
       return { ...state, msgUpdateError: action.payload };
     case ADD_USER_RESQUEST:
-      return { ...state };
+      return { ...state, msgAddSuccess: true };
     case ADD_USER_SUCCESS:
       return { ...state, msgAddSuccess: true };
     case ADD_USER_FAIL:
-      return { loading: false, msgAddError: action.payload };
+      return { loading: false, msgAddError: action.payload, msgAddSuccess: false };
     default:
       return state;
   }

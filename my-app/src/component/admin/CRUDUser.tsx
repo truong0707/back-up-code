@@ -43,50 +43,68 @@ export default function CRUDUser(props: MyCRUDUserProps) {
         </div>
 
         <Row style={{ textAlign: "center" }}>
-          {props.titleCate.map((result: any, index: number) => (
-            <Col
-              key={index}
-              className={Styles.Col_cate}
-              span={result.span}
-              order={index}
-            >
-              <Divider orientation="center">{result.nameCate}</Divider>
-            </Col>
-          ))}
+          {props.titleCate.map(
+            (
+              result: {
+                nameCate: string;
+                span: number;
+              },
+              index: number
+            ) => (
+              <Col
+                key={index}
+                className={Styles.Col_cate}
+                span={result.span}
+                order={index}
+              >
+                <Divider orientation="center">{result.nameCate}</Divider>
+              </Col>
+            )
+          )}
         </Row>
 
         {/* show data */}
-        {props.data.map((data: any) => (
-          <Row key={data.id} style={{ textAlign: "center", marginTop: "5px" }}>
-            <Col className={Styles.Col_IfoTable} span={1} order={1}>
-              {data.id}
-            </Col>
+        {props.data.map(
+          (data: {
+            id: string;
+            name: string;
+            email: string;
+            numberPhone: string;
+          }) => (
+            <Row
+              key={data.id}
+              style={{ textAlign: "center", marginTop: "5px" }}
+            >
+              <Col className={Styles.Col_IfoTable} span={1} order={1}>
+                {data.id}
+              </Col>
 
-            <Col className={Styles.Col_IfoTable} span={6} order={2}>
-              {data.name}
-            </Col>
-            <Col className={Styles.Col_IfoTable} span={6} order={3}>
-              {data.email}
-            </Col>
+              <Col className={Styles.Col_IfoTable} span={6} order={2}>
+                {data.name}
+              </Col>
+              <Col className={Styles.Col_IfoTable} span={6} order={3}>
+                {data.email}
+              </Col>
 
-            <Col className={Styles.Col_IfoTable} span={6} order={4}>
-              {data.numberPhone}
-            </Col>
+              <Col className={Styles.Col_IfoTable} span={6} order={4}>
+                {data.numberPhone}
+              </Col>
 
-            <Col style={{ background: "#F8F8F8" }} span={5} order={5}>
-              <Space align="center">
-                <ModalBtnDelete
-                  /* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */ id={
-                    data.id
-                  }
-                  // handleDelete={handleDelete}
-                  email={data.email}
-                />
-                <ModalBtnUpdate idUser={data.id} />
-              </Space>
-            </Col>
-          </Row>
-        ))}
+              <Col style={{ background: "#F8F8F8" }} span={5} order={5}>
+                <Space align="center">
+                  <ModalBtnDelete
+                    /* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */ id={
+                      data.id
+                    }
+                    // handleDelete={handleDelete}
+                    email={data.email}
+                  />
+                  <ModalBtnUpdate idUser={data.id} />
+                </Space>
+              </Col>
+            </Row>
+          )
+        )}
       </Suspense>
     </>
   );
