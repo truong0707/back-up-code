@@ -33,7 +33,7 @@ export default function ModalBtn(props: MyModalBtn) {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" danger onClick={showModal}>
         {t('admin home.delete')}
       </Button>
 
