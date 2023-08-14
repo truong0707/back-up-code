@@ -1,4 +1,5 @@
 import { Alert, Space } from "antd";
+import Styles from './AlertNotificate.module.scss'
 
 interface myAlertNotiProps {
   msg: string;
@@ -8,7 +9,7 @@ interface myAlertNotiProps {
 export default function AlertNotificate(props: myAlertNotiProps) {
   return (
     <div>
-      <Space direction="vertical" style={{ width: "100%" }}>
+      <Space direction="vertical" className={Styles.wrapperAlertNoti} >
         {props.type === "error" ? (
           <Alert
             message="Error"

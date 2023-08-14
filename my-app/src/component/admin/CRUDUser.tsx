@@ -91,7 +91,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
                 {data.numberPhone}
               </Col>
 
-              <Col style={{ background: "#F8F8F8" }} span={5} order={5}>
+              <Col style={{ background: "#F8F8F8", display:'flex', alignItems:'center' }} span={5} order={5}>
                 <Space align="center">
                   <ModalBtnDelete
                     /* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */ id={
