@@ -8,7 +8,6 @@ interface myAlertNotiProps {
 
 export default function AlertNotificate(props: myAlertNotiProps) {
   return (
-    <div>
       <Space direction="vertical" className={Styles.wrapperAlertNoti} >
         {props.type === "error" ? (
           <Alert
@@ -42,6 +41,5 @@ export default function AlertNotificate(props: myAlertNotiProps) {
           />
         )}
       </Space>
-    </div>
   );
 }

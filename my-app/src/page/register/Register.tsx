@@ -6,6 +6,7 @@ import { StateStore } from "../../store/redux/Store";
 import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "../login/Form.module.scss";
 import AlertNotificate from "../../component/alert/AlertNotificate";
+import { useTranslation } from "react-i18next";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function Register() {
   const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
   const { error, /*  loading, */ userInfo } = userLogin;
   const redirect = location.search ? location.search.split("=")[1] : "/admin"; // cut path
+  const { t } = useTranslation("loginAndRegis");
 
   useEffect(() => {}, [userInfo, navigate, redirect]);
 
@@ -53,7 +55,7 @@ export default function Register() {
         {error ? (
           <AlertNotificate msg={`${error}`} type="error" />
         ) : (
-          <h1 className={Styles.titleForm}>Đăng Ký</h1>
+          <h1 className={Styles.titleForm}>{t("login and regis.register")}</h1>
         )}
       </div>
 
@@ -125,7 +127,7 @@ export default function Register() {
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Đăng ký
+              {t("login and regis.register")}
             </Button>
           </Form.Item>
         </Form>

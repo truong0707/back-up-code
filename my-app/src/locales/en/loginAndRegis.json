@@ -1,6 +1,7 @@
 {
   "login and regis": {
     "login": "Login",
+    "register": "Register",
     "username": "Username",
     "password": "Password",
     "create_account": "Create account"

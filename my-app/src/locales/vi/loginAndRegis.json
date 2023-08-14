@@ -1,6 +1,7 @@
 {
   "login and regis": {
     "login": "Đăng nhập",
+    "register": "Đăng ký",
     "username": "Tài khoản",
     "password": "Mật khẩu",
     "create_account": "Tạo tài khoản"
