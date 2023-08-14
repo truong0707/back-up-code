@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import BreadcrumbNav from "../component/BreadcrumbNav";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -92,9 +93,11 @@ export default function MasterLayoutDoashBoard({ children }: any) {
 
             <div style={{ width: "100%", display: "flex" }}>
               <div style={{ width: "21%" }}></div>
-
               {/* CRUD USER */}
-              <div className={Styles.wrapperContentDoashBoard}>{children}</div>
+              <div className={Styles.wrapperContentDoashBoard}>
+                <BreadcrumbNav />
+                {children}
+              </div>
             </div>
           </div>
         </>
