@@ -1,4 +1,3 @@
-import Doashboard from "../../../layouts/MasterLayoutDoashBoard";
 import React, { Suspense, lazy, useEffect } from "react";
 import MasterLayoutDoashBoard from "../../../layouts/MasterLayoutDoashBoard";
 import Styles from "../userA/ManagerUserA.module.scss";
@@ -6,10 +5,11 @@ import { listDataUser } from "../../../store/redux/actions/dataUserActions";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
 import { useTranslation } from "react-i18next";
+import { StateStore } from "../../../store/redux/Store";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserB() {
-  const { t } = useTranslation(["homeAdmin", "adminManagerA"]);
+  const { t } = useTranslation(["homeAdmin"]);
 
   const titleCateTable = [
     {
@@ -33,7 +33,7 @@ export default function ManagerUserB() {
       span: 5,
     },
   ];
-  const dataUsers = useSelector((state: any) => state.dataUsers); // lấy dữ liệu từ kho redux
+  const dataUsers = useSelector((state:StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { loading, error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
 

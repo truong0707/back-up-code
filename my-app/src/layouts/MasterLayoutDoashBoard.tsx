@@ -1,16 +1,13 @@
-// import Navbar from "../../component/NavBar/Navbar";
 import React, { useEffect, useState } from "react";
 import Styles from "../page/admin/Doahboard.module.scss";
 
 import {
   AppstoreOutlined,
-  ContainerOutlined,
   DesktopOutlined,
-  MailOutlined,
   PieChartOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Button, Menu } from "antd";
+import { Menu } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
@@ -35,13 +32,17 @@ function getItem(
 }
 
 export default function MasterLayoutDoashBoard({ children }: any) {
-  const { t } = useTranslation(["homeAdmin", "adminManagerA"]);
+  const { t } = useTranslation(["homeAdmin"]);
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed /* setCollapsed */] = useState(false);
   const dispatch = useDispatch();
 
   const items: MenuItem[] = [
-    getItem(<Link to={"/admin"}>{t("admin home.admin")}</Link>, "1", <PieChartOutlined />),
+    getItem(
+      <Link to={"/admin"}>{t("admin home.admin")}</Link>,
+      "1",
+      <PieChartOutlined />
+    ),
     getItem(
       <Link to={"/admin/userA"}>{t("admin home.manager_users_type")} A </Link>,
       "2",

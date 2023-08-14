@@ -16,31 +16,30 @@ export default function AlertNotificate(props: myAlertNotiProps) {
             type="error"
             showIcon
           />
+        ) : props.type === "warning" ? (
+          <Alert
+            message="Warning"
+            description={`${props.msg}`}
+            type="warning"
+            showIcon
+            closable
+          />
+        ) : props.type === "note" ? (
+          <Alert
+            message="Informational Notes"
+            description={`${props.msg}`}
+            type="info"
+            showIcon
+          />
         ) : (
-          <Alert message={`${props.msg}`} type="success" showIcon />
+          <Alert
+            message="Success Tips"
+            description={`${props.msg}`}
+            // message={`${props.msg}`}
+            type="success"
+            showIcon
+          />
         )}
-        {/* <Alert message="Informational Notes" type="info" showIcon />
-        <Alert message="Warning" type="warning" showIcon closable />
-        <Alert message="Error" type="error" showIcon />
-        <Alert
-          message="Success Tips"
-          description="Detailed description and advice about successful copywriting."
-          type="success"
-          showIcon
-        />
-        <Alert
-          message="Informational Notes"
-          description="Additional description and information about copywriting."
-          type="info"
-          showIcon
-        />
-        <Alert
-          message="Warning"
-          description="This is a warning notice about copywriting."
-          type="warning"
-          showIcon
-          closable
-        /> */}
       </Space>
     </div>
   );

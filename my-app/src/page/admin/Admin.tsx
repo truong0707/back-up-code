@@ -13,10 +13,10 @@ interface MypropsAmin {
 
 export default function Admin(props: MypropsAmin) {
   const dispatch = useDispatch();
-  const { t } = useTranslation(['homeAdmin', 'adminManagerA']);
+  const { t } = useTranslation(["homeAdmin", "adminManagerA"]);
 
   /* Submit Login */
-  const handleLogOut = (values: any) => {
+  const handleLogOut = () => {
     const logOutPromise = logout();
     logOutPromise(dispatch);
   };
@@ -26,11 +26,13 @@ export default function Admin(props: MypropsAmin) {
       <MasterLayoutDoashBoard>
         <Space>
           <p>
-            {t('admin home.hi_user')}: <b>{props.ifoUser.email}</b>
+            {t("admin home.hi_user")}: <b>{props.ifoUser.email}</b>
           </p>
 
           <SelectOptionLan />
-          <Button onClick={handleLogOut} type="primary">{t('admin home.log_out')}</Button>
+          <Button onClick={handleLogOut} type="primary">
+            {t("admin home.log_out")}
+          </Button>
         </Space>
       </MasterLayoutDoashBoard>
     </>

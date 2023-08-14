@@ -111,8 +111,8 @@ export function updateDataUser(
 
 /* add data user */
 export function addDataUser(
-  email: string,
   name: string,
+  email: string,
   numberPhone: string,
   password: string
 ) {

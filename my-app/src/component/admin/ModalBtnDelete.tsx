@@ -4,7 +4,13 @@ import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-export default function ModalBtn(props: any) {
+
+interface MyModalBtn {
+  id: string,
+  email: string
+}
+
+export default function ModalBtn(props: MyModalBtn) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation(['homeAdmin']);

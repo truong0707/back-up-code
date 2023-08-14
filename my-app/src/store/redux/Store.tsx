@@ -3,7 +3,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { userLoginReduder, userRegisterReducer } from "./reducers/userReducer";
 import {
-  // addDataUserReducer,
   listDataUserReducer,
 } from "./reducers/dataUserReducer";
 
@@ -11,7 +10,6 @@ const reducer = combineReducers({
   userLogin: userLoginReduder,
   userRegister: userRegisterReducer,
   dataUsers: listDataUserReducer,
-  // addDataUser: addDataUserReducer,
 });
 
 const middleware = [thunk];
@@ -23,9 +21,7 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
 
 export interface StateStore {
   dataUsers: any;
-  deleteDataUser: any;
   addDataUser: any;
-  updateDataUser: any;
   userLogin: {
     loading: boolean;
     userInfo: {

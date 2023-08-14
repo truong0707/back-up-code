@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { StateStore } from "./store/redux/Store";
 import { lazy, Suspense } from "react";
 import LoadingCpn from "./component/spin/LoadingCpn";
-import './i18n/i18n';
+import "./i18n/i18n";
 import "./App.css";
 
 const Navbar = lazy(() => import("./component/NavBar/Navbar"));
@@ -41,6 +41,12 @@ function App() {
               path="/admin"
               element={
                 getUser ? <Admin ifoUser={getUser} /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <>Not found</>
               }
             />
           </Routes>

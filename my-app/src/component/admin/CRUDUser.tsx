@@ -82,6 +82,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
               <Col className={Styles.Col_IfoTable} span={6} order={2}>
                 {data.name}
               </Col>
+
               <Col className={Styles.Col_IfoTable} span={6} order={3}>
                 {data.email}
               </Col>

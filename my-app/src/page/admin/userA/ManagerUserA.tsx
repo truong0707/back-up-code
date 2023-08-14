@@ -5,16 +5,16 @@ import { listDataUser } from "../../../store/redux/actions/dataUserActions";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
 import { useTranslation } from "react-i18next";
+import { StateStore } from "../../../store/redux/Store";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserA() {
   const { t } = useTranslation(['homeAdmin']);
-  const dataUsers = useSelector((state: any) => state.dataUsers); // lấy dữ liệu từ kho redux
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { loading, error, listDataUsers } = dataUsers;
-  const deleteDataUsers = useSelector((state: any) => state); // lấy dữ liệu từ kho redux
-  const { loadingDelete } = deleteDataUsers;
   const dispatch = useDispatch();
 
+  /* cate table */
   const titleCateTable = [
     {
       nameCate: "id",
@@ -38,12 +38,10 @@ export default function ManagerUserA() {
     },
   ];
 
-
-
   useEffect(() => {
     const productListPromise = listDataUser();
     productListPromise(dispatch);
-  }, [dispatch, loadingDelete]);
+  }, [dispatch]);
 
   return (
     <MasterLayoutDoashBoard>

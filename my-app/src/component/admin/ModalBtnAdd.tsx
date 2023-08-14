@@ -8,7 +8,11 @@ import { StateStore } from "../../store/redux/Store";
 import { useTranslation } from "react-i18next";
 import AlertNotificate from "../alert/AlertNotificate";
 
-export default function ModalBtnAdd(props: any) {
+interface MyModalBtnAdd {
+  contentBtnAdd?: string
+}
+
+export default function ModalBtnAdd(props: MyModalBtnAdd) {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
