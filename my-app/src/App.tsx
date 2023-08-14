@@ -10,6 +10,7 @@ import { lazy, Suspense } from "react";
 import LoadingCpn from "./component/spin/LoadingCpn";
 import "./i18n/i18n";
 import "./App.css";
+import NotFound from "./page/notFound/NotFound";
 
 const Navbar = lazy(() => import("./component/NavBar/Navbar"));
 const Login = lazy(() => import("./page/login/Login"));
@@ -43,12 +44,7 @@ function App() {
                 getUser ? <Admin ifoUser={getUser} /> : <Navigate to="/login" />
               }
             />
-            <Route
-              path="*"
-              element={
-                <>Not found</>
-              }
-            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Router>

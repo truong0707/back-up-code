@@ -26,7 +26,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
   return (
     <>
       <Suspense fallback={<LoadingCpn />}>
-        <Space>
+        <Space style={{ padding:'10px' }}>
           <ModalBtnAdd contentBtnAdd={props.contentBtnAdd} />
         </Space>
 
