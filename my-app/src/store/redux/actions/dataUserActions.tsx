@@ -129,6 +129,9 @@ export function addDataUser(
         password
       );
 
+      /* Trường hợp 1: khi add user, server trả về thì e sử dụng cách này
+      để lấy id
+      */
       dispatch({
         type: ADD_USER_SUCCESS,
         payload: {
@@ -140,7 +143,18 @@ export function addDataUser(
           },
           message: data,
         },
+
       }); // payload ở đây e thấy json server trả về {} nên e truyền vào luôn
+
+      /* Trường hợp 2 */
+      /* Ở đây e nghĩ còn cách gọi lại data vì ko còn cách nào để lấy id của product 
+      khi ta tạo mới user, ngoại trừ server trả về user mới vừa tạo (json server
+      trả về mảng [])
+      */
+      const dataRefresh = await userServices.getUserApi();
+      dispatch({ type: GET_DATA_USER_RESQUEST });
+      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
+
     } catch (error: any) {
       if (error.message) {
         dispatch({

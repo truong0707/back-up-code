@@ -90,7 +90,7 @@ export function listDataUserReducer(
       return {
         ...state,
         msgAddSuccess: true,
-        listDataUsers: currentDataAdd.concat(payloadDataSuccess),
+        // listDataUsers: currentDataAdd.concat(payloadDataSuccess),
       };
     case ADD_USER_FAIL:
       return {
