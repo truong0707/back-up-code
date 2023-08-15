@@ -6,10 +6,10 @@ export default function Navbar() {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
   
   return (
-    <div>
+    <>
       {
         getUser ? <>  <Link to={'/admin'} >Admin page</Link></> : <><Link to={'/login'} >Login page</Link></>
       }
-    </div>
+    </>
   )
 }

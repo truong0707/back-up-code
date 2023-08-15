@@ -8,7 +8,6 @@ import LoginAndRegis_vi from '../locales/vi/loginAndRegis.json';
 
 
 // const defaultNS = 'homeAdmin'
-
 i18next
   .use(initReactI18next)
   .use(LanguageDetector)

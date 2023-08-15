@@ -71,46 +71,61 @@ export default function Register() {
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label="Name"
+            label={`${t("login and regis.name")}`}
             name="name"
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[
+              { required: true, message: t("login and regis.input_your_name") },
+            ]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Email"
+            label={`${t("login and regis.email")}`}
             name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("login and regis.input_your_email"),
+              },
+            ]}
           >
             <Input type="email" />
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="number phone"
+            label={`${t("login and regis.number_phone")}`}
             name="numberPhone"
             rules={[
-              { required: true, message: "Please input your number phone!" },
+              {
+                required: true,
+                message: t("login and regis.input_your_numberPhone"),
+              },
             ]}
           >
             <Input type="number" />
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Password"
+            label={`${t("login and regis.password")}`}
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[
+              {
+                required: true,
+                message: t("login and regis.input_your_password"),
+              },
+            ]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Confirm Password"
+            label={`${t("login and regis.confirm_password")}`}
             name="confirmPass"
             rules={[
               {
                 required: true,
-                message: "Please input your confirm password!",
+                message: t("login and regis.input_your_passwordConfirm"),
               },
             ]}
           >

@@ -79,15 +79,15 @@ export default function Login() {
           <Form.Item<FieldType>
             label={`${t('login and regis.username')}`}
             name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: "Please input your username!"}]}
           >
-            <Input /* onChange={handleInputChange} */ />
+            <Input />
           </Form.Item>
 
           <Form.Item<FieldType>
             label={`${t('login and regis.password')}`}
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[{ required: true, message: "Please input your password!"}]}
           >
             <Input.Password />
           </Form.Item>

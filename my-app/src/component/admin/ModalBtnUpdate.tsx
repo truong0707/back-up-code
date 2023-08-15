@@ -63,7 +63,7 @@ export default function ModalBtnUpdate(props: any) {
         dataUsers.msgUpdateError && dataUsers.msgUpdateError ? (
           <>{message.error(`Lưu thất bại!- ${dataUsers.msgUpdateError}`)}</>
         ) : null;
-        formRef.current?.resetFields();
+      formRef.current?.resetFields();
     }
   };
 

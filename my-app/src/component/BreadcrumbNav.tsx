@@ -28,7 +28,6 @@ const BreadcrumbNav: React.FC = () => (
       {
         title: (
           <Link to={"/admin/userB"}>
-            {/* <UserOutlined /> */}
             <span>ManagerB</span>
           </Link>
         ),

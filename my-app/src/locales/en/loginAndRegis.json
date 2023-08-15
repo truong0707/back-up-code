@@ -2,8 +2,17 @@
   "login and regis": {
     "login": "Login",
     "register": "Register",
+    "name": "Name",
+    "email": "email",
+    "number_phone" : "Phone number",
+    "confirm_password" : "Confirm password",
     "username": "Username",
     "password": "Password",
-    "create_account": "Create account"
+    "create_account": "Create account",
+    "input_your_email" : "Please input your email!",
+    "input_your_name" : "Please input your name!",
+    "input_your_numberPhone" : "Please input your phone number!",
+    "input_your_password" : "Please input your password!",
+    "input_your_passwordConfirm" : "Please input cornfirm your password!"
   }
 }

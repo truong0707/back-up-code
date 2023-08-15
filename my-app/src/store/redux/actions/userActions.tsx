@@ -14,7 +14,7 @@ import userServices from "../../../services/user";
 export function login(email: string, password: string) {
   return async (dispatch: Dispatch<UserDispatchTypes>) => {
     try {
-      const { data } = await userServices.userLoginApi(email, password)
+      const { data } = await userServices.userLoginApi(email, password);
 
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -58,8 +58,14 @@ export const register =
   ) =>
   async (dispatch: Dispatch) => {
     try {
-      dispatch({ type: USER_REGISTER_RESQUEST }); 
-      const { data } = await userServices.userRegisterApi(name, email, password, confirmPass, numberPhone)
+      dispatch({ type: USER_REGISTER_RESQUEST });
+      const { data } = await userServices.userRegisterApi(
+        name,
+        email,
+        password,
+        confirmPass,
+        numberPhone
+      );
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 
       /// save localStorage
