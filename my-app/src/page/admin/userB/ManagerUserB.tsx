@@ -33,7 +33,8 @@ export default function ManagerUserB() {
       span: 5,
     },
   ];
-  const dataUsers = useSelector((state:StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
+  
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { loading, error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
 
@@ -44,7 +45,7 @@ export default function ManagerUserB() {
   return (
     <MasterLayoutDoashBoard>
       {loading ? (
-        "loading.."
+        <LoadingCpn />
       ) : (
         <div className={Styles.WraperCRUDUser}>
           {listDataUsers ? (
@@ -54,7 +55,7 @@ export default function ManagerUserB() {
                 title={`${t("admin home.table_manager_type")} B`}
                 data={listDataUsers}
                 titleCate={titleCateTable}
-                contentBtnAdd={`${t('admin home.add_user_type')} B`}
+                contentBtnAdd={`${t("admin home.add_user_type")} B`}
               />
             </Suspense>
           ) : (

@@ -13,7 +13,7 @@ const ModalBtnUpdate = lazy(() => import("./ModalBtnUpdate"));
 interface MyCRUDUserProps {
   title: String;
   data: [];
-  titleCate: { nameCate: string; span: number; }[];
+  titleCate: { nameCate: string; span: number }[];
   contentBtnAdd?: string;
 }
 
@@ -26,7 +26,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
   return (
     <>
       <Suspense fallback={<LoadingCpn />}>
-        <Space style={{ padding:'10px' }}>
+        <Space style={{ padding: "10px" }}>
           <ModalBtnAdd contentBtnAdd={props.contentBtnAdd} />
         </Space>
 
@@ -37,8 +37,6 @@ export default function CRUDUser(props: MyCRUDUserProps) {
             <>
               <AlertNotificate msg={msgDeleteError} type={"error"} />
             </>
-          ) : msgDeleteSuccess ? (
-            <>{alert(msgDeleteSuccess)}</>
           ) : null}
         </div>
 
@@ -101,13 +99,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
                 order={5}
               >
                 <Space align="center">
-                  <ModalBtnDelete
-                    /* isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} */ id={
-                      data.id
-                    }
-                    // handleDelete={handleDelete}
-                    email={data.email}
-                  />
+                  <ModalBtnDelete id={data.id} email={data.email} />
                   <ModalBtnUpdate idUser={data.id} />
                 </Space>
               </Col>

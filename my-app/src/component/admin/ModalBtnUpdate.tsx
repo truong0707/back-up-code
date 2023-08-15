@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import { FormInstance, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Space } from "antd";
 import { updateDataUser } from "../../store/redux/actions/dataUserActions";
@@ -26,6 +26,7 @@ export default function ModalBtnUpdate(props: any) {
   /* handle ok */
   const handleOK = () => {
     setIsModalOpen(false);
+    formRef.current?.resetFields();
   };
 
   /* handle show, cancel */
@@ -38,6 +39,7 @@ export default function ModalBtnUpdate(props: any) {
   };
 
   /* handle submit form */
+  const formRef = React.useRef<FormInstance>(null);
   const [form] = Form.useForm();
   const onFinish = () => {
     // validate phone number
@@ -61,6 +63,7 @@ export default function ModalBtnUpdate(props: any) {
         dataUsers.msgUpdateError && dataUsers.msgUpdateError ? (
           <>{message.error(`Lưu thất bại!- ${dataUsers.msgUpdateError}`)}</>
         ) : null;
+        formRef.current?.resetFields();
     }
   };
 
@@ -81,8 +84,10 @@ export default function ModalBtnUpdate(props: any) {
         {dataUsers.msgUpdateSuccess ? (
           <AlertNotificate msg={"Update thành công"} type={""} />
         ) : null}
+
         {/* Form update  */}
         <Form
+          ref={formRef}
           form={form}
           layout="vertical"
           onFinish={onFinish}
@@ -91,13 +96,13 @@ export default function ModalBtnUpdate(props: any) {
           <Form.Item
             name={`${t("admin home.name")}`}
             label={`${t("admin home.name")}`}
-            rules={[{ required: true }, { type: "string", min: 6 }]}
+            rules={[{ required: true }, { type: "string", min: 4 }]}
           >
             <Input
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder={`${t('admin home.name')}`}
+              placeholder={`${t("admin home.name")}`}
             />
           </Form.Item>
 
@@ -107,14 +112,14 @@ export default function ModalBtnUpdate(props: any) {
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
-              { type: "string", min: 6 },
+              { type: "string", min: 4 },
             ]}
           >
             <Input
               type="email"
               name="email"
               onChange={handleInputChange}
-              placeholder={`${t('admin home.email')}`}
+              placeholder={`${t("admin home.email")}`}
             />
           </Form.Item>
 
@@ -127,7 +132,7 @@ export default function ModalBtnUpdate(props: any) {
               type="numberPhone"
               name="numberPhone"
               onChange={handleInputChange}
-              placeholder={`${t('admin home.phoneNumber')}`}
+              placeholder={`${t("admin home.phoneNumber")}`}
             />
           </Form.Item>
 

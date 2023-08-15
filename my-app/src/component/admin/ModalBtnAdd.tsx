@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import { FormInstance, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Space } from "antd";
 import { addDataUser } from "../../store/redux/actions/dataUserActions";
@@ -7,6 +7,7 @@ import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
 import { useTranslation } from "react-i18next";
 import AlertNotificate from "../alert/AlertNotificate";
+import { ADD_USER_FAIL } from "../../store/redux/constants/dataUserContans";
 
 interface MyModalBtnAdd {
   contentBtnAdd?: string;
@@ -30,6 +31,7 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
   /* handle ok */
   const handleOK = () => {
     setIsModalOpen(false);
+    formRef.current?.resetFields();
   };
 
   /* handle show, cancel */
@@ -42,6 +44,7 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
   };
 
   /* handle submit form */
+  const formRef = React.useRef<FormInstance>(null);
   const [form] = Form.useForm();
   const onFinish = () => {
     // validate phone number
@@ -60,12 +63,9 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
         `${inputs.password}`
       );
       addUserPromise(dispatch);
-      // const alertSuccess =
-      //   updateDataUserStore && updateDataUserStore.msg ? (
-      //     <>{message.success(`Lưu thành công!`)}</>
-      //   ) : null;
     }
 
+    formRef.current?.resetFields();
     // const alertErr =
     //   updateDataUserStore && updateDataUserStore.error ? (
     //     <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
@@ -91,6 +91,7 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
         ) : null}
         {/* Form update  */}
         <Form
+          ref={formRef}
           form={form}
           layout="vertical"
           onFinish={onFinish}

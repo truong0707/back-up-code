@@ -28,7 +28,6 @@ interface MyState {
 
 /* Get data users */
 export function listDataUserReducer(
-  // state: State = { dataUsers:[] },
   state: MyState = {
     listDataUsers: [],
     userLogin: {

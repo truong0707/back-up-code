@@ -46,7 +46,7 @@ export default function ManagerUserA() {
   return (
     <MasterLayoutDoashBoard>
       {loading ? (
-        "loading.."
+        <LoadingCpn/>
       ) : (
         <div className={Styles.WraperCRUDUser}>
           {listDataUsers ? (

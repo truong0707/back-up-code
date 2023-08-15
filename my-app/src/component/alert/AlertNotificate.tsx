@@ -15,6 +15,7 @@ export default function AlertNotificate(props: myAlertNotiProps) {
             description={`${props.msg}`}
             type="error"
             showIcon
+            // closable
           />
         ) : props.type === "warning" ? (
           <Alert
@@ -22,7 +23,7 @@ export default function AlertNotificate(props: myAlertNotiProps) {
             description={`${props.msg}`}
             type="warning"
             showIcon
-            closable
+            // closable
           />
         ) : props.type === "note" ? (
           <Alert
@@ -30,6 +31,7 @@ export default function AlertNotificate(props: myAlertNotiProps) {
             description={`${props.msg}`}
             type="info"
             showIcon
+            // closable
           />
         ) : (
           <Alert
@@ -38,6 +40,7 @@ export default function AlertNotificate(props: myAlertNotiProps) {
             // message={`${props.msg}`}
             type="success"
             showIcon
+            // closable
           />
         )}
       </Space>
