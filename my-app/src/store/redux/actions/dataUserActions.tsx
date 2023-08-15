@@ -45,12 +45,8 @@ export function deleteDataUser(id: string) {
     try {
       dispatch({ type: DELETE_USER_RESQUEST });
       const { data } = await userServices.deleteUserApi(id);
-      dispatch({ type: DELETE_USER_SUCCESS, payload: data });
+      dispatch({ type: DELETE_USER_SUCCESS, payload: { data, id } });
 
-      /* refresh data */
-      const dataRefresh = await userServices.getUserApi();
-      dispatch({ type: GET_DATA_USER_RESQUEST });
-      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -85,12 +81,18 @@ export function updateDataUser(
         email,
         numberPhone
       );
-      dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
-
-      /* refresh data */
-      const dataRefresh = await userServices.getUserApi();
-      dispatch({ type: GET_DATA_USER_RESQUEST });
-      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: {
+          data: {
+            id,
+            name,
+            email,
+            numberPhone,
+          },
+          mesg: data
+        },
+      });
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -125,12 +127,19 @@ export function addDataUser(
         numberPhone,
         password
       );
-      dispatch({ type: ADD_USER_SUCCESS, payload: data });
 
-      /* refresh data */
-      const dataRefresh = await userServices.getUserApi();
-      dispatch({ type: GET_DATA_USER_RESQUEST });
-      dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
+      dispatch({
+        type: ADD_USER_SUCCESS,
+        payload: {
+          data: {
+            name: name,
+            email: email,
+            numberPhone: numberPhone,
+            password: password,
+          },
+          message: data,
+        },
+      }); // payload ở đây e thấy json server trả về {} nên e truyền vào luôn
     } catch (error: any) {
       if (error.message) {
         dispatch({

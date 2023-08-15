@@ -20,8 +20,16 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   : null;
 
 export interface StateStore {
-  dataUsers: any;
-  addDataUser: any;
+  dataUsers: {
+    listDataUsers: [],
+    error: Boolean,
+    loading: Boolean,
+    msgUpdateSuccess: string,
+    msgUpdateError: string,
+    msgAddSuccess: string,
+    msgDeleteSuccess: string
+    msgDeleteError: string
+  }
   userLogin: {
     loading: boolean;
     userInfo: {

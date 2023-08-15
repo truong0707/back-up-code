@@ -13,7 +13,7 @@ const ModalBtnUpdate = lazy(() => import("./ModalBtnUpdate"));
 interface MyCRUDUserProps {
   title: String;
   data: [];
-  titleCate: any;
+  titleCate: { nameCate: string; span: number; }[];
   contentBtnAdd?: string;
 }
 

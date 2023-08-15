@@ -9,16 +9,13 @@ import { useTranslation } from "react-i18next";
 import AlertNotificate from "../alert/AlertNotificate";
 
 interface MyModalBtnAdd {
-  contentBtnAdd?: string
+  contentBtnAdd?: string;
 }
 
 export default function ModalBtnAdd(props: MyModalBtnAdd) {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
-  const updateDataUserStore = useSelector(
-    (state: StateStore) => state.addDataUser
-  );
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
 
@@ -63,17 +60,16 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
         `${inputs.password}`
       );
       addUserPromise(dispatch);
-
       // const alertSuccess =
       //   updateDataUserStore && updateDataUserStore.msg ? (
       //     <>{message.success(`Lưu thành công!`)}</>
       //   ) : null;
     }
 
-    const alertErr =
-      updateDataUserStore && updateDataUserStore.error ? (
-        <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
-      ) : null;
+    // const alertErr =
+    //   updateDataUserStore && updateDataUserStore.error ? (
+    //     <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
+    //   ) : null;
   };
 
   useEffect(() => {}, [dispatch]);
