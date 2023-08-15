@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
 import { useTranslation } from "react-i18next";
 import { StateStore } from "../../../store/redux/Store";
+import AlertNotificate from "../../../component/alert/AlertNotificate";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserB() {
@@ -33,7 +34,7 @@ export default function ManagerUserB() {
       span: 5,
     },
   ];
-  
+
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { loading, error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ export default function ManagerUserB() {
               />
             </Suspense>
           ) : (
-            <>{error}</>
+            <AlertNotificate msg={`${error}`} type={"error"} />
           )}
         </div>
       )}

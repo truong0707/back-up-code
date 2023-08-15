@@ -7,7 +7,6 @@ import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
 import { useTranslation } from "react-i18next";
 import AlertNotificate from "../alert/AlertNotificate";
-import { ADD_USER_FAIL } from "../../store/redux/constants/dataUserContans";
 
 interface MyModalBtnAdd {
   contentBtnAdd?: string;

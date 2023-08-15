@@ -49,6 +49,7 @@ export function deleteDataUser(id: string) {
 
     } catch (error: any) {
       if (error.message) {
+        alert("Lỗi server")
         dispatch({
           type: DELETE_USER_FAIL,
           payload: error.message,

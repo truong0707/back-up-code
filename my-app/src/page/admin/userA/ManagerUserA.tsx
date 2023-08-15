@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
 import { useTranslation } from "react-i18next";
 import { StateStore } from "../../../store/redux/Store";
+import AlertNotificate from "../../../component/alert/AlertNotificate";
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
 
 export default function ManagerUserA() {
@@ -60,7 +61,7 @@ export default function ManagerUserA() {
               />
             </Suspense>
           ) : (
-            <>{error}</>
+            <AlertNotificate msg={`${error}`} type={"error"} />
           )}
         </div>
       )}

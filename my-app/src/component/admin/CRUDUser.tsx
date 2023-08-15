@@ -35,7 +35,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
         <div style={{ width: "99%" }}>
           {msgDeleteError ? (
             <>
-              <AlertNotificate msg={msgDeleteError} type={"error"} />
+              <AlertNotificate msg={"Lỗi server"} type={"error"} />
             </>
           ) : null}
         </div>
