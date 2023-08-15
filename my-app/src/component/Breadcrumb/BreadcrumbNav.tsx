@@ -1,15 +1,13 @@
-import { HomeOutlined, UserOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 import React from "react";
 import { Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
+import Styles from "./Breadcrumb.module.scss";
 
 const BreadcrumbNav: React.FC = () => (
-  <Breadcrumb style={{ marginBottom: '10px' }}
+  <Breadcrumb
+    className={Styles.breadcrumb}
     items={[
-      // {
-      //   href: '',
-      //   title: <HomeOutlined />,
-      // },
       {
         // href: '',
         title: (
@@ -21,14 +19,14 @@ const BreadcrumbNav: React.FC = () => (
       {
         title: (
           <Link to={"/admin/userA"}>
-            <span>ManagerA</span>
+            <span>A</span>
           </Link>
         ),
       },
       {
         title: (
           <Link to={"/admin/userB"}>
-            <span>ManagerB</span>
+            <span>B</span>
           </Link>
         ),
       },

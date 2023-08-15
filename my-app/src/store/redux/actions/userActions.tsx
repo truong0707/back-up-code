@@ -15,7 +15,6 @@ export function login(email: string, password: string) {
   return async (dispatch: Dispatch<UserDispatchTypes>) => {
     try {
       const { data } = await userServices.userLoginApi(email, password);
-
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
       /// save localStorage
@@ -72,7 +71,7 @@ export const register =
       document.location.href = "/admin";
       localStorage.setItem("userInfo", JSON.stringify(data));
       alert(
-        "Chào mừng bạn đã đến với trang web của tôi, để chỉnh sửa profile, bạn click vào avata hoặc tên của minh !"
+        "Chào mừng bạn đã đến với trang web của tôi!"
       );
     } catch (error: any) {
       if (error.message) {

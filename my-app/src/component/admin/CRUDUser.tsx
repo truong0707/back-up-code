@@ -19,7 +19,7 @@ interface MyCRUDUserProps {
 
 export default function CRUDUser(props: MyCRUDUserProps) {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
-  const { msgDeleteError, msgDeleteSuccess } = dataUsers;
+  const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
   useEffect(() => {}, [dispatch]);
 

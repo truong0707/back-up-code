@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import BreadcrumbNav from "../component/BreadcrumbNav";
+import BreadcrumbNav from "../component/Breadcrumb/BreadcrumbNav";
 
 type MenuItem = Required<MenuProps>["items"][number];
 

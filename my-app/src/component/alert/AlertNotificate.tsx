@@ -34,7 +34,6 @@ export default function AlertNotificate(props: myAlertNotiProps) {
           <Alert
             message="Success Tips"
             description={`${props.msg}`}
-            // message={`${props.msg}`}
             type="success"
             showIcon
             // closable

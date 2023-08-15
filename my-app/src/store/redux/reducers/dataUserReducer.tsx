@@ -65,7 +65,6 @@ export function listDataUserReducer(
     case UPDATE_USER_SUCCESS:
       const currentListDataUsersUp = [...state.listDataUsers];
       const payloadDataUpdate = action.payload.data;
-
       return {
         ...state,
         msgUpdateSuccess: true,
@@ -78,7 +77,6 @@ export function listDataUserReducer(
               id: payloadDataUpdate.id,
             };
           }
-
           return user;
         }),
       };
@@ -89,7 +87,6 @@ export function listDataUserReducer(
     case ADD_USER_SUCCESS:
       const payloadDataSuccess = action.payload.data;
       const currentDataAdd = [...state.listDataUsers];
-
       return {
         ...state,
         msgAddSuccess: true,
