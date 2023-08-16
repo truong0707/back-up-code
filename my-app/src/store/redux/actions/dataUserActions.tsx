@@ -9,6 +9,9 @@ import {
   GET_DATA_USER_FAIL,
   GET_DATA_USER_RESQUEST,
   GET_DATA_USER_SUCCESS,
+  GET_USER_DETAIL_FAIL,
+  GET_USER_DETAIL_RESQUEST,
+  GET_USER_DETAIL_SUCCESS,
   UPDATE_USER_FAIL,
   UPDATE_USER_RESQUEST,
   UPDATE_USER_SUCCESS,
@@ -30,6 +33,31 @@ export function listDataUser() {
       } else {
         dispatch({
           type: GET_DATA_USER_FAIL,
+          payload: error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        });
+      }
+    }
+  };
+}
+
+export function getDataDetailUser(id: string | number) {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch({ type: GET_USER_DETAIL_RESQUEST });
+      const { data } = await userServices.getUserByIDApi(id);
+      dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: data });
+
+    } catch (error: any) {
+      if (error.message) {
+        dispatch({
+          type: GET_USER_DETAIL_FAIL,
+          payload: error.message,
+        });
+      } else {
+        dispatch({
+          type: GET_USER_DETAIL_FAIL,
           payload: error.response.data.message
             ? error.response.data.message
             : error.message,
