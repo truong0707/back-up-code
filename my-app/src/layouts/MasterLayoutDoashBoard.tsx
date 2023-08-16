@@ -53,14 +53,6 @@ export default function MasterLayoutDoashBoard({ children }: any) {
       "3",
       <DesktopOutlined />
     ),
-
-    // getItem("Menu One", "sub1", <MailOutlined />, [
-    //   getItem("Option 5", "5"),
-    //   getItem("Option 6", "6"),
-    //   getItem("Option 7", "7"),
-    //   getItem("Option 8", "8"),
-    // ]),
-
     getItem("Menu Two", "sub2", <AppstoreOutlined />, [
       getItem("Option 9", "9"),
       getItem("Option 10", "10"),

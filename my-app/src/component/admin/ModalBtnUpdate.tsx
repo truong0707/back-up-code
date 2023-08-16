@@ -8,7 +8,6 @@ import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
 import userServices from "../../services/user";
-import { UserType } from "../../types/User";
 
 export default function ModalBtnUpdate(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);

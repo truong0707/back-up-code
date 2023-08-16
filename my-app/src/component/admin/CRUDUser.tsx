@@ -5,6 +5,8 @@ import LoadingCpn from "../spin/LoadingCpn";
 import Styles from "./Admin.module.scss";
 import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../alert/AlertNotificate";
+import PaginationType1 from "../pagination/PaginationType1";
+import { Link } from "react-router-dom";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
@@ -78,7 +80,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
               </Col>
 
               <Col className={Styles.Col_IfoTable} span={6} order={2}>
-                {data.name}
+                <Link to={`/admin/user/${data.id}`}>{data.name}</Link>
               </Col>
 
               <Col className={Styles.Col_IfoTable} span={6} order={3}>
@@ -94,6 +96,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
                   background: "#F8F8F8",
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "center",
                 }}
                 span={5}
                 order={5}
@@ -106,6 +109,8 @@ export default function CRUDUser(props: MyCRUDUserProps) {
             </Row>
           )
         )}
+
+        <PaginationType1 total={props.data.length} />
       </Suspense>
     </>
   );

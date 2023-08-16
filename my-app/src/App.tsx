@@ -11,6 +11,7 @@ import LoadingCpn from "./component/spin/LoadingCpn";
 import "./i18n/i18n";
 import "./App.css";
 import NotFound from "./page/notFound/NotFound";
+import UserDetail from "./page/userDetail/UserDetail";
 
 const Navbar = lazy(() => import("./component/NavBar/Navbar"));
 const Login = lazy(() => import("./page/login/Login"));
@@ -43,6 +44,10 @@ function App() {
               element={
                 getUser ? <Admin ifoUser={getUser} /> : <Navigate to="/login" />
               }
+            />
+            <Route
+              path="/admin/user/:id"
+              element={getUser ? <UserDetail /> : <Navigate to="/login" />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
