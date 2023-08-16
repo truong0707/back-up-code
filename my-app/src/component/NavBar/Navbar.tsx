@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <>
       {
-        getUser ? <>  <Link to={'/admin'} >Admin page</Link></> : <><Link to={'/login'} >Login page</Link></>
+        getUser ? <><Link to={'/admin'} >Admin page</Link></> : <><Link to={'/login'} >Login page</Link></>
       }
     </>
   )

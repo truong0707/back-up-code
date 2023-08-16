@@ -7,6 +7,8 @@ import { TypeObjectInput } from "../../page/login/Login";
 import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
+import userServices from "../../services/user";
+import { UserType } from "../../types/User";
 
 export default function ModalBtnUpdate(props: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +16,21 @@ export default function ModalBtnUpdate(props: any) {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
+
+  useEffect(() => {
+    /* call data default input */
+    const dataDefaultInput = async () => {
+      const { data } = await userServices.getUserByIDApi(props.idUser);
+      if (data) {
+        setInputs({
+          name: `${data.name}`,
+          email: `${data.email}`,
+          numberPhone: `${data.numberPhone}`,
+        });
+      }
+    };
+    dataDefaultInput();
+  }, [props.idUser]);
 
   /* handle change input */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,6 +114,7 @@ export default function ModalBtnUpdate(props: any) {
             name={`${t("admin home.name")}`}
             label={`${t("admin home.name")}`}
             rules={[{ required: true }, { type: "string", min: 4 }]}
+            initialValue={inputs.name}
           >
             <Input
               type="name"
@@ -109,6 +127,7 @@ export default function ModalBtnUpdate(props: any) {
           <Form.Item
             name={`${t("admin home.email")}`}
             label={`${t("admin home.email")}`}
+            initialValue={inputs.email}
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
@@ -126,6 +145,7 @@ export default function ModalBtnUpdate(props: any) {
           <Form.Item
             name={`${t("admin home.phoneNumber")}`}
             label={`${t("admin home.phoneNumber")}`}
+            initialValue={inputs.numberPhone}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
