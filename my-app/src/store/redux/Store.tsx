@@ -28,7 +28,8 @@ export interface StateStore {
     msgUpdateError: string,
     msgAddSuccess: string,
     msgDeleteSuccess: string
-    msgDeleteError: string
+    msgDeleteError: string,
+    dataUserDetail: []
   }
   userLogin: {
     loading: boolean;
