@@ -12,7 +12,7 @@ interface MyModalBtnAdd {
   contentBtnAdd?: string;
 }
 
-export default function ModalBtnAdd(props: MyModalBtnAdd) {
+const ModalBtnAdd = (props: MyModalBtnAdd) => {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
@@ -164,3 +164,4 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
     </>
   );
 }
+export default ModalBtnAdd;

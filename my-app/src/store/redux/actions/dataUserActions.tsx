@@ -48,7 +48,6 @@ export function getDataDetailUser(id: string | number) {
       dispatch({ type: GET_USER_DETAIL_RESQUEST });
       const { data } = await userServices.getUserByIDApi(id);
       dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: data });
-
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -74,10 +73,9 @@ export function deleteDataUser(id: string) {
       dispatch({ type: DELETE_USER_RESQUEST });
       const { data } = await userServices.deleteUserApi(id);
       dispatch({ type: DELETE_USER_SUCCESS, payload: { data, id } });
-
     } catch (error: any) {
       if (error.message) {
-        alert("Lỗi server")
+        alert("Lỗi server");
         dispatch({
           type: DELETE_USER_FAIL,
           payload: error.message,
@@ -119,7 +117,7 @@ export function updateDataUser(
             email,
             numberPhone,
           },
-          mesg: data
+          mesg: data,
         },
       });
     } catch (error: any) {
@@ -171,7 +169,6 @@ export function addDataUser(
           },
           message: data,
         },
-
       }); // payload ở đây e thấy json server trả về {} nên e truyền vào luôn
 
       /* Trường hợp 2 */
@@ -182,7 +179,6 @@ export function addDataUser(
       const dataRefresh = await userServices.getUserApi();
       dispatch({ type: GET_DATA_USER_RESQUEST });
       dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
-
     } catch (error: any) {
       if (error.message) {
         dispatch({

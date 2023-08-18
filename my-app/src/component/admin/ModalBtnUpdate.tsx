@@ -9,7 +9,7 @@ import AlertNotificate from "../alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
 import userServices from "../../services/user";
 
-export default function ModalBtnUpdate(props: any) {
+const ModalBtnUpdate = (props: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
@@ -167,3 +167,4 @@ export default function ModalBtnUpdate(props: any) {
     </>
   );
 }
+export default ModalBtnUpdate;

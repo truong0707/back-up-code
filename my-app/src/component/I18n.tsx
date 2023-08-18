@@ -1,5 +1,7 @@
 // import { useTranslation, Trans } from "react-i18next";
 
+import React from "react";
+
 // import { useRef } from "react";
 
 // const lngs: any = {

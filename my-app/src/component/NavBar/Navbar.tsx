@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { StateStore } from '../../store/redux/Store';
 import { useSelector } from 'react-redux';
+import React from 'react';
 
-export default function Navbar() {
+const Navbar = () => {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
   
   return (
@@ -13,3 +14,4 @@ export default function Navbar() {
     </>
   )
 }
+export default Navbar;

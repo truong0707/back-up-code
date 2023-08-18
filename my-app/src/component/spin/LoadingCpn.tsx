@@ -1,5 +1,7 @@
 import { Spin } from "antd";
+import React from "react";
 
-export default function LoadingCpn() {
+const LoadingCpn = () => {
   return <Spin />;
 }
+export default LoadingCpn;

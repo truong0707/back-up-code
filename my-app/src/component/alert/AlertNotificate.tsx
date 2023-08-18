@@ -1,12 +1,13 @@
 import { Alert, Space } from "antd";
 import Styles from './AlertNotificate.module.scss'
+import React from "react";
 
 interface myAlertNotiProps {
   msg: string;
   type: string;
 }
 
-export default function AlertNotificate(props: myAlertNotiProps) {
+const AlertNotificate = (props: myAlertNotiProps) => {
   return (
       <Space direction="vertical" className={Styles.wrapperAlertNoti} >
         {props.type === "error" ? (
@@ -42,3 +43,4 @@ export default function AlertNotificate(props: myAlertNotiProps) {
       </Space>
   );
 }
+export default AlertNotificate;

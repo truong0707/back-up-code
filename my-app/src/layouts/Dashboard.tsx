@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import Styles from "../page/admin/Doahboard.module.scss";
 import {
   AppstoreOutlined,
@@ -31,25 +32,30 @@ function getItem(
   } as MenuItem;
 }
 
-export default function MasterLayoutDoashBoard({ children }: any) {
+const Dashboard = () => {
   const { t } = useTranslation(["homeAdmin"]);
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
   const [collapsed /* setCollapsed */] = useState(false);
   const dispatch = useDispatch();
+  const isAdmin = true; // check dữ liệu admin từ server
 
   const items: MenuItem[] = [
     getItem(
-      <Link to={"/admin"}>{t("admin home.admin")}</Link>,
+      <Link to={"/admin/home"}>{t("admin home.admin")}</Link>,
       "1",
       <PieChartOutlined />
     ),
     getItem(
-      <Link to={"/admin/userA"}>{t("admin home.manager_users_type")} A </Link>,
+      <Link to={"/admin/managerUserA"}>
+        {t("admin home.manager_users_type")} A{" "}
+      </Link>,
       "2",
       <DesktopOutlined />
     ),
     getItem(
-      <Link to={"/admin/userB"}>{t("admin home.manager_users_type")} B</Link>,
+      <Link to={"/admin/managerUserB"}>
+        {t("admin home.manager_users_type")} B
+      </Link>,
       "3",
       <DesktopOutlined />
     ),
@@ -70,31 +76,38 @@ export default function MasterLayoutDoashBoard({ children }: any) {
     <>
       {getUser ? (
         <>
-          <div className={Styles.wrapperDoashBoard}>
-            <div className={Styles.menuDoashBoard}>
-              <Menu
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
-                mode="inline"
-                theme="dark"
-                inlineCollapsed={collapsed}
-                items={items}
-              />
-            </div>
+          {isAdmin ? (
+            <>
+              <div className={Styles.wrapperDoashBoard}>
+                <div className={Styles.menuDoashBoard}>
+                  <Menu
+                    defaultSelectedKeys={["1"]}
+                    defaultOpenKeys={["sub1"]}
+                    mode="inline"
+                    theme="dark"
+                    inlineCollapsed={collapsed}
+                    items={items}
+                  />
+                </div>
 
-            <div style={{ width: "100%", display: "flex" }}>
-              <div style={{ width: "21%" }}></div>
-              {/* CRUD USER */}
-              <div className={Styles.wrapperContentDoashBoard}>
-                <BreadcrumbNav />
-                {children}
+                <div style={{ width: "100%", display: "flex" }}>
+                  <div style={{ width: "21%" }}></div>
+                  {/* CRUD USER */}
+                  <div className={Styles.wrapperContentDoashBoard}>
+                    <BreadcrumbNav />
+                    <Outlet />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          ) : (
+            <>Bạn không có quyền!</>
+          )}
         </>
       ) : (
-        <>{/* <Navbar /> */}</>
+        <Navigate to="/login" />
       )}
     </>
   );
-}
+};
+export default Dashboard;

@@ -19,7 +19,7 @@ interface MyCRUDUserProps {
   contentBtnAdd?: string;
 }
 
-export default function CRUDUser(props: MyCRUDUserProps) {
+const CRUDUser = (props: MyCRUDUserProps) => {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
   const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
@@ -80,7 +80,7 @@ export default function CRUDUser(props: MyCRUDUserProps) {
               </Col>
 
               <Col className={Styles.Col_IfoTable} span={6} order={2}>
-                <Link to={`/admin/user/${data.id}`}>{data.name}</Link>
+                <Link to={`/admin/user-detail/${data.id}`}>{data.name}</Link>
               </Col>
 
               <Col className={Styles.Col_IfoTable} span={6} order={3}>
@@ -115,3 +115,4 @@ export default function CRUDUser(props: MyCRUDUserProps) {
     </>
   );
 }
+export default CRUDUser;
