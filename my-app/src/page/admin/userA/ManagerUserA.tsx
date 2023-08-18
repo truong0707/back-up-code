@@ -7,7 +7,9 @@ import { useTranslation } from "react-i18next";
 import { StateStore } from "../../../store/redux/Store";
 
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
-const AlertNotificate = lazy(() => import("../../../component/alert/AlertNotificate"));
+const AlertNotificate = lazy(
+  () => import("../../../component/alert/AlertNotificate")
+);
 
 const ManagerUserA = () => {
   const { t } = useTranslation(["homeAdmin"]);
@@ -65,25 +67,3 @@ const ManagerUserA = () => {
 };
 
 export default ManagerUserA;
-
-{
-  /* {loading ? (
-        <LoadingCpn />
-      ) : (
-        <div className={Styles.WraperCRUDUser}>
-          {listDataUsers ? (
-            <Suspense fallback={<LoadingCpn />}>
-              Tái sử dụng CRUD component
-              <CRUDUser
-                title={`${t("admin home.table_manager_type")} A`}
-                data={listDataUsers}
-                titleCate={titleCateTable}
-                contentBtnAdd={`${t("admin home.add_user_type")} A`}
-              />
-            </Suspense>
-          ) : (
-            <AlertNotificate msg={`${error}`} type={"error"} />
-          )}
-        </div>
-      )} */
-}

@@ -1,12 +1,12 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { Col, Divider, Row, Space } from "antd";
+import { Divider, Space, Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../spin/LoadingCpn";
-import Styles from "./Admin.module.scss";
 import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../alert/AlertNotificate";
-import PaginationType1 from "../pagination/PaginationType1";
 import { Link } from "react-router-dom";
+import { ColumnsType } from "antd/es/table";
+import { useTranslation } from "react-i18next";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
@@ -19,10 +19,61 @@ interface MyCRUDUserProps {
   contentBtnAdd?: string;
 }
 
+interface DataType {
+  email: string;
+  id: string;
+  name: string;
+  numberPhone: string;
+  tags: string[];
+}
+
 const CRUDUser = (props: MyCRUDUserProps) => {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
   const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
+  const { t } = useTranslation(["homeAdmin"]);
+
+  const columns: ColumnsType<DataType> = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+      render: (text) => <p>{text}</p>,
+    },
+    {
+      title: `${t(`admin home.name`)}`,
+      dataIndex: "name",
+      key: "name",
+      // render: (text) => <Link >{text}</Link>,
+      render: (_, record) => (
+        <Link to={`/admin/user-detail/${record.id}`} key={record.id}>
+          {record.name}
+        </Link>
+      ),
+    },
+    {
+      title: `${t(`admin home.email`)}`,
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: `${t(`admin home.phoneNumber`)}`,
+      dataIndex: "numberPhone",
+      key: "numberPhone",
+      render: (text) => <p>{text}</p>,
+    },
+    {
+      title: `${t(`admin home.option`)}`,
+      key: "action",
+      render: (_, record) => (
+        <Space align="center" key={record.id} size="middle">
+          <ModalBtnDelete id={record.id} email={record.email} />
+          <ModalBtnUpdate idUser={record.id} />
+        </Space>
+      ),
+    },
+  ];
+
   useEffect(() => {}, [dispatch]);
 
   return (
@@ -42,77 +93,9 @@ const CRUDUser = (props: MyCRUDUserProps) => {
           ) : null}
         </div>
 
-        <Row style={{ textAlign: "center" }}>
-          {props.titleCate.map(
-            (
-              result: {
-                nameCate: string;
-                span: number;
-              },
-              index: number
-            ) => (
-              <Col
-                key={index}
-                className={Styles.Col_cate}
-                span={result.span}
-                order={index}
-              >
-                <Divider orientation="center">{result.nameCate}</Divider>
-              </Col>
-            )
-          )}
-        </Row>
-
-        {/* show data */}
-        {props.data.map(
-          (data: {
-            id: string;
-            name: string;
-            email: string;
-            numberPhone: string;
-          }) => (
-            <Row
-              key={data.id}
-              style={{ textAlign: "center", marginTop: "5px" }}
-            >
-              <Col className={Styles.Col_IfoTable} span={1} order={1}>
-                {data.id}
-              </Col>
-
-              <Col className={Styles.Col_IfoTable} span={6} order={2}>
-                <Link to={`/admin/user-detail/${data.id}`}>{data.name}</Link>
-              </Col>
-
-              <Col className={Styles.Col_IfoTable} span={6} order={3}>
-                {data.email}
-              </Col>
-
-              <Col className={Styles.Col_IfoTable} span={6} order={4}>
-                {data.numberPhone}
-              </Col>
-
-              <Col
-                style={{
-                  background: "#F8F8F8",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={5}
-                order={5}
-              >
-                <Space align="center">
-                  <ModalBtnDelete id={data.id} email={data.email} />
-                  <ModalBtnUpdate idUser={data.id} />
-                </Space>
-              </Col>
-            </Row>
-          )
-        )}
-
-        <PaginationType1 total={props.data.length} />
+        <Table columns={columns} dataSource={props.data} />
       </Suspense>
     </>
   );
-}
+};
 export default CRUDUser;

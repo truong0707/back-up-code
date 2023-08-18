@@ -40,7 +40,7 @@ const UserDetail = () => {
             <p>email: {`${dataUserDetail.email}`}</p>
           </Card>
         ) : (
-          "không có dữ liệu"
+          <LoadingCpn />
         )}
       </Suspense>
     </>
