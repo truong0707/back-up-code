@@ -17,29 +17,6 @@ const ManagerUserA = () => {
   const { loading, error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
 
-  /* cate table */
-  const titleCateTable = [
-    {
-      nameCate: "id",
-      span: 1,
-    },
-    {
-      nameCate: `${t("admin home.name")} A`,
-      span: 6,
-    },
-    {
-      nameCate: `${t("admin home.email")} A`,
-      span: 6,
-    },
-    {
-      nameCate: `${t("admin home.phoneNumber")} A`,
-      span: 6,
-    },
-    {
-      nameCate: `${t("admin home.option")} A`,
-      span: 5,
-    },
-  ];
 
   useEffect(() => {
     const productListPromise = listDataUser();
@@ -54,7 +31,6 @@ const ManagerUserA = () => {
             <CRUDUser
               title={`${t("admin home.table_manager_type")} A`}
               data={listDataUsers}
-              titleCate={titleCateTable}
               contentBtnAdd={`${t("admin home.add_user_type")} A`}
             />
           ) : (

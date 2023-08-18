@@ -117,7 +117,15 @@
       "id": 3
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "name": "NewUser",
+      "email": "NewUser@gmail.com",
+      "numberPhone": "23423423424",
+      "password": "1357453241",
+      "id": 1
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

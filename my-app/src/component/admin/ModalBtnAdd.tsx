@@ -62,6 +62,7 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
         `${inputs.password}`
       );
       addUserPromise(dispatch);
+      setIsModalOpen(false);
     }
 
     formRef.current?.resetFields();

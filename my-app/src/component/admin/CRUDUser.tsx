@@ -15,7 +15,6 @@ const ModalBtnUpdate = lazy(() => import("./ModalBtnUpdate"));
 interface MyCRUDUserProps {
   title: String;
   data: [];
-  titleCate: { nameCate: string; span: number }[];
   contentBtnAdd?: string;
 }
 
@@ -82,9 +81,7 @@ const CRUDUser = (props: MyCRUDUserProps) => {
         <Space style={{ padding: "10px" }}>
           <ModalBtnAdd contentBtnAdd={props.contentBtnAdd} />
         </Space>
-
         <Divider orientation="left">{props.title}</Divider>
-
         <div style={{ width: "99%" }}>
           {msgDeleteError ? (
             <>
@@ -92,7 +89,6 @@ const CRUDUser = (props: MyCRUDUserProps) => {
             </>
           ) : null}
         </div>
-
         <Table columns={columns} dataSource={props.data} />
       </Suspense>
     </>
