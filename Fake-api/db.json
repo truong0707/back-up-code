@@ -4,96 +4,6 @@
       "email": "User1",
       "password": "ssss",
       "id": 2
-    },
-    {
-      "email": "aaaaaaaaaaaa",
-      "password": "sđasd",
-      "id": 3
-    },
-    {
-      "email": "ssss",
-      "password": "117417",
-      "id": 4
-    },
-    {
-      "email": "ssss",
-      "password": "sssss",
-      "id": 5
-    },
-    {
-      "email": "Truong",
-      "password": "asddadadad",
-      "id": 6
-    },
-    {
-      "email": "Usser2",
-      "password": "ssssss",
-      "id": 7
-    },
-    {
-      "email": "Truong",
-      "password": "qưdasdasđ",
-      "id": 8
-    },
-    {
-      "email": "ddđ",
-      "password": "ddd",
-      "id": 9
-    },
-    {
-      "email": "ádsdadad",
-      "password": "ádadad",
-      "id": 10
-    },
-    {
-      "email": "User1",
-      "password": "111111111111",
-      "id": 11
-    },
-    {
-      "email": "uuuu",
-      "password": "uuuuu",
-      "id": 12
-    },
-    {
-      "email": "sss",
-      "password": "sss",
-      "id": 13
-    },
-    {
-      "email": "đâ",
-      "password": "đa",
-      "id": 14
-    },
-    {
-      "email": "dss",
-      "password": "sss",
-      "id": 15
-    },
-    {
-      "email": "sss",
-      "password": "sss",
-      "id": 16
-    },
-    {
-      "email": "ssss",
-      "password": "sss",
-      "id": 17
-    },
-    {
-      "email": "sss",
-      "password": "sss",
-      "id": 18
-    },
-    {
-      "email": "sssss",
-      "password": "ssss",
-      "id": 19
-    },
-    {
-      "email": "User2",
-      "password": "da",
-      "id": 20
     }
   ],
   "register": [
@@ -104,37 +14,23 @@
       "confirmPass": "41414141",
       "numberPhone": "014044041",
       "id": 1
-    },
-    {
-      "name": "ssssss",
-      "email": "ssssss@gmail.com",
-      "password": "ádasdasdasdasdasdasd",
-      "confirmPass": "ssssssssssssssss",
-      "numberPhone": "2222222222222222",
-      "id": 2
-    },
-    {
-      "name": "NewUser",
-      "email": "NewUser@gmail.com",
-      "password": "sadaddadad",
-      "confirmPass": "dadadadad",
-      "numberPhone": "222222222",
-      "id": 3
     }
   ],
   "users": [
     {
-      "name": "NewUser",
-      "email": "NewUser@gmail.com",
-      "numberPhone": "23423423424",
-      "password": "1357453241",
+      "name": "User1",
+      "email": "User1@gmail.com",
+      "numberPhone": "2222222222222222",
+      "password": "dsfsdfsdfsfsf",
       "id": 1
-    },
+    }
+  ],
+  "menus": [
     {
-      "name": "User2",
-      "email": "User2@gmail.com",
-      "numberPhone": "42452355433224242",
-      "id": 2
+      "id": "sá1414141",
+      "name": "aaaaaaaaaaa@gmail.com",
+      "url": "https://fontawesome.com/",
+      "iconClass": "sdasdasd"
     }
   ],
   "profile": {

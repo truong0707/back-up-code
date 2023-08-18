@@ -59,15 +59,22 @@ const Dashboard = () => {
       "3",
       <DesktopOutlined />
     ),
-    getItem("Menu Two", "sub2", <AppstoreOutlined />, [
-      getItem("Option 9", "9"),
-      getItem("Option 10", "10"),
+    getItem(
+      "Manager Menu",
+      "sub2",
+      <Link to={"/admin/managerMenu"}>
+        <AppstoreOutlined />
+      </Link>,
+      [
+        getItem("Option 9", "9"),
+        getItem("Option 10", "10"),
 
-      getItem("Submenu", "sub3", null, [
-        getItem("Option 11", "11"),
-        getItem("Option 12", "12"),
-      ]),
-    ]),
+        // getItem("Submenu", "sub3", null, [
+        //   getItem("Option 11", "11"),
+        //   getItem("Option 12", "12"),
+        // ]),
+      ]
+    ),
   ];
 
   useEffect(() => {}, [dispatch]);

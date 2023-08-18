@@ -13,6 +13,7 @@ import Admin from "./page/admin/Admin";
 import Navbar from "./component/NavBar/Navbar";
 import Login from "./page/login/Login";
 import Register from "./page/register/Register";
+import ManagerMenu from "./page/managerMenu/ManagerMenu";
 
 
 const App = () => {
@@ -34,10 +35,12 @@ const App = () => {
             <Route path="managerUserB" element={<ManagerUserB />} />
             <Route path="home" element={<Admin ifoUser={getUser} />} />
             <Route path="user-detail/:id" element={<UserDetail />} />
+            <Route path="managerMenu" element={<ManagerMenu />} />
           </Route>
 
           {/* not Found */}
           <Route path="*" element={<NotFound />} />
+          
         </Routes>
       </Router>
     </div>
