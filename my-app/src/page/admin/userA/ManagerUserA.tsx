@@ -14,7 +14,7 @@ const AlertNotificate = lazy(
 const ManagerUserA = () => {
   const { t } = useTranslation(["homeAdmin"]);
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
-  const { loading, error, listDataUsers } = dataUsers;
+  const { /* loading, */ error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
 
 

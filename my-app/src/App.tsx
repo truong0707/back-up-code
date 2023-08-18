@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { StateStore } from "./store/redux/Store";
-import React, { lazy } from "react";
+import React from "react";
 import "./i18n/i18n";
 import "./App.css";
 import NotFound from "./page/notFound/NotFound";

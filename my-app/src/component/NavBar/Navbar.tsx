@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <>
       {
-        getUser ? <><Link to={'/admin'} >Admin page</Link></> : <><Link to={'/login'} >Login page</Link></>
+        getUser ? <><Link to={'/admin/home'} >Admin page</Link></> : <><Link to={'/login'} >Login page</Link></>
       }
     </>
   )
