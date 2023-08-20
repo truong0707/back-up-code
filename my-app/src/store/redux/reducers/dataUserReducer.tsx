@@ -9,6 +9,9 @@ import {
   GET_DATA_USER_FAIL,
   GET_DATA_USER_RESQUEST,
   GET_DATA_USER_SUCCESS,
+  GET_USER_DETAIL_FAIL,
+  GET_USER_DETAIL_RESQUEST,
+  GET_USER_DETAIL_SUCCESS,
   UPDATE_USER_FAIL,
   UPDATE_USER_RESQUEST,
   UPDATE_USER_SUCCESS,
@@ -82,6 +85,12 @@ export function listDataUserReducer(
       };
     case UPDATE_USER_FAIL:
       return { ...state, msgUpdateError: action.payload };
+    case GET_USER_DETAIL_RESQUEST:
+      return { ...state };
+    case GET_USER_DETAIL_SUCCESS:
+      return { ...state, dataUserDetail: action.payload };
+    case GET_USER_DETAIL_FAIL:
+      return { ...state };
     case ADD_USER_RESQUEST:
       return { ...state, msgAddSuccess: true };
     case ADD_USER_SUCCESS:

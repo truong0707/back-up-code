@@ -7,8 +7,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "../login/Form.module.scss";
 import AlertNotificate from "../../component/alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
+import React from "react";
 
-export default function Register() {
+const Register = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -150,3 +151,4 @@ export default function Register() {
     </>
   );
 }
+export default Register;

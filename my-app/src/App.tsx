@@ -1,54 +1,49 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { StateStore } from "./store/redux/Store";
-import { lazy, Suspense } from "react";
-import LoadingCpn from "./component/spin/LoadingCpn";
+import React from "react";
 import "./i18n/i18n";
 import "./App.css";
 import NotFound from "./page/notFound/NotFound";
+import UserDetail from "./page/userDetail/UserDetail";
+import Dashboard from "./layouts/Dashboard";
+import ManagerUserA from "./page/admin/userA/ManagerUserA";
+import ManagerUserB from "./page/admin/userB/ManagerUserB";
+import Admin from "./page/admin/Admin";
+import Navbar from "./component/NavBar/Navbar";
+import Login from "./page/login/Login";
+import Register from "./page/register/Register";
+import ManagerMenu from "./page/managerMenu/ManagerMenu";
 
-const Navbar = lazy(() => import("./component/NavBar/Navbar"));
-const Login = lazy(() => import("./page/login/Login"));
-const Register = lazy(() => import("./page/register/Register"));
-const ManagerUserA = lazy(() => import("./page/admin/userA/ManagerUserA"));
-const ManagerUserB = lazy(() => import("./page/admin/userB/ManagerUserB"));
-const Admin = lazy(() => import("./page/admin/Admin"));
 
-function App() {
+const App = () => {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
 
   return (
     <div className="App">
       <Router>
-        <Suspense fallback={<LoadingCpn />}>
-          <Routes>
-            <Route path="/" element={<Navbar />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/admin/userA"
-              element={getUser ? <ManagerUserA /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/admin/userB"
-              element={getUser ? <ManagerUserB /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/admin"
-              element={
-                getUser ? <Admin ifoUser={getUser} /> : <Navigate to="/login" />
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          {/* page  */}
+
+          <Route path="/" element={<Navbar />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* Admin */}
+          <Route path="/admin" element={<Dashboard />}>
+            <Route path="managerUserA" element={<ManagerUserA />} />
+            <Route path="managerUserB" element={<ManagerUserB />} />
+            <Route path="home" element={<Admin ifoUser={getUser} />} />
+            <Route path="user-detail/:id" element={<UserDetail />} />
+            <Route path="managerMenu" element={<ManagerMenu />} />
+          </Route>
+
+          {/* not Found */}
+          <Route path="*" element={<NotFound />} />
+          
+        </Routes>
       </Router>
     </div>
   );
-}
+};
 export default App;

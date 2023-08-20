@@ -9,6 +9,9 @@ import {
   GET_DATA_USER_FAIL,
   GET_DATA_USER_RESQUEST,
   GET_DATA_USER_SUCCESS,
+  GET_USER_DETAIL_FAIL,
+  GET_USER_DETAIL_RESQUEST,
+  GET_USER_DETAIL_SUCCESS,
   UPDATE_USER_FAIL,
   UPDATE_USER_RESQUEST,
   UPDATE_USER_SUCCESS,
@@ -39,6 +42,30 @@ export function listDataUser() {
   };
 }
 
+export function getDataDetailUser(id: string | number) {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch({ type: GET_USER_DETAIL_RESQUEST });
+      const { data } = await userServices.getUserByIDApi(id);
+      dispatch({ type: GET_USER_DETAIL_SUCCESS, payload: data });
+    } catch (error: any) {
+      if (error.message) {
+        dispatch({
+          type: GET_USER_DETAIL_FAIL,
+          payload: error.message,
+        });
+      } else {
+        dispatch({
+          type: GET_USER_DETAIL_FAIL,
+          payload: error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        });
+      }
+    }
+  };
+}
+
 /* delete user */
 export function deleteDataUser(id: string) {
   return async (dispatch: Dispatch) => {
@@ -46,10 +73,9 @@ export function deleteDataUser(id: string) {
       dispatch({ type: DELETE_USER_RESQUEST });
       const { data } = await userServices.deleteUserApi(id);
       dispatch({ type: DELETE_USER_SUCCESS, payload: { data, id } });
-
     } catch (error: any) {
       if (error.message) {
-        alert("Lỗi server")
+        alert("Lỗi server");
         dispatch({
           type: DELETE_USER_FAIL,
           payload: error.message,
@@ -91,7 +117,7 @@ export function updateDataUser(
             email,
             numberPhone,
           },
-          mesg: data
+          mesg: data,
         },
       });
     } catch (error: any) {
@@ -143,7 +169,6 @@ export function addDataUser(
           },
           message: data,
         },
-
       }); // payload ở đây e thấy json server trả về {} nên e truyền vào luôn
 
       /* Trường hợp 2 */
@@ -154,7 +179,6 @@ export function addDataUser(
       const dataRefresh = await userServices.getUserApi();
       dispatch({ type: GET_DATA_USER_RESQUEST });
       dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
-
     } catch (error: any) {
       if (error.message) {
         dispatch({

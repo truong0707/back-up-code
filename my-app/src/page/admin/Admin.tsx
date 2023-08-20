@@ -1,9 +1,12 @@
-import MasterLayoutDoashBoard from "../../layouts/MasterLayoutDoashBoard";
 import { Button, Space } from "antd";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/redux/actions/userActions";
-import SelectOptionLan from "../../component/selectOptionLan/SelectOptionLan";
 import { useTranslation } from "react-i18next";
+import React, { Suspense, lazy } from "react";
+import LoadingCpn from "../../component/spin/LoadingCpn";
+const SelectOptionLan = lazy(
+  () => import("../../component/selectOptionLan/SelectOptionLan")
+);
 
 interface MypropsAmin {
   ifoUser: {
@@ -11,7 +14,7 @@ interface MypropsAmin {
   };
 }
 
-export default function Admin(props: MypropsAmin) {
+const Admin = (props: MypropsAmin) => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin", "adminManagerA"]);
 
@@ -23,10 +26,10 @@ export default function Admin(props: MypropsAmin) {
 
   return (
     <>
-      <MasterLayoutDoashBoard>
+      <Suspense fallback={<LoadingCpn />}>
         <Space>
           <p>
-            {t("admin home.hi_user")}: <b>{props.ifoUser.email}</b>
+            {t("admin home.hi_user")}: <b>{props.ifoUser.email}</b>s
           </p>
 
           <SelectOptionLan />
@@ -34,7 +37,8 @@ export default function Admin(props: MypropsAmin) {
             {t("admin home.log_out")}
           </Button>
         </Space>
-      </MasterLayoutDoashBoard>
+      </Suspense>
     </>
   );
-}
+};
+export default Admin;

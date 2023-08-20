@@ -7,7 +7,7 @@ import { useTranslation, /* Trans */ } from "react-i18next";
 //   vi: { nativeName: "Tiếng việt" },
 // };
 
-export default function SelectOptionLan() {
+const SelectOptionLan = () =>  {
   const { i18n } = useTranslation(["homeAdmin"]);
 
   const handleChange = (value: string) => {
@@ -79,3 +79,4 @@ export default function SelectOptionLan() {
     // </Space>
   );
 }
+export default SelectOptionLan;

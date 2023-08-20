@@ -10,7 +10,7 @@ interface MyModalBtn {
   email: string
 }
 
-export default function ModalBtn(props: MyModalBtn) {
+const  ModalBtn = (props: MyModalBtn) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation(['homeAdmin']);
@@ -50,3 +50,5 @@ export default function ModalBtn(props: MyModalBtn) {
     </>
   );
 }
+
+export default ModalBtn;

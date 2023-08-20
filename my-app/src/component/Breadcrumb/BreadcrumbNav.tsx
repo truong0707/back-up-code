@@ -11,21 +11,21 @@ const BreadcrumbNav: React.FC = () => (
       {
         // href: '',
         title: (
-          <Link to={"/admin/"}>
+          <Link to={"/admin/home"}>
             <HomeOutlined />
           </Link>
         ),
       },
       {
         title: (
-          <Link to={"/admin/userA"}>
+          <Link to={"/admin/managerUserA"}>
             <span>A</span>
           </Link>
         ),
       },
       {
         title: (
-          <Link to={"/admin/userB"}>
+          <Link to={"/admin/managerUserB"}>
             <span>B</span>
           </Link>
         ),

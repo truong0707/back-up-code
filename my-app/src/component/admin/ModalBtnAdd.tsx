@@ -12,7 +12,7 @@ interface MyModalBtnAdd {
   contentBtnAdd?: string;
 }
 
-export default function ModalBtnAdd(props: MyModalBtnAdd) {
+const ModalBtnAdd = (props: MyModalBtnAdd) => {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
@@ -62,6 +62,7 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
         `${inputs.password}`
       );
       addUserPromise(dispatch);
+      setIsModalOpen(false);
     }
 
     formRef.current?.resetFields();
@@ -99,7 +100,7 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
           <Form.Item
             name={`${t(`admin home.name`)}`}
             label={`${t(`admin home.name`)}`}
-            rules={[{ required: true }, { type: "string", min: 6 }]}
+            rules={[{ required: true }, { type: "string", min: 3 }]}
           >
             <Input
               type="name"
@@ -164,3 +165,4 @@ export default function ModalBtnAdd(props: MyModalBtnAdd) {
     </>
   );
 }
+export default ModalBtnAdd;

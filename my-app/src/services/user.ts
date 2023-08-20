@@ -13,6 +13,10 @@ const userServices = {
     const response = await axiosClient.get(`/users`);
     return response;
   },
+  getUserByIDApi: async (id: string | number) => {
+    const response = await axiosClient.get(`/users/${id}`);
+    return response;
+  },
   deleteUserApi: async (id: string) => {
     const response = await axiosClient.delete(`/users/${id}`);
     return response;
