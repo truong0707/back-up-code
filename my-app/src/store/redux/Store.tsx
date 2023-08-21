@@ -5,11 +5,13 @@ import { userLoginReduder, userRegisterReducer } from "./reducers/userReducer";
 import {
   listDataUserReducer,
 } from "./reducers/dataUserReducer";
+import { menuReducer } from "./reducers/menuReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReduder,
   userRegister: userRegisterReducer,
   dataUsers: listDataUserReducer,
+  MenuAdmin: menuReducer,
 });
 
 const middleware = [thunk];
@@ -39,6 +41,9 @@ export interface StateStore {
     };
     error: boolean;
   };
+  MenuAdmin: {
+    listDataMenu: []
+  }
 }
 
 const initalState = {

@@ -5,9 +5,10 @@ import {
   AppstoreOutlined,
   DesktopOutlined,
   PieChartOutlined,
+  PlusSquareOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { Button, Menu, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
@@ -35,10 +36,45 @@ function getItem(
 const Dashboard = () => {
   const { t } = useTranslation(["homeAdmin"]);
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
+  const getMenu = useSelector((state: StateStore) => state);
   const [collapsed /* setCollapsed */] = useState(false);
   const dispatch = useDispatch();
   const isAdmin = true; // check dữ liệu admin từ server
 
+  useEffect(() => {
+    // console.log(getMenu.MenuAdmin.listDataMenu, "getMenu");
+  }, [dispatch]);
+
+  const ItemDataMenu = () => {
+    /* sub menu */
+    const renderSubMenu = (subMenu: any) => {
+      if (subMenu.length > 0) {
+        const dataSubMenu = subMenu.map(
+          (data: { id: number; name: string }) => {
+            return getItem(`${data.name}`, `${data.id}`);
+          }
+        );
+        return dataSubMenu;
+      } else {
+        return null;
+      }
+    };
+
+    /* main menu */
+    const result = getMenu.MenuAdmin.listDataMenu.map(
+      (dataMenu: { name: string; id: number; children: [] }) => {
+        return getItem(
+          `${dataMenu.name}`,
+          `${dataMenu.id}`,
+          null,
+          renderSubMenu(dataMenu.children)
+        );
+      }
+    );
+    return result;
+  };
+
+  /* Menu */
   const items: MenuItem[] = [
     getItem(
       <Link to={"/admin/home"}>{t("admin home.admin")}</Link>,
@@ -60,24 +96,25 @@ const Dashboard = () => {
       <DesktopOutlined />
     ),
     getItem(
-      "Manager Menu",
+      <Space>
+        Manager Menu đâsd
+        <Link to={"/admin/managerMenu"}>
+          <PlusSquareOutlined />
+        </Link>
+      </Space>,
+      // "Manager Menu đâsd",
       "sub2",
-      <Link to={"/admin/managerMenu"}>
-        <AppstoreOutlined />
-      </Link>,
+      <AppstoreOutlined />,
+      // ItemDataMenu()
       [
         getItem("Option 9", "9"),
-        getItem("Option 10", "10"),
-
-        // getItem("Submenu", "sub3", null, [
-        //   getItem("Option 11", "11"),
-        //   getItem("Option 12", "12"),
-        // ]),
+        getItem("Submenu", "sub3", null, [
+          getItem("Option 11", "11"),
+          getItem("Option 12", "12"),
+        ]),
       ]
     ),
   ];
-
-  useEffect(() => {}, [dispatch]);
 
   return (
     <>

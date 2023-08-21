@@ -7,6 +7,7 @@ import AlertNotificate from "../alert/AlertNotificate";
 import { Link } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
+import { getMenuAction } from "../../store/redux/actions/menuActions";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
@@ -27,10 +28,16 @@ interface DataType {
 }
 
 const CRUDUser = (props: MyCRUDUserProps) => {
+  const store = useSelector((state: StateStore) => state);
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
   const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
+
+  useEffect(() => {
+    const dataMenuPromise = getMenuAction();
+    dataMenuPromise(dispatch);
+  },[dispatch]);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -73,7 +80,11 @@ const CRUDUser = (props: MyCRUDUserProps) => {
     },
   ];
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    console.log(store, "store1");
+  }, [dispatch]);
+
+  console.log(store, "store2");
 
   return (
     <>

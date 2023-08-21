@@ -19,28 +19,12 @@ import {
 
 interface MyState {
   listDataUsers: [];
-  userLogin: {
-    loading: boolean;
-    userInfo: {
-      name?: string;
-      email?: string;
-    };
-    error: boolean;
-  };
 }
 
 /* Get data users */
 export function listDataUserReducer(
   state: MyState = {
     listDataUsers: [],
-    userLogin: {
-      loading: false,
-      userInfo: {
-        name: undefined,
-        email: undefined,
-      },
-      error: false,
-    },
   },
   action: { type: string; payload: any }
 ) {

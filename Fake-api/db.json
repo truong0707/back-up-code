@@ -23,19 +23,55 @@
   ],
   "users": [
     {
-      "name": "User1",
+      "name": "User11",
       "email": "User1@gmail.ocm",
       "numberPhone": "070724106",
-      "password": "truong19062000",
       "id": 1
     }
   ],
   "menus": [
     {
-      "id": "sá1414141",
-      "name": "aaaaaaaaaaa@gmail.com",
+      "id": 9,
+      "name": "option 9",
       "url": "https://fontawesome.com/",
-      "iconClass": "sdasdasd"
+      "iconClass": "sdasdasd",
+      "children": [
+        {
+          "id": 10,
+          "name": "option sub menu 1",
+          "url": ""
+        },
+        {
+          "id": 11,
+          "name": "option sub menu 2",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "option 10",
+      "url": "https://fontawesome.com/",
+      "iconClass": "sdasdasd",
+      "children": []
+    },
+    {
+      "id": 13,
+      "name": "option 13",
+      "url": "https://fontawesome.com/",
+      "iconClass": "sdasdasd",
+      "children": [
+        {
+          "id": 14,
+          "name": "option sub menu 1",
+          "url": ""
+        },
+        {
+          "id": 15,
+          "name": "option sub menu 2",
+          "url": ""
+        }
+      ]
     }
   ],
   "profile": {
