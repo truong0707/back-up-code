@@ -12,8 +12,11 @@ export function getMenuAction() {
       dispatch({ type: GET_DATA_MENU_RESQUEST });
       const { data } = await menuServices.getMenuApi();
 
+      console.log(data , 'data')
+
       dispatch({ type: GET_DATA_MENU, payload: data });
     } catch (error: any) {
+      console.log(error, "err")
       // if (error.message) {
       //   dispatch({
       //     type: GET_DATA_USER_FAIL,
@@ -31,15 +34,22 @@ export function getMenuAction() {
   };
 }
 
-export function addMenuAction(ojb: any /* idMenu: number, nameMenu: string, urlMenu: string, iconClass: string, children: [] */) {
+export function addMenuAction(
+  dataOjb: any /* idMenu: number, nameMenu: string, urlMenu: string, iconClass: string, children: [] */
+) {
   return async (dispatch: Dispatch) => {
     try {
-      console.log(ojb, "ojb")
+      console.log(dataOjb, "ojb");
       // dispatch({ type: ADD_DATA_MENU });
-      // const { data } = await menuServices.postMenuApi(idMenu, nameMenu, urlMenu, iconClass, children);
+      const { data } = await menuServices.postMenuApi(
+        dataOjb.name,
+        dataOjb.url,
+        dataOjb.iconClass,
+        dataOjb.children
+      );
 
-      // // dispatch({ type: GET_DATA_MENU, payload: data });
-      // console.log(data, "data post")
+      dispatch({ type: ADD_DATA_MENU, /* payload: data */ });
+      console.log(data, "data post");
     } catch (error: any) {
       // if (error.message) {
       //   dispatch({

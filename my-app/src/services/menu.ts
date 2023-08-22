@@ -6,14 +6,14 @@ const menuServices = {
     return response;
   },
   postMenuApi: async (
-    idMenu: number,
+    // idMenu: number,
     nameMenu: string,
     urlMenu: string,
     iconClass: string,
     children: []
   ) => {
     const response = await axiosClient.post(`/menus`, {
-      id: idMenu,
+      // id: idMenu,
       name: nameMenu,
       url: urlMenu,
       iconClass: iconClass,

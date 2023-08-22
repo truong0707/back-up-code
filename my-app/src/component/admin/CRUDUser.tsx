@@ -80,12 +80,6 @@ const CRUDUser = (props: MyCRUDUserProps) => {
     },
   ];
 
-  useEffect(() => {
-    console.log(store, "store1");
-  }, [dispatch]);
-
-  console.log(store, "store2");
-
   return (
     <>
       <Suspense fallback={<LoadingCpn />}>

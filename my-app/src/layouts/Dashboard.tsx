@@ -14,6 +14,7 @@ import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import BreadcrumbNav from "../component/Breadcrumb/BreadcrumbNav";
+import { getMenuAction } from "../store/redux/actions/menuActions";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -37,12 +38,13 @@ const Dashboard = () => {
   const { t } = useTranslation(["homeAdmin"]);
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
   const getMenu = useSelector((state: StateStore) => state);
-  const [collapsed /* setCollapsed */] = useState(false);
+  const [collapsed] = useState(false);
   const dispatch = useDispatch();
   const isAdmin = true; // check dữ liệu admin từ server
 
   useEffect(() => {
-    // console.log(getMenu.MenuAdmin.listDataMenu, "getMenu");
+    const dataMenuPromise = getMenuAction();
+    dataMenuPromise(dispatch);
   }, [dispatch]);
 
   const ItemDataMenu = () => {
@@ -71,8 +73,11 @@ const Dashboard = () => {
         );
       }
     );
+
     return result;
   };
+
+ 
 
   /* Menu */
   const items: MenuItem[] = [
@@ -97,7 +102,7 @@ const Dashboard = () => {
     ),
     getItem(
       <Space>
-        Manager Menu đâsd
+        Manager Menu
         <Link to={"/admin/managerMenu"}>
           <PlusSquareOutlined />
         </Link>
@@ -105,14 +110,15 @@ const Dashboard = () => {
       // "Manager Menu đâsd",
       "sub2",
       <AppstoreOutlined />,
-      // ItemDataMenu()
-      [
-        getItem("Option 9", "9"),
-        getItem("Submenu", "sub3", null, [
-          getItem("Option 11", "11"),
-          getItem("Option 12", "12"),
-        ]),
-      ]
+
+      ItemDataMenu()
+      // [
+      //   getItem("Option 9", "9"),
+      //   getItem("Submenu", "sub3", null, [
+      //     getItem("Option 11", "11"),
+      //     getItem("Option 12", "12"),
+      //   ]),
+      // ]
     ),
   ];
 

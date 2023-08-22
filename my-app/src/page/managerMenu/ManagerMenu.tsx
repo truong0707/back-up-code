@@ -4,18 +4,13 @@ import SelectTab from "../../component/select/SelectTab";
 import ModalForm from "./ModalForm";
 import { addMenuAction } from "../../store/redux/actions/menuActions";
 import { useDispatch } from "react-redux";
+import ListScroll from "../../component/list/ListScroll";
 
 const ManagerMenu: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   // const onFinishFailed = () => {
   //   message.error("Submit failed!");
-  // };
-
-  // const onFill = () => {
-  //   form.setFieldsValue({
-  //     url: "https://taobao.com/",
-  //   });
   // };
 
   /*  */
@@ -35,13 +30,14 @@ const ManagerMenu: React.FC = () => {
   const onHandleSave = (value: any) => {
     setValue({
       name: value.nameMenu,
+      url: value.urlMenu,
+      iconClass: value.iconClass,
       children: submenu,
     });
-    console.log(valueA, "result");
-    alert("save thanh cong!");
+    alert("Đã lưu thành công - hãy submit !");
   };
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {}, [dispatch, submenu]);
 
   /* handleChange */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,70 +47,76 @@ const ManagerMenu: React.FC = () => {
     setInputs((state: any) => ({ ...state, [nameInput]: valueInput })); //
   };
 
-  const handleClick = () => {
-    console.log(inputs, "inputs");
+  const handleClickAddSubMenu = () => {
     /* Check input empty - don't submit */
-    const parser = JSON.stringify(inputs);
-    const items = parser.replace(/\s/g, "");
+    const parser = JSON.stringify(inputs.name ? inputs.name : "");
+    const items = parser.replace(/\s+/g, "");
 
-    console.log(items.length);
-    console.log(parser, "s");
+    if (items.length > 2) {
+      setSubmenu((state: any) => [...state, inputs]);
+    }
 
-    // if (items.length < 2) {
-    //   alert("ddieen ");
-    // } else {
-    setSubmenu((state: any) => [...state, inputs]);
-    // }
-
-    console.log(submenu, "submenu");
+    alert("Thêm sub menu thành công!");
   };
 
   const handleSubmit = () => {
     const addMenuActionPromise = addMenuAction(valueA);
     addMenuActionPromise(dispatch);
+
+    alert("Submit thành công!")
   };
 
   return (
     <>
       {openModalAddSubMenu ? (
-        <div
-          style={{
-            padding: "5px",
-            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
-          }}
-        >
-          <h3>Add Sub menu</h3>
-          <p>Name sub menu</p>
-          <Input
-            name="name"
-            onChange={handleInputChange}
-            placeholder="input placeholder"
-          />
-          {submenu && submenu.length < 0 ? (
+        <>
+          <div
+            style={{
+              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+            }}
+          >
+            <h4 style={{ marginBottom: "10px" }}>Sub menu</h4>
+
+            <Space>
+              <Space direction="vertical">
+                {/* <p>name</p> */}
+                <Input
+                  name="name"
+                  onChange={handleInputChange}
+                  placeholder="name"
+                />
+              </Space>
+
+              <Space direction="vertical">
+                {/* <p>url</p> */}
+                <Input
+                  name="urlSubMenu"
+                  onChange={handleInputChange}
+                  placeholder="url"
+                />
+              </Space>
+            </Space>
+          </div>
+
+          {/* <p>List sub menu :</p> */}
+          {/* <ListScroll/> */}
+          {submenu ? (
             <>
               {submenu.map((data: any, index: number) => (
                 <li key={index}>nameSub: {data.name}</li>
               ))}
             </>
-          ) : null}
+          ) : (
+            "null"
+          )}
 
-          <Form.Item
-            name="urlSubMenu"
-            label="Url Sub Menu"
-            // rules={[{ required: true }, { type: "string", min: 1 }]}
-          >
-            <Input
-              name="urlSubMenu"
-              onChange={handleInputChange}
-              placeholder="input placeholder"
-            />
-          </Form.Item>
-
-          <Space style={{ paddingBottom: "17px" }}>
-            <Button onClick={handleClick}>add Sub menu</Button>
+          <Space style={{ marginTop: "10px", paddingBottom: "30px" }}>
+            <Button type="primary" onClick={handleClickAddSubMenu}>
+              add Sub menu
+            </Button>
             <Button onClick={handleCloseModalAddSubMenu}>close</Button>
           </Space>
-        </div>
+        </>
       ) : (
         <Space style={{ paddingBottom: "17px" }}>
           <Button onClick={handleOpenModalAddSubMenu}>Thêm menu con</Button>
@@ -122,6 +124,7 @@ const ManagerMenu: React.FC = () => {
       )}
 
       {/* Main menu */}
+      <h4 style={{ marginBottom: "10px" }}>Main menu</h4>
       <Form
         form={form}
         layout="vertical"
@@ -142,7 +145,7 @@ const ManagerMenu: React.FC = () => {
         </Form.Item>
 
         <Form.Item
-          name="url"
+          name="urlMenu"
           label="URL"
           rules={[
             { required: true },
@@ -156,11 +159,7 @@ const ManagerMenu: React.FC = () => {
         <Form.Item
           name="iconClass"
           label="Icon Class"
-          rules={[
-            { required: true },
-            { type: "url", warningOnly: true },
-            { type: "string", min: 1 },
-          ]}
+          rules={[{ required: true }, { type: "string", min: 1 }]}
         >
           <Input placeholder="input placeholder" />
         </Form.Item>
@@ -171,7 +170,7 @@ const ManagerMenu: React.FC = () => {
               save
             </Button>
 
-            <Button onClick={handleSubmit}>Sumit</Button>
+            <Button onClick={handleSubmit}>Submit</Button>
           </Space>
         </Form.Item>
       </Form>
