@@ -22,6 +22,7 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   : null;
 
 export interface StateStore {
+  menuDetail(menuDetail: any, arg1: string): unknown;
   dataUsers: {
     listDataUsers: [],
     error: Boolean,
@@ -32,7 +33,7 @@ export interface StateStore {
     msgDeleteSuccess: string
     msgDeleteError: string,
     dataUserDetail: []
-  }
+  },
   userLogin: {
     loading: boolean;
     userInfo: {
@@ -42,6 +43,9 @@ export interface StateStore {
     error: boolean;
   };
   MenuAdmin: {
+    menuDetail: {
+      name: string
+    };
     listDataMenu: []
   }
 }

@@ -32,28 +32,35 @@
   "menus": [
     {
       "id": 9,
-      "name": "Menu A",
+      "name": "Menu 1",
       "url": "https://fontawesome.com/",
       "iconClass": "sdasdasd",
       "children": [
         {
           "id": 10,
-          "name": "sub menu a",
+          "title": "Sub menu a",
           "url": ""
         },
         {
           "id": 11,
-          "name": "Sub menu b",
+          "title": "Sub menu b",
           "url": ""
         }
       ]
     },
     {
-      "id": 13,
-      "name": "Menu B",
-      "url": "https://fontawesome.com/",
-      "iconClass": "sdasdasd",
-      "children": []
+      "name": "đa",
+      "url": "adada",
+      "iconClass": "dâd",
+      "children": [],
+      "id": 13
+    },
+    {
+      "name": "đá",
+      "url": "ádad",
+      "iconClass": "áda",
+      "children": [],
+      "id": 14
     }
   ],
   "profile": {

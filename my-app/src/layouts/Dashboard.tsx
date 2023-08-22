@@ -6,9 +6,10 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   PlusSquareOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Button, Menu, Space } from "antd";
+import { Menu, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
@@ -52,8 +53,8 @@ const Dashboard = () => {
     const renderSubMenu = (subMenu: any) => {
       if (subMenu.length > 0) {
         const dataSubMenu = subMenu.map(
-          (data: { id: number; name: string }) => {
-            return getItem(`${data.name}`, `${data.id}`);
+          (data: { id: number; title: string }) => {
+            return getItem(`${data.title}`, `${data.id}`);
           }
         );
         return dataSubMenu;
@@ -103,8 +104,12 @@ const Dashboard = () => {
     getItem(
       <Space>
         Manager Menu
-        <Link to={"/admin/managerMenu"}>
+        <Link to={"/admin/add-menu"}>
           <PlusSquareOutlined />
+        </Link>
+
+        <Link to={"/admin/delete&update-menu"}>
+          <DeleteOutlined />
         </Link>
       </Space>,
       // "Manager Menu đâsd",

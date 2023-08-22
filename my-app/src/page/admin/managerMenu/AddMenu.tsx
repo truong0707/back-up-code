@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, message, Space } from "antd";
-import SelectTab from "../../component/select/SelectTab";
-import ModalForm from "./ModalForm";
-import { addMenuAction } from "../../store/redux/actions/menuActions";
+import { Button, Form, Input, Space, message } from "antd";
+import { addMenuAction } from "../../../store/redux/actions/menuActions";
 import { useDispatch } from "react-redux";
-import ListScroll from "../../component/list/ListScroll";
 
-const ManagerMenu: React.FC = () => {
+const AddMenu: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  // const onFinishFailed = () => {
-  //   message.error("Submit failed!");
-  // };
-
-  /*  */
   const [inputs, setInputs] = useState<any>({});
-  // const subMenu: any = [];
   const [submenu, setSubmenu] = useState<any>([]);
   const [valueA, setValue] = useState<any>();
   const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
 
+  useEffect(() => {}, [dispatch, submenu]);
+
+  /* Show/hide add submenu */
   const handleOpenModalAddSubMenu = () => {
     setOpenModalAddSubMenu(true);
   };
@@ -27,6 +21,27 @@ const ManagerMenu: React.FC = () => {
     setOpenModalAddSubMenu(false);
   };
 
+  /* handle change input sub menu */
+  const handleInputChangeSubMenu = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nameInput = e.target.name;
+    let valueInput = e.target.value;
+
+    setInputs((state: any) => ({ ...state, [nameInput]: valueInput })); //
+  };
+
+  /* handle add submenu */
+  const handleClickAddSubMenu = () => {
+    /* Check input empty - don't submit */
+    const parser = JSON.stringify(inputs.title ? inputs.title : "");
+    const items = parser.replace(/\s+/g, "");
+
+    if (items.length > 2) {
+      setSubmenu((state: any) => [...state, inputs]);
+    }
+    message.success("Thêm sub menu thành công!", 2.5);
+  };
+
+  /* handle save form */
   const onHandleSave = (value: any) => {
     setValue({
       name: value.nameMenu,
@@ -34,64 +49,37 @@ const ManagerMenu: React.FC = () => {
       iconClass: value.iconClass,
       children: submenu,
     });
-    alert("Đã lưu thành công - hãy submit !");
+
+    message.success("Đã lưu thành công - hãy submit!", 2.5);
   };
 
-  useEffect(() => {}, [dispatch, submenu]);
-
-  /* handleChange */
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nameInput = e.target.name;
-    let valueInput = e.target.value;
-
-    setInputs((state: any) => ({ ...state, [nameInput]: valueInput })); //
-  };
-
-  const handleClickAddSubMenu = () => {
-    /* Check input empty - don't submit */
-    const parser = JSON.stringify(inputs.name ? inputs.name : "");
-    const items = parser.replace(/\s+/g, "");
-
-    if (items.length > 2) {
-      setSubmenu((state: any) => [...state, inputs]);
-    }
-
-    alert("Thêm sub menu thành công!");
-  };
-
+  /* Handle submit form - Call api */
   const handleSubmit = () => {
     const addMenuActionPromise = addMenuAction(valueA);
     addMenuActionPromise(dispatch);
-
-    alert("Submit thành công!")
+    message.success("Submit thành công!", 2.5);
   };
 
   return (
     <>
       {openModalAddSubMenu ? (
         <>
-          <div
-            style={{
-              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
-            }}
-          >
+          <div>
             <h4 style={{ marginBottom: "10px" }}>Sub menu</h4>
 
             <Space>
               <Space direction="vertical">
-                {/* <p>name</p> */}
                 <Input
-                  name="name"
-                  onChange={handleInputChange}
-                  placeholder="name"
+                  name="title"
+                  onChange={handleInputChangeSubMenu}
+                  placeholder="name Sub menu"
                 />
               </Space>
 
               <Space direction="vertical">
-                {/* <p>url</p> */}
                 <Input
                   name="urlSubMenu"
-                  onChange={handleInputChange}
+                  onChange={handleInputChangeSubMenu}
                   placeholder="url"
                 />
               </Space>
@@ -99,11 +87,10 @@ const ManagerMenu: React.FC = () => {
           </div>
 
           {/* <p>List sub menu :</p> */}
-          {/* <ListScroll/> */}
           {submenu ? (
             <>
               {submenu.map((data: any, index: number) => (
-                <li key={index}>nameSub: {data.name}</li>
+                <li key={index}>nameSub: {data.title}</li>
               ))}
             </>
           ) : (
@@ -129,17 +116,12 @@ const ManagerMenu: React.FC = () => {
         form={form}
         layout="vertical"
         onFinish={onHandleSave}
-        // onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
           name="nameMenu"
           label="Name menu"
-          rules={[
-            { required: true },
-            // { type: "email", warningOnly: true },
-            { type: "string", min: 1 },
-          ]}
+          rules={[{ required: true }, { type: "string", min: 1 }]}
         >
           <Input placeholder="input placeholder" />
         </Form.Item>
@@ -178,4 +160,4 @@ const ManagerMenu: React.FC = () => {
   );
 };
 
-export default ManagerMenu;
+export default AddMenu;
