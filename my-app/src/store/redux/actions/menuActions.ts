@@ -57,7 +57,7 @@ export function deleteMenuAction(id: string | number) {
       dispatch({ type: DELETE_DATA_MENU, payload: id });
       message.success("Xóa menu thành công!", 2.5);
     } catch (error: any) {
-      message.error("Lỗi Xóa menu!", 2.5);
+      message.error("Lỗi Xóa menu! - xem log ở tab", 2.5);
       console.log(error, "Lỗi");
     }
   };

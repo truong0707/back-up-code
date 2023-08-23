@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "antd";
+import { FormInstance, Modal, message } from "antd";
 import { Button, Form, Input, /* message */ Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addMenuAction,
   getDetailMenuAction,
   updateMenuAction,
 } from "../../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../../store/redux/Store";
 import menuServices from "../../../../services/menu";
+import Styles from "../../../../page/admin/managerMenu/managerMenu.module.scss";
 
 interface MyPropsModalNomal {
   idMenu: string | number | null;
@@ -18,17 +18,33 @@ interface MyPropsModalNomal {
   menuDetail: any;
 }
 
+interface MyAllInfoInput {
+  name: string;
+  iconClass: string;
+  url: string;
+  children: [];
+}
+
+interface MyInputSubMenu {
+  title: string;
+  urlSubMenu: string;
+}
+
 export default function ModalNomal(props: MyPropsModalNomal) {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const [defaultValueInput, setDefaultValue] = useState<any>();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+
   /* input sub menu */
-  const [inputs, setInputs] = useState<any>({});
+  const [inputs, setInputs] = useState<MyInputSubMenu>({
+    title: "",
+    urlSubMenu: "",
+  });
   const [submenu, setSubmenu] = useState<any>([]);
 
   /* total value  */
-  const [valueA, setValue] = useState<any>({});
+  const [valueA, setValue] = useState<MyAllInfoInput>();
 
   /* show/hide  sub menu  */
   const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
@@ -59,35 +75,65 @@ export default function ModalNomal(props: MyPropsModalNomal) {
       setSubmenu((state: any) => [...state, inputs]);
     }
 
-    alert("Thêm sub menu thành công!");
+    message.success("Thêm sub menu thành công!", 2.5);
   };
 
   /* handle save form */
-  const onHandleSave = (value: any) => {
+  const onHandleSave = (value: {
+    nameMenu: string;
+    urlMenu: string;
+    iconClass: string;
+    children: [];
+  }) => {
     setValue({
       name: value.nameMenu,
       url: value.urlMenu,
       iconClass: value.iconClass,
       children: submenu,
     });
-    alert("Đã lưu thành công - hãy submit!");
+    message.success("Đã lưu thành công - hãy submit!", 2.5);
   };
 
-  /* Handle submit form - Call api */
-  const handleSubmit = () => {
-    if (props.idMenu) {
-      const updateMenuActionPromise = updateMenuAction(props.idMenu, valueA);
-      updateMenuActionPromise(dispatch);
-
-      alert("Submit thành công!");
-      props.setShowModalUpdate(false);
-    } else {
-      alert("miss id");
-    }
+  /*  clear */
+  const handleClearModalAddSubMenu = () => {
+    setSubmenu([]);
   };
 
   const handleCancel = () => {
     props.setShowModalUpdate(false);
+  };
+
+  /* Handle submit form - Call api */
+  const formRef = React.useRef<FormInstance>(null);
+  const handleSubmit = () => {
+    if (props.idMenu) {
+      if (
+        !valueA ||
+        valueA.name === "" ||
+        valueA.url === "" ||
+        valueA.iconClass === ""
+      ) {
+        message.error("Hãy điền thông tin và lưu lại!", 2.5);
+      } else {
+        const updateMenuActionPromise = updateMenuAction(props.idMenu, valueA);
+        updateMenuActionPromise(dispatch);
+
+        message.success("Submit thành công - hãy submit!", 2.5);
+        props.setShowModalUpdate(false);
+      }
+    } else {
+      message.error("miss id!", 2.5);
+    }
+
+    /* reset Value input */
+    setValue({
+      name: "",
+      iconClass: "",
+      url: "",
+      children: [],
+    });
+
+    formRef.current?.resetFields();
   };
 
   useEffect(() => {
@@ -122,7 +168,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
         {openModalAddSubMenu ? (
           <>
             <div>
-              <h4 style={{ marginBottom: "10px" }}>Sub menu</h4>
+              <h4 className={Styles.titleContent}>Sub menu</h4>
 
               <Space>
                 <Space direction="vertical">
@@ -143,21 +189,37 @@ export default function ModalNomal(props: MyPropsModalNomal) {
               </Space>
             </div>
 
-            {/* <p>List sub menu :</p> */}
             {submenu ? (
               <>
-                {submenu.map((data: any, index: number) => (
-                  <li key={index}>nameSub: {data.title}</li>
-                ))}
+                <ul>
+                  <>
+                    {submenu.map(
+                      (
+                        data: {
+                          title: string;
+                          url: string;
+                        },
+                        index: number
+                      ) => (
+                        <li
+                          key={index}
+                        >
+                          {index + 1}. nameSub: {data.title}
+                        </li>
+                      )
+                    )}
+                  </>
+                </ul>
               </>
             ) : (
-              "null"
+              "empty"
             )}
 
-            <Space style={{ marginTop: "10px", paddingBottom: "30px" }}>
+            <Space className={Styles.wrapperBtnAdd}>
               <Button type="primary" onClick={handleClickAddSubMenu}>
                 add Sub menu
               </Button>
+              <Button onClick={handleClearModalAddSubMenu}>clear</Button>
               <Button onClick={handleCloseModalAddSubMenu}>close</Button>
             </Space>
           </>
@@ -168,8 +230,9 @@ export default function ModalNomal(props: MyPropsModalNomal) {
         )}
 
         {/* Main menu */}
-        <h4 style={{ marginBottom: "10px" }}>Main menu</h4>
+        <h4 className={Styles.titleContent}>Main menu</h4>
         <Form
+          ref={formRef}
           form={form}
           layout="vertical"
           onFinish={onHandleSave}
@@ -178,22 +241,15 @@ export default function ModalNomal(props: MyPropsModalNomal) {
           <Form.Item
             name="nameMenu"
             label="Name menu"
-            // initialValue={valueA.name ? `${valueA.name}` : undefined}
             rules={[{ required: true }, { type: "string", min: 1 }]}
           >
-            {/* {valueA.name ? <>{valueA.name}da</> : "sád"} */}
             <Input name="nameMenu" placeholder="input placeholder" />
           </Form.Item>
 
           <Form.Item
             name="urlMenu"
             label="URL"
-            initialValue={valueA.name}
-            rules={[
-              { required: true },
-              { type: "url", warningOnly: true },
-              { type: "string", min: 1 },
-            ]}
+            rules={[{ required: true }, { type: "string", min: 1 }]}
           >
             <Input placeholder="input placeholder" />
           </Form.Item>
@@ -211,8 +267,6 @@ export default function ModalNomal(props: MyPropsModalNomal) {
               <Button type="primary" htmlType="submit">
                 save
               </Button>
-
-              {/* <Button onClick={handleSubmit}>Submit</Button> */}
             </Space>
           </Form.Item>
         </Form>

@@ -33,43 +33,43 @@
     {
       "id": 9,
       "name": "Menu 1",
-      "url": "https://fontawesome.com/",
-      "iconClass": "sdasdasd",
+      "url": "/admin/menu1",
+      "iconClass": "icon1",
       "children": [
         {
           "id": 10,
           "title": "Sub menu a",
-          "url": ""
+          "url": "/admin/menu1/sub1"
         },
         {
           "id": 11,
           "title": "Sub menu b",
-          "url": ""
+          "url": "/admin/menu1/sub2"
         }
       ]
     },
     {
       "id": 10,
-      "name": "Menu2",
-      "iconClass": "dấd",
+      "name": "đá",
+      "iconClass": "ádasdasd",
       "children": [
         {
-          "title": "sdad",
-          "urlSubMenu": "ádadad"
+          "title": "đá",
+          "urlSubMenu": "đa"
         }
       ]
     },
     {
-      "id": 11,
-      "name": "Menu 3",
-      "iconClass": "adadasd",
-      "children": []
-    },
-    {
-      "id": 12,
-      "name": "Menu 4",
-      "iconClass": "adadasd",
-      "children": []
+      "name": "áda",
+      "url": "sdad",
+      "iconClass": "adasdad",
+      "children": [
+        {
+          "title": "ád",
+          "urlSubMenu": "adad"
+        }
+      ],
+      "id": 11
     }
   ],
   "profile": {

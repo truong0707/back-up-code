@@ -61,17 +61,18 @@ const AddMenu: React.FC = () => {
     message.success("Thêm sub menu thành công!", 2.5);
   };
 
-  /*  */
+  /*  clear */
   const handleClearModalAddSubMenu = () => {
-    console.log(submenu, "sadsadasd");
-    console.log(inputs, "inputs");
-    setSubmenu({
-      
-    });
+    setSubmenu([]);
   };
 
   /* handle save form */
-  const onHandleSave = (value: any) => {
+  const onHandleSave = (value: {
+    nameMenu: string,
+    urlMenu: string,
+    iconClass: string,
+    children: []
+  }) => {
     setValue({
       name: value.nameMenu,
       url: value.urlMenu,
@@ -80,8 +81,6 @@ const AddMenu: React.FC = () => {
     });
 
     message.success("Đã lưu thành công - hãy submit!", 2.5);
-
-    console.log(submenu, "submenu");
   };
 
   /* Handle submit form - Call api */
@@ -117,7 +116,7 @@ const AddMenu: React.FC = () => {
       {openModalAddSubMenu ? (
         <>
           <div>
-            <h4 style={{ marginBottom: "10px" }}>Sub menu</h4>
+            <h4 className={Styles.titleContent}>Sub menu</h4>
 
             <Space>
               <Space direction="vertical">
@@ -144,19 +143,27 @@ const AddMenu: React.FC = () => {
             <>
               <ul className={Styles.listSubMenu}>
                 <>
-                  {submenu.map((data: any, index: number) => (
-                    <li key={index}>
-                      {index + 1}. nameSub: {data.title}
-                    </li>
-                  ))}
+                  {submenu.map(
+                    (
+                      data: {
+                        title: string;
+                        url: string
+                      },
+                      index: number
+                    ) => (
+                      <li key={index}>
+                        {index + 1}. nameSub: {data.title}
+                      </li>
+                    )
+                  )}
                 </>
               </ul>
             </>
           ) : (
-            "trống"
+            "empty"
           )}
 
-          <Space style={{ marginTop: "10px", paddingBottom: "30px" }}>
+          <Space className={Styles.wrapperBtnAdd} >
             <Button type="primary" onClick={handleClickAddSubMenu}>
               add Sub menu
             </Button>
@@ -165,13 +172,13 @@ const AddMenu: React.FC = () => {
           </Space>
         </>
       ) : (
-        <Space style={{ paddingBottom: "17px" }}>
+        <Space >
           <Button onClick={handleOpenModalAddSubMenu}>Thêm menu con</Button>
         </Space>
       )}
 
       {/* Main menu */}
-      <h4 style={{ marginBottom: "10px" }}>Main menu</h4>
+      <h4 className={Styles.titleContent}>Main menu</h4>
       <Form
         ref={formRef}
         form={form}
