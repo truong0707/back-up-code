@@ -38,34 +38,36 @@ export default function DeleteMenu() {
     alert("Xóa menu này?");
 
     if (id === 9) {
-      message.error("Menu này e để làm mẫu ạ! - a thử menu khác ạ", 4);
+      message.error("Menu này e để làm mẫu ạ! - a thử menu khác", 4);
     } else {
       const deleteMenuPromise = deleteMenuAction(id);
       deleteMenuPromise(dispatch);
     }
   };
 
-  const getListDataMenu = listDataMenu.map((data: any) => {
-    return {
-      title: (
-        <>
-          <DeleteOutlined
-            style={{ color: "red", marginRight: "10px" }}
-            onClick={() => handleClickDelete(data.id)}
-          />
-          <ScissorOutlined
-            style={{ color: "#1677FF", marginRight: "10px" }}
-            onClick={() => handleShowModalUpdate(data.id)}
-          />
+  const getListDataMenu = listDataMenu.map(
+    (data: { id: string | number; name: string; children: [] }) => {
+      return {
+        title: (
+          <>
+            <DeleteOutlined
+              style={{ color: "red", marginRight: "10px" }}
+              onClick={() => handleClickDelete(data.id)}
+            />
+            <ScissorOutlined
+              style={{ color: "#1677FF", marginRight: "10px" }}
+              onClick={() => handleShowModalUpdate(data.id)}
+            />
 
-          <b>{data.name}</b>
-        </>
-      ),
-      key: data.id,
-      icon: <SmileOutlined />,
-      children: data.children.length > 0 ? data.children : [],
-    };
-  });
+            <b>{data.name}</b>
+          </>
+        ),
+        key: data.id,
+        icon: <SmileOutlined />,
+        children: data.children.length > 0 ? data.children : [],
+      };
+    }
+  );
 
   return (
     <>

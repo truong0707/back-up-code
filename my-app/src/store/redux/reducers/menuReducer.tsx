@@ -25,7 +25,7 @@ export const menuReducer = (
     case GET_DATA_DETAIL_MENU:
       return { ...state, menuDetail: action.payload };
     case ADD_DATA_MENU:
-      const currentlistDataMenu: any = [...state.listDataMenu];
+      const currentlistDataMenu: {}[] = [...state.listDataMenu];
       const payload = action.payload;
       currentlistDataMenu.push(payload);
 
@@ -43,20 +43,27 @@ export const menuReducer = (
 
       return {
         ...state,
-        listDataMenu: currentListDataUsersUp.map((items: any) => {
-          console.log(items, "adasdadadadad")
-          if (items.id === payloadDataUpdate.id) {
-            
-            return {
-              id: payloadDataUpdate.id,
-              name: payloadDataUpdate.name,
-              url: payloadDataUpdate.url,
-              iconClass: payloadDataUpdate.iconClass,
-              children: payloadDataUpdate.children,
-            };
+        listDataMenu: currentListDataUsersUp.map(
+          (items: {
+            id: string | number;
+            name: string;
+            url: string;
+            iconClass: string;
+            children: [];
+          }) => {
+            console.log(items, "adasdadadadad");
+            if (items.id === payloadDataUpdate.id) {
+              return {
+                id: payloadDataUpdate.id,
+                name: payloadDataUpdate.name,
+                url: payloadDataUpdate.url,
+                iconClass: payloadDataUpdate.iconClass,
+                children: payloadDataUpdate.children,
+              };
+            }
+            return items;
           }
-          return items;
-        }),
+        ),
       };
     default:
       return state;

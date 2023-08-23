@@ -47,29 +47,6 @@
           "url": "/admin/menu1/sub2"
         }
       ]
-    },
-    {
-      "id": 10,
-      "name": "đá",
-      "iconClass": "ádasdasd",
-      "children": [
-        {
-          "title": "đá",
-          "urlSubMenu": "đa"
-        }
-      ]
-    },
-    {
-      "name": "áda",
-      "url": "sdad",
-      "iconClass": "adasdad",
-      "children": [
-        {
-          "title": "ád",
-          "urlSubMenu": "adad"
-        }
-      ],
-      "id": 11
     }
   ],
   "profile": {
