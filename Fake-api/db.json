@@ -49,18 +49,27 @@
       ]
     },
     {
-      "name": "đa",
-      "url": "adada",
-      "iconClass": "dâd",
-      "children": [],
-      "id": 13
+      "id": 10,
+      "name": "Menu2",
+      "iconClass": "dấd",
+      "children": [
+        {
+          "title": "sdad",
+          "urlSubMenu": "ádadad"
+        }
+      ]
     },
     {
-      "name": "đá",
-      "url": "ádad",
-      "iconClass": "áda",
-      "children": [],
-      "id": 14
+      "id": 11,
+      "name": "Menu 3",
+      "iconClass": "adadasd",
+      "children": []
+    },
+    {
+      "id": 12,
+      "name": "Menu 4",
+      "iconClass": "adadasd",
+      "children": []
     }
   ],
   "profile": {

@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addMenuAction,
   getDetailMenuAction,
+  updateMenuAction,
 } from "../../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../../store/redux/Store";
+import menuServices from "../../../../services/menu";
 
 interface MyPropsModalNomal {
   idMenu: string | number | null;
@@ -18,7 +20,7 @@ interface MyPropsModalNomal {
 
 export default function ModalNomal(props: MyPropsModalNomal) {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-
+  const [defaultValueInput, setDefaultValue] = useState<any>();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   /* input sub menu */
@@ -26,20 +28,10 @@ export default function ModalNomal(props: MyPropsModalNomal) {
   const [submenu, setSubmenu] = useState<any>([]);
 
   /* total value  */
-  const [valueA, setValue] = useState<any>();
+  const [valueA, setValue] = useState<any>({});
 
   /* show/hide  sub menu  */
   const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
-
-  useEffect(() => {
-    if (props.idMenu) {
-      const dataDetailMenuPromise = getDetailMenuAction(props.idMenu);
-      dataDetailMenuPromise(dispatch);
-    }
-  }, [dispatch, props.idMenu, submenu]);
-
-  console.log(getMenu.menuDetail, "getMenu");
-  console.log(props.menuDetail, "menuDetail");
 
   /* Show/hide add submenu */
   const handleOpenModalAddSubMenu = () => {
@@ -83,16 +75,41 @@ export default function ModalNomal(props: MyPropsModalNomal) {
 
   /* Handle submit form - Call api */
   const handleSubmit = () => {
-    const addMenuActionPromise = addMenuAction(valueA);
-    addMenuActionPromise(dispatch);
+    if (props.idMenu) {
+      const updateMenuActionPromise = updateMenuAction(props.idMenu, valueA);
+      updateMenuActionPromise(dispatch);
 
-    alert("Submit thành công!");
-    props.setShowModalUpdate(false);
+      alert("Submit thành công!");
+      props.setShowModalUpdate(false);
+    } else {
+      alert("miss id");
+    }
   };
 
   const handleCancel = () => {
     props.setShowModalUpdate(false);
   };
+
+  useEffect(() => {
+    if (props.idMenu) {
+      const dataDetailMenuPromise = getDetailMenuAction(props.idMenu);
+      dataDetailMenuPromise(dispatch);
+      setDefaultValue(getMenu.menuDetail);
+
+      const dataDefaultInput = async () => {
+        const { data } = await menuServices.getMenuByIdApi(props.idMenu);
+        if (data) {
+          setValue({
+            name: data.name,
+            url: data.url,
+            iconClass: data.iconClass,
+            children: submenu,
+          });
+        }
+      };
+      dataDefaultInput();
+    }
+  }, [dispatch, props.idMenu, defaultValueInput]);
 
   return (
     <>
@@ -161,18 +178,17 @@ export default function ModalNomal(props: MyPropsModalNomal) {
           <Form.Item
             name="nameMenu"
             label="Name menu"
-            // initialValue={}
+            // initialValue={valueA.name ? `${valueA.name}` : undefined}
             rules={[{ required: true }, { type: "string", min: 1 }]}
           >
-            <Input
-              defaultValue={props.menuDetail ? props.menuDetail : "ss"}
-              placeholder="input placeholder"
-            />
+            {/* {valueA.name ? <>{valueA.name}da</> : "sád"} */}
+            <Input name="nameMenu" placeholder="input placeholder" />
           </Form.Item>
 
           <Form.Item
             name="urlMenu"
             label="URL"
+            initialValue={valueA.name}
             rules={[
               { required: true },
               { type: "url", warningOnly: true },

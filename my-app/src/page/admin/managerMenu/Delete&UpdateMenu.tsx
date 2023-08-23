@@ -19,7 +19,6 @@ export default function DeleteMenu() {
   const { listDataMenu } = getMenu;
   const { menuDetail } = getMenu;
   const dispatch = useDispatch();
-
   const [idMenu, setIdMenu] = useState<any>();
 
   /* modal update */
@@ -36,7 +35,7 @@ export default function DeleteMenu() {
   }, [dispatch]);
 
   const handleClickDelete = (id: string | number) => {
-    alert("Có chắc muốn xóa");
+    alert("Xóa menu này?");
 
     const deleteMenuPromise = deleteMenuAction(id);
     deleteMenuPromise(dispatch);

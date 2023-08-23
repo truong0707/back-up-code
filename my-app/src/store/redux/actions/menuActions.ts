@@ -5,8 +5,10 @@ import {
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
+  UPDATE_DATA_MENU,
 } from "../constants/menuReducerContans";
 import menuServices from "../../../services/menu";
+import { message } from "antd";
 
 export function getMenuAction() {
   return async (dispatch: Dispatch) => {
@@ -14,35 +16,23 @@ export function getMenuAction() {
       dispatch({ type: GET_DATA_MENU_RESQUEST });
       const { data } = await menuServices.getMenuApi();
 
-      console.log(data, "data");
-
       dispatch({ type: GET_DATA_MENU, payload: data });
     } catch (error: any) {
       console.log(error, "err");
-      // if (error.message) {
-      //   dispatch({
-      //     type: GET_DATA_USER_FAIL,
-      //     payload: error.message,
-      //   });
-      // } else {
-      //   dispatch({
-      //     type: GET_DATA_USER_FAIL,
-      //     payload: error.response.data.message
-      //       ? error.response.data.message
-      //       : error.message,
-      //   });
-      // }
     }
   };
 }
 
-export function addMenuAction(
-  dataOjb: any /* idMenu: number, nameMenu: string, urlMenu: string, iconClass: string, children: [] */
-) {
+interface DataMenuOjb {
+  name: string;
+  url: string;
+  iconClass: string;
+  children: [];
+}
+
+export function addMenuAction(dataOjb: DataMenuOjb) {
   return async (dispatch: Dispatch) => {
     try {
-      console.log(dataOjb, "ojb");
-      // dispatch({ type: ADD_DATA_MENU });
       const { data } = await menuServices.postMenuApi(
         dataOjb.name,
         dataOjb.url,
@@ -51,21 +41,10 @@ export function addMenuAction(
       );
 
       dispatch({ type: ADD_DATA_MENU, payload: data });
-      console.log(data, "data post");
+      message.success("Thêm menu thành công!", 2.5);
     } catch (error: any) {
-      // if (error.message) {
-      //   dispatch({
-      //     type: GET_DATA_USER_FAIL,
-      //     payload: error.message,
-      //   });
-      // } else {
-      //   dispatch({
-      //     type: GET_DATA_USER_FAIL,
-      //     payload: error.response.data.message
-      //       ? error.response.data.message
-      //       : error.message,
-      //   });
-      // }
+      message.error("Thêm menu thất bại!", 2.5);
+      console.log(error, "Lỗi");
     }
   };
 }
@@ -74,22 +53,12 @@ export function deleteMenuAction(id: string | number) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.deleteMenuApi(id);
-      dispatch({ type: DELETE_DATA_MENU, payload: id });
 
+      dispatch({ type: DELETE_DATA_MENU, payload: id });
+      message.success("Xóa menu thành công!", 2.5);
     } catch (error: any) {
-      // if (error.message) {
-      //   dispatch({
-      //     type: GET_DATA_USER_FAIL,
-      //     payload: error.message,
-      //   });
-      // } else {
-      //   dispatch({
-      //     type: GET_DATA_USER_FAIL,
-      //     payload: error.response.data.message
-      //       ? error.response.data.message
-      //       : error.message,
-      //   });
-      // }
+      message.error("Lỗi Xóa menu!", 2.5);
+      console.log(error, "Lỗi");
     }
   };
 }
@@ -99,13 +68,25 @@ export function getDetailMenuAction(id: string | number) {
     try {
       const { data } = await menuServices.getMenuByIdApi(id);
 
-
-      // console.log(data, "alo")
-
       dispatch({ type: GET_DATA_DETAIL_MENU, payload: data });
-
     } catch (error: any) {
-    
+      message.error("get detail thất bại!", 2.5);
+      console.log(error, "Lỗi");
+    }
+  };
+}
+
+export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
+  return async (dispatch: Dispatch) => {
+    try {
+      const { data } = await menuServices.updateMenuApi(id, dataOjb);
+
+      /* gắn data đã update từ server trả về */
+      dispatch({ type: UPDATE_DATA_MENU, payload: data });
+      message.success("Cập nhật thành công!", 2.5);
+    } catch (error: any) {
+      message.error("Cập nhật thất bại!", 2.5);
+      console.log(error, "Lỗi");
     }
   };
 }

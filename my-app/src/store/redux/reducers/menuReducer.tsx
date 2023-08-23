@@ -23,7 +23,7 @@ export const menuReducer = (
     case GET_DATA_MENU:
       return { listDataMenu: action.payload };
     case GET_DATA_DETAIL_MENU:
-      return {...state, menuDetail: action.payload };
+      return { ...state, menuDetail: action.payload };
     case ADD_DATA_MENU:
       const currentlistDataMenu: any = [...state.listDataMenu];
       const payload = action.payload;
@@ -34,11 +34,30 @@ export const menuReducer = (
       return {
         ...state,
         listDataMenu: state.listDataMenu.filter(
-          (user: { id: string }) => user.id !== action.payload
+          (menu: { id: string }) => menu.id !== action.payload
         ),
       };
-    // case UPDATE_DATA_MENU:
-    //   return;
+    case UPDATE_DATA_MENU:
+      const currentListDataUsersUp = [...state.listDataMenu];
+      const payloadDataUpdate = action.payload;
+
+      return {
+        ...state,
+        listDataMenu: currentListDataUsersUp.map((items: any) => {
+          console.log(items, "adasdadadadad")
+          if (items.id === payloadDataUpdate.id) {
+            
+            return {
+              id: payloadDataUpdate.id,
+              name: payloadDataUpdate.name,
+              url: payloadDataUpdate.url,
+              iconClass: payloadDataUpdate.iconClass,
+              children: payloadDataUpdate.children,
+            };
+          }
+          return items;
+        }),
+      };
     default:
       return state;
   }

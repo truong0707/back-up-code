@@ -21,13 +21,23 @@ const menuServices = {
 
     return response;
   },
-
   deleteMenuApi: async (id: number | string) => {
     const response = await axiosClient.delete(`/menus/${id}`);
     return response;
   },
-  getMenuByIdApi: async (id: number | string) => {
+  getMenuByIdApi: async (id: number | string | null) => {
     const response = await axiosClient.get(`/menus/${id}`);
+    return response;
+  },
+  updateMenuApi: async (id: number | string, inputData: any) => {
+    const response = await axiosClient.put(`/menus/${id}`, {
+      id: id,
+      name: inputData.name,
+      url: inputData.urlMenu,
+      iconClass: inputData.iconClass,
+      children: inputData.children,
+    });
+
     return response;
   },
 };

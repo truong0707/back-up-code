@@ -57,7 +57,6 @@ const AddMenu: React.FC = () => {
   const handleSubmit = () => {
     const addMenuActionPromise = addMenuAction(valueA);
     addMenuActionPromise(dispatch);
-    message.success("Submit thành công!", 2.5);
   };
 
   return (

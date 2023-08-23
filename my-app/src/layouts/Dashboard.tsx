@@ -6,10 +6,12 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   PlusSquareOutlined,
+  ScissorOutlined,
+  SettingFilled,
   DeleteOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu, Space } from "antd";
+import { Menu, Space, Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
@@ -78,8 +80,6 @@ const Dashboard = () => {
     return result;
   };
 
- 
-
   /* Menu */
   const items: MenuItem[] = [
     getItem(
@@ -103,16 +103,18 @@ const Dashboard = () => {
     ),
     getItem(
       <Space>
-        Manager Menu
+        Menu Dynamic
         <Link to={"/admin/add-menu"}>
-          <PlusSquareOutlined />
+          <Tooltip title="Add new Menu">
+            <PlusSquareOutlined />
+          </Tooltip>
         </Link>
-
         <Link to={"/admin/delete&update-menu"}>
-          <DeleteOutlined />
+          <Tooltip title="Delete/Update Menu">
+            <SettingFilled spin /* rotate={180} */ />
+          </Tooltip>
         </Link>
       </Space>,
-      // "Manager Menu đâsd",
       "sub2",
       <AppstoreOutlined />,
 
