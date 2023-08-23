@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store/redux/Store";
+
 // import { I18nextProvider } from "react-i18next";
 // import i18next from "i18next";
 

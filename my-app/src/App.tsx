@@ -16,7 +16,6 @@ import Register from "./page/register/Register";
 import AddMenu from "./page/admin/managerMenu/AddMenu";
 import DeleDeleteUpdateMenu from "./page/admin/managerMenu/Delete&UpdateMenu";
 
-
 const App = () => {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
 
@@ -37,12 +36,14 @@ const App = () => {
             <Route path="home" element={<Admin ifoUser={getUser} />} />
             <Route path="user-detail/:id" element={<UserDetail />} />
             <Route path="add-menu" element={<AddMenu />} />
-            <Route path="delete&update-menu" element={<DeleDeleteUpdateMenu />} />
+            <Route
+              path="delete&update-menu"
+              element={<DeleDeleteUpdateMenu />}
+            />
           </Route>
 
           {/* not Found */}
           <Route path="*" element={<NotFound />} />
-          
         </Routes>
       </Router>
     </div>

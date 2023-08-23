@@ -1,5 +1,5 @@
 {
-  "admin home": {
+  "adminHome": {
     "admin" : "Quản trị",
     "hi_user": "Chào người dùng",
     "log_out": "Đăng xuất",
@@ -19,5 +19,8 @@
     "add_user": "Thêm người dùng",
     "ok" : "Đồng ý",
     "update_info" : "Cập nhật thông tin"
+  },
+  "MenuAdmin": {
+    "add_sub_menu" : "Thêm menu con"
   }
 }

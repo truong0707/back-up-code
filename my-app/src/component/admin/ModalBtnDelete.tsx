@@ -34,17 +34,17 @@ const  ModalBtn = (props: MyModalBtn) => {
   return (
     <>
       <Button type="primary" danger onClick={showModal}>
-        {t('admin home.delete')}
+        {t('adminHome.delete')}
       </Button>
 
       <Modal
-        title={t('admin home.delete_user')}
+        title={t('adminHome.delete_user')}
         open={isModalOpen}
         onOk={handleDelete}
         onCancel={handleCancel}
       >
         <p>
-          {t(`admin home.want_delete_user`)} <b>{props.email}</b>?
+          {t(`adminHome.want_delete_user`)} <b>{props.email}</b>?
         </p>
       </Modal>
     </>

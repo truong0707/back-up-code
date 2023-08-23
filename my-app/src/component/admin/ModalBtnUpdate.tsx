@@ -74,11 +74,6 @@ const ModalBtnUpdate = (props: any) => {
         `${inputs.numberPhone}`
       );
       updateUserPromise(dispatch);
-
-      const alertErr =
-        dataUsers.msgUpdateError && dataUsers.msgUpdateError ? (
-          <>{message.error(`Lưu thất bại!- ${dataUsers.msgUpdateError}`)}</>
-        ) : null;
       formRef.current?.resetFields();
     }
   };
@@ -88,11 +83,11 @@ const ModalBtnUpdate = (props: any) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        {t("admin home.update")}
+        {t("adminHome.update")}
       </Button>
 
       <Modal
-        title={`${t("admin home.update_info")}`}
+        title={`${t("adminHome.update_info")}`}
         open={isModalOpen}
         onOk={handleOK}
         onCancel={handleCancel}
@@ -110,8 +105,8 @@ const ModalBtnUpdate = (props: any) => {
           autoComplete="off"
         >
           <Form.Item
-            name={`${t("admin home.name")}`}
-            label={`${t("admin home.name")}`}
+            name={`${t("adminHome.name")}`}
+            label={`${t("adminHome.name")}`}
             rules={[{ required: true }, { type: "string", min: 4 }]}
             initialValue={inputs.name}
           >
@@ -119,13 +114,13 @@ const ModalBtnUpdate = (props: any) => {
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder={`${t("admin home.name")}`}
+              placeholder={`${t("adminHome.name")}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t("admin home.email")}`}
-            label={`${t("admin home.email")}`}
+            name={`${t("adminHome.email")}`}
+            label={`${t("adminHome.email")}`}
             initialValue={inputs.email}
             rules={[
               { required: true },
@@ -137,13 +132,13 @@ const ModalBtnUpdate = (props: any) => {
               type="email"
               name="email"
               onChange={handleInputChange}
-              placeholder={`${t("admin home.email")}`}
+              placeholder={`${t("adminHome.email")}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t("admin home.phoneNumber")}`}
-            label={`${t("admin home.phoneNumber")}`}
+            name={`${t("adminHome.phoneNumber")}`}
+            label={`${t("adminHome.phoneNumber")}`}
             initialValue={inputs.numberPhone}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
@@ -151,14 +146,14 @@ const ModalBtnUpdate = (props: any) => {
               type="numberPhone"
               name="numberPhone"
               onChange={handleInputChange}
-              placeholder={`${t("admin home.phoneNumber")}`}
+              placeholder={`${t("adminHome.phoneNumber")}`}
             />
           </Form.Item>
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                {t("admin home.submit")}
+                {t("adminHome.submit")}
               </Button>
             </Space>
           </Form.Item>

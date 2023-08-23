@@ -28,7 +28,6 @@ interface DataType {
 }
 
 const CRUDUser = (props: MyCRUDUserProps) => {
-  const store = useSelector((state: StateStore) => state);
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
   const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ const CRUDUser = (props: MyCRUDUserProps) => {
       render: (text) => <p>{text}</p>,
     },
     {
-      title: `${t(`admin home.name`)}`,
+      title: `${t(`adminHome.name`)}`,
       dataIndex: "name",
       key: "name",
       // render: (text) => <Link >{text}</Link>,
@@ -58,18 +57,18 @@ const CRUDUser = (props: MyCRUDUserProps) => {
       ),
     },
     {
-      title: `${t(`admin home.email`)}`,
+      title: `${t(`adminHome.email`)}`,
       dataIndex: "email",
       key: "email",
     },
     {
-      title: `${t(`admin home.phoneNumber`)}`,
+      title: `${t(`adminHome.phoneNumber`)}`,
       dataIndex: "numberPhone",
       key: "numberPhone",
       render: (text) => <p>{text}</p>,
     },
     {
-      title: `${t(`admin home.option`)}`,
+      title: `${t(`adminHome.option`)}`,
       key: "action",
       render: (_, record) => (
         <Space align="center" key={record.id} size="middle">

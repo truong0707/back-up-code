@@ -155,6 +155,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
       };
       dataDefaultInput();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, props.idMenu, defaultValueInput]);
 
   return (
@@ -201,9 +202,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
                         },
                         index: number
                       ) => (
-                        <li
-                          key={index}
-                        >
+                        <li key={index}>
                           {index + 1}. nameSub: {data.title}
                         </li>
                       )

@@ -77,7 +77,7 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
       </Button>
 
       <Modal
-        title={`${t(`admin home.add_user`)}`}
+        title={`${t(`adminHome.add_user`)}`}
         open={isModalOpen}
         onOk={handleOK}
         onCancel={handleCancel}
@@ -94,21 +94,21 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
           autoComplete="off"
         >
           <Form.Item
-            name={`${t(`admin home.name`)}`}
-            label={`${t(`admin home.name`)}`}
+            name={`${t(`adminHome.name`)}`}
+            label={`${t(`adminHome.name`)}`}
             rules={[{ required: true }, { type: "string", min: 3 }]}
           >
             <Input
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder={`${t(`admin home.name`)}`}
+              placeholder={`${t(`adminHome.name`)}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t(`admin home.email`)}`}
-            label={`${t(`admin home.email`)}`}
+            name={`${t(`adminHome.email`)}`}
+            label={`${t(`adminHome.email`)}`}
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
@@ -119,40 +119,40 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
               type="email"
               name="email"
               onChange={handleInputChange}
-              placeholder={`${t(`admin home.email`)}`}
+              placeholder={`${t(`adminHome.email`)}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t(`admin home.phoneNumber`)}`}
-            label={`${t(`admin home.phoneNumber`)}`}
+            name={`${t(`adminHome.phoneNumber`)}`}
+            label={`${t(`adminHome.phoneNumber`)}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="numberPhone"
               name="numberPhone"
               onChange={handleInputChange}
-              placeholder={`${t(`admin home.phoneNumber`)}`}
+              placeholder={`${t(`adminHome.phoneNumber`)}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t(`admin home.password`)}`}
-            label={`${t(`admin home.password`)}`}
+            name={`${t(`adminHome.password`)}`}
+            label={`${t(`adminHome.password`)}`}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="password"
               name="password"
               onChange={handleInputChange}
-              placeholder={`${t(`admin home.password`)}`}
+              placeholder={`${t(`adminHome.password`)}`}
             />
           </Form.Item>
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                {t(`admin home.submit`)}
+                {t(`adminHome.submit`)}
               </Button>
             </Space>
           </Form.Item>

@@ -97,20 +97,20 @@ const Dashboard = () => {
   /* Menu */
   const items: MenuItem[] = [
     getItem(
-      <Link to={"/admin/home"}>{t("admin home.admin")}</Link>,
+      <Link to={"/admin/home"}>{t("adminHome.admin")}</Link>,
       "1",
       <PieChartOutlined />
     ),
     getItem(
       <Link to={"/admin/managerUserA"}>
-        {t("admin home.manager_users_type")} A{" "}
+        {t("adminHome.manager_users_type")} A{" "}
       </Link>,
       "2",
       <DesktopOutlined />
     ),
     getItem(
       <Link to={"/admin/managerUserB"}>
-        {t("admin home.manager_users_type")} B
+        {t("adminHome.manager_users_type")} B
       </Link>,
       "3",
       <DesktopOutlined />

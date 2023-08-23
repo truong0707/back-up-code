@@ -1,23 +1,26 @@
 {
-  "admin home": {
-    "admin" : "Admin",
+  "adminHome": {
+    "admin": "Admin",
     "hi_user": "Hi user",
     "log_out": "Logout",
-    "manager_users_type" : "Manager user type",
-    "table_manager_type" : "Table manager user type",
+    "manager_users_type": "Manager user type",
+    "table_manager_type": "Table manager user type",
     "name": "Name",
     "email": "Email",
-    "phoneNumber" : "Number phone",
-    "password" : "Password",
-    "option" : "Option",
-    "delete" : "Delete",
-    "update" : "Update",
-    "add_user_type" : "Add user type",
-    "delete_user" : "Delete user?",
+    "phoneNumber": "Number phone",
+    "password": "Password",
+    "option": "Option",
+    "delete": "Delete",
+    "update": "Update",
+    "add_user_type": "Add user type",
+    "delete_user": "Delete user?",
     "want_delete_user": "You want delete user:",
     "submit": "Submit",
     "add_user": "Add user",
-    "ok" : "OK",
-    "update_info" : "Update infomation"
+    "ok": "OK",
+    "update_info": "Update infomation"
+  },
+  "MenuAdmin": {
+    "add_sub_menu": "Add sub menu"
   }
 }

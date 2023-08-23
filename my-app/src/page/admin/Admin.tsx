@@ -29,12 +29,12 @@ const Admin = (props: MypropsAmin) => {
       <Suspense fallback={<LoadingCpn />}>
         <Space>
           <p>
-            {t("admin home.hi_user")}: <b>{props.ifoUser.email}</b>s
+            {t("adminHome.hi_user")}: <b>{props.ifoUser.email}</b>s
           </p>
 
           <SelectOptionLan />
           <Button onClick={handleLogOut} type="primary">
-            {t("admin home.log_out")}
+            {t("adminHome.log_out")}
           </Button>
         </Space>
       </Suspense>

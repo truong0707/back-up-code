@@ -52,6 +52,7 @@ export function addMenuAction(dataOjb: DataMenuOjb) {
 export function deleteMenuAction(id: string | number) {
   return async (dispatch: Dispatch) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = await menuServices.deleteMenuApi(id);
 
       dispatch({ type: DELETE_DATA_MENU, payload: id });

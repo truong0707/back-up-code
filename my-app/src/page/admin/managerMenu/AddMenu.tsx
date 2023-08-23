@@ -3,6 +3,7 @@ import { Button, Form, FormInstance, Input, Space, message } from "antd";
 import { addMenuAction } from "../../../store/redux/actions/menuActions";
 import { useDispatch } from "react-redux";
 import Styles from "./managerMenu.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface MyInputSubMenu {
   title: string;
@@ -17,6 +18,7 @@ interface MyAllInfoInput {
 }
 
 const AddMenu: React.FC = () => {
+  const { t } = useTranslation(["homeAdmin"]);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -68,10 +70,10 @@ const AddMenu: React.FC = () => {
 
   /* handle save form */
   const onHandleSave = (value: {
-    nameMenu: string,
-    urlMenu: string,
-    iconClass: string,
-    children: []
+    nameMenu: string;
+    urlMenu: string;
+    iconClass: string;
+    children: [];
   }) => {
     setValue({
       name: value.nameMenu,
@@ -147,7 +149,7 @@ const AddMenu: React.FC = () => {
                     (
                       data: {
                         title: string;
-                        url: string
+                        url: string;
                       },
                       index: number
                     ) => (
@@ -163,7 +165,7 @@ const AddMenu: React.FC = () => {
             "empty"
           )}
 
-          <Space className={Styles.wrapperBtnAdd} >
+          <Space className={Styles.wrapperBtnAdd}>
             <Button type="primary" onClick={handleClickAddSubMenu}>
               add Sub menu
             </Button>
@@ -172,8 +174,10 @@ const AddMenu: React.FC = () => {
           </Space>
         </>
       ) : (
-        <Space >
-          <Button onClick={handleOpenModalAddSubMenu}>Thêm menu con</Button>
+        <Space>
+          <Button onClick={handleOpenModalAddSubMenu}>
+            {t(`MenuAdmin.add_sub_menu`)}
+          </Button>
         </Space>
       )}
 

@@ -29,9 +29,9 @@ const ManagerUserA = () => {
         <div className={Styles.WraperCRUDUser}>
           {listDataUsers ? (
             <CRUDUser
-              title={`${t("admin home.table_manager_type")} A`}
+              title={`${t("adminHome.table_manager_type")} A`}
               data={listDataUsers}
-              contentBtnAdd={`${t("admin home.add_user_type")} A`}
+              contentBtnAdd={`${t("adminHome.add_user_type")} A`}
             />
           ) : (
             <AlertNotificate msg={`${error}`} type={"error"} />
