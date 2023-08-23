@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Space, message } from "antd";
+import { Button, Form, FormInstance, Input, Space, message } from "antd";
 import { addMenuAction } from "../../../store/redux/actions/menuActions";
 import { useDispatch } from "react-redux";
+import Styles from "./managerMenu.module.scss";
+
+interface MyInputSubMenu {
+  title: string;
+  urlSubMenu: string;
+}
+
+interface MyAllInfoInput {
+  name: string;
+  iconClass: string;
+  url: string;
+  children: [];
+}
 
 const AddMenu: React.FC = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState<any>({});
-  const [submenu, setSubmenu] = useState<any>([]);
-  const [valueA, setValue] = useState<any>();
-  const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
 
-  useEffect(() => {}, [dispatch, submenu]);
+  /* Sub menu */
+  const [inputs, setInputs] = useState<MyInputSubMenu>({
+    title: "",
+    urlSubMenu: "",
+  });
+  const [submenu, setSubmenu] = useState<any>([]);
+
+  const [valueA, setValue] = useState<MyAllInfoInput>();
+  const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
 
   /* Show/hide add submenu */
   const handleOpenModalAddSubMenu = () => {
@@ -26,7 +43,10 @@ const AddMenu: React.FC = () => {
     const nameInput = e.target.name;
     let valueInput = e.target.value;
 
-    setInputs((state: any) => ({ ...state, [nameInput]: valueInput })); //
+    setInputs((state: MyInputSubMenu) => ({
+      ...state,
+      [nameInput]: valueInput,
+    })); //
   };
 
   /* handle add submenu */
@@ -41,6 +61,15 @@ const AddMenu: React.FC = () => {
     message.success("Thêm sub menu thành công!", 2.5);
   };
 
+  /*  */
+  const handleClearModalAddSubMenu = () => {
+    console.log(submenu, "sadsadasd");
+    console.log(inputs, "inputs");
+    setSubmenu({
+      
+    });
+  };
+
   /* handle save form */
   const onHandleSave = (value: any) => {
     setValue({
@@ -51,13 +80,37 @@ const AddMenu: React.FC = () => {
     });
 
     message.success("Đã lưu thành công - hãy submit!", 2.5);
+
+    console.log(submenu, "submenu");
   };
 
   /* Handle submit form - Call api */
+  const formRef = React.useRef<FormInstance>(null);
   const handleSubmit = () => {
-    const addMenuActionPromise = addMenuAction(valueA);
-    addMenuActionPromise(dispatch);
+    if (
+      !valueA ||
+      valueA.name === "" ||
+      valueA.url === "" ||
+      valueA.iconClass === ""
+    ) {
+      message.error("Hãy điền thông tin và lưu lại!", 2.5);
+    } else {
+      const addMenuActionPromise = addMenuAction(valueA);
+      addMenuActionPromise(dispatch);
+    }
+
+    /* reset Value input */
+    setValue({
+      name: "",
+      iconClass: "",
+      url: "",
+      children: [],
+    });
+
+    formRef.current?.resetFields();
   };
+
+  useEffect(() => {}, [dispatch, submenu]);
 
   return (
     <>
@@ -85,21 +138,29 @@ const AddMenu: React.FC = () => {
             </Space>
           </div>
 
-          {/* <p>List sub menu :</p> */}
+          <p className={Styles.titleContent}>List menu: </p>
+
           {submenu ? (
             <>
-              {submenu.map((data: any, index: number) => (
-                <li key={index}>nameSub: {data.title}</li>
-              ))}
+              <ul className={Styles.listSubMenu}>
+                <>
+                  {submenu.map((data: any, index: number) => (
+                    <li key={index}>
+                      {index + 1}. nameSub: {data.title}
+                    </li>
+                  ))}
+                </>
+              </ul>
             </>
           ) : (
-            "null"
+            "trống"
           )}
 
           <Space style={{ marginTop: "10px", paddingBottom: "30px" }}>
             <Button type="primary" onClick={handleClickAddSubMenu}>
               add Sub menu
             </Button>
+            <Button onClick={handleClearModalAddSubMenu}>clear</Button>
             <Button onClick={handleCloseModalAddSubMenu}>close</Button>
           </Space>
         </>
@@ -112,6 +173,7 @@ const AddMenu: React.FC = () => {
       {/* Main menu */}
       <h4 style={{ marginBottom: "10px" }}>Main menu</h4>
       <Form
+        ref={formRef}
         form={form}
         layout="vertical"
         onFinish={onHandleSave}
@@ -130,7 +192,7 @@ const AddMenu: React.FC = () => {
           label="URL"
           rules={[
             { required: true },
-            { type: "url", warningOnly: true },
+            // { type: "url", warningOnly: true },
             { type: "string", min: 1 },
           ]}
         >

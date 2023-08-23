@@ -1,0 +1,16 @@
+/*  */
+$default-marginTopAndBotton-title: 10px;
+
+.listSubMenu {
+    border: 1px solid silver;
+    padding: 5px;
+
+    li {
+        list-style: none;
+        padding: 5px;
+    }
+}
+.titleContent {
+    margin-top: $default-marginTopAndBotton-title;
+    margin-bottom: $default-marginTopAndBotton-title;
+}

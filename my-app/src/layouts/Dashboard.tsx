@@ -6,9 +6,7 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   PlusSquareOutlined,
-  ScissorOutlined,
   SettingFilled,
-  DeleteOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu, Space, Tooltip } from "antd";
@@ -55,21 +53,37 @@ const Dashboard = () => {
     const renderSubMenu = (subMenu: any) => {
       if (subMenu.length > 0) {
         const dataSubMenu = subMenu.map(
-          (data: { id: number; title: string }) => {
-            return getItem(`${data.title}`, `${data.id}`);
+          (data: { id: number; title: string; url: string }) => {
+            return getItem(
+              <>
+                <Link to={data.url}>{data.title}</Link>
+              </>,
+              `${data.id}`
+            );
           }
         );
+
         return dataSubMenu;
-      } else {
-        return null;
       }
     };
 
     /* main menu */
     const result = getMenu.MenuAdmin.listDataMenu.map(
-      (dataMenu: { name: string; id: number; children: [] }) => {
+      (dataMenu: {
+        iconClass: string;
+        name: string;
+        id: number;
+        children: [];
+        url: string;
+      }) => {
         return getItem(
-          `${dataMenu.name}`,
+          // `${dataMenu.name}`,
+          <>
+            <Link to={dataMenu.url}>
+              {dataMenu.iconClass} {dataMenu.name}
+              <p></p>
+            </Link>
+          </>,
           `${dataMenu.id}`,
           null,
           renderSubMenu(dataMenu.children)
@@ -122,7 +136,7 @@ const Dashboard = () => {
       // [
       //   getItem("Option 9", "9"),
       //   getItem("Submenu", "sub3", null, [
-      //     getItem("Option 11", "11"),
+      //     getItem(<><Link to={'đa'}>sáda</Link></>, "11"),
       //     getItem("Option 12", "12"),
       //   ]),
       // ]

@@ -11,7 +11,7 @@ import {
   DeleteOutlined,
   SmileOutlined,
 } from "@ant-design/icons";
-import { Tree } from "antd";
+import { Tree, message } from "antd";
 import ModalUpdate from "../../../component/admin/menu/modal/ModalUpdate";
 
 export default function DeleteMenu() {
@@ -37,8 +37,12 @@ export default function DeleteMenu() {
   const handleClickDelete = (id: string | number) => {
     alert("Xóa menu này?");
 
-    const deleteMenuPromise = deleteMenuAction(id);
-    deleteMenuPromise(dispatch);
+    if (id === 9) {
+      message.error("Menu này e để làm mẫu ạ! - a thử menu khác ạ", 4);
+    } else {
+      const deleteMenuPromise = deleteMenuAction(id);
+      deleteMenuPromise(dispatch);
+    }
   };
 
   const getListDataMenu = listDataMenu.map((data: any) => {
@@ -65,21 +69,27 @@ export default function DeleteMenu() {
 
   return (
     <>
-      <ModalUpdate
-        titleModal="Update Menu"
-        showMoal={showModalUpdate}
-        setShowModalUpdate={setShowModalUpdate}
-        idMenu={idMenu}
-        menuDetail={menuDetail}
-      />
+      {getListDataMenu.length === 0 ? (
+        <>Chưa có menu nào trong database! - Hãy thêm menu</>
+      ) : (
+        <>
+          <ModalUpdate
+            titleModal="Update Menu"
+            showMoal={showModalUpdate}
+            setShowModalUpdate={setShowModalUpdate}
+            idMenu={idMenu}
+            menuDetail={menuDetail}
+          />
 
-      <Tree
-        showIcon
-        defaultExpandAll
-        defaultSelectedKeys={["0-0-0"]}
-        switcherIcon={<DownOutlined />}
-        treeData={getListDataMenu}
-      />
+          <Tree
+            showIcon
+            defaultExpandAll
+            defaultSelectedKeys={["0-0-0"]}
+            switcherIcon={<DownOutlined />}
+            treeData={getListDataMenu}
+          />
+        </>
+      )}
     </>
   );
 }

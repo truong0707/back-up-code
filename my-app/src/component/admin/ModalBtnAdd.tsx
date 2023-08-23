@@ -66,10 +66,6 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
     }
 
     formRef.current?.resetFields();
-    // const alertErr =
-    //   updateDataUserStore && updateDataUserStore.error ? (
-    //     <>{message.error(`Lưu thất bại!- ${updateDataUserStore.error}`)}</>
-    //   ) : null;
   };
 
   useEffect(() => {}, [dispatch]);
