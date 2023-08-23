@@ -16,6 +16,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import BreadcrumbNav from "../component/Breadcrumb/BreadcrumbNav";
 import { getMenuAction } from "../store/redux/actions/menuActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+// import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -80,8 +83,9 @@ const Dashboard = () => {
           // `${dataMenu.name}`,
           <>
             <Link to={dataMenu.url}>
-              {dataMenu.iconClass} {dataMenu.name}
-              <p></p>
+              {/* {dataMenu.iconClass} */}
+              {/*  <FontAwesomeIcon icon={'faHome'}/>  */}{dataMenu.name}
+              {/* <FontAwesomeIcon icon="fa-brands fa-twitter" /> */}
             </Link>
           </>,
           `${dataMenu.id}`,

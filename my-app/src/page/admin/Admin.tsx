@@ -4,6 +4,9 @@ import { logout } from "../../store/redux/actions/userActions";
 import { useTranslation } from "react-i18next";
 import React, { Suspense, lazy } from "react";
 import LoadingCpn from "../../component/spin/LoadingCpn";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 const SelectOptionLan = lazy(
   () => import("../../component/selectOptionLan/SelectOptionLan")
 );
@@ -31,6 +34,8 @@ const Admin = (props: MypropsAmin) => {
           <p>
             {t("adminHome.hi_user")}: <b>{props.ifoUser.email}</b>s
           </p>
+
+          <FontAwesomeIcon icon={faHome}/>
 
           <SelectOptionLan />
           <Button onClick={handleLogOut} type="primary">
