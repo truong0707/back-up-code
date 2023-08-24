@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Tooltip, Tree, message } from "antd";
-import ModalUpdate from "../../../component/admin/menu/modal/ModalUpdate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../../../untils/checkIcons";
 import {
@@ -17,6 +16,10 @@ import {
 
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
+import LoadingCpn from "../../../component/spin/LoadingCpn";
+
+
+const ModalUpdate = lazy(() => import("../../../component/admin/menu/modal/ModalUpdate"));
 
 export default function DeleteMenu() {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
@@ -90,7 +93,7 @@ export default function DeleteMenu() {
   );
 
   return (
-    <>
+    <Suspense fallback={<LoadingCpn />}>
       {getListDataMenu.length === 0 ? (
         <>Chưa có menu nào trong database! - Hãy thêm menu</>
       ) : (
@@ -112,6 +115,6 @@ export default function DeleteMenu() {
           />
         </>
       )}
-    </>
+    </Suspense>
   );
 }

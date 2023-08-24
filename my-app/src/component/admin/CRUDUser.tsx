@@ -17,6 +17,7 @@ interface MyCRUDUserProps {
   title: String;
   data: [];
   contentBtnAdd?: string;
+  columnsTitle: any;
 }
 
 interface DataType {
@@ -31,53 +32,53 @@ const CRUDUser = (props: MyCRUDUserProps) => {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // get data store
   const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
-  const { t } = useTranslation(["homeAdmin"]);
+  // const { t } = useTranslation(["homeAdmin"]);
 
   useEffect(() => {
     const dataMenuPromise = getMenuAction();
     dataMenuPromise(dispatch);
-  },[dispatch]);
+  }, [dispatch]);
 
-  const columns: ColumnsType<DataType> = [
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
-      render: (text) => <p>{text}</p>,
-    },
-    {
-      title: `${t(`adminHome.name`)}`,
-      dataIndex: "name",
-      key: "name",
-      // render: (text) => <Link >{text}</Link>,
-      render: (_, record) => (
-        <Link to={`/admin/user-detail/${record.id}`} key={record.id}>
-          {record.name}
-        </Link>
-      ),
-    },
-    {
-      title: `${t(`adminHome.email`)}`,
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: `${t(`adminHome.phoneNumber`)}`,
-      dataIndex: "numberPhone",
-      key: "numberPhone",
-      render: (text) => <p>{text}</p>,
-    },
-    {
-      title: `${t(`adminHome.option`)}`,
-      key: "action",
-      render: (_, record) => (
-        <Space align="center" key={record.id} size="middle">
-          <ModalBtnDelete id={record.id} email={record.email} />
-          <ModalBtnUpdate idUser={record.id} />
-        </Space>
-      ),
-    },
-  ];
+  // const columns: ColumnsType<DataType> = [
+  //   {
+  //     title: "Id",
+  //     dataIndex: "id",
+  //     key: "id",
+  //     render: (text) => <p>{text}</p>,
+  //   },
+  //   {
+  //     title: `${t(`adminHome.name`)}`,
+  //     dataIndex: "name",
+  //     key: "name",
+  //     // render: (text) => <Link >{text}</Link>,
+  //     render: (_, record) => (
+  //       <Link to={`/admin/user-detail/${record.id}`} key={record.id}>
+  //         {record.name}
+  //       </Link>
+  //     ),
+  //   },
+  //   {
+  //     title: `${t(`adminHome.email`)}`,
+  //     dataIndex: "email",
+  //     key: "email",
+  //   },
+  //   {
+  //     title: `${t(`adminHome.phoneNumber`)}`,
+  //     dataIndex: "numberPhone",
+  //     key: "numberPhone",
+  //     render: (text) => <p>{text}</p>,
+  //   },
+  //   {
+  //     title: `${t(`adminHome.option`)}`,
+  //     key: "action",
+  //     render: (_, record) => (
+  //       <Space align="center" key={record.id} size="middle">
+  //         <ModalBtnDelete id={record.id} email={record.email} />
+  //         <ModalBtnUpdate idUser={record.id} />
+  //       </Space>
+  //     ),
+  //   },
+  // ];
 
   return (
     <>
@@ -85,6 +86,7 @@ const CRUDUser = (props: MyCRUDUserProps) => {
         <Space style={{ padding: "10px" }}>
           <ModalBtnAdd contentBtnAdd={props.contentBtnAdd} />
         </Space>
+
         <Divider orientation="left">{props.title}</Divider>
         <div style={{ width: "99%" }}>
           {msgDeleteError ? (
@@ -93,7 +95,7 @@ const CRUDUser = (props: MyCRUDUserProps) => {
             </>
           ) : null}
         </div>
-        <Table columns={columns} dataSource={props.data} />
+        <Table columns={props.columnsTitle} dataSource={props.data} />
       </Suspense>
     </>
   );

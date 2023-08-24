@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Button, Form, FormInstance, Input, Space, message } from "antd";
 import { addMenuAction } from "../../../store/redux/actions/menuActions";
 import { useDispatch } from "react-redux";
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
+import LoadingCpn from "../../../component/spin/LoadingCpn";
 
 interface MyInputSubMenu {
   title: string;
@@ -114,7 +115,7 @@ const AddMenu: React.FC = () => {
   useEffect(() => {}, [dispatch, submenu]);
 
   return (
-    <>
+    <Suspense fallback={<LoadingCpn />}>
       {openModalAddSubMenu ? (
         <>
           <div>
@@ -169,7 +170,7 @@ const AddMenu: React.FC = () => {
             <Button type="primary" onClick={handleClickAddSubMenu}>
               {t(`MenuAdmin.add_sub_menu`)}
             </Button>
-            <Button danger  onClick={handleClearModalAddSubMenu}>
+            <Button danger onClick={handleClearModalAddSubMenu}>
               {t(`MenuAdmin.clear`)}
             </Button>
             <Button onClick={handleCloseModalAddSubMenu}>
@@ -229,7 +230,7 @@ const AddMenu: React.FC = () => {
           </Space>
         </Form.Item>
       </Form>
-    </>
+    </Suspense>
   );
 };
 

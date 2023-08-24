@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { FormInstance, Modal, message } from "antd";
 import { Button, Form, Input, /* message */ Space } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   // getDetailMenuAction,
   updateMenuAction,
 } from "../../../../store/redux/actions/menuActions";
-import { StateStore } from "../../../../store/redux/Store";
 // import menuServices from "../../../../services/menu";
 import Styles from "../../../../page/admin/managerMenu/managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
+import LoadingCpn from "../../../spin/LoadingCpn";
 
 interface MyPropsModalNomal {
   idMenu: string | number | null;
@@ -155,7 +155,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
   }, [dispatch, props.idMenu /* setDefaultValue */]);
 
   return (
-    <>
+    <Suspense fallback={<LoadingCpn />}>
       <Modal
         title={`${props.titleModal}`}
         open={props.showMoal}
@@ -278,6 +278,6 @@ export default function ModalNomal(props: MyPropsModalNomal) {
           </Form.Item>
         </Form>
       </Modal>
-    </>
+    </Suspense>
   );
 }
