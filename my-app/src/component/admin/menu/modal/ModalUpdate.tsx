@@ -3,19 +3,20 @@ import { FormInstance, Modal, message } from "antd";
 import { Button, Form, Input, /* message */ Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getDetailMenuAction,
+  // getDetailMenuAction,
   updateMenuAction,
 } from "../../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../../store/redux/Store";
-import menuServices from "../../../../services/menu";
+// import menuServices from "../../../../services/menu";
 import Styles from "../../../../page/admin/managerMenu/managerMenu.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface MyPropsModalNomal {
   idMenu: string | number | null;
   titleModal: string;
   showMoal: boolean;
   setShowModalUpdate: (a: boolean) => void;
-  menuDetail: any;
+  menuDetail: {};
 }
 
 interface MyAllInfoInput {
@@ -31,10 +32,11 @@ interface MyInputSubMenu {
 }
 
 export default function ModalNomal(props: MyPropsModalNomal) {
-  const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const [defaultValueInput, setDefaultValue] = useState<any>();
+  // const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
+  // const [defaultValueInput, setDefaultValue] = useState<any>({});
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const { t } = useTranslation([]);
 
   /* input sub menu */
   const [inputs, setInputs] = useState<MyInputSubMenu>({
@@ -62,7 +64,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
     const nameInput = e.target.name;
     let valueInput = e.target.value;
 
-    setInputs((state: any) => ({ ...state, [nameInput]: valueInput })); //
+    setInputs((state) => ({ ...state, [nameInput]: valueInput })); //
   };
 
   /* handle add submenu */
@@ -107,18 +109,12 @@ export default function ModalNomal(props: MyPropsModalNomal) {
   const formRef = React.useRef<FormInstance>(null);
   const handleSubmit = () => {
     if (props.idMenu) {
-      if (
-        !valueA ||
-        valueA.name === "" ||
-        valueA.url === "" ||
-        valueA.iconClass === ""
-      ) {
+      if (!valueA) {
         message.error("Hãy điền thông tin và lưu lại!", 2.5);
       } else {
         const updateMenuActionPromise = updateMenuAction(props.idMenu, valueA);
         updateMenuActionPromise(dispatch);
 
-        message.success("Submit thành công - hãy submit!", 2.5);
         props.setShowModalUpdate(false);
       }
     } else {
@@ -137,26 +133,26 @@ export default function ModalNomal(props: MyPropsModalNomal) {
   };
 
   useEffect(() => {
-    if (props.idMenu) {
-      const dataDetailMenuPromise = getDetailMenuAction(props.idMenu);
-      dataDetailMenuPromise(dispatch);
-      setDefaultValue(getMenu.menuDetail);
-
-      const dataDefaultInput = async () => {
-        const { data } = await menuServices.getMenuByIdApi(props.idMenu);
-        if (data) {
-          setValue({
-            name: data.name,
-            url: data.url,
-            iconClass: data.iconClass,
-            children: submenu,
-          });
-        }
-      };
-      dataDefaultInput();
-    }
+    // if (props.idMenu) {
+    //   const dataDetailMenuPromise = getDetailMenuAction(props.idMenu);
+    //   dataDetailMenuPromise(dispatch);
+    //   setDefaultValue(getMenu.menuDetail);
+    //   const dataDefaultInput = async () => {
+    //     const { data } = await menuServices.getMenuByIdApi(props.idMenu);
+    //     if (data) {
+    //       setDefaultValue({
+    //         name: data.name,
+    //         url: data.url,
+    //         iconClass: data.iconClass,
+    //         children: submenu,
+    //       });
+    //     }
+    //   };
+    //   dataDefaultInput();
+    // }
+    // console.log(defaultValueInput, "defaultValueInput");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, props.idMenu, defaultValueInput]);
+  }, [dispatch, props.idMenu /* setDefaultValue */]);
 
   return (
     <>
@@ -169,7 +165,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
         {openModalAddSubMenu ? (
           <>
             <div>
-              <h4 className={Styles.titleContent}>Sub menu</h4>
+              <h4 className={Styles.titleContent}>{t(`MenuAdmin.sub_menu`)}</h4>
 
               <Space>
                 <Space direction="vertical">
@@ -216,20 +212,26 @@ export default function ModalNomal(props: MyPropsModalNomal) {
 
             <Space className={Styles.wrapperBtnAdd}>
               <Button type="primary" onClick={handleClickAddSubMenu}>
-                add Sub menu
+                {t(`MenuAdmin.update_sub_menu`)}
               </Button>
-              <Button onClick={handleClearModalAddSubMenu}>clear</Button>
-              <Button onClick={handleCloseModalAddSubMenu}>close</Button>
+              <Button onClick={handleClearModalAddSubMenu}>
+                {t(`MenuAdmin.clear`)}
+              </Button>
+              <Button onClick={handleCloseModalAddSubMenu}>
+                {t(`MenuAdmin.close`)}
+              </Button>
             </Space>
           </>
         ) : (
           <Space style={{ paddingBottom: "17px" }}>
-            <Button onClick={handleOpenModalAddSubMenu}>update menu con</Button>
+            <Button onClick={handleOpenModalAddSubMenu}>
+              {t(`MenuAdmin.update_sub_menu`)}
+            </Button>
           </Space>
         )}
 
         {/* Main menu */}
-        <h4 className={Styles.titleContent}>Main menu</h4>
+        <h4 className={Styles.titleContent}>Menu</h4>
         <Form
           ref={formRef}
           form={form}
@@ -237,34 +239,40 @@ export default function ModalNomal(props: MyPropsModalNomal) {
           onFinish={onHandleSave}
           autoComplete="off"
         >
-          <Form.Item
-            name="nameMenu"
-            label="Name menu"
-            rules={[{ required: true }, { type: "string", min: 1 }]}
-          >
-            <Input name="nameMenu" placeholder="input placeholder" />
-          </Form.Item>
+          <>
+            <Form.Item
+              name="nameMenu"
+              label={t(`MenuAdmin.name_menu`)}
+              rules={[{ type: "string", min: 1 }]}
+              // initialValue={`${defaultValueInput.name}`}
+            >
+              <Input
+                name="nameMenu"
+                placeholder={` Nhập ${t(`MenuAdmin.name_menu`)}`}
+              />
+            </Form.Item>
+          </>
 
           <Form.Item
             name="urlMenu"
-            label="URL"
-            rules={[{ required: true }, { type: "string", min: 1 }]}
+            label={t(`MenuAdmin.url`)}
+            rules={[{ type: "string", min: 1 }]}
           >
-            <Input placeholder="input placeholder" />
+            <Input placeholder={` Nhập ${t(`MenuAdmin.url`)}`} />
           </Form.Item>
 
           <Form.Item
             name="iconClass"
-            label="Icon Class"
-            rules={[{ required: true }, { type: "string", min: 1 }]}
+            label={t(`MenuAdmin.icon_class`)}
+            rules={[{ type: "string", min: 1 }]}
           >
-            <Input placeholder="input placeholder" />
+            <Input placeholder={` Nhập ${t(`MenuAdmin.icon_class`)}`} />
           </Form.Item>
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                save
+                {t(`MenuAdmin.save`)}
               </Button>
             </Space>
           </Form.Item>

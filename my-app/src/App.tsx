@@ -16,6 +16,7 @@ import Register from "./page/register/Register";
 import AddMenu from "./page/admin/managerMenu/AddMenu";
 import DeleDeleteUpdateMenu from "./page/admin/managerMenu/Delete&UpdateMenu";
 
+
 const App = () => {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
 

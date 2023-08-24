@@ -1,26 +1,38 @@
 {
   "adminHome": {
-    "admin" : "Quản trị",
+    "admin": "Quản trị",
     "hi_user": "Chào người dùng",
     "log_out": "Đăng xuất",
-    "manager_users_type" : "Quản lý người dùng loại",
-    "table_manager_type" : "Bảng quản lý người dùng loại",
+    "manager_users_type": "Quản lý người dùng loại",
+    "table_manager_type": "Bảng quản lý người dùng loại",
     "name": "Tên",
     "email": "Email",
-    "phoneNumber" : "Số điện thoại",
-    "password" : "Mật khẩu",
-    "option" : "Lựa chọn",
-    "delete" : "Xóa",
-    "update" : "Cập nhật",
-    "add_user_type" : "Thêm người dùng loại",
-    "delete_user" : "Xóa người dùng này?",
+    "phoneNumber": "Số điện thoại",
+    "password": "Mật khẩu",
+    "option": "Lựa chọn",
+    "delete": "Xóa",
+    "update": "Cập nhật",
+    "add_user_type": "Thêm người dùng loại",
+    "delete_user": "Xóa người dùng này?",
     "want_delete_user": "Bạn muốn xóa người dùng này:",
     "submit": "Nhập",
     "add_user": "Thêm người dùng",
-    "ok" : "Đồng ý",
-    "update_info" : "Cập nhật thông tin"
+    "ok": "Đồng ý",
+    "update_info": "Cập nhật thông tin"
   },
   "MenuAdmin": {
-    "add_sub_menu" : "Thêm menu con"
+    "add_sub_menu": "Thêm menu phụ",
+    "menu_dynamic": "Menu Động",
+    "name_menu": "Tên menu",
+    "save": "Lưu",
+    "url": "Đường dẫn",
+    "icon_class": "Lớp Icon",
+    "sub_menu": "Menu phụ",
+    "list_menu": "Danh sách menu phụ",
+    "clear" : "Dọn",
+    "close" : "Đóng",
+    "repair_menu": "Sửa menu",
+    "delete_menu": "Xóa menu",
+    "update_sub_menu" : "Sửa menu phụ"
   }
 }

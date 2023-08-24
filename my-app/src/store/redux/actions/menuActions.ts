@@ -41,9 +41,9 @@ export function addMenuAction(dataOjb: DataMenuOjb) {
       );
 
       dispatch({ type: ADD_DATA_MENU, payload: data });
-      message.success("Thêm menu thành công!", 2.5);
+      message.success("Thêm menu thành công!", 3);
     } catch (error: any) {
-      message.error("Thêm menu thất bại!", 2.5);
+      message.error("Thêm menu thất bại!", 3);
       console.log(error, "Lỗi");
     }
   };
@@ -71,7 +71,7 @@ export function getDetailMenuAction(id: string | number) {
 
       dispatch({ type: GET_DATA_DETAIL_MENU, payload: data });
     } catch (error: any) {
-      message.error("get detail thất bại!", 2.5);
+      message.error("get detail thất bại!", 3);
       console.log(error, "Lỗi");
     }
   };
@@ -80,13 +80,17 @@ export function getDetailMenuAction(id: string | number) {
 export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
   return async (dispatch: Dispatch) => {
     try {
-      const { data } = await menuServices.updateMenuApi(id, dataOjb);
+      if (id === 9) {
+        message.error("Menu này e làm mẫu ạ!", 3);
+      } else {
+        const { data } = await menuServices.updateMenuApi(id, dataOjb);
 
-      /* gắn data đã update từ server trả về */
-      dispatch({ type: UPDATE_DATA_MENU, payload: data });
-      message.success("Cập nhật thành công!", 2.5);
+        /* gắn data đã update từ server trả về */
+        dispatch({ type: UPDATE_DATA_MENU, payload: data });
+        message.success("Cập nhật thành công!", 3);
+      }
     } catch (error: any) {
-      message.error("Cập nhật thất bại!", 2.5);
+      message.error("Cập nhật thất bại!", 3);
       console.log(error, "Lỗi");
     }
   };

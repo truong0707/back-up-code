@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Tooltip, Tree, message } from "antd";
+import ModalUpdate from "../../../component/admin/menu/modal/ModalUpdate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { checkIcons } from "../../../untils/checkIcons";
 import {
   deleteMenuAction,
   getMenuAction,
@@ -9,10 +13,10 @@ import {
   DownOutlined,
   ScissorOutlined,
   DeleteOutlined,
-  SmileOutlined,
 } from "@ant-design/icons";
-import { Tree, message } from "antd";
-import ModalUpdate from "../../../component/admin/menu/modal/ModalUpdate";
+
+import Styles from "./managerMenu.module.scss";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteMenu() {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
@@ -20,6 +24,7 @@ export default function DeleteMenu() {
   const { menuDetail } = getMenu;
   const dispatch = useDispatch();
   const [idMenu, setIdMenu] = useState<any>();
+  const { t } = useTranslation(["homeAdmin"]);
 
   /* modal update */
   const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -46,24 +51,39 @@ export default function DeleteMenu() {
   };
 
   const getListDataMenu = listDataMenu.map(
-    (data: { id: string | number; name: string; children: [] }) => {
+    (data: {
+      id: string | number;
+      name: string;
+      iconClass: string;
+      children: [];
+    }) => {
       return {
         title: (
           <>
-            <DeleteOutlined
-              style={{ color: "red", marginRight: "10px" }}
-              onClick={() => handleClickDelete(data.id)}
-            />
-            <ScissorOutlined
-              style={{ color: "#1677FF", marginRight: "10px" }}
-              onClick={() => handleShowModalUpdate(data.id)}
-            />
+            <Tooltip title={t(`MenuAdmin.delete_menu`)}>
+              <DeleteOutlined
+                className={Styles.IconDelete}
+                onClick={() => handleClickDelete(data.id)}
+              />
+            </Tooltip>
+
+            <Tooltip title={t(`MenuAdmin.repair_menu`)}>
+              <ScissorOutlined
+                className={Styles.IconUpdate}
+                onClick={() => handleShowModalUpdate(data.id)}
+              />
+            </Tooltip>
 
             <b>{data.name}</b>
           </>
         ),
         key: data.id,
-        icon: <SmileOutlined />,
+        icon: (
+          <FontAwesomeIcon
+            icon={checkIcons(data.iconClass)}
+            style={{ marginRight: "10px" }}
+          />
+        ),
         children: data.children.length > 0 ? data.children : [],
       };
     }

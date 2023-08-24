@@ -16,9 +16,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import BreadcrumbNav from "../component/Breadcrumb/BreadcrumbNav";
 import { getMenuAction } from "../store/redux/actions/menuActions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-// import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { checkIcons } from "../untils/checkIcons";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -82,10 +81,12 @@ const Dashboard = () => {
         return getItem(
           // `${dataMenu.name}`,
           <>
-            <Link to={dataMenu.url}>
-              {/* {dataMenu.iconClass} */}
-              {/*  <FontAwesomeIcon icon={'faHome'}/>  */}{dataMenu.name}
-              {/* <FontAwesomeIcon icon="fa-brands fa-twitter" /> */}
+            <Link to={`${dataMenu.url}`}>
+              <FontAwesomeIcon
+                icon={checkIcons(dataMenu.iconClass)}
+                style={{ marginRight: "10px" }}
+              />
+              {dataMenu.name}
             </Link>
           </>,
           `${dataMenu.id}`,
@@ -107,7 +108,7 @@ const Dashboard = () => {
     ),
     getItem(
       <Link to={"/admin/managerUserA"}>
-        {t("adminHome.manager_users_type")} A{" "}
+        {t("adminHome.manager_users_type")} A
       </Link>,
       "2",
       <DesktopOutlined />
@@ -121,7 +122,7 @@ const Dashboard = () => {
     ),
     getItem(
       <Space>
-        Menu Dynamic
+        {t(`MenuAdmin.menu_dynamic`)}
         <Link to={"/admin/add-menu"}>
           <Tooltip title="Add new Menu">
             <PlusSquareOutlined />
@@ -129,7 +130,7 @@ const Dashboard = () => {
         </Link>
         <Link to={"/admin/delete&update-menu"}>
           <Tooltip title="Delete/Update Menu">
-            <SettingFilled spin /* rotate={180} */ />
+            <SettingFilled spin />
           </Tooltip>
         </Link>
       </Space>,

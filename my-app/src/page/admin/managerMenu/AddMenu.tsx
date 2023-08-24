@@ -58,7 +58,7 @@ const AddMenu: React.FC = () => {
     const items = parser.replace(/\s+/g, "");
 
     if (items.length > 2) {
-      setSubmenu((state: any) => [...state, inputs]);
+      setSubmenu((state: []) => [...state, inputs]);
     }
     message.success("Thêm sub menu thành công!", 2.5);
   };
@@ -118,7 +118,7 @@ const AddMenu: React.FC = () => {
       {openModalAddSubMenu ? (
         <>
           <div>
-            <h4 className={Styles.titleContent}>Sub menu</h4>
+            <h4 className={Styles.titleContent}>{t(`MenuAdmin.sub_menu`)}</h4>
 
             <Space>
               <Space direction="vertical">
@@ -139,7 +139,7 @@ const AddMenu: React.FC = () => {
             </Space>
           </div>
 
-          <p className={Styles.titleContent}>List menu: </p>
+          <p className={Styles.titleContent}>{t(`MenuAdmin.list_menu`)}</p>
 
           {submenu ? (
             <>
@@ -167,10 +167,14 @@ const AddMenu: React.FC = () => {
 
           <Space className={Styles.wrapperBtnAdd}>
             <Button type="primary" onClick={handleClickAddSubMenu}>
-              add Sub menu
+              {t(`MenuAdmin.add_sub_menu`)}
             </Button>
-            <Button onClick={handleClearModalAddSubMenu}>clear</Button>
-            <Button onClick={handleCloseModalAddSubMenu}>close</Button>
+            <Button danger  onClick={handleClearModalAddSubMenu}>
+              {t(`MenuAdmin.clear`)}
+            </Button>
+            <Button onClick={handleCloseModalAddSubMenu}>
+              {t(`MenuAdmin.close`)}
+            </Button>
           </Space>
         </>
       ) : (
@@ -182,7 +186,7 @@ const AddMenu: React.FC = () => {
       )}
 
       {/* Main menu */}
-      <h4 className={Styles.titleContent}>Main menu</h4>
+      <h4 className={Styles.titleContent}>Menu</h4>
       <Form
         ref={formRef}
         form={form}
@@ -192,39 +196,36 @@ const AddMenu: React.FC = () => {
       >
         <Form.Item
           name="nameMenu"
-          label="Name menu"
+          label={t(`MenuAdmin.name_menu`)}
           rules={[{ required: true }, { type: "string", min: 1 }]}
         >
-          <Input placeholder="input placeholder" />
+          <Input placeholder="vd: Menu1 " />
         </Form.Item>
 
         <Form.Item
           name="urlMenu"
-          label="URL"
-          rules={[
-            { required: true },
-            // { type: "url", warningOnly: true },
-            { type: "string", min: 1 },
-          ]}
+          label={t(`MenuAdmin.url`)}
+          rules={[{ required: true }, { type: "string", min: 1 }]}
+          initialValue={"/"}
         >
-          <Input placeholder="input placeholder" />
+          <Input placeholder="vd: /menu1 " />
         </Form.Item>
 
         <Form.Item
           name="iconClass"
-          label="Icon Class"
+          label={t(`MenuAdmin.icon_class`)}
           rules={[{ required: true }, { type: "string", min: 1 }]}
         >
-          <Input placeholder="input placeholder" />
+          <Input placeholder="vd: user, code, folder-open, phone" />
         </Form.Item>
 
         <Form.Item>
           <Space>
             <Button type="primary" htmlType="submit">
-              save
+              {t(`MenuAdmin.save`)}
             </Button>
 
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={handleSubmit}>{t(`adminHome.submit`)}</Button>
           </Space>
         </Form.Item>
       </Form>

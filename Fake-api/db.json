@@ -33,20 +33,26 @@
     {
       "id": 9,
       "name": "Menu 1",
-      "url": "/admin/menu1",
-      "iconClass": "icon1",
+      "url": "/menu1",
+      "iconClass": "folder-open",
       "children": [
         {
           "id": 10,
           "title": "Sub menu a",
-          "url": "/admin/menu1/sub1"
+          "url": "/menu1/sub1"
         },
         {
           "id": 11,
           "title": "Sub menu b",
-          "url": "/admin/menu1/sub2"
+          "url": "/menu1/sub2"
         }
       ]
+    },
+    {
+      "id": 10,
+      "name": "dasdasd",
+      "iconClass": "asdasd",
+      "children": []
     }
   ],
   "profile": {

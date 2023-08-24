@@ -21,6 +21,18 @@
     "update_info": "Update infomation"
   },
   "MenuAdmin": {
-    "add_sub_menu": "Add sub menu"
+    "add_sub_menu": "Add sub menu",
+    "menu_dynamic": "Menu Dynamic",
+    "name_menu": "Name menu",
+    "save": "Save",
+    "url" : "URL",
+    "icon_class": "Icon Class",
+    "sub_menu" : "Sub Menu",
+    "list_menu" : "List menu",
+    "clear" : "Clear",
+    "close" : "Close",
+    "repair_menu": "Repair menu",
+    "delete_menu": "Delete menu",
+    "update_sub_menu" : "Update sub menu"
   }
 }
