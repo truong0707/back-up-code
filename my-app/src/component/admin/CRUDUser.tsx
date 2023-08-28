@@ -4,28 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../spin/LoadingCpn";
 import { StateStore } from "../../store/redux/Store";
 import AlertNotificate from "../alert/AlertNotificate";
-import { Link } from "react-router-dom";
-import { ColumnsType } from "antd/es/table";
-import { useTranslation } from "react-i18next";
+// import { Link } from "react-router-dom";
+// import { ColumnsType } from "antd/es/table";
+// import { useTranslation } from "react-i18next";
 import { getMenuAction } from "../../store/redux/actions/menuActions";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
-const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
-const ModalBtnUpdate = lazy(() => import("./ModalBtnUpdate"));
+// const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
+// const ModalBtnUpdate = lazy(() => import("./ModalBtnUpdate"));
 
 interface MyCRUDUserProps {
   title: String;
   data: [];
   contentBtnAdd?: string;
   columnsTitle: any;
-}
-
-interface DataType {
-  email: string;
-  id: string;
-  name: string;
-  numberPhone: string;
-  tags: string[];
 }
 
 const CRUDUser = (props: MyCRUDUserProps) => {

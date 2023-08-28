@@ -5,8 +5,10 @@ import {
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
+  GET_DATA_SUB_MENU,
   UPDATE_DATA_MENU,
-} from "../constants/menuReducerContans";
+  UPDATE_FIELD_DATA_MENU,
+} from "../constants/menuContans";
 import menuServices from "../../../services/menu";
 import { message } from "antd";
 
@@ -95,3 +97,46 @@ export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
     }
   };
 }
+
+export function updateFieldMenuAction(
+  id: string | number,
+  dataOjb: object[]
+) {
+  return async (dispatch: Dispatch) => {
+    try {
+      if (id === 9) {
+        message.error("Menu này e làm mẫu ạ!", 3);
+      } else {
+        const { data } = await menuServices.updateFieldMenuApi(id, dataOjb);
+
+
+        dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
+        message.success(`Đã thêm sub cho menu có id: ${id} !`, 3);
+      }
+    } catch (error: any) {
+      message.error("Cập nhật thất bại!", 3);
+      console.log(error, "Lỗi");
+    }
+  };
+}
+
+// export function getDataSubMenubyIdAction(
+//   id: string | number,
+// ) {
+//   return async (dispatch: Dispatch) => {
+//     try {
+//       if (id === 9) {
+//         message.error("Menu này e làm mẫu ạ!", 3);
+//       } else {
+//         const { data } = await menuServices.updateFieldMenuApi(id);
+
+
+//         dispatch({ type: GET_DATA_SUB_MENU, payload: data });
+//         message.success(`Đã thêm sub cho menu có id: ${id} !`, 3);
+//       }
+//     } catch (error: any) {
+//       message.error("Cập nhật thất bại!", 3);
+//       console.log(error, "Lỗi");
+//     }
+//   };
+// }

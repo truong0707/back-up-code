@@ -4,8 +4,10 @@ import {
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
+  GET_DATA_SUB_MENU,
   UPDATE_DATA_MENU,
-} from "../constants/menuReducerContans";
+  UPDATE_FIELD_DATA_MENU,
+} from "../constants/menuContans";
 
 interface MyMenuState {
   listDataMenu: [];
@@ -28,7 +30,6 @@ export const menuReducer = (
       const currentlistDataMenu: {}[] = [...state.listDataMenu];
       const payload = action.payload;
       currentlistDataMenu.push(payload);
-
       return { ...state, listDataMenu: currentlistDataMenu };
     case DELETE_DATA_MENU:
       return {
@@ -38,12 +39,11 @@ export const menuReducer = (
         ),
       };
     case UPDATE_DATA_MENU:
-      const currentListDataUsersUp = [...state.listDataMenu];
+      const currentListDataMenusUp = [...state.listDataMenu];
       const payloadDataUpdate = action.payload;
-
       return {
         ...state,
-        listDataMenu: currentListDataUsersUp.map(
+        listDataMenu: currentListDataMenusUp.map(
           (items: {
             id: string | number;
             name: string;
@@ -51,7 +51,6 @@ export const menuReducer = (
             iconClass: string;
             children: [];
           }) => {
-            console.log(items, "adasdadadadad");
             if (items.id === payloadDataUpdate.id) {
               return {
                 id: payloadDataUpdate.id,
@@ -64,6 +63,16 @@ export const menuReducer = (
             return items;
           }
         ),
+      };
+    case UPDATE_FIELD_DATA_MENU:
+      return {
+        ...state,
+        menuDetail: action.payload,
+      };
+    case GET_DATA_SUB_MENU:
+      return {
+        ...state,
+        listSubDataMenu: action.payload,
       };
     default:
       return state;

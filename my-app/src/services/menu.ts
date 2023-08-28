@@ -30,16 +30,33 @@ const menuServices = {
     return response;
   },
   updateMenuApi: async (id: number | string, inputData: any) => {
+    console.log(inputData, "inputData");
     const response = await axiosClient.put(`/menus/${id}`, {
       id: id,
       name: inputData.name,
-      url: inputData.urlMenu,
+      url: inputData.url,
       iconClass: inputData.iconClass,
       children: inputData.children,
     });
 
     return response;
   },
+
+  updateFieldMenuApi: async (id: number | string, inputData: object[]) => {
+    const response = await axiosClient.patch(`/menus/${id}`, {
+      children: inputData,
+    });
+
+    return response;
+  },
+
+  // getSubFieldMenuApi: async (id: number | string, inputData: object[]) => {
+  //   const response = await axiosClient.patch(`/menus/${id}`, {
+  //     children: inputData,
+  //   });
+
+  //   return response;
+  // },
 };
 
 export default menuServices;

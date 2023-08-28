@@ -2,6 +2,7 @@
 $default-marginTopAndBotton-title: 10px;
 $default-color-delete: red;
 $default-color-update: green;
+$default-margin: 10px;
 
 .listSubMenu {
     border: 1px solid silver;
@@ -26,5 +27,8 @@ $default-color-update: green;
 }
 .IconUpdate {
     color: $default-color-update;
+    margin-right: 10px;
+}
+.icon {
     margin-right: 10px;
 }

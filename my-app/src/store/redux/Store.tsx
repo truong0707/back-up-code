@@ -2,9 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { userLoginReduder, userRegisterReducer } from "./reducers/userReducer";
-import {
-  listDataUserReducer,
-} from "./reducers/dataUserReducer";
+import { listDataUserReducer } from "./reducers/dataUserReducer";
 import { menuReducer } from "./reducers/menuReducer";
 
 const reducer = combineReducers({
@@ -22,18 +20,18 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   : null;
 
 export interface StateStore {
-  menuDetail(menuDetail: any, arg1: string): unknown;
+  menuDetail(menuDetail: any, arg1: string): {};
   dataUsers: {
-    listDataUsers: [],
-    error: Boolean,
-    loading: Boolean,
-    msgUpdateSuccess: string,
-    msgUpdateError: string,
-    msgAddSuccess: string,
-    msgDeleteSuccess: string
-    msgDeleteError: string,
-    dataUserDetail: []
-  },
+    listDataUsers: [];
+    error: Boolean;
+    loading: Boolean;
+    msgUpdateSuccess: string;
+    msgUpdateError: string;
+    msgAddSuccess: string;
+    msgDeleteSuccess: string;
+    msgDeleteError: string;
+    dataUserDetail: [];
+  };
   userLogin: {
     loading: boolean;
     userInfo: {
@@ -44,10 +42,14 @@ export interface StateStore {
   };
   MenuAdmin: {
     menuDetail: {
-      name: string
+      id: string | number;
+      name: string;
+      url: string;
+      children: [];
+      iconClass: string;
     };
-    listDataMenu: []
-  }
+    listDataMenu: [];
+  };
 }
 
 const initalState = {

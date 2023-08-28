@@ -1,57 +1,54 @@
+import { Button, Form, FormInstance, Input, Space, message } from "antd";
 import React, { Suspense, useEffect, useState } from "react";
-import { FormInstance, Modal, message } from "antd";
-import { Button, Form, Input, /* message */ Space } from "antd";
-import { useDispatch } from "react-redux";
-import {
-  // getDetailMenuAction,
-  updateMenuAction,
-} from "../../../../store/redux/actions/menuActions";
-// import menuServices from "../../../../services/menu";
-import Styles from "../../../../page/admin/managerMenu/managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
-import LoadingCpn from "../../../spin/LoadingCpn";
-
-interface MyPropsModalNomal {
-  idMenu: string | number | null;
-  titleModal: string;
-  showMoal: boolean;
-  setShowModalUpdate: (a: boolean) => void;
-  menuDetail: {};
-}
-
-interface MyAllInfoInput {
-  name: string;
-  iconClass: string;
-  url: string;
-  children: [];
-}
+import { useDispatch } from "react-redux";
+import { updateMenuAction } from "../../../store/redux/actions/menuActions";
+import LoadingCpn from "../../../component/spin/LoadingCpn";
+import Styles from "./managerMenu.module.scss";
+import menuServices from "../../../services/menu";
+import { useLocation } from "react-router-dom";
 
 interface MyInputSubMenu {
   title: string;
   urlSubMenu: string;
 }
 
-export default function ModalNomal(props: MyPropsModalNomal) {
-  // const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  // const [defaultValueInput, setDefaultValue] = useState<any>({});
+export default function UpdateMenu() {
+  const location = useLocation();
+  const pathId = location.pathname.split("/")[3]; /* cat id  params*/
+  const { t } = useTranslation(["homeAdmin"]);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { t } = useTranslation([]);
 
-  /* input sub menu */
+  /* Sub menu */
   const [inputs, setInputs] = useState<MyInputSubMenu>({
     title: "",
     urlSubMenu: "",
   });
   const [submenu, setSubmenu] = useState<any>([]);
 
-  /* total value  */
-  const [valueA, setValue] = useState<MyAllInfoInput>();
-
-  /* show/hide  sub menu  */
+  const [valueA, setValue] = useState<any>({
+    name: "",
+  });
   const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
 
-  /* Show/hide add submenu */
+  useEffect(() => {
+    const dataDefaultInput = async () => {
+      const { data } = await menuServices.getMenuByIdApi(pathId);
+
+      if (data) {
+        setValue({
+          name: data.name,
+          url: data.url,
+          iconClass: data.iconClass,
+          children: submenu,
+        });
+      }
+    };
+    dataDefaultInput();
+  }, [dispatch, submenu, setValue, pathId]);
+
+  /* Show/hide update submenu */
   const handleOpenModalAddSubMenu = () => {
     setOpenModalAddSubMenu(true);
   };
@@ -64,20 +61,27 @@ export default function ModalNomal(props: MyPropsModalNomal) {
     const nameInput = e.target.name;
     let valueInput = e.target.value;
 
-    setInputs((state) => ({ ...state, [nameInput]: valueInput })); //
+    setInputs((state: MyInputSubMenu) => ({
+      ...state,
+      [nameInput]: valueInput,
+    })); //
   };
 
-  /* handle add submenu */
+  /* handle update submenu */
   const handleClickAddSubMenu = () => {
     /* Check input empty - don't submit */
     const parser = JSON.stringify(inputs.title ? inputs.title : "");
     const items = parser.replace(/\s+/g, "");
 
     if (items.length > 2) {
-      setSubmenu((state: any) => [...state, inputs]);
+      setSubmenu((state: []) => [...state, inputs]);
     }
-
     message.success("Thêm sub menu thành công!", 2.5);
+  };
+
+  /*  clear */
+  const handleClearModalAddSubMenu = () => {
+    setSubmenu([]);
   };
 
   /* handle save form */
@@ -93,75 +97,29 @@ export default function ModalNomal(props: MyPropsModalNomal) {
       iconClass: value.iconClass,
       children: submenu,
     });
+
     message.success("Đã lưu thành công - hãy submit!", 2.5);
-  };
-
-  /*  clear */
-  const handleClearModalAddSubMenu = () => {
-    setSubmenu([]);
-  };
-
-  const handleCancel = () => {
-    props.setShowModalUpdate(false);
   };
 
   /* Handle submit form - Call api */
   const formRef = React.useRef<FormInstance>(null);
   const handleSubmit = () => {
-    if (props.idMenu) {
-      if (!valueA) {
-        message.error("Hãy điền thông tin và lưu lại!", 2.5);
-      } else {
-        const updateMenuActionPromise = updateMenuAction(props.idMenu, valueA);
-        updateMenuActionPromise(dispatch);
-
-        props.setShowModalUpdate(false);
-      }
+    if (
+      !valueA ||
+      valueA.name === "" ||
+      valueA.url === "" ||
+      valueA.iconClass === ""
+    ) {
+      message.error("Hãy điền thông tin và lưu lại!", 2.5);
     } else {
-      message.error("miss id!", 2.5);
+      const updateMenuActionPromise = updateMenuAction(pathId, valueA);
+      updateMenuActionPromise(dispatch);
     }
-
-    /* reset Value input */
-    setValue({
-      name: "",
-      iconClass: "",
-      url: "",
-      children: [],
-    });
-
-    formRef.current?.resetFields();
   };
 
-  useEffect(() => {
-    // if (props.idMenu) {
-    //   const dataDetailMenuPromise = getDetailMenuAction(props.idMenu);
-    //   dataDetailMenuPromise(dispatch);
-    //   setDefaultValue(getMenu.menuDetail);
-    //   const dataDefaultInput = async () => {
-    //     const { data } = await menuServices.getMenuByIdApi(props.idMenu);
-    //     if (data) {
-    //       setDefaultValue({
-    //         name: data.name,
-    //         url: data.url,
-    //         iconClass: data.iconClass,
-    //         children: submenu,
-    //       });
-    //     }
-    //   };
-    //   dataDefaultInput();
-    // }
-    // console.log(defaultValueInput, "defaultValueInput");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, props.idMenu /* setDefaultValue */]);
-
   return (
-    <Suspense fallback={<LoadingCpn />}>
-      <Modal
-        title={`${props.titleModal}`}
-        open={props.showMoal}
-        onOk={handleSubmit}
-        onCancel={handleCancel}
-      >
+    <>
+      <Suspense fallback={<LoadingCpn />}>
         {openModalAddSubMenu ? (
           <>
             <div>
@@ -181,14 +139,17 @@ export default function ModalNomal(props: MyPropsModalNomal) {
                     name="urlSubMenu"
                     onChange={handleInputChangeSubMenu}
                     placeholder="url"
+                    defaultValue={"/"}
                   />
                 </Space>
               </Space>
             </div>
 
+            <p className={Styles.titleContent}>{t(`MenuAdmin.list_menu`)}</p>
+
             {submenu ? (
               <>
-                <ul>
+                <ul className={Styles.listSubMenu}>
                   <>
                     {submenu.map(
                       (
@@ -214,7 +175,7 @@ export default function ModalNomal(props: MyPropsModalNomal) {
               <Button type="primary" onClick={handleClickAddSubMenu}>
                 {t(`MenuAdmin.update_sub_menu`)}
               </Button>
-              <Button onClick={handleClearModalAddSubMenu}>
+              <Button danger onClick={handleClearModalAddSubMenu}>
                 {t(`MenuAdmin.clear`)}
               </Button>
               <Button onClick={handleCloseModalAddSubMenu}>
@@ -223,9 +184,9 @@ export default function ModalNomal(props: MyPropsModalNomal) {
             </Space>
           </>
         ) : (
-          <Space style={{ paddingBottom: "17px" }}>
+          <Space>
             <Button onClick={handleOpenModalAddSubMenu}>
-              {t(`MenuAdmin.update_sub_menu`)}
+              {t(`MenuAdmin.add_sub_menu`)}
             </Button>
           </Space>
         )}
@@ -239,45 +200,50 @@ export default function ModalNomal(props: MyPropsModalNomal) {
           onFinish={onHandleSave}
           autoComplete="off"
         >
-          <>
+          {valueA.name ? (
             <Form.Item
               name="nameMenu"
               label={t(`MenuAdmin.name_menu`)}
-              rules={[{ type: "string", min: 1 }]}
-              // initialValue={`${defaultValueInput.name}`}
+              rules={[{ required: true }, { type: "string", min: 1 }]}
+              initialValue={valueA.name}
             >
-              <Input
-                name="nameMenu"
-                placeholder={` Nhập ${t(`MenuAdmin.name_menu`)}`}
-              />
+              <Input placeholder="vd: Menu1" />
             </Form.Item>
-          </>
+          ) : null}
 
-          <Form.Item
-            name="urlMenu"
-            label={t(`MenuAdmin.url`)}
-            rules={[{ type: "string", min: 1 }]}
-          >
-            <Input placeholder={` Nhập ${t(`MenuAdmin.url`)}`} />
-          </Form.Item>
+          {valueA.url ? (
+            <Form.Item
+              name="urlMenu"
+              label={t(`MenuAdmin.url`)}
+              rules={[{ required: true }, { type: "string", min: 1 }]}
+              initialValue={valueA.url}
+            >
+              <Input placeholder="vd: /menu1 " />
+            </Form.Item>
+          ) : null}
 
-          <Form.Item
-            name="iconClass"
-            label={t(`MenuAdmin.icon_class`)}
-            rules={[{ type: "string", min: 1 }]}
-          >
-            <Input placeholder={` Nhập ${t(`MenuAdmin.icon_class`)}`} />
-          </Form.Item>
+          {valueA.iconClass ? (
+            <Form.Item
+              name="iconClass"
+              label={t(`MenuAdmin.icon_class`)}
+              rules={[{ required: true }, { type: "string", min: 1 }]}
+              initialValue={valueA.iconClass}
+            >
+              <Input placeholder="vd: user, code, folder-open, phone" />
+            </Form.Item>
+          ) : null}
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
                 {t(`MenuAdmin.save`)}
               </Button>
+
+              <Button onClick={handleSubmit}>{t(`adminHome.submit`)}</Button>
             </Space>
           </Form.Item>
         </Form>
-      </Modal>
-    </Suspense>
+      </Suspense>
+    </>
   );
 }

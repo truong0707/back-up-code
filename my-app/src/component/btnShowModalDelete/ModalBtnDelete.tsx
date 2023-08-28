@@ -4,16 +4,18 @@ import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-
 interface MyModalBtn {
-  id: string,
-  email: string
+  id: string;
+  // email?: string;
+  nameOjbDelete: string;
+  contentBtn: string;
+  typeDelete: string;
 }
 
-const  ModalBtn = (props: MyModalBtn) => {
+const ModalBtn = (props: MyModalBtn) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const { t } = useTranslation(['homeAdmin']);
+  const { t } = useTranslation(["homeAdmin"]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -23,8 +25,14 @@ const  ModalBtn = (props: MyModalBtn) => {
   const handleDelete = () => {
     setIsModalOpen(false);
 
-    const deleteUserPromise = deleteDataUser(props.id);
-    deleteUserPromise(dispatch);
+    if (props.typeDelete === "user") {
+      const deleteUserPromise = deleteDataUser(props.id);
+      deleteUserPromise(dispatch);
+    } else if (props.typeDelete === "subMenu") {
+      
+    } else {
+      alert("sss");
+    }
   };
 
   const handleCancel = () => {
@@ -34,21 +42,22 @@ const  ModalBtn = (props: MyModalBtn) => {
   return (
     <>
       <Button type="primary" danger onClick={showModal}>
-        {t('adminHome.delete')}
+        {props.contentBtn}
       </Button>
 
       <Modal
-        title={t('adminHome.delete_user')}
+        title={t("adminHome.delete_user")}
         open={isModalOpen}
         onOk={handleDelete}
         onCancel={handleCancel}
       >
         <p>
-          {t(`adminHome.want_delete_user`)} <b>{props.email}</b>?
+          {/* {t(`adminHome.want_delete_user`)} */}
+          Có chắc muốn xóa <b>{/* props.email */ props.nameOjbDelete}</b>?
         </p>
       </Modal>
     </>
   );
-}
+};
 
 export default ModalBtn;

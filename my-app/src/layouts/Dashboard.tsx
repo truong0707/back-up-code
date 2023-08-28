@@ -18,6 +18,7 @@ import BreadcrumbNav from "../component/Breadcrumb/BreadcrumbNav";
 import { getMenuAction } from "../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../untils/checkIcons";
+import TreeMenu from "../component/tree/TreeMenu";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -81,13 +82,13 @@ const Dashboard = () => {
         return getItem(
           // `${dataMenu.name}`,
           <>
-            <Link to={`${dataMenu.url}`}>
+            {/* <Link to={`${dataMenu.url}`}>
               <FontAwesomeIcon
                 icon={checkIcons(dataMenu.iconClass)}
                 style={{ marginRight: "10px" }}
               />
               {dataMenu.name}
-            </Link>
+            </Link> */}
           </>,
           `${dataMenu.id}`,
           null,
@@ -137,7 +138,7 @@ const Dashboard = () => {
       "sub2",
       <AppstoreOutlined />,
 
-      ItemDataMenu()
+      ItemDataMenu(),
       // [
       //   getItem("Option 9", "9"),
       //   getItem("Submenu", "sub3", null, [
@@ -164,6 +165,7 @@ const Dashboard = () => {
                     inlineCollapsed={collapsed}
                     items={items}
                   />
+                  <TreeMenu />
                 </div>
 
                 <div style={{ width: "100%", display: "flex" }}>

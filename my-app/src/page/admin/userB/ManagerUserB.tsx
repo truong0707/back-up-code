@@ -6,7 +6,7 @@ import LoadingCpn from "../../../component/spin/LoadingCpn";
 import { useTranslation } from "react-i18next";
 import { StateStore } from "../../../store/redux/Store";
 import { Space } from "antd";
-import ModalBtnDelete from "../../../component/admin/ModalBtnDelete";
+import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete";
 import ModalBtnUpdate from "../../../component/admin/ModalBtnUpdate";
 import { Link } from "react-router-dom";
 import { ColumnsType } from "rc-table/lib/interface";
@@ -69,7 +69,12 @@ const ManagerUserB = () => {
       key: "action",
       render: (_, record) => (
         <Space align="center" key={record.id} size="middle">
-          <ModalBtnDelete id={record.id} email={record.email} />
+          <ModalBtnDelete
+            typeDelete="user"
+            id={record.id}
+            nameOjbDelete={record.email}
+            contentBtn="xóa"
+          />
           <ModalBtnUpdate idUser={record.id} />
         </Space>
       ),

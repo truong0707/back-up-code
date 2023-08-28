@@ -9,6 +9,16 @@
       "email": "user",
       "password": "dấda",
       "id": 3
+    },
+    {
+      "email": "đa",
+      "password": "adadad",
+      "id": 4
+    },
+    {
+      "email": "ss",
+      "password": "ss",
+      "id": 5
     }
   ],
   "register": [
@@ -21,14 +31,7 @@
       "id": 1
     }
   ],
-  "users": [
-    {
-      "name": "User11",
-      "email": "User1@gmail.ocm",
-      "numberPhone": "070724106",
-      "id": 1
-    }
-  ],
+  "users": [],
   "menus": [
     {
       "id": 9,
@@ -45,14 +48,56 @@
           "id": 11,
           "title": "Sub menu b",
           "url": "/menu1/sub2"
+        },
+        {
+          "title": "đá",
+          "urlSubMenu": "/dá",
+          "id": 3
         }
       ]
     },
     {
-      "id": 10,
-      "name": "dasdasd",
-      "iconClass": "asdasd",
-      "children": []
+      "name": "đâsd",
+      "url": "/đấ",
+      "iconClass": "user",
+      "children": [
+        {
+          "id": 1,
+          "name": "option 2 sub menu a new",
+          "url": ""
+        },
+        {
+          "title": "new",
+          "urlSubMenu": "/sad",
+          "id": 2
+        },
+        {
+          "title": "ád",
+          "urlSubMenu": "/ád",
+          "id": 3
+        },
+        {
+          "title": "dá",
+          "urlSubMenu": "/đá",
+          "id": 4
+        },
+        {
+          "title": "đá",
+          "urlSubMenu": "/ad",
+          "id": 5
+        },
+        {
+          "title": "đá",
+          "urlSubMenu": "/ád",
+          "id": 6
+        },
+        {
+          "title": "đád",
+          "urlSubMenu": "/ádáda",
+          "id": 7
+        }
+      ],
+      "id": 12
     }
   ],
   "profile": {

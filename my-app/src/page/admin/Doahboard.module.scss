@@ -1,3 +1,5 @@
+$default-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 .wrapperDoashBoard {
   display: flex;
 }
@@ -9,6 +11,6 @@
 }
 .wrapperContentDoashBoard {
   width: 79%;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: $default-box-shadow;
   padding: 10px;
 }

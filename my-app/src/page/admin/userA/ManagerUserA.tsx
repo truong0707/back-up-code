@@ -8,7 +8,7 @@ import { StateStore } from "../../../store/redux/Store";
 import { ColumnsType } from "rc-table/lib/interface";
 import { Link } from "react-router-dom";
 import { Space } from "antd";
-import ModalBtnDelete from "../../../component/admin/ModalBtnDelete";
+import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete";
 import ModalBtnUpdate from "../../../component/admin/ModalBtnUpdate";
 
 const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
@@ -29,7 +29,6 @@ const ManagerUserA = () => {
   const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
   const { /* loading, */ error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
-
 
   const columns: ColumnsType<DataType> = [
     {
@@ -65,13 +64,17 @@ const ManagerUserA = () => {
       key: "action",
       render: (_, record) => (
         <Space align="center" key={record.id} size="middle">
-          <ModalBtnDelete id={record.id} email={record.email} />
+          <ModalBtnDelete
+            typeDelete="user"
+            contentBtn="xóa"
+            id={record.id}
+            nameOjbDelete={record.email}
+          />
           <ModalBtnUpdate idUser={record.id} />
         </Space>
       ),
     },
   ];
-
 
   useEffect(() => {
     const productListPromise = listDataUser();

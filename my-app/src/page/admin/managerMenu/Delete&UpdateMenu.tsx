@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Tooltip, Tree, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,30 +13,18 @@ import {
   ScissorOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
+import { Link } from "react-router-dom";
 
-
-const ModalUpdate = lazy(() => import("../../../component/admin/menu/modal/ModalUpdate"));
-
-export default function DeleteMenu() {
+const DeleteMenu = () => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { listDataMenu } = getMenu;
-  const { menuDetail } = getMenu;
   const dispatch = useDispatch();
-  const [idMenu, setIdMenu] = useState<any>();
   const { t } = useTranslation(["homeAdmin"]);
 
   /* modal update */
-  const [showModalUpdate, setShowModalUpdate] = useState(false);
-
-  const handleShowModalUpdate = (id: number | string) => {
-    setShowModalUpdate(true);
-    setIdMenu(id);
-  };
-
   useEffect(() => {
     const dataMenuPromise = getMenuAction();
     dataMenuPromise(dispatch);
@@ -71,10 +59,9 @@ export default function DeleteMenu() {
             </Tooltip>
 
             <Tooltip title={t(`MenuAdmin.repair_menu`)}>
-              <ScissorOutlined
-                className={Styles.IconUpdate}
-                onClick={() => handleShowModalUpdate(data.id)}
-              />
+              <Link to={`/admin/update/${data.id}`}>
+                <ScissorOutlined className={Styles.IconUpdate} />
+              </Link>
             </Tooltip>
 
             <b>{data.name}</b>
@@ -84,7 +71,7 @@ export default function DeleteMenu() {
         icon: (
           <FontAwesomeIcon
             icon={checkIcons(data.iconClass)}
-            style={{ marginRight: "10px" }}
+            className={Styles.icon}
           />
         ),
         children: data.children.length > 0 ? data.children : [],
@@ -98,14 +85,6 @@ export default function DeleteMenu() {
         <>Chưa có menu nào trong database! - Hãy thêm menu</>
       ) : (
         <>
-          <ModalUpdate
-            titleModal="Update Menu"
-            showMoal={showModalUpdate}
-            setShowModalUpdate={setShowModalUpdate}
-            idMenu={idMenu}
-            menuDetail={menuDetail}
-          />
-
           <Tree
             showIcon
             defaultExpandAll
@@ -117,4 +96,6 @@ export default function DeleteMenu() {
       )}
     </Suspense>
   );
-}
+};
+
+export default DeleteMenu;

@@ -8,8 +8,8 @@ import {
   faHighlighter,
   faUser,
   faPhone,
-  faFolderOpen
+  faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
-//Add các icon đã được import vào trong thư viện của bạn
+//A dd các icon đã được import vào trong thư viện
 library.add(/* faMoneyBill */ faCode, faHighlighter, faUser, faPhone, faFolderOpen);
