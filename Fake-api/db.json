@@ -40,64 +40,25 @@
       "iconClass": "folder-open",
       "children": [
         {
-          "id": 10,
-          "title": "Sub menu a",
-          "url": "/menu1/sub1"
-        },
-        {
-          "id": 11,
-          "title": "Sub menu b",
-          "url": "/menu1/sub2"
-        },
-        {
-          "title": "đá",
-          "urlSubMenu": "/dá",
-          "id": 3
+          "id": 20,
+          "title": "sub2",
+          "url": "/menu1/sub2",
+          "children": [
+            {
+              "id": 11,
+              "title": "subA",
+              "url": "/menu1/subA",
+              "children": [
+                {
+                  "id": 12,
+                  "title": "suba",
+                  "url": "/đấ"
+                }
+              ]
+            }
+          ]
         }
       ]
-    },
-    {
-      "name": "đâsd",
-      "url": "/đấ",
-      "iconClass": "user",
-      "children": [
-        {
-          "id": 1,
-          "name": "option 2 sub menu a new",
-          "url": ""
-        },
-        {
-          "title": "new",
-          "urlSubMenu": "/sad",
-          "id": 2
-        },
-        {
-          "title": "ád",
-          "urlSubMenu": "/ád",
-          "id": 3
-        },
-        {
-          "title": "dá",
-          "urlSubMenu": "/đá",
-          "id": 4
-        },
-        {
-          "title": "đá",
-          "urlSubMenu": "/ad",
-          "id": 5
-        },
-        {
-          "title": "đá",
-          "urlSubMenu": "/ád",
-          "id": 6
-        },
-        {
-          "title": "đád",
-          "urlSubMenu": "/ádáda",
-          "id": 7
-        }
-      ],
-      "id": 12
     }
   ],
   "profile": {

@@ -19,6 +19,8 @@ import { getMenuAction } from "../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../untils/checkIcons";
 import TreeMenu from "../component/tree/TreeMenu";
+import TreeMenu2 from "../component/tree/TreeMenu2";
+import TreeMenu3 from "../component/tree/TreeMenu3";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -59,7 +61,8 @@ const Dashboard = () => {
           (data: { id: number; title: string; url: string }) => {
             return getItem(
               <>
-                <Link to={data.url}>{data.title}</Link>
+                {/* <Link to={data.url}>{data.title}</Link> */}
+                {data.title}
               </>,
               `${data.id}`
             );
@@ -82,13 +85,13 @@ const Dashboard = () => {
         return getItem(
           // `${dataMenu.name}`,
           <>
-            {/* <Link to={`${dataMenu.url}`}>
-              <FontAwesomeIcon
-                icon={checkIcons(dataMenu.iconClass)}
-                style={{ marginRight: "10px" }}
-              />
-              {dataMenu.name}
-            </Link> */}
+            {/* <Link to={`${dataMenu.url}`}> */}
+            <FontAwesomeIcon
+              icon={checkIcons(dataMenu.iconClass)}
+              style={{ marginRight: "10px" }}
+            />
+            {dataMenu.name}
+            {/* </Link> */}
           </>,
           `${dataMenu.id}`,
           null,
@@ -138,7 +141,7 @@ const Dashboard = () => {
       "sub2",
       <AppstoreOutlined />,
 
-      ItemDataMenu(),
+      ItemDataMenu()
       // [
       //   getItem("Option 9", "9"),
       //   getItem("Submenu", "sub3", null, [
@@ -157,6 +160,10 @@ const Dashboard = () => {
             <>
               <div className={Styles.wrapperDoashBoard}>
                 <div className={Styles.menuDoashBoard}>
+                  <div style={{ padding: "10px" }}>
+                    {/* <TreeMenu2 /> */}
+                  </div>
+
                   <Menu
                     defaultSelectedKeys={["1"]}
                     defaultOpenKeys={["sub1"]}
@@ -165,7 +172,9 @@ const Dashboard = () => {
                     inlineCollapsed={collapsed}
                     items={items}
                   />
-                  <TreeMenu />
+
+                  {/* <TreeMenu /> */}
+                  <TreeMenu3/>
                 </div>
 
                 <div style={{ width: "100%", display: "flex" }}>

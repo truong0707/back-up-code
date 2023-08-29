@@ -29,7 +29,7 @@ const ModalBtn = (props: MyModalBtn) => {
       const deleteUserPromise = deleteDataUser(props.id);
       deleteUserPromise(dispatch);
     } else if (props.typeDelete === "subMenu") {
-      
+      console.log(props.id, "id");
     } else {
       alert("sss");
     }
@@ -53,7 +53,8 @@ const ModalBtn = (props: MyModalBtn) => {
       >
         <p>
           {/* {t(`adminHome.want_delete_user`)} */}
-          Có chắc muốn xóa <b>{/* props.email */ props.nameOjbDelete}</b>?
+          Có chắc muốn xóa {props.id}{" "}
+          <b>{/* props.email */ props.nameOjbDelete}</b>?
         </p>
       </Modal>
     </>

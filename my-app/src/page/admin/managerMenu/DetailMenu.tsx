@@ -86,6 +86,7 @@ export default function DetailMenu() {
             id={record.id}
             nameOjbDelete={record.title}
           />
+
           {/* <ModalBtnUpdate idUser={record.id} /> */}
         </Space>
       ),
@@ -94,7 +95,7 @@ export default function DetailMenu() {
 
   return (
     <>
-      <BtnShowModalAddMenuSub id={pathId} />
+      <BtnShowModalAddMenuSub id={pathId} menuDetail={menuDetail} />
 
       {/* {data ? <Table columns={columns} dataSource={data} /> : null} */}
       {getMenu && menuDetail ? (

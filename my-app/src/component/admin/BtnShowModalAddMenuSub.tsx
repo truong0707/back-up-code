@@ -16,6 +16,7 @@ interface MyInputSubMenu {
 
 interface MyBtnShowMenuSubProps {
   id: string;
+  menuDetail?: any
 }
 
 const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
@@ -64,22 +65,24 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
 
   /* handle submit */
   const handleOk = () => {
-    if (menuDetail) {
-      const currentSubMenu: object[] = menuDetail.children;
-      /* add new sub */
-      currentSubMenu.push(inputs);
+    console.log("ok")
 
-      console.log(currentSubMenu, "in");
+    console.log(props.menuDetail, "props");
+    
+    // if (menuDetail) {
+    //   const currentSubMenu: object[] = menuDetail.children;
+    //   /* add new sub */
+    //   currentSubMenu.push(inputs);
 
-      /* Update */
-      const updateFieldMenuPromise = updateFieldMenuAction(
-        props.id,
-        currentSubMenu
-      );
-      updateFieldMenuPromise(dispatch);
-    }
+    //   /* Update */
+    //   const updateFieldMenuPromise = updateFieldMenuAction(
+    //     props.id,
+    //     currentSubMenu
+    //   );
+    //   updateFieldMenuPromise(dispatch);
+    // }
 
-    formRef.current?.resetFields();
+    // formRef.current?.resetFields();
     // setIsModalOpen(false);
   };
 

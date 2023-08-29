@@ -76,13 +76,13 @@ const AddMenu: React.FC = () => {
     iconClass: string;
     children: [];
   }) => {
+
     setValue({
       name: value.nameMenu,
       url: value.urlMenu,
       iconClass: value.iconClass,
       children: submenu,
     });
-
     message.success("Đã lưu thành công - hãy submit!", 2.5);
   };
 
@@ -181,7 +181,8 @@ const AddMenu: React.FC = () => {
       ) : (
         <Space>
           <Button onClick={handleOpenModalAddSubMenu}>
-            {t(`MenuAdmin.add_sub_menu`)}
+            {/* {t(`MenuAdmin.add_sub_menu`)} */}
+            ADD menu
           </Button>
         </Space>
       )}
@@ -223,7 +224,8 @@ const AddMenu: React.FC = () => {
         <Form.Item>
           <Space>
             <Button type="primary" htmlType="submit">
-              {t(`MenuAdmin.save`)}
+              {/* {t(`MenuAdmin.save`)} */}
+              Save
             </Button>
 
             <Button onClick={handleSubmit}>{t(`adminHome.submit`)}</Button>
