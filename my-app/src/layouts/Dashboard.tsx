@@ -161,7 +161,7 @@ const Dashboard = () => {
               <div className={Styles.wrapperDoashBoard}>
                 <div className={Styles.menuDoashBoard}>
                   <div style={{ padding: "10px" }}>
-                    {/* <TreeMenu2 /> */}
+                    <TreeMenu2 />
                   </div>
 
                   <Menu
@@ -174,7 +174,7 @@ const Dashboard = () => {
                   />
 
                   {/* <TreeMenu /> */}
-                  <TreeMenu3/>
+                  {/* <TreeMenu3/> */}
                 </div>
 
                 <div style={{ width: "100%", display: "flex" }}>

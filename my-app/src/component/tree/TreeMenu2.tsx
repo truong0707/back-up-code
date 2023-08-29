@@ -36,11 +36,44 @@ const TreeMenu2: React.FC = () => {
             //   className={Styles.icon}
           />
         ),
-        // children: logChildren(data.children),
-
         children:
           data.children.length > 0
-            ? data.children.map((data: any) => data)
+            ? data.children.map((childData: any) => ({
+                title: (
+                  <>
+                    <Link to={`/admin${childData.url}`}>
+                      <b>{childData.title}</b>
+                    </Link>
+                  </>
+                ),
+                key: childData.id,
+                icon: (
+                  <FontAwesomeIcon
+                    icon={checkIcons(childData.iconClass)}
+                    //   className={Styles.icon}
+                  />
+                ),
+                children:
+                  childData.children && childData.children.length > 0
+                    ? childData.children.map((grandchildData: any) => ({
+                        title: (
+                          <>
+                            <Link to={`/admin${grandchildData.url}`}>
+                              <b>{grandchildData.title}</b>
+                            </Link>
+                          </>
+                        ),
+                        key: grandchildData.id,
+                        icon: (
+                          <FontAwesomeIcon
+                            icon={checkIcons(grandchildData.iconClass)}
+                            //   className={Styles.icon}
+                          />
+                        ),
+                        children: grandchildData.children
+                      }))
+                    : [],
+              }))
             : [],
       };
     }
