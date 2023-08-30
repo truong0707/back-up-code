@@ -10,6 +10,8 @@ import ModalBtnUpdate from "../../../component/admin/ModalBtnUpdate";
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import BtnShowModalAddMenuSub from "../../../component/admin/BtnShowModalAddMenuSub";
+import { childrenData } from "../../../component/tree/TreeMenu";
+import BtnShowModalUpdateMenu from "./BtnShowModalUpdateMenu";
 
 interface DataType {
   title: string;
@@ -25,32 +27,44 @@ export default function DetailMenu() {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const dispatch = useDispatch();
-  const [data, setData] = useState();
-
   const { t } = useTranslation(["homeAdmin"]);
 
-  useEffect(() => {
-    // if (pathId) {
-    //   const dataDetailMenuPromise = getDetailMenuAction(pathId);
-    //   dataDetailMenuPromise(dispatch);
-    // }
+  const showChildtreeMenu = (children: childrenData[] | undefined): any[] => {
+    if (!children || children.length === 0) {
+      return [];
+    }
 
+    return children.map((childMenu: childrenData) => {
+      console.log(childMenu, "test");
+      if (childMenu.id === 44) {
+        return {
+          id: "55",
+          title: "Da sua",
+          url: "/menu1/subA",
+          children: [],
+        };
+      }
+
+      return {
+        title: childMenu.title,
+        id: childMenu.id,
+        children: showChildtreeMenu(childMenu.children),
+        url: childMenu.url,
+      };
+    });
+  };
+
+  useEffect(() => {
     if (pathId) {
       const dataDetailMenuPromise = getDetailMenuAction(pathId);
       dataDetailMenuPromise(dispatch);
     }
-
-    // const getData = async () => {
-    //   if (pathId) {
-    //     const { data } = await menuServices.getMenuByIdApi(pathId);
-
-    //     if (data) {
-    //       setData(data.children);
-    //     }
-    //   }
-    // };
-    // getData();
   }, [dispatch, pathId]);
+
+  if (menuDetail && menuDetail.children) {
+    console.log(showChildtreeMenu(menuDetail.children), "result");
+
+  }
 
   const columns: ColumnsType<DataType> = [
     {
@@ -87,7 +101,7 @@ export default function DetailMenu() {
             nameOjbDelete={record.title}
           />
 
-          {/* <ModalBtnUpdate idUser={record.id} /> */}
+          <BtnShowModalUpdateMenu id={record.id} />
         </Space>
       ),
     },
@@ -97,7 +111,6 @@ export default function DetailMenu() {
     <>
       <BtnShowModalAddMenuSub id={pathId} menuDetail={menuDetail} />
 
-      {/* {data ? <Table columns={columns} dataSource={data} /> : null} */}
       {getMenu && menuDetail ? (
         <Table columns={columns} dataSource={menuDetail.children} />
       ) : null}

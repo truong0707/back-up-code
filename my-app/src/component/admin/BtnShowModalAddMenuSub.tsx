@@ -65,9 +65,8 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
 
   /* handle submit */
   const handleOk = () => {
-    console.log("ok")
-
     console.log(props.menuDetail, "props");
+
     
     // if (menuDetail) {
     //   const currentSubMenu: object[] = menuDetail.children;
@@ -133,7 +132,7 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
               {t(`MenuAdmin.add_sub_menu`)}
             </Button> */}
 
-            <Button danger onClick={handleClearModalAddSubMenu}>
+            <Button style={{ marginTop:'10px' }} danger onClick={handleClearModalAddSubMenu}>
               {t(`MenuAdmin.clear`)}
             </Button>
           </Space>

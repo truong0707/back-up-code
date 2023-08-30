@@ -21,6 +21,10 @@ const TreeMenu2: React.FC = () => {
   const { listDataMenu } = getMenu;
   const dispatch = useDispatch();
 
+  const handleClick = (id: number | string) => {
+    console.log(id, "s");
+  };
+
   const showChildtreeMenu = (children: childrenData[] | undefined): any[] => {
     if (!children || children.length === 0) {
       return [];
@@ -29,9 +33,9 @@ const TreeMenu2: React.FC = () => {
     return children.map((childMenu: childrenData) => {
       return {
         title: (
-          <Link className="link" to={`/admin${childMenu.url}/${childMenu.id}`}>
-            <b>{childMenu.title}</b>
-          </Link>
+          // <Link className="link" to={`/admin${childMenu.url}/${childMenu.id}`}>
+          <b onClick={() => handleClick(childMenu.id)}>{childMenu.title}</b>
+          // </Link>
         ),
         key: childMenu.id,
         children: showChildtreeMenu(childMenu.children),

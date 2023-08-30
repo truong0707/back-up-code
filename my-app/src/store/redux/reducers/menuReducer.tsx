@@ -26,6 +26,8 @@ export const menuReducer = (
       return { listDataMenu: action.payload };
     case GET_DATA_DETAIL_MENU:
       return { ...state, menuDetail: action.payload };
+    case UPDATE_FIELD_DATA_MENU:
+      return { ...state, menuDetail: action.payload };
     case ADD_DATA_MENU:
       const currentlistDataMenu: {}[] = [...state.listDataMenu];
       const payload = action.payload;

@@ -42,10 +42,8 @@ const menuServices = {
     return response;
   },
 
-  updateFieldMenuApi: async (id: number | string, inputData: object[]) => {
-    const response = await axiosClient.patch(`/menus/${id}`, {
-      children: inputData,
-    });
+  updateFieldMenuApi: async (id: number | string, inputData: any) => {
+    const response = await axiosClient.patch(`/menus/${id}`, inputData);
 
     return response;
   },

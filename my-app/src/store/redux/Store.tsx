@@ -42,6 +42,7 @@ export interface StateStore {
   };
   MenuAdmin: {
     menuDetail: {
+      title: any;
       id: string | number;
       name: string;
       url: string;
