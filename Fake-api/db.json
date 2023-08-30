@@ -34,27 +34,95 @@
   "users": [],
   "menus": [
     {
-      "id": 9,
+      "id": 1,
       "name": "Menu 1",
       "url": "/menu1",
       "iconClass": "folder-open",
       "children": [
         {
           "id": 20,
-          "title": "sub2",
+          "title": "sub1",
           "url": "/menu1/sub2",
           "children": [
             {
-              "id": 11,
+              "id": 33,
+              "title": "subA",
+              "url": "/menu1/subA",
+              "children": []
+            },
+            {
+              "id": 143,
               "title": "subA",
               "url": "/menu1/subA",
               "children": [
                 {
-                  "id": 12,
-                  "title": "suba",
-                  "url": "/đấ"
+                  "id": 355,
+                  "title": "subA",
+                  "url": "/menu1/subA",
+                  "children": [
+                    {
+                      "id": 83,
+                      "title": "subA",
+                      "url": "/menu1/subA",
+                      "children": [
+                        {
+                          "id": 338,
+                          "title": "subA",
+                          "url": "/menu1/subA",
+                          "children": [
+                            {
+                              "id": 3387,
+                              "title": "subA",
+                              "url": "/menu1/subA",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "title": "sub1",
+          "url": "/menu1/sub2",
+          "children": [
+            {
+              "id": 44,
+              "title": "subA",
+              "url": "/menu1/subA",
+              "children": []
+            },
+            {
+              "id": 454,
+              "title": "subA",
+              "url": "/menu1/subA",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Menu 2",
+      "url": "/menu1",
+      "iconClass": "folder-open",
+      "children": [
+        {
+          "id": 4547,
+          "title": "subA",
+          "url": "/menu1/subA",
+          "children": [
+            {
+              "id": 454767,
+              "title": "subA",
+              "url": "/menu1/subA",
+              "children": []
             }
           ]
         }

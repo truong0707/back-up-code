@@ -17,6 +17,7 @@ import AddMenu from "./page/admin/managerMenu/AddMenu";
 import DeleDeleteUpdateMenu from "./page/admin/managerMenu/Delete&UpdateMenu";
 import UpdateMenu from "./page/admin/managerMenu/UpdateMenu";
 import DetailMenu from "./page/admin/managerMenu/DetailMenu";
+import MenuUrlPage from "./page/admin/managerMenu/MenuUrlPage";
 
 const App = () => {
   const getUser = useSelector((state: StateStore) => state.userLogin.userInfo);
@@ -43,6 +44,7 @@ const App = () => {
             />
             <Route path="update/:id" element={<UpdateMenu />} />
             <Route path="DetailMenu/:id" element={<DetailMenu />} />
+            {/* <Route path="DetailMenu/:ss" element={<MenuUrlPage />} /> */}
           </Route>
 
           {/* not Found */}
