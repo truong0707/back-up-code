@@ -39,25 +39,13 @@ const ModalBtn = (props: MyModalBtn) => {
     } else if (props.typeDelete === "subMenu") {
       /* Delete sub menu */
       const removeItemById = (menuData: any, targetId: string | number) => {
-        const stack = [...menuData];
-        const updatedMenuData = [];
+        const updatedMenuData = menuData.filter((item:any) => item.id !== targetId);
 
-        while (stack.length > 0) {
-          const currentItem = stack.pop();
-
-          if (currentItem.id === targetId) {
-            continue; // Bỏ qua phần tử cần xóa
+        updatedMenuData.forEach((item:any) => {
+          if (item.children && item.children.length > 0) {
+            item.children = removeItemById(item.children, targetId);
           }
-
-          if (currentItem.children && currentItem.children.length > 0) {
-            currentItem.children = currentItem.children.filter(
-              (child: { id: string | number }) => child.id !== targetId
-            );
-            // stack.push(...currentItem.children);
-          }
-
-          updatedMenuData.push(currentItem);
-        }
+        });
 
         return updatedMenuData;
       };
