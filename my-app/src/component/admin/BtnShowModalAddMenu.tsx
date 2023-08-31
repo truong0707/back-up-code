@@ -8,18 +8,23 @@ import {
   updateFieldMenuAction,
 } from "../../store/redux/actions/menuActions";
 import { StateStore } from "../../store/redux/Store";
+import { addChildToParentById } from "../../untils/addDataSub";
+import { v4 as uuidv4 } from "uuid";
 
 interface MyInputSubMenu {
-  title: string;
+  name: string;
   urlSubMenu: string;
+  iconClass: string;
+  children: [];
 }
 
 interface MyBtnShowMenuSubProps {
   id: string;
-  menuDetail?: any
+  menuDetail?: any;
+  listDataMenu: any;
 }
 
-const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
+const BtnShowModalAddMenu = (props: MyBtnShowMenuSubProps) => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { menuDetail } = getMenu;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,11 +38,15 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
 
   const { t } = useTranslation(["homeAdmin"]);
   const dispatch = useDispatch();
+  const uuidV4 = uuidv4();
+  const parserNumber = parseInt(uuidV4.replace(/- +/g, ""), 16);
 
   /* Sub menu */
   const [inputs, setInputs] = useState<MyInputSubMenu>({
-    title: "",
+    name: "",
     urlSubMenu: "",
+    iconClass: "",
+    children: [],
   });
 
   /* handle change input sub menu */
@@ -45,10 +54,9 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
     const nameInput = e.target.name;
     let valueInput = e.target.value;
 
-    const idSub = menuDetail.children.length + 1;
     setInputs((state: MyInputSubMenu) => ({
       ...state,
-      id: idSub,
+      id: parserNumber,
       [nameInput]: valueInput,
     })); //
   };
@@ -59,69 +67,67 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
   };
 
   /* Handle submit form - Call api */
-  const formRef = React.useRef<FormInstance>(null);
-
-  useEffect(() => {}, [dispatch]);
-
-  /* handle submit */
   const handleOk = () => {
-    console.log(props.menuDetail, "props");
+    const idParam = parseInt(props.id);
 
-    
-    // if (menuDetail) {
-    //   const currentSubMenu: object[] = menuDetail.children;
-    //   /* add new sub */
-    //   currentSubMenu.push(inputs);
+    // if (menuDetail && menuDetail.children) {
+    //   const ss = addChildToParentById(props.listDataMenu, idParam, inputs);
 
-    //   /* Update */
-    //   const updateFieldMenuPromise = updateFieldMenuAction(
-    //     props.id,
-    //     currentSubMenu
+    //   const updateFielMenuActionPromise = updateFieldMenuAction(
+    //     idParam,
+    //     undefined,
+    //     ss[0]
     //   );
-    //   updateFieldMenuPromise(dispatch);
+    //   updateFielMenuActionPromise(dispatch);
     // }
-
-    // formRef.current?.resetFields();
-    // setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {}, [dispatch]);
+
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Thêm sub mới
+        Thêm mới
       </Button>
 
       <Modal
-        title="Basic Modal"
+        title="Thêm mới menu"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
         <Suspense fallback={<LoadingCpn />}>
           <div>
-            <h4 /* className={Styles.titleContent} */>
-              {t(`MenuAdmin.sub_menu`)}
-            </h4>
-
             <Space>
               <Space direction="vertical">
+                <h4>Name</h4>
                 <Input
-                  name="title"
+                  name="name"
                   onChange={handleInputChangeSubMenu}
-                  placeholder="name Sub menu"
+                  placeholder="name Menu"
                 />
               </Space>
 
               <Space direction="vertical">
+                <h4>url</h4>
                 <Input
                   name="urlSubMenu"
                   onChange={handleInputChangeSubMenu}
                   placeholder="url"
                   defaultValue={"/"}
+                />
+              </Space>
+
+              <Space direction="vertical">
+                <h4>icon classss</h4>
+                <Input
+                  name="iconClass"
+                  onChange={handleInputChangeSubMenu}
+                  placeholder="iconClass"
                 />
               </Space>
             </Space>
@@ -132,7 +138,11 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
               {t(`MenuAdmin.add_sub_menu`)}
             </Button> */}
 
-            <Button style={{ marginTop:'10px' }} danger onClick={handleClearModalAddSubMenu}>
+            <Button
+              style={{ marginTop: "10px" }}
+              danger
+              onClick={handleClearModalAddSubMenu}
+            >
               {t(`MenuAdmin.clear`)}
             </Button>
           </Space>
@@ -142,4 +152,4 @@ const BtnShowMenuSub = (props: MyBtnShowMenuSubProps) => {
   );
 };
 
-export default BtnShowMenuSub;
+export default BtnShowModalAddMenu;

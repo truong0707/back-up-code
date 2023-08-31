@@ -35,48 +35,34 @@
   "menus": [
     {
       "id": 1,
-      "name": "Menu 2 4",
+      "name": "Menu 1",
       "url": "/menu1",
       "iconClass": "folder-open",
       "children": [
         {
-          "id": 20,
-          "title": "sssss",
-          "url": "/dấd",
-          "children": [
-            {
-              "title": "đá",
-              "id": 33,
-              "children": [
-                {
-                  "title": "Da sua Day 30",
-                  "id": 48,
-                  "children": [],
-                  "url": "/fake"
-                }
-              ],
-              "url": "/ádad"
-            }
-          ]
+          "title": "Sub1",
+          "id": 12,
+          "children": [],
+          "url": "/đá"
         }
       ]
     },
     {
-      "id": 2,
-      "name": "Menu 2 4",
+      "id": 4,
+      "name": "Menu 2",
       "url": "/menu1",
       "iconClass": "folder-open",
       "children": [
         {
-          "id": 66,
-          "title": "Da sua Day 30",
-          "url": "/fake",
+          "id": 15,
+          "title": "ssss2",
+          "url": "/đá",
           "children": [
             {
-              "title": "Da sua Day 29",
-              "id": 44,
+              "title": "4.1",
+              "id": 895989567,
               "children": [],
-              "url": "/s"
+              "url": ""
             }
           ]
         }

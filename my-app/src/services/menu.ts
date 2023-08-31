@@ -44,17 +44,14 @@ const menuServices = {
 
   updateFieldMenuApi: async (id: number | string, inputData: any) => {
     const response = await axiosClient.patch(`/menus/${id}`, inputData);
-
     return response;
   },
-
-  // getSubFieldMenuApi: async (id: number | string, inputData: object[]) => {
-  //   const response = await axiosClient.patch(`/menus/${id}`, {
-  //     children: inputData,
-  //   });
-
-  //   return response;
-  // },
+  addSubMenuApi: async (id: number | string, data: any) => {
+    console.log(id,"iiddddddđ");
+    console.log(data, "day")
+    const response = await axiosClient.patch(`/menus/${id}`, data);
+    return response;
+  },
 };
 
 export default menuServices;

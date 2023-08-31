@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import {
   ADD_DATA_MENU,
   DELETE_DATA_MENU,
+  DELETE_SUB_DATA_MENU,
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
@@ -98,10 +99,7 @@ export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
   };
 }
 
-export function updateFieldMenuAction(
-  id: string | number,
-  inputData: any
-) {
+export function updateFieldMenuAction(id: string | number, inputData: any) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
@@ -115,22 +113,39 @@ export function updateFieldMenuAction(
   };
 }
 
-// export function getDataSubMenubyIdAction(
-//   id: string | number,
-// ) {
-//   return async (dispatch: Dispatch) => {
-//     try {
-//       if (id === 9) {
-//         message.error("Menu này e làm mẫu ạ!", 3);
-//       } else {
-//         const { data } = await menuServices.updateFieldMenuApi(id);
+export function deleteSubdMenuAction(
+  id: string | number,
+  inputData: any,
+  dataCurrent: any
+) {
+  return async (dispatch: Dispatch) => {
+    try {
+      const { data } = await menuServices.updateFieldMenuApi(id, inputData);
+      console.log(data, "xoa");
 
-//         dispatch({ type: GET_DATA_SUB_MENU, payload: data });
-//         message.success(`Đã thêm sub cho menu có id: ${id} !`, 3);
-//       }
-//     } catch (error: any) {
-//       message.error("Cập nhật thất bại!", 3);
-//       console.log(error, "Lỗi");
-//     }
-//   };
-// }
+      dispatch({ type: DELETE_SUB_DATA_MENU, payload: {data: data, idMenu: id} });
+      message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
+    } catch (error: any) {
+      message.error("Cập nhật thất bại!", 3);
+      console.log(error, "Lỗi");
+    }
+  };
+}
+
+export function addSubMenuAction(
+  id: string | number,
+  dataInput: any,
+) {
+  return async (dispatch: Dispatch) => {
+    try {
+      const { data } = await menuServices.addSubMenuApi(id, dataInput);
+      console.log(id, "id day");
+
+      dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
+      message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
+    } catch (error: any) {
+      message.error("Cập nhật thất bại!", 3);
+      console.log(error, "Lỗi");
+    }
+  };
+}

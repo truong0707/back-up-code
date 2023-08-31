@@ -19,13 +19,7 @@ const BtnShowModalUpdate = (props: any) => {
   const { menuDetail }: any = getMenu;
 
   /* get sub id */
-  const ss = findDataDetailSumenu(
-    menuDetail.children,
-    props.id,
-  );
-
-  console.log(ss, "daaaaa")
-  console.log(props.id, "đá")
+  const ss = findDataDetailSumenu(menuDetail.children, props.id);
 
   const [inputs, setInputs] = useState({
     title: `doi`,
@@ -48,8 +42,6 @@ const BtnShowModalUpdate = (props: any) => {
     let valueInput = e.target.value;
 
     setInputs((state) => ({ ...state, [nameInput]: valueInput }));
-
-    console.log(getMenu.menuDetail, "getMenu");
   };
 
   const handleOK = () => {

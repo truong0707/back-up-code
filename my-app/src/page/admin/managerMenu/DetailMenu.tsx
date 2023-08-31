@@ -9,9 +9,10 @@ import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete
 import ModalBtnUpdate from "../../../component/admin/ModalBtnUpdate";
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
-import BtnShowModalAddMenuSub from "../../../component/admin/BtnShowModalAddMenuSub";
+import BtnShowModalAddMenu from "../../../component/admin/BtnShowModalAddMenu";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import BtnShowModalUpdateMenu from "./BtnShowModalUpdateMenu";
+import BtnShowModalAddSubMenu from "./BtnShowModalAddSubMenu";
 
 interface DataType {
   title: string;
@@ -24,6 +25,7 @@ interface DataType {
 export default function DetailMenu() {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { menuDetail }: any = getMenu;
+  const { listDataMenu }: any = getMenu;
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const dispatch = useDispatch();
@@ -62,8 +64,7 @@ export default function DetailMenu() {
   }, [dispatch, pathId]);
 
   if (menuDetail && menuDetail.children) {
-    console.log(showChildtreeMenu(menuDetail.children), "result");
-
+    // console.log(showChildtreeMenu(menuDetail.children), "result");
   }
 
   const columns: ColumnsType<DataType> = [
@@ -94,22 +95,34 @@ export default function DetailMenu() {
       key: "action",
       render: (_, record) => (
         <Space align="center" key={record.id} size="middle">
+          <BtnShowModalAddSubMenu
+            idMenu={pathId}
+            id={record.id}
+            listDataMenu={listDataMenu}
+            menuDetail={menuDetail}
+          />
+
           <ModalBtnDelete
             typeDelete="subMenu"
             contentBtn="xóa"
             id={record.id}
             nameOjbDelete={record.title}
           />
-
           <BtnShowModalUpdateMenu id={record.id} />
         </Space>
       ),
     },
   ];
 
+  console.log(getMenu,"ád")
+
   return (
     <>
-      <BtnShowModalAddMenuSub id={pathId} menuDetail={menuDetail} />
+      <BtnShowModalAddMenu
+        listDataMenu={listDataMenu}
+        id={pathId}
+        menuDetail={menuDetail}
+      />
 
       {getMenu && menuDetail ? (
         <Table columns={columns} dataSource={menuDetail.children} />

@@ -1,6 +1,7 @@
 import {
   ADD_DATA_MENU,
   DELETE_DATA_MENU,
+  DELETE_SUB_DATA_MENU,
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
@@ -10,12 +11,14 @@ import {
 } from "../constants/menuContans";
 
 interface MyMenuState {
+  menuDetail: any;
   listDataMenu: [];
 }
 
 export const menuReducer = (
   state: MyMenuState = {
     listDataMenu: [],
+    menuDetail: undefined,
   },
   action: { type: string; payload: any }
 ) => {
@@ -33,12 +36,40 @@ export const menuReducer = (
       const payload = action.payload;
       currentlistDataMenu.push(payload);
       return { ...state, listDataMenu: currentlistDataMenu };
-    case DELETE_DATA_MENU:
+    case DELETE_SUB_DATA_MENU:
+      const currentlistData: {}[] = [...state.listDataMenu];
+      const currentlistMenuDetail: { children: any }[] = [state.menuDetail];
+      const newData = action.payload.data;
+      const id = parseInt(action.payload.id);
+
+      const abc = currentlistData.map((menu: any) => {
+        if (menu.id === newData.id) {
+          return {
+            id: newData.id,
+            name: newData.name,
+            iconClass: newData.iconClass,
+            children: newData.children,
+          };
+        }
+        return menu;
+      });
+
+      const cbs = state.listDataMenu.filter((menu: { id: number }) => {
+        if (menu.id === id) {
+          return menu;
+        }
+      });
+
+      console.log(cbs, "abc");
+      console.log(currentlistMenuDetail[0], "currentlistMenuDetail");
+
+      // console.log(cbs, "no day");
+      // console.log(cbs, "no day");
+
       return {
         ...state,
-        listDataMenu: state.listDataMenu.filter(
-          (menu: { id: string }) => menu.id !== action.payload
-        ),
+        listDataMenu: abc,
+        menuDetail: currentlistMenuDetail[0],
       };
     case UPDATE_DATA_MENU:
       const currentListDataMenusUp = [...state.listDataMenu];
@@ -66,11 +97,11 @@ export const menuReducer = (
           }
         ),
       };
-    case UPDATE_FIELD_DATA_MENU:
-      return {
-        ...state,
-        menuDetail: action.payload,
-      };
+    // case UPDATE_FIELD_DATA_MENU:
+    //   return {
+    //     ...state,
+    //     menuDetail: action.payload,
+    //   };
     case GET_DATA_SUB_MENU:
       return {
         ...state,

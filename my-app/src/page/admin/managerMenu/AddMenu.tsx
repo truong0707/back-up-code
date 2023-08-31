@@ -76,7 +76,6 @@ const AddMenu: React.FC = () => {
     iconClass: string;
     children: [];
   }) => {
-
     setValue({
       name: value.nameMenu,
       url: value.urlMenu,
