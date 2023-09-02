@@ -41,6 +41,7 @@ export interface StateStore {
     error: boolean;
   };
   MenuAdmin: {
+    loadingDelete: any;
     menuDetail: {
       title: any;
       id: string | number;

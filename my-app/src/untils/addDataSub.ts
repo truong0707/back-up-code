@@ -1,21 +1,44 @@
-export const addChildToParentById = (
-  menuData: any[],
-  parentId: string | number,
-  childData: any
-) => {
-  const updatedMenuData = menuData.map((item: any) => {
-    if (item.id === parentId) {
-      if (!item.children) {
-        item.children = [];
-      }
-      item.children.push(childData);
-    } else if (item.children && item.children.length > 0) {
-      item.children = addChildToParentById(item.children, parentId, childData);
-    }
-    return item;
-  }); 
+import { MyInputSubMenu } from "../component/admin/menu/BtnShowModalAddSubMenu";
 
-  return updatedMenuData;
+export const addChildToParentById = (
+  currentData: any[],
+  parentId: string | number,
+  childData: object
+) => {
+  const addSubMenuData = currentData.map(
+    (item: { id: number; children: object[] }) => {
+      if (item.id === parentId) {
+        if (!item.children) {
+          item.children = [];
+        }
+        item.children.push(childData);
+      } else if (item.children && item.children.length > 0) {
+        item.children = addChildToParentById(
+          item.children,
+          parentId,
+          childData
+        );
+      }
+      return item;
+    }
+  );
+
+  return addSubMenuData;
 };
 
-
+export const addChildToMenu = (
+  currentData: {
+    children: [];
+    id: number;
+  }[],
+  idmenu: number,
+  inputData: MyInputSubMenu
+) => {
+  const filterData: any = currentData.filter((menu) => {
+    if (menu.id === idmenu) {
+      return menu;
+    }
+  });
+  filterData[0].children.push(inputData);
+  return filterData[0];
+};

@@ -1,7 +1,7 @@
 import {
   ADD_DATA_MENU,
-  DELETE_DATA_MENU,
   DELETE_SUB_DATA_MENU,
+  DELETE_SUB_DATA_MENU_RESQUEST,
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
@@ -11,14 +11,14 @@ import {
 } from "../constants/menuContans";
 
 interface MyMenuState {
-  menuDetail: any;
+  menuDetail: {};
   listDataMenu: [];
 }
 
 export const menuReducer = (
   state: MyMenuState = {
     listDataMenu: [],
-    menuDetail: undefined,
+    menuDetail: [],
   },
   action: { type: string; payload: any }
 ) => {
@@ -30,19 +30,38 @@ export const menuReducer = (
     case GET_DATA_DETAIL_MENU:
       return { ...state, menuDetail: action.payload };
     case UPDATE_FIELD_DATA_MENU:
-      return { ...state, menuDetail: action.payload };
+      const currentData = [...state.listDataMenu];
+      const newDataUpate = action.payload;
+      const as = currentData.map((menu: {
+        id: number,
+        name: string,
+        iconClass: string,
+        children: []
+      }) => {
+        if (menu.id === newDataUpate.id) {
+          return {
+            id: newDataUpate.id,
+            name: newDataUpate.name,
+            iconClass: newDataUpate.iconClass,
+            children: newDataUpate.children,
+          };
+        }
+        return menu;
+      });
+      return { ...state, listDataMenu: as, menuDetail: action.payload };
     case ADD_DATA_MENU:
       const currentlistDataMenu: {}[] = [...state.listDataMenu];
       const payload = action.payload;
       currentlistDataMenu.push(payload);
       return { ...state, listDataMenu: currentlistDataMenu };
+    case DELETE_SUB_DATA_MENU_RESQUEST:
+      return { ...state, loadingDelete: true };
     case DELETE_SUB_DATA_MENU:
-      const currentlistData: {}[] = [...state.listDataMenu];
-      const currentlistMenuDetail: { children: any }[] = [state.menuDetail];
+      const currentlistData = [...state.listDataMenu];
+      const menuDetailCurrent = state.menuDetail;
+      const currentlistMenuDetail = [menuDetailCurrent];
       const newData = action.payload.data;
-      const id = parseInt(action.payload.id);
-
-      const abc = currentlistData.map((menu: any) => {
+      const findData = currentlistData.map((menu: { id: number, name: string, iconClass: string, children: [] }) => {
         if (menu.id === newData.id) {
           return {
             id: newData.id,
@@ -54,22 +73,11 @@ export const menuReducer = (
         return menu;
       });
 
-      const cbs = state.listDataMenu.filter((menu: { id: number }) => {
-        if (menu.id === id) {
-          return menu;
-        }
-      });
-
-      console.log(cbs, "abc");
-      console.log(currentlistMenuDetail[0], "currentlistMenuDetail");
-
-      // console.log(cbs, "no day");
-      // console.log(cbs, "no day");
-
       return {
         ...state,
-        listDataMenu: abc,
+        listDataMenu: findData,
         menuDetail: currentlistMenuDetail[0],
+        loadingDelete: false,
       };
     case UPDATE_DATA_MENU:
       const currentListDataMenusUp = [...state.listDataMenu];
@@ -97,11 +105,6 @@ export const menuReducer = (
           }
         ),
       };
-    // case UPDATE_FIELD_DATA_MENU:
-    //   return {
-    //     ...state,
-    //     menuDetail: action.payload,
-    //   };
     case GET_DATA_SUB_MENU:
       return {
         ...state,

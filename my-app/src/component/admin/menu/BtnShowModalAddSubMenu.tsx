@@ -1,43 +1,36 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Button, Input, Modal, Space } from "antd";
-import { useTranslation } from "react-i18next";
+import { Button, Input, Modal, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingCpn from "../../../component/spin/LoadingCpn";
-import {
-  addSubMenuAction,
-  getDetailMenuAction,
-  updateFieldMenuAction,
-} from "../../../store/redux/actions/menuActions";
+import LoadingCpn from "../../spin/LoadingCpn";
+import { addSubMenuAction } from "../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../store/redux/Store";
 import { v4 as uuidv4 } from "uuid";
 import { PlusOutlined } from "@ant-design/icons";
-import { addChildToParentById } from "../../../untils/addDataSub";
-import { useLocation } from "react-router-dom";
+import { addChildToMenu, addChildToParentById } from "../../../untils/addDataSub";
 
-interface MyInputSubMenu {
+export interface MyInputSubMenu {
   title: string;
   url: string;
   children: [];
 }
 
 interface MyBtnShowMenuSubProps {
-  id: string;
-  menuDetail?: any;
-  listDataMenu: any;
-  idMenu: number | string;
+  idSubMenu?: string;
+  menuDetail?: {
+    id: number,
+    name: string,
+    url: string,
+    iconClass: string,
+    children: [],
+  }[];
+  listDataMenu: [];
+  idMenu: string;
 }
 
 const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const location = useLocation();
-  const pathId = location.pathname.split("/")[3];
   const { menuDetail } = getMenu;
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
   const dispatch = useDispatch();
   const uuidV4 = uuidv4();
   const parserNumber = parseInt(uuidV4.replace(/- +/g, ""), 16);
@@ -58,40 +51,50 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
       ...state,
       id: parserNumber,
       [nameInput]: valueInput,
-    })); //
+    }));
   };
 
   /* Handle submit form - Call api */
   const handleOk = () => {
-    const idProps = parseInt(props.id);
-    const idPath = parseInt(pathId);
+    const idMenu = parseInt(props.idMenu);
 
-    if (menuDetail && menuDetail.children) {
-      let ss = addChildToParentById(props.listDataMenu, idProps, inputs);
+    /* check input empty */
+    if (inputs.title === '') {
+      message.error("Hãy điền name cho sub menu!", 3);
+    } else if (inputs.url === '') {
+      message.error("Hãy điền url cho sub menu!", 3);
+    } else {
+      /* add sub menu */
+      if (menuDetail && menuDetail.children) {
+        if (props.idSubMenu) {
+          const idMenuSub = parseInt(props.idSubMenu);
+          let resultAddSub = addChildToParentById(props.listDataMenu, idMenuSub, inputs);
+          const newData = resultAddSub.filter((menu) => {
+            if (menu.id === idMenu) {
+              return menu;
+            }
+          });
+          const addSubMenuActionPromise = addSubMenuAction(idMenu, newData[0]);
+          addSubMenuActionPromise(dispatch);
 
-      const abc = ss.filter((menu: { id: number }) => {
-        if (menu.id === idPath) {
-          return menu;
+
+        } else {
+          let resultAddSub = addChildToMenu(props.listDataMenu, idMenu, inputs);
+          const addSubMenuActionPromise = addSubMenuAction(idMenu, resultAddSub);
+          addSubMenuActionPromise(dispatch);
         }
-      });
-      const addSubMenuActionPromise = addSubMenuAction(props.idMenu, abc[0]);
-      addSubMenuActionPromise(dispatch);
-
-      ss = [];
-      setInputs({
-        title: "",
-        url: "",
-        children: [],
-      });
+      }
     }
+    setIsModalOpen(false);
   };
-
+  /* handle Cancel */
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  useEffect(() => {}, [dispatch]);
-
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  useEffect(() => { }, [dispatch]);
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -120,7 +123,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
               defaultValue={inputs.title}
               onChange={handleInputChangeSubMenu}
               placeholder="url"
-              // defaultValue={"/"}
+            // defaultValue={"/"}
             />
           </div>
         </Suspense>

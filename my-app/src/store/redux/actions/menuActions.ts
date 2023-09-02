@@ -3,6 +3,7 @@ import {
   ADD_DATA_MENU,
   DELETE_DATA_MENU,
   DELETE_SUB_DATA_MENU,
+  DELETE_SUB_DATA_MENU_RESQUEST,
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
@@ -120,10 +121,14 @@ export function deleteSubdMenuAction(
 ) {
   return async (dispatch: Dispatch) => {
     try {
+      dispatch({ type: DELETE_SUB_DATA_MENU_RESQUEST });
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
       console.log(data, "xoa");
 
-      dispatch({ type: DELETE_SUB_DATA_MENU, payload: {data: data, idMenu: id} });
+      dispatch({
+        type: DELETE_SUB_DATA_MENU,
+        payload: { data: data, idMenu: id },
+      });
       message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
     } catch (error: any) {
       message.error("Cập nhật thất bại!", 3);
@@ -132,10 +137,7 @@ export function deleteSubdMenuAction(
   };
 }
 
-export function addSubMenuAction(
-  id: string | number,
-  dataInput: any,
-) {
+export function addSubMenuAction(id: string | number, dataInput: any) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.addSubMenuApi(id, dataInput);

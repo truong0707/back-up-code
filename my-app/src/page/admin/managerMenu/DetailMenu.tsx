@@ -1,18 +1,15 @@
-import { Button, Space, Table } from "antd";
-import React, { useEffect, useState } from "react";
-import menuServices from "../../../services/menu";
+import { Space, Table } from "antd";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getDetailMenuAction } from "../../../store/redux/actions/menuActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../../store/redux/Store";
 import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete";
-import ModalBtnUpdate from "../../../component/admin/ModalBtnUpdate";
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
-import BtnShowModalAddMenu from "../../../component/admin/BtnShowModalAddMenu";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import BtnShowModalUpdateMenu from "./BtnShowModalUpdateMenu";
-import BtnShowModalAddSubMenu from "./BtnShowModalAddSubMenu";
+import BtnShowModalAddSubMenu from "../../../component/admin/menu/BtnShowModalAddSubMenu";
 
 interface DataType {
   title: string;
@@ -24,28 +21,27 @@ interface DataType {
 
 export default function DetailMenu() {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const { menuDetail }: any = getMenu;
+  const { menuDetail }:any = getMenu;
   const { listDataMenu }: any = getMenu;
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
 
-  const showChildtreeMenu = (children: childrenData[] | undefined): any[] => {
+  const showChildtreeMenu = (children: childrenData[] | undefined): {}[] => {
     if (!children || children.length === 0) {
       return [];
     }
 
     return children.map((childMenu: childrenData) => {
-      console.log(childMenu, "test");
-      if (childMenu.id === 44) {
-        return {
-          id: "55",
-          title: "Da sua",
-          url: "/menu1/subA",
-          children: [],
-        };
-      }
+      // if (childMenu.id === 44) {
+      //   return {
+      //     id: "55",
+      //     title: "Da sua",
+      //     url: "/menu1/subA",
+      //     children: [],
+      //   };
+      // }
 
       return {
         title: childMenu.title,
@@ -56,16 +52,6 @@ export default function DetailMenu() {
     });
   };
 
-  useEffect(() => {
-    if (pathId) {
-      const dataDetailMenuPromise = getDetailMenuAction(pathId);
-      dataDetailMenuPromise(dispatch);
-    }
-  }, [dispatch, pathId]);
-
-  if (menuDetail && menuDetail.children) {
-    // console.log(showChildtreeMenu(menuDetail.children), "result");
-  }
 
   const columns: ColumnsType<DataType> = [
     {
@@ -97,7 +83,7 @@ export default function DetailMenu() {
         <Space align="center" key={record.id} size="middle">
           <BtnShowModalAddSubMenu
             idMenu={pathId}
-            id={record.id}
+            idSubMenu={record.id}
             listDataMenu={listDataMenu}
             menuDetail={menuDetail}
           />
@@ -114,19 +100,29 @@ export default function DetailMenu() {
     },
   ];
 
-  console.log(getMenu,"ád")
+  useEffect(() => {
+    if (pathId) {
+      const dataDetailMenuPromise = getDetailMenuAction(pathId);
+      dataDetailMenuPromise(dispatch);
+    }
+  }, [dispatch, pathId]);
 
   return (
     <>
-      <BtnShowModalAddMenu
+      <BtnShowModalAddSubMenu
+        idMenu={pathId}
         listDataMenu={listDataMenu}
-        id={pathId}
         menuDetail={menuDetail}
       />
+      {
+        getMenu.loadingDelete ? null : <>
+          {getMenu && menuDetail ? (
+            <Table columns={columns} dataSource={menuDetail.children} />
+          ) : null}
+        </>
+      }
 
-      {getMenu && menuDetail ? (
-        <Table columns={columns} dataSource={menuDetail.children} />
-      ) : null}
     </>
   );
 }
+
