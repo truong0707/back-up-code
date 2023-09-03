@@ -41,69 +41,72 @@
   ],
   "menus": [
     {
-      "name": "Menu1",
-      "iconClass": "user",
+      "name": "Quyền",
+      "url": "/quyen",
+      "iconClass": "quyen",
       "children": [
         {
-          "title": "Sub1",
-          "url": "/Sub1",
-          "children": [
-            {
-              "title": "suba",
-              "url": "/suba",
-              "children": [],
-              "id": 1650715669
-            },
-            {
-              "title": "subb",
-              "url": "/subb",
-              "children": [],
-              "id": 2623943644
-            }
-          ],
-          "id": 403887254
+          "title": "Quản lý thiết chế văn hoá",
+          "id": 1238194321,
+          "children": [],
+          "url": "/Quản_lý_thiết_chế_văn_hoá"
         },
         {
-          "title": "Sub2",
-          "url": "/Sub2",
-          "children": [],
-          "id": 678840887
+          "title": "Quản lý gia đình, bạo lực",
+          "id": 2390760334,
+          "children": [
+            {
+              "title": "Quản lý bạo lực A",
+              "id": 2436563508,
+              "children": [
+                {
+                  "id": 4010351569,
+                  "title": "Quản lý dịch vụ văn hoá",
+                  "url": "/Quản_lý_dịch vụ_văn_hoá",
+                  "children": [
+                    {
+                      "title": "Quản Lý C",
+                      "url": "/quản_lý_c",
+                      "children": [
+                        {
+                          "title": "Quản lý văn hoá thôn",
+                          "url": "/Quản_lý_văn-hoá_thôn",
+                          "children": [
+                            {
+                              "title": "Quản lý dịch vụ văn hoá2",
+                              "url": "/aa",
+                              "children": [
+                                {
+                                  "title": "Quản lý dịch vụ văn hoá2",
+                                  "url": "/Quản",
+                                  "children": [],
+                                  "id": 2338850076
+                                }
+                              ],
+                              "id": 3476733540
+                            }
+                          ],
+                          "id": 2029854018
+                        }
+                      ],
+                      "id": 3976083811
+                    }
+                  ]
+                }
+              ],
+              "url": "/Quản_lý_bạo_lực_A"
+            }
+          ],
+          "url": "/Quản_lý_gia_đình_bạo_lực"
         }
       ],
       "id": 1
     },
     {
-      "name": "da",
-      "url": "/d",
-      "iconClass": "d",
-      "children": [
-        {
-          "title": "Sub2",
-          "url": "/Sub2",
-          "children": [
-            {
-              "title": "d",
-              "url": "/d",
-              "children": [],
-              "id": 3723159039
-            }
-          ],
-          "id": 678840887
-        },
-        {
-          "title": "dâd",
-          "url": "/Sd",
-          "children": [
-            {
-              "title": "d",
-              "url": "/d",
-              "children": [],
-              "id": 3082522896
-            }
-          ],
-          "id": 2642972535
-        }
-      ],
+      "name": "Y Tế",
+      "url": "/y-te",
+      "iconClass": "user",
+      "children": [],
       "id": 2
     }
   ],

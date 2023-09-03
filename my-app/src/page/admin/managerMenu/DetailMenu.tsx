@@ -64,7 +64,7 @@ export default function DetailMenu() {
       title: "Id Sub",
       dataIndex: "id",
       key: "id",
-      render: (text) => <p>{text}</p>,
+      render: (text) => <p>{/* {text} */}</p>,
     },
     {
       title: `${t(`adminHome.name`)} Sub`,

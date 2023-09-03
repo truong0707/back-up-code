@@ -173,7 +173,7 @@ const Dashboard = () => {
                 </div>
 
                 <div style={{ width: "100%", display: "flex" }}>
-                  <div style={{ width: "21%" }}></div>
+                  <div style={{ width: "26%" }}></div>
                   {/* CRUD USER */}
                   <div className={Styles.wrapperContentDoashBoard}>
                     <BreadcrumbNav />

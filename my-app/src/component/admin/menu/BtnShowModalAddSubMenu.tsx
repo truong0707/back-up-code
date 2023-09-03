@@ -79,9 +79,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           });
           const addSubMenuActionPromise = addSubMenuAction(idMenu, newData[0]);
           addSubMenuActionPromise(dispatch);
-        } else {
-      
-        }
+        } 
         
         if (props.parentType) {
           let resultAddSub = addChildToMenu(props.listDataMenu, idMenu, inputs);
@@ -89,6 +87,11 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           addSubMenuActionPromise(dispatch);
         }
 
+        setInputs({
+          title: "",
+          url: "",
+          children: [],
+        })  
       }
 
 

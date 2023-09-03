@@ -125,10 +125,12 @@ export function deleteSubdMenuAction(
       dispatch({ type: DELETE_SUB_DATA_MENU_RESQUEST });
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
 
+      console.log(data, "data")
       dispatch({
         type: DELETE_SUB_DATA_MENU,
         payload: { data: data, idMenu: id },
       });
+
       message.success(`Xoá sub cho menu có id: ${id} thành công !`, 3);
     } catch (error: any) {
       message.error("Xoá sub menu thất bại! - có lỗi ở server", 5);

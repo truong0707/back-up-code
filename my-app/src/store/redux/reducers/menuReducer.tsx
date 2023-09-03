@@ -85,23 +85,27 @@ export const menuReducer = (
       const newData = action.payload.data;
       const findData = currentlistData.map((menu: { id: number, name: string, iconClass: string, children: [] }) => {
         if (menu.id === newData.id) {
+          console.log(menu, "menu")
           return {
             id: newData.id,
             name: newData.name,
             iconClass: newData.iconClass,
             children: newData.children,
           };
-        }
+        } 
+
+
         return menu;
       });
 
       console.log(currentlistMenuDetail, "currentlistMenuDetail")
-      console.log(newData, "newData")
+      console.log(newData, "newData");
+      console.log(findData, "findData")
 
       return {
         ...state,
         listDataMenu: findData,
-        menuDetail: currentlistMenuDetail[0],
+        menuDetail: newData,
         loadingDelete: false,
       };
     case UPDATE_DATA_MENU:
