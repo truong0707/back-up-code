@@ -57,6 +57,7 @@ const ModalBtn = (props: MyModalBtn) => {
       };
 
       const newSubmenu = removeItemById(menuDetail.children, props.id);
+      console.log(newSubmenu,"áda")
 
       if (menuDetail && menuDetail.children) {
         const DeleteSubMenuActionPromise = deleteSubdMenuAction(
@@ -68,16 +69,13 @@ const ModalBtn = (props: MyModalBtn) => {
             //   iconClass: "folder-open",
             children: newSubmenu,
           },
-          listDataMenu
+          // listDataMenu
         );
         DeleteSubMenuActionPromise(dispatch);
-
       }
     } else {
       alert("sss");
     }
-
-    console.log(getMenu, "getMenu")
   };
 
   const handleCancel = () => {
@@ -92,15 +90,14 @@ const ModalBtn = (props: MyModalBtn) => {
       </Button>
 
       <Modal
-        title={t("adminHome.delete_user")}
+        title="Thông báo"
         open={isModalOpen}
         onOk={handleDelete}
         onCancel={handleCancel}
       >
         <p>
           {/* {t(`adminHome.want_delete_user`)} */}
-          Có chắc muốn xóa {props.id}{" "}
-          <b>{/* props.email */ props.nameOjbDelete}</b>?
+          Có chắc bạn muốn xóa <b>{props.nameOjbDelete}</b> không?
         </p>
       </Modal>
     </>

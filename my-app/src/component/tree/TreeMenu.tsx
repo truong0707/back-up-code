@@ -63,7 +63,7 @@ const TreeMenu2: React.FC = () => {
         icon: (
           <FontAwesomeIcon
             icon={checkIcons(data.iconClass)}
-            //   className={Styles.icon}
+          //   className={Styles.icon}
           />
         ),
         children: showChildtreeMenu(data.children),

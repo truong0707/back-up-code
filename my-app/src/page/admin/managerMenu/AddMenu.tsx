@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
+import { v4 as uuidv4 } from "uuid";
 
 interface MyInputSubMenu {
   title: string;
@@ -22,6 +23,7 @@ const AddMenu: React.FC = () => {
   const { t } = useTranslation(["homeAdmin"]);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const uuidV4 = uuidv4();
 
   /* Sub menu */
   const [inputs, setInputs] = useState<MyInputSubMenu>({
@@ -45,9 +47,11 @@ const AddMenu: React.FC = () => {
   const handleInputChangeSubMenu = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nameInput = e.target.name;
     let valueInput = e.target.value;
+    const parserNumber = parseInt(uuidV4.replace(/- +/g, ""), 16);
 
     setInputs((state: MyInputSubMenu) => ({
       ...state,
+      id: parserNumber,
       [nameInput]: valueInput,
     })); //
   };
@@ -71,14 +75,16 @@ const AddMenu: React.FC = () => {
 
   /* handle save form */
   const onHandleSave = (value: {
+    url: string;
     nameMenu: string;
     urlMenu: string;
     iconClass: string;
     children: [];
   }) => {
     setValue({
+      // id: parserNumber,
       name: value.nameMenu,
-      url: value.urlMenu,
+      url: value.url,
       iconClass: value.iconClass,
       children: submenu,
     });
@@ -99,6 +105,7 @@ const AddMenu: React.FC = () => {
       const addMenuActionPromise = addMenuAction(valueA);
       addMenuActionPromise(dispatch);
     }
+
 
     /* reset Value input */
     setValue({
@@ -131,7 +138,7 @@ const AddMenu: React.FC = () => {
 
               <Space direction="vertical">
                 <Input
-                  name="urlSubMenu"
+                  name="url"
                   onChange={handleInputChangeSubMenu}
                   placeholder="url"
                 />
@@ -180,7 +187,6 @@ const AddMenu: React.FC = () => {
       ) : (
         <Space>
           <Button onClick={handleOpenModalAddSubMenu}>
-            {/* {t(`MenuAdmin.add_sub_menu`)} */}
             ADD menu
           </Button>
         </Space>
@@ -204,7 +210,7 @@ const AddMenu: React.FC = () => {
         </Form.Item>
 
         <Form.Item
-          name="urlMenu"
+          name="url"
           label={t(`MenuAdmin.url`)}
           rules={[{ required: true }, { type: "string", min: 1 }]}
           initialValue={"/"}
@@ -223,7 +229,6 @@ const AddMenu: React.FC = () => {
         <Form.Item>
           <Space>
             <Button type="primary" htmlType="submit">
-              {/* {t(`MenuAdmin.save`)} */}
               Save
             </Button>
 

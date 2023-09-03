@@ -39,12 +39,6 @@ const ModalBtnUpdate = (props: any) => {
     setInputs((state) => ({ ...state, [nameInput]: valueInput }));
   };
 
-  /* handle ok */
-  const handleOK = () => {
-    setIsModalOpen(false);
-    formRef.current?.resetFields();
-  };
-
   /* handle show, cancel */
   const showModal = () => {
     setIsModalOpen(true);
@@ -76,9 +70,13 @@ const ModalBtnUpdate = (props: any) => {
       updateUserPromise(dispatch);
       formRef.current?.resetFields();
     }
+
+    const myTimeout = setTimeout(() => {
+      setIsModalOpen(false);
+    }, 1000);
   };
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => { }, [dispatch]);
 
   return (
     <>
@@ -89,8 +87,9 @@ const ModalBtnUpdate = (props: any) => {
       <Modal
         title={`${t("adminHome.update_info")}`}
         open={isModalOpen}
-        onOk={handleOK}
+        // onOk={handleOK}
         onCancel={handleCancel}
+        footer={null} // Đặt footer thành null để loại bỏ nút "OK"
       >
         {dataUsers.msgUpdateSuccess ? (
           <AlertNotificate msg={"Update thành công"} type={""} />
@@ -154,6 +153,10 @@ const ModalBtnUpdate = (props: any) => {
             <Space>
               <Button type="primary" htmlType="submit">
                 {t("adminHome.submit")}
+              </Button>
+
+              <Button onClick={handleCancel}>
+                Cancel
               </Button>
             </Space>
           </Form.Item>

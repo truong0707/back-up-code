@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormInstance, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, Space } from "antd";
+import { Button, Form, Input } from "antd";
 import { StateStore } from "../../../store/redux/Store";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -9,7 +9,12 @@ import { handleUpdateChildtreeMenu } from "../../../untils/handleUpdatechildrenS
 import { updateFieldMenuAction } from "../../../store/redux/actions/menuActions";
 import { findDataDetailSumenu } from "../../../untils/findDataDetailSumenu";
 
-const BtnShowModalUpdate = (props: any) => {
+interface myBtnShowModalUpdate {
+  titleSub: string,
+  id: string | number,
+  url: string,
+}
+const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
@@ -19,14 +24,14 @@ const BtnShowModalUpdate = (props: any) => {
   const { menuDetail }: any = getMenu;
 
   /* get sub id */
-  const ss = findDataDetailSumenu(menuDetail.children, props.id);
+  // const ss = findDataDetailSumenu(menuDetail.children, props.id);
 
   const [inputs, setInputs] = useState({
-    title: `doi`,
-    url: `/đá`,
+    title: props.titleSub,
+    url: props.url,
   });
 
-  useEffect(() => {}, [props.id, dispatch]);
+  useEffect(() => { }, [props.id, dispatch]);
 
   /* input sub update here  */
   const newSubmenu = handleUpdateChildtreeMenu(
@@ -84,7 +89,7 @@ const BtnShowModalUpdate = (props: any) => {
   /* handle submit form */
   const formRef = React.useRef<FormInstance>(null);
   const [form] = Form.useForm();
-  const onFinish = () => {};
+  const onFinish = () => { };
 
   return (
     <>
@@ -123,7 +128,7 @@ const BtnShowModalUpdate = (props: any) => {
           <Form.Item
             name="url"
             label="Url"
-            initialValue={"/"}
+            initialValue={inputs.url}
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
@@ -152,11 +157,11 @@ const BtnShowModalUpdate = (props: any) => {
           </Form.Item> */}
 
           <Form.Item>
-            <Space>
+            {/* <Space>
               <Button type="primary" htmlType="submit">
                 {t("adminHome.submit")}
               </Button>
-            </Space>
+            </Space> */}
           </Form.Item>
         </Form>
       </Modal>

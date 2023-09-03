@@ -33,7 +33,7 @@
   ],
   "users": [
     {
-      "name": "truongs",
+      "name": "truongss1",
       "email": "truong@gmail.com",
       "numberPhone": "322323",
       "id": 1
@@ -41,32 +41,70 @@
   ],
   "menus": [
     {
-      "id": 1,
-      "name": "Menu 1",
-      "url": "/menu1",
-      "iconClass": "folder-open",
-      "children": []
-    },
-    {
-      "id": 2,
-      "name": "Menu 2",
-      "url": "/menu1",
-      "iconClass": "folder-open",
+      "name": "Menu1",
+      "iconClass": "user",
       "children": [
         {
-          "title": "aaaa",
-          "id": 1488361399,
+          "title": "Sub1",
+          "url": "/Sub1",
           "children": [
             {
-              "id": 746859318,
-              "title": "ssss",
-              "url": "/s",
-              "children": []
+              "title": "suba",
+              "url": "/suba",
+              "children": [],
+              "id": 1650715669
+            },
+            {
+              "title": "subb",
+              "url": "/subb",
+              "children": [],
+              "id": 2623943644
             }
           ],
-          "url": "/đá"
+          "id": 403887254
+        },
+        {
+          "title": "Sub2",
+          "url": "/Sub2",
+          "children": [],
+          "id": 678840887
         }
-      ]
+      ],
+      "id": 1
+    },
+    {
+      "name": "da",
+      "url": "/d",
+      "iconClass": "d",
+      "children": [
+        {
+          "title": "Sub2",
+          "url": "/Sub2",
+          "children": [
+            {
+              "title": "d",
+              "url": "/d",
+              "children": [],
+              "id": 3723159039
+            }
+          ],
+          "id": 678840887
+        },
+        {
+          "title": "dâd",
+          "url": "/Sd",
+          "children": [
+            {
+              "title": "d",
+              "url": "/d",
+              "children": [],
+              "id": 3082522896
+            }
+          ],
+          "id": 2642972535
+        }
+      ],
+      "id": 2
     }
   ],
   "profile": {

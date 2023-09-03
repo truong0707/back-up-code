@@ -30,13 +30,12 @@ const menuServices = {
     return response;
   },
   updateMenuApi: async (id: number | string, inputData: any) => {
-    console.log(inputData, "inputData");
-    const response = await axiosClient.put(`/menus/${id}`, {
+    const response = await axiosClient.patch(`/menus/${id}`, {
       id: id,
       name: inputData.name,
       url: inputData.url,
       iconClass: inputData.iconClass,
-      children: inputData.children,
+      // children: inputData.children,
     });
 
     return response;

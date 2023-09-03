@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Tooltip, Tree, message } from "antd";
+import { Alert, Modal, Tooltip, Tree, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../../../untils/checkIcons";
 import {
@@ -16,37 +16,53 @@ import {
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
-import { Link } from "react-router-dom";
+import ModalUpdateMenu from "../../../component/admin/menu/ModalUpdateMenu";
 
 const DeleteMenu = () => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { listDataMenu } = getMenu;
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
+  const [open, setOpen] = useState(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [id, setId] = useState<number | string>();
 
   /* modal update */
   useEffect(() => {
     const dataMenuPromise = getMenuAction();
     dataMenuPromise(dispatch);
+
   }, [dispatch]);
 
   const handleClickDelete = (id: string | number) => {
-    alert("Xóa menu này?");
+    setId(id)
+    setOpen(true);
+  };
 
-    if (id === 9) {
-      message.error("Menu này e để làm mẫu ạ! - a thử menu khác", 4);
-    } else {
+  const handleClickUpdate = (id: string | number) => {
+    setOpenModalUpdate(true);
+  }
+
+  const handleOK = () => {
+    if (id) {
       const deleteMenuPromise = deleteMenuAction(id);
       deleteMenuPromise(dispatch);
     }
-  };
+    setOpen(false);
+  }
+
+  const handleCancel = () => {
+    setOpen(false);
+    setOpenModalUpdate(false);
+  }
 
   const getListDataMenu = listDataMenu.map(
     (data: {
-      id: string | number;
-      name: string;
-      iconClass: string;
-      children: [];
+      id: string | number,
+      name: string,
+      url: string,
+      iconClass: string,
+      children: [],
     }) => {
       return {
         title: (
@@ -59,10 +75,10 @@ const DeleteMenu = () => {
             </Tooltip>
 
             <Tooltip title={t(`MenuAdmin.repair_menu`)}>
-              <Link to={`/admin/update/${data.id}`}>
-                <ScissorOutlined className={Styles.IconUpdate} />
-              </Link>
+              <ScissorOutlined onClick={() => handleClickUpdate(data.id)} className={Styles.IconUpdate} />
             </Tooltip>
+
+            <ModalUpdateMenu handleOK={handleOK} openModalUpdate={openModalUpdate} handleCancel={handleCancel} setOpenModalUpdate={setOpenModalUpdate} idMenu={data.id} nameMenu={data.name} urlMenu={data.url} iconClass={data.iconClass} />
 
             <b>{data.name}</b>
           </>
@@ -81,6 +97,20 @@ const DeleteMenu = () => {
 
   return (
     <Suspense fallback={<LoadingCpn />}>
+      <Modal
+        title="Title"
+        open={open}
+        onOk={handleOK}
+        onCancel={handleCancel}
+      >
+        <Alert
+          message="Bạn có chắc muốn xoá menu này? Toàn bộ sub menu của menu này cũng sẽ mất!"
+          type="warning"
+          showIcon
+        />
+      </Modal>
+
+
       {getListDataMenu.length === 0 ? (
         <>Chưa có menu nào trong database! - Hãy thêm menu</>
       ) : (

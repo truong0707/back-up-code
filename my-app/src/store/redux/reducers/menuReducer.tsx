@@ -1,5 +1,6 @@
 import {
   ADD_DATA_MENU,
+  DELETE_DATA_MENU,
   DELETE_SUB_DATA_MENU,
   DELETE_SUB_DATA_MENU_RESQUEST,
   GET_DATA_DETAIL_MENU,
@@ -49,6 +50,27 @@ export const menuReducer = (
         return menu;
       });
       return { ...state, listDataMenu: as, menuDetail: action.payload };
+    case DELETE_DATA_MENU:
+      const dataCurrentMenuList = [...state.listDataMenu];
+
+      function xoaMenuTheoID(arr: any, idCanXoa: string | number) {
+        return arr.filter((item: any) => {
+          if (item.id === idCanXoa) {
+            return false;
+          }
+
+          if (item.children && item.children.length > 0) {
+            item.children = xoaMenuTheoID(item.children, idCanXoa);
+          }
+
+          return true;
+        });
+      }
+      const newListMenu = xoaMenuTheoID(dataCurrentMenuList, action.payload);
+      return {
+        ...state,
+        listDataMenu: newListMenu
+      }
     case ADD_DATA_MENU:
       const currentlistDataMenu: {}[] = [...state.listDataMenu];
       const payload = action.payload;
@@ -72,6 +94,9 @@ export const menuReducer = (
         }
         return menu;
       });
+
+      console.log(currentlistMenuDetail, "currentlistMenuDetail")
+      console.log(newData, "newData")
 
       return {
         ...state,

@@ -1,4 +1,14 @@
 $default-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+.menuDoashBoard {
+  .BoxMenu {
+    padding: 10px;
+    padding-top: 0;
+    color: #1677FF;
+    .titleMenu {
+      padding: 10px;
+    }
+  }
+}
 
 .wrapperDoashBoard {
   display: flex;

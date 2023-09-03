@@ -81,6 +81,7 @@ export function getDetailMenuAction(id: string | number) {
   };
 }
 
+/* update menu */
 export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
   return async (dispatch: Dispatch) => {
     try {
@@ -108,7 +109,7 @@ export function updateFieldMenuAction(id: string | number, inputData: any) {
       dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
       message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
     } catch (error: any) {
-      message.error("Cập nhật thất bại!", 3);
+      message.error("Cập nhật thất bại! - có lỗi ở server", 5);
       console.log(error, "Lỗi");
     }
   };
@@ -117,21 +118,20 @@ export function updateFieldMenuAction(id: string | number, inputData: any) {
 export function deleteSubdMenuAction(
   id: string | number,
   inputData: any,
-  dataCurrent: any
+  // dataCurrent: any
 ) {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: DELETE_SUB_DATA_MENU_RESQUEST });
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
-      console.log(data, "xoa");
 
       dispatch({
         type: DELETE_SUB_DATA_MENU,
         payload: { data: data, idMenu: id },
       });
-      message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
+      message.success(`Xoá sub cho menu có id: ${id} thành công !`, 3);
     } catch (error: any) {
-      message.error("Cập nhật thất bại!", 3);
+      message.error("Xoá sub menu thất bại! - có lỗi ở server", 5);
       console.log(error, "Lỗi");
     }
   };
@@ -141,12 +141,11 @@ export function addSubMenuAction(id: string | number, dataInput: any) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.addSubMenuApi(id, dataInput);
-      console.log(id, "id day");
 
       dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
-      message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
+      message.success(`Đã thêm sub cho menu có id: ${id} !`, 3);
     } catch (error: any) {
-      message.error("Cập nhật thất bại!", 3);
+      message.error("Thêm sub menu thất bại! - có lỗi Server", 5);
       console.log(error, "Lỗi");
     }
   };

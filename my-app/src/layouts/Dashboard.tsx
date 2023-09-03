@@ -5,8 +5,6 @@ import {
   AppstoreOutlined,
   DesktopOutlined,
   PieChartOutlined,
-  PlusSquareOutlined,
-  SettingFilled,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu, Space, Tooltip } from "antd";
@@ -19,6 +17,10 @@ import { getMenuAction } from "../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../untils/checkIcons";
 import TreeMenu, { childrenData } from "../component/tree/TreeMenu";
+import {
+  PlusSquareOutlined,
+  SettingFilled,
+} from "@ant-design/icons";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -44,7 +46,7 @@ const Dashboard = () => {
   const getMenu = useSelector((state: StateStore) => state);
   const [collapsed] = useState(false);
   const dispatch = useDispatch();
-  const isAdmin = true; // check dữ liệu admin từ server
+  const isAdmin = true;
 
   useEffect(() => {
     const dataMenuPromise = getMenuAction();
@@ -58,11 +60,9 @@ const Dashboard = () => {
 
     return children.map((childMenu: childrenData) => {
       return getItem(
-        <>
-          <Link className="link" to={`/admin${childMenu.url}`}>
-            {childMenu.title}
-          </Link>
-        </>,
+        <Link className="link" to={`/admin${childMenu.url}`}>
+          {childMenu.title}
+        </Link>,
         `${childMenu.id}`,
         null,
         showChildtreeMenu(childMenu.children)
@@ -80,15 +80,13 @@ const Dashboard = () => {
         url: string;
       }) => {
         return getItem(
-          <>
-            <Link className="link" to={`/admin${dataMenu.url}`}>
-              <FontAwesomeIcon
-                icon={checkIcons(dataMenu.iconClass)}
-                style={{ marginRight: "10px" }}
-              />
-              {dataMenu.name}
-            </Link>
-          </>,
+          <Link className="link" to={`/admin${dataMenu.url}`}>
+            <FontAwesomeIcon
+              icon={checkIcons(dataMenu.iconClass)}
+              style={{ marginRight: "10px" }}
+            />
+            {dataMenu.name}
+          </Link>,
           `${dataMenu.id}`,
           null,
           showChildtreeMenu(dataMenu.children)
@@ -123,16 +121,6 @@ const Dashboard = () => {
     getItem(
       <Space>
         {t(`MenuAdmin.menu_dynamic`)}
-        <Link to={"/admin/add-menu"}>
-          <Tooltip title="Add new Menu">
-            <PlusSquareOutlined />
-          </Tooltip>
-        </Link>
-        <Link to={"/admin/delete&update-menu"}>
-          <Tooltip title="Delete/Update Menu">
-            <SettingFilled spin />
-          </Tooltip>
-        </Link>
       </Space>,
       "sub2",
       <AppstoreOutlined />,
@@ -165,8 +153,21 @@ const Dashboard = () => {
                     inlineCollapsed={collapsed}
                     items={items}
                   />
-                  <div style={{ padding: "10px", color: "#1677FF" }}>
-                    <p style={{ padding: "12px" }}>Manager menu</p>
+
+                  <div className={Styles.BoxMenu}>
+                    <Space>
+                      <p className={Styles.titleMenu}>Manager menu</p>
+                      <Link to={"/admin/add-menu"}>
+                        <Tooltip title="Add new Menu">
+                          <PlusSquareOutlined />
+                        </Tooltip>
+                      </Link>
+                      <Link to={"/admin/delete&update-menu"}>
+                        <Tooltip title="Delete/Update Menu">
+                          <SettingFilled spin />
+                        </Tooltip>
+                      </Link>
+                    </Space>
                     <TreeMenu />
                   </div>
                 </div>

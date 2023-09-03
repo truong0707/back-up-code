@@ -68,7 +68,7 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
     formRef.current?.resetFields();
   };
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => { }, [dispatch]);
 
   return (
     <>
@@ -79,7 +79,8 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
       <Modal
         title={`${t(`adminHome.add_user`)}`}
         open={isModalOpen}
-        onOk={handleOK}
+        // onOk={handleOK}
+        footer={null} // Đặt footer thành null để loại bỏ nút "OK"
         onCancel={handleCancel}
       >
         {dataUsers.msgAddSuccess ? (
@@ -153,6 +154,10 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
             <Space>
               <Button type="primary" htmlType="submit">
                 {t(`adminHome.submit`)}
+              </Button>
+
+              <Button onClick={handleCancel}>
+                Cancel
               </Button>
             </Space>
           </Form.Item>

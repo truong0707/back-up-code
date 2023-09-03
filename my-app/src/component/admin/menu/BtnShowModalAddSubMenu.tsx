@@ -17,7 +17,7 @@ export interface MyInputSubMenu {
 interface MyBtnShowMenuSubProps {
   idSubMenu?: string;
   menuDetail?: {
-    id: number,
+    id: number | number,
     name: string,
     url: string,
     iconClass: string,
@@ -25,6 +25,8 @@ interface MyBtnShowMenuSubProps {
   }[];
   listDataMenu: [];
   idMenu: string;
+  contenBtn?: string,
+  parentType?: boolean,
 }
 
 const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
@@ -69,6 +71,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
         if (props.idSubMenu) {
           const idMenuSub = parseInt(props.idSubMenu);
           let resultAddSub = addChildToParentById(props.listDataMenu, idMenuSub, inputs);
+          // eslint-disable-next-line array-callback-return
           const newData = resultAddSub.filter((menu) => {
             if (menu.id === idMenu) {
               return menu;
@@ -76,14 +79,19 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           });
           const addSubMenuActionPromise = addSubMenuAction(idMenu, newData[0]);
           addSubMenuActionPromise(dispatch);
-
-
         } else {
+      
+        }
+        
+        if (props.parentType) {
           let resultAddSub = addChildToMenu(props.listDataMenu, idMenu, inputs);
           const addSubMenuActionPromise = addSubMenuAction(idMenu, resultAddSub);
           addSubMenuActionPromise(dispatch);
         }
+
       }
+
+
     }
     setIsModalOpen(false);
   };
@@ -98,7 +106,11 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        <PlusOutlined />
+        {
+          props.contenBtn ? <>
+            {props.contenBtn}
+          </> : <PlusOutlined />
+        }
       </Button>
 
       <Modal
@@ -111,7 +123,6 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           <div>
             <h4>Title</h4>
             <Input
-              defaultValue={inputs.title}
               name="title"
               onChange={handleInputChangeSubMenu}
               placeholder="name Menu"
@@ -120,10 +131,9 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
             <h4>url</h4>
             <Input
               name="url"
-              defaultValue={inputs.title}
+              defaultValue={"/"}
               onChange={handleInputChangeSubMenu}
               placeholder="url"
-            // defaultValue={"/"}
             />
           </div>
         </Suspense>

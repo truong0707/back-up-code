@@ -34,6 +34,7 @@ export const addChildToMenu = (
   idmenu: number,
   inputData: MyInputSubMenu
 ) => {
+  // eslint-disable-next-line array-callback-return
   const filterData: any = currentData.filter((menu) => {
     if (menu.id === idmenu) {
       return menu;
