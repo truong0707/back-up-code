@@ -3,7 +3,7 @@ import { childrenData } from "../component/tree/TreeMenu";
 export const handleUpdateChildtreeMenu = (
     children: childrenData[] | undefined,
     titleSub: string,
-    idSub: any,
+    idSub: number | string,
     urlSub: string
   ): any[] => {
     if (!children || children.length === 0) {

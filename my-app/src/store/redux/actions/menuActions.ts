@@ -3,11 +3,9 @@ import {
   ADD_DATA_MENU,
   DELETE_DATA_MENU,
   DELETE_SUB_DATA_MENU,
-  DELETE_SUB_DATA_MENU_RESQUEST,
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
-  GET_DATA_SUB_MENU,
   UPDATE_DATA_MENU,
   UPDATE_FIELD_DATA_MENU,
 } from "../constants/menuContans";
@@ -101,7 +99,7 @@ export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
   };
 }
 
-export function updateFieldMenuAction(id: string | number, inputData: any) {
+export function updateFieldMenuAction(id: string | number, inputData: {}) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
@@ -117,20 +115,17 @@ export function updateFieldMenuAction(id: string | number, inputData: any) {
 
 export function deleteSubdMenuAction(
   id: string | number,
-  inputData: any,
+  inputData: {},
   // dataCurrent: any
 ) {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch({ type: DELETE_SUB_DATA_MENU_RESQUEST });
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
 
-      console.log(data, "data")
       dispatch({
         type: DELETE_SUB_DATA_MENU,
         payload: { data: data, idMenu: id },
       });
-
       message.success(`Xoá sub cho menu có id: ${id} thành công !`, 3);
     } catch (error: any) {
       message.error("Xoá sub menu thất bại! - có lỗi ở server", 5);
@@ -139,7 +134,7 @@ export function deleteSubdMenuAction(
   };
 }
 
-export function addSubMenuAction(id: string | number, dataInput: any) {
+export function addSubMenuAction(id: string | number, dataInput: {}) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.addSubMenuApi(id, dataInput);

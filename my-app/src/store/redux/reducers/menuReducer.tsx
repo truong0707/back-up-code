@@ -2,7 +2,6 @@ import {
   ADD_DATA_MENU,
   DELETE_DATA_MENU,
   DELETE_SUB_DATA_MENU,
-  DELETE_SUB_DATA_MENU_RESQUEST,
   GET_DATA_DETAIL_MENU,
   GET_DATA_MENU,
   GET_DATA_MENU_RESQUEST,
@@ -76,16 +75,11 @@ export const menuReducer = (
       const payload = action.payload;
       currentlistDataMenu.push(payload);
       return { ...state, listDataMenu: currentlistDataMenu };
-    case DELETE_SUB_DATA_MENU_RESQUEST:
-      return { ...state, loadingDelete: true };
     case DELETE_SUB_DATA_MENU:
       const currentlistData = [...state.listDataMenu];
-      const menuDetailCurrent = state.menuDetail;
-      const currentlistMenuDetail = [menuDetailCurrent];
       const newData = action.payload.data;
       const findData = currentlistData.map((menu: { id: number, name: string, iconClass: string, children: [] }) => {
         if (menu.id === newData.id) {
-          console.log(menu, "menu")
           return {
             id: newData.id,
             name: newData.name,
@@ -93,20 +87,13 @@ export const menuReducer = (
             children: newData.children,
           };
         } 
-
-
         return menu;
       });
-
-      console.log(currentlistMenuDetail, "currentlistMenuDetail")
-      console.log(newData, "newData");
-      console.log(findData, "findData")
 
       return {
         ...state,
         listDataMenu: findData,
         menuDetail: newData,
-        loadingDelete: false,
       };
     case UPDATE_DATA_MENU:
       const currentListDataMenusUp = [...state.listDataMenu];

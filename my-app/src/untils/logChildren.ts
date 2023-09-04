@@ -1,7 +1,9 @@
-export const logChildren = (nestedArray: any) => {
+export const logChildren = (nestedArray: []) => {
   let ss: any[] = [];
 
-  function logChildrenNames(obj: any) {
+  function logChildrenNames(obj: {
+    children: [],
+  }) {
     if (obj.children && obj.children.length > 0) {
       ss.push(obj)
 
@@ -11,8 +13,9 @@ export const logChildren = (nestedArray: any) => {
     }
   }
 
-  // Sử dụng đệ quy để log tên của các đối tượng có trường "children"
-  nestedArray.forEach((obj: any) => {
+  nestedArray.forEach((obj: {
+    children: []
+  }) => {
     logChildrenNames(obj);
   });
 

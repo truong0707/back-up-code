@@ -2,22 +2,34 @@ import React, { useEffect, useState } from "react";
 import { FormInstance, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, message, Space } from "antd";
-import { addDataUser } from "../../store/redux/actions/dataUserActions";
-import { TypeObjectInput } from "../../page/login/Login";
-import { StateStore } from "../../store/redux/Store";
+import { updateDataUser } from "../../../store/redux/actions/dataUserActions";
+import { TypeObjectInput } from "../../../page/login/Login";
+import { StateStore } from "../../../store/redux/Store";
+import AlertNotificate from "../../alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
-import AlertNotificate from "../alert/AlertNotificate";
+import userServices from "../../../services/user";
 
-interface MyModalBtnAdd {
-  contentBtnAdd?: string;
-}
-
-const ModalBtnAdd = (props: MyModalBtnAdd) => {
-  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
+const ModalBtnUpdate = (props: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
+
+  useEffect(() => {
+    /* call data default input */
+    const dataDefaultInput = async () => {
+      const { data } = await userServices.getUserByIDApi(props.idUser);
+      if (data) {
+        setInputs({
+          name: `${data.name}`,
+          email: `${data.email}`,
+          numberPhone: `${data.numberPhone}`,
+        });
+      }
+    };
+    dataDefaultInput();
+  }, [props.idUser]);
 
   /* handle change input */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,12 +37,6 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
     let valueInput = e.target.value;
 
     setInputs((state) => ({ ...state, [nameInput]: valueInput }));
-  };
-
-  /* handle ok */
-  const handleOK = () => {
-    setIsModalOpen(false);
-    formRef.current?.resetFields();
   };
 
   /* handle show, cancel */
@@ -55,17 +61,19 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
       message.error("Số điện thoại phải là 1 number!");
     } else {
       /* Bắn dispatch */
-      const addUserPromise = addDataUser(
-        `${inputs.name}`,
+      const updateUserPromise = updateDataUser(
+        `${props.idUser}`,
         `${inputs.email}`,
-        `${inputs.numberPhone}`,
-        `${inputs.password}`
+        `${inputs.name}`,
+        `${inputs.numberPhone}`
       );
-      addUserPromise(dispatch);
-      setIsModalOpen(false);
+      updateUserPromise(dispatch);
+      formRef.current?.resetFields();
     }
 
-    formRef.current?.resetFields();
+    const myTimeout = setTimeout(() => {
+      setIsModalOpen(false);
+    }, 1000);
   };
 
   useEffect(() => { }, [dispatch]);
@@ -73,19 +81,20 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        {props.contentBtnAdd ? <>{props.contentBtnAdd}</> : "Thêm"}
+        {t("adminHome.update")}
       </Button>
 
       <Modal
-        title={`${t(`adminHome.add_user`)}`}
+        title={`${t("adminHome.update_info")}`}
         open={isModalOpen}
         // onOk={handleOK}
-        footer={null} // Đặt footer thành null để loại bỏ nút "OK"
         onCancel={handleCancel}
+        footer={null} // Đặt footer thành null để loại bỏ nút "OK"
       >
-        {dataUsers.msgAddSuccess ? (
-          <AlertNotificate msg={"Add thành công"} type={""} />
+        {dataUsers.msgUpdateSuccess ? (
+          <AlertNotificate msg={"Update thành công"} type={""} />
         ) : null}
+
         {/* Form update  */}
         <Form
           ref={formRef}
@@ -95,65 +104,55 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
           autoComplete="off"
         >
           <Form.Item
-            name={`${t(`adminHome.name`)}`}
-            label={`${t(`adminHome.name`)}`}
-            rules={[{ required: true }, { type: "string", min: 3 }]}
+            name={`${t("adminHome.name")}`}
+            label={`${t("adminHome.name")}`}
+            rules={[{ required: true }, { type: "string", min: 4 }]}
+            initialValue={inputs.name}
           >
             <Input
               type="name"
               name="name"
               onChange={handleInputChange}
-              placeholder={`${t(`adminHome.name`)}`}
+              placeholder={`${t("adminHome.name")}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t(`adminHome.email`)}`}
-            label={`${t(`adminHome.email`)}`}
+            name={`${t("adminHome.email")}`}
+            label={`${t("adminHome.email")}`}
+            initialValue={inputs.email}
             rules={[
               { required: true },
               // { type: "url", warningOnly: true },
-              { type: "string", min: 6 },
+              { type: "string", min: 4 },
             ]}
           >
             <Input
               type="email"
               name="email"
               onChange={handleInputChange}
-              placeholder={`${t(`adminHome.email`)}`}
+              placeholder={`${t("adminHome.email")}`}
             />
           </Form.Item>
 
           <Form.Item
-            name={`${t(`adminHome.phoneNumber`)}`}
-            label={`${t(`adminHome.phoneNumber`)}`}
+            name={`${t("adminHome.phoneNumber")}`}
+            label={`${t("adminHome.phoneNumber")}`}
+            initialValue={inputs.numberPhone}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input
               type="numberPhone"
               name="numberPhone"
               onChange={handleInputChange}
-              placeholder={`${t(`adminHome.phoneNumber`)}`}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name={`${t(`adminHome.password`)}`}
-            label={`${t(`adminHome.password`)}`}
-            rules={[{ required: true }, { type: "string", min: 6 }]}
-          >
-            <Input
-              type="password"
-              name="password"
-              onChange={handleInputChange}
-              placeholder={`${t(`adminHome.password`)}`}
+              placeholder={`${t("adminHome.phoneNumber")}`}
             />
           </Form.Item>
 
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                {t(`adminHome.submit`)}
+                {t("adminHome.submit")}
               </Button>
 
               <Button onClick={handleCancel}>
@@ -166,4 +165,4 @@ const ModalBtnAdd = (props: MyModalBtnAdd) => {
     </>
   );
 }
-export default ModalBtnAdd;
+export default ModalBtnUpdate;

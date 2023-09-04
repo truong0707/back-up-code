@@ -78,12 +78,9 @@ export function listDataUserReducer(
     case ADD_USER_RESQUEST:
       return { ...state, msgAddSuccess: true };
     case ADD_USER_SUCCESS:
-      // const payloadDataSuccess = action.payload.data;
-      // const currentDataAdd = [...state.listDataUsers];
       return {
         ...state,
         msgAddSuccess: true,
-        // listDataUsers: currentDataAdd.concat(payloadDataSuccess),
       };
     case ADD_USER_FAIL:
       return {

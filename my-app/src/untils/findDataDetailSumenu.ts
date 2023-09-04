@@ -2,7 +2,7 @@ import { childrenData } from "../component/tree/TreeMenu";
 
 export const findDataDetailSumenu = (
   children: childrenData[] | undefined,
-  idSub: any
+  idSub: number
 ): any[] => {
   const ss: childrenData[] = [];
 

@@ -31,7 +31,6 @@ const AddMenu: React.FC = () => {
     urlSubMenu: "",
   });
   const [submenu, setSubmenu] = useState<any>([]);
-
   const [valueA, setValue] = useState<MyAllInfoInput>();
   const [openModalAddSubMenu, setOpenModalAddSubMenu] = useState(false);
 
@@ -105,7 +104,6 @@ const AddMenu: React.FC = () => {
       const addMenuActionPromise = addMenuAction(valueA);
       addMenuActionPromise(dispatch);
     }
-
 
     /* reset Value input */
     setValue({

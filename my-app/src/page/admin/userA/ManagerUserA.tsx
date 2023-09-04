@@ -9,9 +9,9 @@ import { ColumnsType } from "rc-table/lib/interface";
 import { Link } from "react-router-dom";
 import { Space } from "antd";
 import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete";
-import ModalBtnUpdate from "../../../component/admin/ModalBtnUpdate";
+import ModalBtnUpdate from "../../../component/admin/user/ModalBtnUpdate";
 
-const CRUDUser = lazy(() => import("../../../component/admin/CRUDUser"));
+const CRUDUser = lazy(() => import("../../../component/admin/user/CRUDUser"));
 const AlertNotificate = lazy(
   () => import("../../../component/alert/AlertNotificate")
 );

@@ -10,9 +10,6 @@ import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import BtnShowModalUpdateMenu from "../../../component/admin/menu/BtnShowModalUpdateMenu";
 import BtnShowModalAddSubMenu from "../../../component/admin/menu/BtnShowModalAddSubMenu";
-import {
-  DeleteOutlined,
-} from "@ant-design/icons";
 
 interface DataType {
   url: string;
@@ -24,11 +21,11 @@ interface DataType {
 }
 
 export default function DetailMenu() {
-  const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const { menuDetail }: any = getMenu;
-  const { listDataMenu }: any = getMenu;
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
+  const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
+  const { menuDetail }:any = getMenu;
+  const { listDataMenu }: any = getMenu;
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
@@ -58,10 +55,30 @@ export default function DetailMenu() {
     });
   };
 
+  const handleOK = () => {
+    const deleteMenuPromise = deleteMenuAction(pathId);
+    deleteMenuPromise(dispatch);
+
+    setOpen(false);
+  }
+
+  const handleCancel = () => {
+    setOpen(false);
+  }
+
+  useEffect(() => {
+    console.log(pathId,"p")
+    if (pathId) {
+      console.log(pathId,"p2")
+      const dataDetailMenuPromise = getDetailMenuAction(pathId);
+      dataDetailMenuPromise(dispatch);
+    }
+  }, [dispatch, pathId]);
+
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Id Sub",
+      title: "Id",
       dataIndex: "id",
       key: "id",
       render: (text) => <p>{/* {text} */}</p>,
@@ -72,7 +89,7 @@ export default function DetailMenu() {
       key: "name",
       // render: (text) => <Link >{text}</Link>,
       render: (_, record) => (
-        <Link to={`/admin/${record.id}`} key={record.id}>
+        <Link to={`/admin/${record.url}`} key={record.id}>
           {record.title}
         </Link>
       ),
@@ -106,27 +123,7 @@ export default function DetailMenu() {
     },
   ];
 
-  const handleOK = () => {
-    const deleteMenuPromise = deleteMenuAction(pathId);
-    deleteMenuPromise(dispatch);
 
-    setOpen(false);
-  }
-
-  const handleCancel = () => {
-    setOpen(false);
-  }
-
-  useEffect(() => {
-    if (pathId) {
-      const dataDetailMenuPromise = getDetailMenuAction(pathId);
-      dataDetailMenuPromise(dispatch);
-    }
-  }, [dispatch, pathId]);
-
-  const handleClickDelete = () => {
-    setOpen(true);
-  };
 
   return (
     <>
@@ -150,15 +147,10 @@ export default function DetailMenu() {
         listDataMenu={listDataMenu}
         menuDetail={menuDetail}
       />
-
-      {
-        getMenu.loadingDelete ? null : <>
           {getMenu && menuDetail ? (
             <Table columns={columns} dataSource={menuDetail.children} />
           ) : null}
         </>
-      }
-    </>
   );
 }
 

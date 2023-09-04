@@ -1,13 +1,13 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { Divider, Space, Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingCpn from "../spin/LoadingCpn";
-import { StateStore } from "../../store/redux/Store";
-import AlertNotificate from "../alert/AlertNotificate";
+import LoadingCpn from "../../spin/LoadingCpn";
+import { StateStore } from "../../../store/redux/Store";
+import AlertNotificate from "../../alert/AlertNotificate";
 // import { Link } from "react-router-dom";
 // import { ColumnsType } from "antd/es/table";
 // import { useTranslation } from "react-i18next";
-import { getMenuAction } from "../../store/redux/actions/menuActions";
+import { getMenuAction } from "../../../store/redux/actions/menuActions";
 
 const ModalBtnAdd = lazy(() => import("./ModalBtnAdd"));
 // const ModalBtnDelete = lazy(() => import("./ModalBtnDelete"));
