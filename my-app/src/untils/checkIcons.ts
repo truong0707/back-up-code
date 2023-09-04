@@ -1,6 +1,6 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
-export const checkIcons= (classIcon: string): IconProp => {
+export const checkIcons = (classIcon: string): IconProp => {
   let icon: IconProp;
 
   if (classIcon === "code") {
@@ -9,8 +9,12 @@ export const checkIcons= (classIcon: string): IconProp => {
     icon = "user";
   } else if (classIcon === "phone") {
     icon = "phone";
-  } else if (classIcon === "folder-open") {
-    icon = "folder-open";
+  } else if (classIcon === "education") {
+    icon = "user-graduate";
+  } else if (classIcon === "medical") {
+    icon = "suitcase-medical";
+  } else if (classIcon === "Justice") {
+    icon = "scale-unbalanced-flip";
   } else {
     icon = "folder-open";
   }

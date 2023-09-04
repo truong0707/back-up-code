@@ -5,9 +5,9 @@ import { Button, Form, Input } from "antd";
 import { StateStore } from "../../../store/redux/Store";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
-import { handleUpdateChildtreeMenu } from "../../../untils/handleUpdatechildrenSub";
+import { handleUpdateChildtreeMenu } from "../../../untils/handleArrayMenu";
 import { updateFieldMenuAction } from "../../../store/redux/actions/menuActions";
-import { findDataDetailSumenu } from "../../../untils/findDataDetailSumenu";
+
 
 interface myBtnShowModalUpdate {
   titleSub: string,
@@ -24,8 +24,6 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
   const { menuDetail }: any = getMenu;
 
   /* get sub id */
-  // const ss = findDataDetailSumenu(menuDetail.children, props.id);
-
   const [inputs, setInputs] = useState({
     title: props.titleSub,
     url: props.url,

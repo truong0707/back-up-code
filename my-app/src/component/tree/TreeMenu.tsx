@@ -21,9 +21,7 @@ const TreeMenu2: React.FC = () => {
   const { listDataMenu } = getMenu;
   const dispatch = useDispatch();
 
-  const handleClick = (id: number | string) => {
-    console.log(id, "s");
-  };
+  const handleClick = (id: number | string) => {};
 
   const showChildtreeMenu = (children: childrenData[] | undefined): any[] => {
     if (!children || children.length === 0) {
@@ -34,7 +32,7 @@ const TreeMenu2: React.FC = () => {
       return {
         title: (
           // <Link className="link" to={`/admin${childMenu.url}/${childMenu.id}`}>
-          <b onClick={() => handleClick(childMenu.id)}>{childMenu.title}</b>
+          <b key={childMenu.id} onClick={() => handleClick(childMenu.id)}>{childMenu.title}</b>
           // </Link>
         ),
         key: childMenu.id,
@@ -53,18 +51,19 @@ const TreeMenu2: React.FC = () => {
     }) => {
       return {
         title: (
-          <>
-            <Link className="link" to={`/admin/DetailMenu/${data.id}`}>
+            <Link key={data.id} className="link" to={`/admin/DetailMenu/${data.id}`}>
               <b>{data.name}</b>
             </Link>
-          </>
         ),
         key: data.id,
         icon: (
+          <p key={data.id}>
           <FontAwesomeIcon
             icon={checkIcons(data.iconClass)}
           //   className={Styles.icon}
           />
+          </p>
+          
         ),
         children: showChildtreeMenu(data.children),
       };

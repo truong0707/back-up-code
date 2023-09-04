@@ -1,4 +1,4 @@
-import { Alert, Modal, Space, Table, Tooltip, message } from "antd";
+import { Alert, Modal, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { deleteMenuAction, getDetailMenuAction } from "../../../store/redux/actions/menuActions";
@@ -8,7 +8,7 @@ import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
-import BtnShowModalUpdateMenu from "../../../component/admin/menu/BtnShowModalUpdateMenu";
+import BtnShowModalUpdateMenu from "../../../component/admin/menu/BtnShowModalUpdateSubMenu";
 import BtnShowModalAddSubMenu from "../../../component/admin/menu/BtnShowModalAddSubMenu";
 
 interface DataType {
@@ -24,7 +24,7 @@ export default function DetailMenu() {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const { menuDetail }:any = getMenu;
+  const { menuDetail }: any = getMenu;
   const { listDataMenu }: any = getMenu;
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
@@ -67,9 +67,8 @@ export default function DetailMenu() {
   }
 
   useEffect(() => {
-    console.log(pathId,"p")
     if (pathId) {
-      console.log(pathId,"p2")
+      console.log(pathId, "p2")
       const dataDetailMenuPromise = getDetailMenuAction(pathId);
       dataDetailMenuPromise(dispatch);
     }
@@ -123,8 +122,6 @@ export default function DetailMenu() {
     },
   ];
 
-
-
   return (
     <>
       <Modal
@@ -147,10 +144,11 @@ export default function DetailMenu() {
         listDataMenu={listDataMenu}
         menuDetail={menuDetail}
       />
-          {getMenu && menuDetail ? (
-            <Table columns={columns} dataSource={menuDetail.children} />
-          ) : null}
-        </>
+      
+      {getMenu && menuDetail ? (
+        <Table columns={columns} dataSource={menuDetail.children} />
+      ) : null}
+    </>
   );
 }
 

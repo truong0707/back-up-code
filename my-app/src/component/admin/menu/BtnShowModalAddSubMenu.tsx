@@ -6,7 +6,7 @@ import { addSubMenuAction } from "../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../store/redux/Store";
 import { v4 as uuidv4 } from "uuid";
 import { PlusOutlined } from "@ant-design/icons";
-import { addChildToMenu, addChildToParentById } from "../../../untils/addDataSub";
+import { addChildToMenu, addChildToParentById } from "../../../untils/handleArrayMenu";
 
 export interface MyInputSubMenu {
   title: string;
@@ -36,6 +36,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   const dispatch = useDispatch();
   const uuidV4 = uuidv4();
   const parserNumber = parseInt(uuidV4.replace(/- +/g, ""), 16);
+
 
   /* Sub menu */
   const [inputs, setInputs] = useState<MyInputSubMenu>({
@@ -93,8 +94,6 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           children: [],
         })  
       }
-
-
     }
     setIsModalOpen(false);
   };

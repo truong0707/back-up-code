@@ -1,3 +1,4 @@
+import { DeleteMenuByID } from "../../../untils/handleArrayMenu";
 import {
   ADD_DATA_MENU,
   DELETE_DATA_MENU,
@@ -32,6 +33,7 @@ export const menuReducer = (
     case UPDATE_FIELD_DATA_MENU:
       const currentData = [...state.listDataMenu];
       const newDataUpate = action.payload;
+      
       const as = currentData.map((menu: {
         id: number,
         name: string,
@@ -51,21 +53,7 @@ export const menuReducer = (
       return { ...state, listDataMenu: as, menuDetail: action.payload };
     case DELETE_DATA_MENU:
       const dataCurrentMenuList = [...state.listDataMenu];
-
-      function xoaMenuTheoID(arr: any, idCanXoa: string | number) {
-        return arr.filter((item: any) => {
-          if (item.id === idCanXoa) {
-            return false;
-          }
-
-          if (item.children && item.children.length > 0) {
-            item.children = xoaMenuTheoID(item.children, idCanXoa);
-          }
-
-          return true;
-        });
-      }
-      const newListMenu = xoaMenuTheoID(dataCurrentMenuList, action.payload);
+      const newListMenu = DeleteMenuByID(dataCurrentMenuList, action.payload);
       return {
         ...state,
         listDataMenu: newListMenu

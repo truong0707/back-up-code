@@ -1,13 +1,9 @@
 import { Button, Form, FormInstance, Input, Modal, Space, message } from "antd";
-import React, { Dispatch, SetStateAction, Suspense, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { getDetailMenuAction, updateMenuAction } from "../../../store/redux/actions/menuActions";
-import LoadingCpn from "../../spin/LoadingCpn";
+import { useDispatch } from "react-redux";
+import { updateMenuAction } from "../../../store/redux/actions/menuActions";
 import Styles from "../../../page/admin/managerMenu/managerMenu.module.scss";
-import menuServices from "../../../services/menu";
-import { useLocation } from "react-router-dom";
-import { StateStore } from "../../../store/redux/Store";
 import { v4 as uuidv4 } from "uuid";
 
 interface MyInputSubMenu {
@@ -27,8 +23,6 @@ interface MyUpdatePropsMenu {
 }
 
 export default function ModalUpdateMenu(props: MyUpdatePropsMenu) {
-  const location = useLocation();
-  const pathId = location.pathname.split("/")[3];
   const { t } = useTranslation(["homeAdmin"]);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -42,7 +36,7 @@ export default function ModalUpdateMenu(props: MyUpdatePropsMenu) {
   });
 
   useEffect(() => {
-  }, [dispatch, setValue, pathId]);
+  }, [dispatch, setValue, props.idMenu, props.nameMenu, props.openModalUpdate ]);
 
 
   /* handle save form */

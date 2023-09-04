@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Alert, Modal, Tooltip, Tree, message } from "antd";
+import { Alert, Modal, Tooltip, Tree } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../../../untils/checkIcons";
 import {
@@ -26,6 +26,7 @@ const DeleteMenu = () => {
   const [open, setOpen] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [id, setId] = useState<number | string>();
+  const [dataUpdateCurrent, setDataUpdateCurrent] = useState<any>();
 
   /* modal update */
   useEffect(() => {
@@ -39,8 +40,10 @@ const DeleteMenu = () => {
     setOpen(true);
   };
 
-  const handleClickUpdate = (id: string | number) => {
+  const handleClickUpdate = (data: object) => {
+    setDataUpdateCurrent(data)
     setOpenModalUpdate(true);
+    console.log(data, "data")
   }
 
   const handleOK = () => {
@@ -49,6 +52,10 @@ const DeleteMenu = () => {
       deleteMenuPromise(dispatch);
     }
     setOpen(false);
+  }
+
+  const handleOKUpdate = (id: string | number | undefined) => {
+    console.log(id, "ád")
   }
 
   const handleCancel = () => {
@@ -75,10 +82,8 @@ const DeleteMenu = () => {
             </Tooltip>
 
             <Tooltip title={t(`MenuAdmin.repair_menu`)}>
-              <ScissorOutlined onClick={() => handleClickUpdate(data.id)} className={Styles.IconUpdate} />
+              <ScissorOutlined onClick={() => handleClickUpdate({ id: data.id, name: data.name, iconClass: data.iconClass, url: data.url })} className={Styles.IconUpdate} />
             </Tooltip>
-
-            <ModalUpdateMenu handleOK={handleOK} openModalUpdate={openModalUpdate} handleCancel={handleCancel} setOpenModalUpdate={setOpenModalUpdate} idMenu={data.id} nameMenu={data.name} urlMenu={data.url} iconClass={data.iconClass} />
 
             <b>{data.name}</b>
           </>
@@ -109,6 +114,11 @@ const DeleteMenu = () => {
           showIcon
         />
       </Modal>
+
+      {
+        openModalUpdate && dataUpdateCurrent ? <>   <ModalUpdateMenu handleOK={() => handleOKUpdate(dataUpdateCurrent.id)} openModalUpdate={openModalUpdate} handleCancel={handleCancel} setOpenModalUpdate={setOpenModalUpdate} idMenu={dataUpdateCurrent.id} nameMenu={dataUpdateCurrent.name} urlMenu={dataUpdateCurrent.url} iconClass={dataUpdateCurrent.iconClass} /></> : null
+      }
+
 
 
       {getListDataMenu.length === 0 ? (

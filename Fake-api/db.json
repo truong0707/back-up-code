@@ -41,28 +41,59 @@
   ],
   "menus": [
     {
-      "name": "Quyền",
-      "url": "/quyen",
+      "name": "Văn hoá - Thông tin",
+      "url": "/văn-hoá-Thông-tin",
       "iconClass": "quyen",
       "children": [
         {
-          "title": "Quản lý gia đình, bạo lực",
+          "title": "Quản lý danh hiệu & mô hình vh",
           "id": 2390760334,
           "children": [
             {
               "title": "Quản lý bạo lực",
               "id": 2436563508,
-              "children": [],
+              "children": [
+                {
+                  "title": "Quản lý A",
+                  "url": "/Quản_lý_A",
+                  "children": [],
+                  "id": 3360595989
+                }
+              ],
               "url": "/Quản_lý_bạo_lực"
+            },
+            {
+              "title": "Quản lý A",
+              "url": "/Quản_lý_A",
+              "children": [],
+              "id": 3353718022
             }
           ],
-          "url": "/Quản_lý_gia_đình_bạo_lực"
+          "url": "/Quản_lý_các_danh_hiệu_&_mô_hình_văn_hoá"
         },
         {
-          "id": 3347197375,
-          "title": "đád",
-          "url": "/add",
+          "id": 3547635537,
+          "title": "Quản lý thiết chế văn hoá",
+          "url": "/Quản-lý-thiết-chế-văn-hoá",
           "children": []
+        },
+        {
+          "title": "Quản lý gia đình, bạo lực",
+          "url": "/Quản-lý-gia-đình,bạo-lực",
+          "children": [],
+          "id": 1241938926
+        },
+        {
+          "title": "Quản lý dịch vụ văn hoá",
+          "url": "/Quản-lý-dịch-vụ-văn-hoá",
+          "children": [],
+          "id": 1229769943
+        },
+        {
+          "title": "Văn hoá thể thao",
+          "url": "/Văn-hoá-thể-thao",
+          "children": [],
+          "id": 1427838883
         }
       ],
       "id": 1
@@ -70,9 +101,65 @@
     {
       "name": "Y Tế",
       "url": "/y-te",
-      "iconClass": "user",
-      "children": [],
+      "iconClass": "medical",
+      "children": [
+        {
+          "title": "d",
+          "url": "/ad",
+          "children": [
+            {
+              "title": "ad",
+              "url": "/đaad",
+              "children": [],
+              "id": 3833154566
+            }
+          ],
+          "id": 153685545
+        }
+      ],
       "id": 2
+    },
+    {
+      "name": "Giáo dục",
+      "url": "/giao-duc",
+      "iconClass": "education",
+      "children": [
+        {
+          "title": "ds",
+          "url": "/đa",
+          "children": [],
+          "id": 2847378073
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "Quản lý Số điện thoại",
+      "url": "/Quản_lý_số_điện_thoại",
+      "iconClass": "phone",
+      "children": [
+        {
+          "title": "Quản lý A",
+          "url": "/Quản-lý-A",
+          "children": [],
+          "id": 4209891024
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Tư pháp",
+      "url": "/tu-phap",
+      "iconClass": "Justice",
+      "children": [
+        {
+          "title": "Quản lý A",
+          "url": "/Quản_lý_A",
+          "children": [],
+          "id": 1127137184
+        }
+      ],
+      "id": 5
     }
   ],
   "profile": {
