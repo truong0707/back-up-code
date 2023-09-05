@@ -15,6 +15,10 @@ export const checkIcons = (classIcon: string): IconProp => {
     icon = "suitcase-medical";
   } else if (classIcon === "Justice") {
     icon = "scale-unbalanced-flip";
+  } else if (classIcon === "folder") {
+    icon = "folder-open";
+  }else if (classIcon === "coin") {
+    icon = "coins";
   } else {
     icon = "folder-open";
   }

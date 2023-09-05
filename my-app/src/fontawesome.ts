@@ -9,7 +9,8 @@ import {
   faFolderOpen,
   faSuitcaseMedical,
   faUserGraduate,
-  faScaleUnbalancedFlip
+  faScaleUnbalancedFlip,
+  faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -21,5 +22,6 @@ library.add(
   faUser,
   faPhone,
   faFolderOpen,
-  faSuitcaseMedical
+  faSuitcaseMedical,
+  faCoins,
 );

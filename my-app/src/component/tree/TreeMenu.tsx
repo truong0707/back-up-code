@@ -7,6 +7,7 @@ import { StateStore } from "../../store/redux/Store";
 import { getMenuAction } from "../../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../../untils/checkIcons";
+import Styles from "./TreeMenu.module.scss";
 
 export interface childrenData {
   id: number | string;
@@ -16,11 +17,10 @@ export interface childrenData {
   children?: [];
 }
 
-const TreeMenu2: React.FC = () => {
+const TreeMenu: React.FC = () => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { listDataMenu } = getMenu;
   const dispatch = useDispatch();
-
   const handleClick = (id: number | string) => {};
 
   const showChildtreeMenu = (children: childrenData[] | undefined): any[] => {
@@ -32,7 +32,9 @@ const TreeMenu2: React.FC = () => {
       return {
         title: (
           // <Link className="link" to={`/admin${childMenu.url}/${childMenu.id}`}>
-          <b key={childMenu.id} onClick={() => handleClick(childMenu.id)}>{childMenu.title}</b>
+          <b key={childMenu.id} onClick={() => handleClick(childMenu.id)}>
+            {childMenu.title}
+          </b>
           // </Link>
         ),
         key: childMenu.id,
@@ -47,23 +49,26 @@ const TreeMenu2: React.FC = () => {
       name: string;
       url: string;
       iconClass: string;
-      children: any;
+      children: [];
     }) => {
       return {
         title: (
-            <Link key={data.id} className="link" to={`/admin/DetailMenu/${data.id}`}>
-              <b>{data.name}</b>
-            </Link>
+          <Link
+            key={data.id}
+            className="link"
+            to={`/admin/DetailMenu/${data.id}`}
+          >
+            <b>{data.name}</b>
+          </Link>
         ),
         key: data.id,
         icon: (
           <p key={data.id}>
-          <FontAwesomeIcon
-            icon={checkIcons(data.iconClass)}
-          //   className={Styles.icon}
-          />
+            <FontAwesomeIcon
+              icon={checkIcons(data.iconClass)}
+              //   className={Styles.icon}
+            />
           </p>
-          
         ),
         children: showChildtreeMenu(data.children),
       };
@@ -76,7 +81,19 @@ const TreeMenu2: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div
+      id="scrollableDiv"
+      style={{
+        // maxHeight: 400,
+        // overflow: "auto",
+        // padding: "0 16px",
+        // WebkitScrollBar
+        // '&::WebkitScrollbar': "width: 0, height: 0 ",
+        // width: '100px'
+        // border: "1px solid rgba(140, 140, 140, 0.35)",
+      }}
+      className={Styles.ScrollBar}
+    >
       <Tree
         style={{ background: "#001529", color: "#a0a3a5" }}
         showIcon
@@ -85,8 +102,8 @@ const TreeMenu2: React.FC = () => {
         switcherIcon={<DownOutlined />}
         treeData={getListDataMenu}
       />
-    </>
+    </div>
   );
 };
 
-export default TreeMenu2;
+export default TreeMenu;

@@ -45,7 +45,7 @@ export function addMenuAction(dataOjb: DataMenuOjb) {
       dispatch({ type: ADD_DATA_MENU, payload: data });
       message.success("Thêm menu thành công!", 3);
     } catch (error: any) {
-      message.error("Thêm menu thất bại!", 3);
+      message.error("Thêm menu thất bại! - kiểm tra server ", 3);
       console.log(error, "Lỗi");
     }
   };
@@ -73,7 +73,7 @@ export function getDetailMenuAction(id: string | number) {
 
       dispatch({ type: GET_DATA_DETAIL_MENU, payload: data });
     } catch (error: any) {
-      message.error("get detail thất bại!", 3);
+      message.error("get detail thất bại! - kiểm tra server", 3);
       console.log(error, "Lỗi");
     }
   };
@@ -105,7 +105,7 @@ export function updateFieldMenuAction(id: string | number, inputData: {}) {
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);
 
       dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
-      message.success(`Đã cập nhật sub cho menu có id: ${id} !`, 3);
+      message.success(`Đã cập nhật sub cho menu có id cha: ${id} !`, 3);
     } catch (error: any) {
       message.error("Cập nhật thất bại! - có lỗi ở server", 5);
       console.log(error, "Lỗi");
@@ -126,7 +126,7 @@ export function deleteSubdMenuAction(
         type: DELETE_SUB_DATA_MENU,
         payload: { data: data, idMenu: id },
       });
-      message.success(`Xoá sub cho menu có id: ${id} thành công !`, 3);
+      message.success(`Xoá sub cho menu có id cha là: ${id} thành công !`, 3);
     } catch (error: any) {
       message.error("Xoá sub menu thất bại! - có lỗi ở server", 5);
       console.log(error, "Lỗi");
@@ -140,7 +140,7 @@ export function addSubMenuAction(id: string | number, dataInput: {}) {
       const { data } = await menuServices.addSubMenuApi(id, dataInput);
 
       dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
-      message.success(`Đã thêm sub cho menu có id: ${id} !`, 3);
+      message.success(`Đã thêm sub cho menu có id cha là: ${id} !`, 3);
     } catch (error: any) {
       message.error("Thêm sub menu thất bại! - có lỗi Server", 5);
       console.log(error, "Lỗi");

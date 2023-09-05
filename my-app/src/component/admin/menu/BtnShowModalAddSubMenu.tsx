@@ -88,14 +88,15 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           addSubMenuActionPromise(dispatch);
         }
 
-        setInputs({
-          title: "",
-          url: "",
-          children: [],
-        })  
+       
       }
     }
     setIsModalOpen(false);
+    setInputs({
+      title: "",
+      url: "",
+      children: [],
+    })  
   };
   /* handle Cancel */
   const handleCancel = () => {
@@ -128,6 +129,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
               name="title"
               onChange={handleInputChangeSubMenu}
               placeholder="name Menu"
+              defaultValue={inputs.title}
             />
 
             <h4>url</h4>

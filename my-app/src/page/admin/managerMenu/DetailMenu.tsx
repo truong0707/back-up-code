@@ -9,6 +9,7 @@ import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
+import ScrollContent from "../../../component/scrollContent/ScrollContent";
 const BtnShowModalAddSubMenu = lazy(
   () => import("../../../component/admin/menu/BtnShowModalAddSubMenu")
 );
@@ -154,6 +155,7 @@ const DetailMenu = () => {
       {getMenu && menuDetail ? (
         <Table columns={columns} dataSource={menuDetail.children} />
       ) : null}
+
     </Suspense>
   );
 }

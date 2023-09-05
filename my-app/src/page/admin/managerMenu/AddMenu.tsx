@@ -221,12 +221,12 @@ const AddMenu: React.FC = () => {
           label={t(`MenuAdmin.icon_class`)}
           rules={[{ required: true }, { type: "string", min: 1 }]}
         >
-          <Input placeholder="vd: user, code, folder-open, phone" />
+          <Input placeholder="vd: user, code, folder-open, phone, folder" />
         </Form.Item>
 
         <Form.Item>
           <Space>
-            <Button type="primary" htmlType="submit">
+            <Button  type="primary" htmlType="submit">
               Save
             </Button>
 
