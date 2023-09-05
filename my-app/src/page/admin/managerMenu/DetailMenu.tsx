@@ -1,7 +1,10 @@
 import { Alert, Modal, Space, Table } from "antd";
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { deleteMenuAction, getDetailMenuAction } from "../../../store/redux/actions/menuActions";
+import {
+  deleteMenuAction,
+  getDetailMenuAction,
+} from "../../../store/redux/actions/menuActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../../store/redux/Store";
 import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete";
@@ -9,7 +12,6 @@ import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
-import ScrollContent from "../../../component/scrollContent/ScrollContent";
 const BtnShowModalAddSubMenu = lazy(
   () => import("../../../component/admin/menu/BtnShowModalAddSubMenu")
 );
@@ -17,14 +19,15 @@ const BtnShowModalUpdateMenu = lazy(
   () => import("../../../component/admin/menu/BtnShowModalUpdateSubMenu")
 );
 
-
 interface DataType {
   url: string;
   title: string;
   id: string;
-  name: string;
-  numberPhone: string;
-  tags: string[];
+  // name: string;
+  // numberPhone: string;
+  // tags: string[];
+  children: any[];
+  key: number;
 }
 
 const DetailMenu = () => {
@@ -36,6 +39,7 @@ const DetailMenu = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showChildtreeMenu = (children: childrenData[] | undefined): {}[] => {
@@ -67,20 +71,29 @@ const DetailMenu = () => {
     deleteMenuPromise(dispatch);
 
     setOpen(false);
-  }
+  };
 
   const handleCancel = () => {
     setOpen(false);
-  }
+  };
 
   useEffect(() => {
     if (pathId) {
-      console.log(pathId, "p2")
       const dataDetailMenuPromise = getDetailMenuAction(pathId);
       dataDetailMenuPromise(dispatch);
     }
-  }, [dispatch, pathId]);
 
+    if (menuDetail && menuDetail.children) {
+      const data = menuDetail.children.map((data: any) => {
+        return {
+          ...data,
+          key: data.id,
+        };
+      });
+
+      setData(data);
+    }
+  }, [dispatch, pathId]);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -123,20 +136,19 @@ const DetailMenu = () => {
             id={record.id}
             nameOjbDelete={record.title}
           />
-          <BtnShowModalUpdateMenu titleSub={record.title} id={record.id} url={record.url} />
+          <BtnShowModalUpdateMenu
+            titleSub={record.title}
+            id={record.id}
+            url={record.url}
+          />
         </Space>
       ),
     },
   ];
 
   return (
-      <Suspense fallback={<LoadingCpn />}>
-      <Modal
-        title="Title"
-        open={open}
-        onOk={handleOK}
-        onCancel={handleCancel}
-      >
+    <Suspense fallback={<LoadingCpn />}>
+      <Modal title="Title" open={open} onOk={handleOK} onCancel={handleCancel}>
         <Alert
           message="Bạn có chắc muốn xoá menu này? Toàn bộ sub menu của menu này cũng sẽ mất!"
           type="warning"
@@ -151,14 +163,18 @@ const DetailMenu = () => {
         listDataMenu={listDataMenu}
         menuDetail={menuDetail}
       />
-      
-      {getMenu && menuDetail ? (
-        <Table columns={columns} dataSource={menuDetail.children} />
-      ) : null}
 
+      {getMenu && menuDetail && data ? (
+        <Table
+          columns={columns}
+          dataSource={
+            /* menuDetail.children */
+            data
+          }
+        />
+      ) : null}
     </Suspense>
   );
-}
+};
 
 export default DetailMenu;
-

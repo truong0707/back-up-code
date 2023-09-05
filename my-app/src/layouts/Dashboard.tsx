@@ -130,7 +130,7 @@ const Dashboard = () => {
       <Space>
         {t(`MenuAdmin.menu_dynamic`)}
       </Space>,
-      "sub2",
+      "4",
       <AppstoreOutlined />,
 
       ItemDataMenu()

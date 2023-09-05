@@ -34,7 +34,7 @@ export const menuReducer = (
       const currentData = [...state.listDataMenu];
       const newDataUpate = action.payload;
       
-      const as = currentData.map((menu: {
+      const newDataMenu = currentData.map((menu: {
         id: number,
         name: string,
         iconClass: string,
@@ -50,7 +50,7 @@ export const menuReducer = (
         }
         return menu;
       });
-      return { ...state, listDataMenu: as, menuDetail: action.payload };
+      return { ...state, listDataMenu: newDataMenu, menuDetail: action.payload };
     case DELETE_DATA_MENU:
       const dataCurrentMenuList = [...state.listDataMenu];
       const newListMenu = DeleteMenuByID(dataCurrentMenuList, action.payload);

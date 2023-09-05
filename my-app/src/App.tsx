@@ -5,7 +5,7 @@ import React from "react";
 import "./i18n/i18n";
 import "./App.css";
 import NotFound from "./page/notFound/NotFound";
-import UserDetail from "./page/userDetail/UserDetail";
+import UserDetail from "./page/admin/userDetail/UserDetail";
 import Dashboard from "./layouts/Dashboard";
 import ManagerUserA from "./page/admin/userA/ManagerUserA";
 import ManagerUserB from "./page/admin/userB/ManagerUserB";

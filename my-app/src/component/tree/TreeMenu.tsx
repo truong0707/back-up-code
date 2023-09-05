@@ -83,15 +83,6 @@ const TreeMenu: React.FC = () => {
   return (
     <div
       id="scrollableDiv"
-      style={{
-        // maxHeight: 400,
-        // overflow: "auto",
-        // padding: "0 16px",
-        // WebkitScrollBar
-        // '&::WebkitScrollbar': "width: 0, height: 0 ",
-        // width: '100px'
-        // border: "1px solid rgba(140, 140, 140, 0.35)",
-      }}
       className={Styles.ScrollBar}
     >
       <Tree

@@ -16,12 +16,14 @@ import {
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
+import _ from 'underscore';
+
 const ModalUpdateMenu = lazy(
   () => import("../../../component/admin/menu/ModalUpdateMenu")
 );
 
 const DeleteMenu = () => {
-  const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
+  const getMenu = useSelector((state: StateStore) => state.MenuAdmin, _.isEqual);
   const { listDataMenu } = getMenu;
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);

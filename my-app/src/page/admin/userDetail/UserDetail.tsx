@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { StateStore } from "../../store/redux/Store";
+import { StateStore } from "../../../store/redux/Store";
 import { useLocation } from "react-router-dom";
-import { getDataDetailUser } from "../../store/redux/actions/dataUserActions";
+import { getDataDetailUser } from "../../../store/redux/actions/dataUserActions";
 import { Suspense, useEffect } from "react";
 import { Card } from "antd";
 import React from "react";
-import LoadingCpn from "../../component/spin/LoadingCpn";
+import LoadingCpn from "../../../component/spin/LoadingCpn";
 
 const UserDetail = () => {
   const { Meta } = Card;
