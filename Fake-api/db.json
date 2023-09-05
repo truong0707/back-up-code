@@ -33,10 +33,17 @@
   ],
   "users": [
     {
-      "name": "truongss1",
+      "name": "truong1",
       "email": "truong@gmail.com",
       "numberPhone": "322323",
       "id": 1
+    },
+    {
+      "name": "dda",
+      "email": "dadasssss@gmail.com",
+      "numberPhone": "525465465465",
+      "password": "12321313",
+      "id": 2
     }
   ],
   "menus": [
@@ -46,54 +53,89 @@
       "iconClass": "quyen",
       "children": [
         {
-          "title": "Quản lý danh hiệu & mô hình vh",
           "id": 2390760334,
+          "title": "Quản lý danh hiệu & mô hìnhvh",
+          "url": "/Quản_lý_các_danh_hiệu_&_mô_hình_văn_hoá",
           "children": [
             {
               "title": "Quản lý bạo lực",
               "id": 2436563508,
               "children": [
                 {
-                  "title": "Quản lý A",
-                  "url": "/Quản_lý_A",
-                  "children": [],
-                  "id": 3360595989
+                  "title": "Quản lý As",
+                  "id": 3360595989,
+                  "children": [
+                    {
+                      "title": "đa",
+                      "id": 1461087430,
+                      "children": [
+                        {
+                          "title": "test",
+                          "id": 3009759332,
+                          "children": [
+                            {
+                              "title": "test2",
+                              "id": 723584977,
+                              "children": [
+                                {
+                                  "title": "test3",
+                                  "id": 713228488,
+                                  "children": [
+                                    {
+                                      "title": "test4",
+                                      "id": 437652312,
+                                      "children": [],
+                                      "url": "/test4"
+                                    }
+                                  ],
+                                  "url": "/test3"
+                                }
+                              ],
+                              "url": "/test2"
+                            }
+                          ],
+                          "url": "/test"
+                        }
+                      ],
+                      "url": "/ad"
+                    }
+                  ],
+                  "url": "/Quản_lý_A"
                 }
               ],
               "url": "/Quản_lý_bạo_lực"
-            },
-            {
-              "title": "Quản lý A",
-              "url": "/Quản_lý_A",
-              "children": [],
-              "id": 3353718022
             }
-          ],
-          "url": "/Quản_lý_các_danh_hiệu_&_mô_hình_văn_hoá"
+          ]
         },
         {
-          "id": 3547635537,
           "title": "Quản lý thiết chế văn hoá",
-          "url": "/Quản-lý-thiết-chế-văn-hoá",
-          "children": []
+          "id": 3547635537,
+          "children": [],
+          "url": "/Quản-lý-thiết-chế-văn-hoá"
         },
         {
           "title": "Quản lý gia đình, bạo lực",
-          "url": "/Quản-lý-gia-đình,bạo-lực",
+          "id": 1241938926,
           "children": [],
-          "id": 1241938926
+          "url": "/Quản-lý-gia-đình,bạo-lực"
         },
         {
           "title": "Quản lý dịch vụ văn hoá",
-          "url": "/Quản-lý-dịch-vụ-văn-hoá",
+          "id": 1229769943,
           "children": [],
-          "id": 1229769943
+          "url": "/Quản-lý-dịch-vụ-văn-hoá"
         },
         {
           "title": "Văn hoá thể thao",
-          "url": "/Văn-hoá-thể-thao",
+          "id": 1427838883,
           "children": [],
-          "id": 1427838883
+          "url": "/Văn-hoá-thể-thao"
+        },
+        {
+          "title": "Khu vực",
+          "id": 3199428424,
+          "children": [],
+          "url": "/Khu-vực"
         }
       ],
       "id": 1
@@ -104,17 +146,29 @@
       "iconClass": "medical",
       "children": [
         {
-          "title": "d",
-          "url": "/ad",
+          "title": "Kinh tế loại A",
+          "id": 153685545,
           "children": [
             {
-              "title": "ad",
-              "url": "/đaad",
+              "title": "Tài chính loại B",
+              "id": 3833154566,
               "children": [],
-              "id": 3833154566
+              "url": "/đaad"
             }
           ],
-          "id": 153685545
+          "url": "/ad"
+        },
+        {
+          "id": 2476877036,
+          "title": "Tài chính loại A",
+          "url": "/d",
+          "children": []
+        },
+        {
+          "title": "Tài chính loại A",
+          "id": 2017709167,
+          "children": [],
+          "url": "/Tài_chính_loại_A"
         }
       ],
       "id": 2
@@ -160,6 +214,74 @@
         }
       ],
       "id": 5
+    },
+    {
+      "name": "Tài chính - kế hoạch",
+      "url": "/Tài-chính-kế-hoạch",
+      "iconClass": "coin",
+      "children": [
+        {
+          "title": "Quản lý tài chính",
+          "url": "/Quản_lý_tài_chính",
+          "children": [],
+          "id": 2214427725
+        }
+      ],
+      "id": 6
+    },
+    {
+      "name": "front-end Back-end",
+      "url": "/ss",
+      "iconClass": "code",
+      "children": [
+        {
+          "title": "front-end",
+          "id": 148199847,
+          "children": [
+            {
+              "id": 2868118288,
+              "title": "quản lý",
+              "url": "/ada",
+              "children": [
+                {
+                  "title": "d",
+                  "id": 4293355050,
+                  "children": [],
+                  "url": "/d"
+                }
+              ]
+            },
+            {
+              "title": "add",
+              "id": 621329525,
+              "children": [
+                {
+                  "title": "da",
+                  "id": 2543700965,
+                  "children": [],
+                  "url": "/đ"
+                }
+              ],
+              "url": "/da"
+            }
+          ],
+          "url": "/front-end"
+        },
+        {
+          "title": "back-end",
+          "id": 3815946003,
+          "children": [
+            {
+              "title": "TypeA",
+              "id": 883837399,
+              "children": [],
+              "url": "/s"
+            }
+          ],
+          "url": "/back-end"
+        }
+      ],
+      "id": 7
     }
   ],
   "profile": {

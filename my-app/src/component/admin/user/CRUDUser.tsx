@@ -72,6 +72,22 @@ const CRUDUser = (props: MyCRUDUserProps) => {
   //   },
   // ];
 
+  const handleData = (menu: []) => {
+    if (menu) {
+      const data = menu.map((dataMenu: { id: string; children: [] }): any => {
+        return {
+          ...dataMenu,
+          key: dataMenu.id,
+          children: handleData(dataMenu.children),
+        };
+      });
+
+      return data
+    }
+
+    return undefined;
+  };
+
   return (
     <>
       <Suspense fallback={<LoadingCpn />}>
@@ -87,7 +103,7 @@ const CRUDUser = (props: MyCRUDUserProps) => {
             </>
           ) : null}
         </div>
-        <Table columns={props.columnsTitle} dataSource={props.data} />
+        <Table columns={props.columnsTitle} dataSource={handleData(props.data)} />
       </Suspense>
     </>
   );

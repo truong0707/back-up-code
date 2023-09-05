@@ -96,7 +96,7 @@ const DetailMenu = () => {
       key: "name",
       // render: (text) => <Link >{text}</Link>,
       render: (_, record) => (
-        <Link to={`/admin/${record.url}`} key={record.id}>
+        <Link to={`/admin${record.url}`} key={record.id}>
           {record.title}
         </Link>
       ),

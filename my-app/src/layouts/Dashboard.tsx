@@ -16,19 +16,13 @@ import { getMenuAction } from "../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../untils/checkIcons";
 import { childrenData } from "../component/tree/TreeMenu";
-import {
-  PlusSquareOutlined,
-  SettingFilled,
-} from "@ant-design/icons";
+import { PlusSquareOutlined, SettingFilled } from "@ant-design/icons";
 import LoadingCpn from "../component/spin/LoadingCpn";
 
-const TreeMenu = lazy(
-  () => import("../component/tree/TreeMenu")
-);
+const TreeMenu = lazy(() => import("../component/tree/TreeMenu"));
 const BreadcrumbNav = lazy(
   () => import("../component/Breadcrumb/BreadcrumbNav")
 );
-
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -127,9 +121,7 @@ const Dashboard = () => {
       <DesktopOutlined />
     ),
     getItem(
-      <Space>
-        {t(`MenuAdmin.menu_dynamic`)}
-      </Space>,
+      <Space>{t(`MenuAdmin.menu_dynamic`)}</Space>,
       "4",
       <AppstoreOutlined />,
 
@@ -153,14 +145,16 @@ const Dashboard = () => {
             <>
               <div className={Styles.wrapperDoashBoard}>
                 <div className={Styles.menuDoashBoard}>
-                  <Menu
-                    defaultSelectedKeys={["1"]}
-                    defaultOpenKeys={["sub1"]}
-                    mode="inline"
-                    theme="dark"
-                    inlineCollapsed={collapsed}
-                    items={items}
-                  />
+                  <div id="scrollableDiv" className={Styles.ScrollBar}>
+                    <Menu
+                      defaultSelectedKeys={["1"]}
+                      defaultOpenKeys={["sub1"]}
+                      mode="inline"
+                      theme="dark"
+                      inlineCollapsed={collapsed}
+                      items={items}
+                    />
+                  </div>
 
                   <div className={Styles.BoxMenu}>
                     <Space>
