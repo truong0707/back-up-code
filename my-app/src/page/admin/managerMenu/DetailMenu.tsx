@@ -87,11 +87,11 @@ const DetailMenu = () => {
       const data = menuDetail.children.map((data: any) => {
         return {
           ...data,
-          key: data.id,
-        };
+          key: data.id
+        }
       });
-
-      setData(data);
+  
+      setData(data)
     }
   }, [dispatch, pathId]);
 
@@ -146,6 +146,8 @@ const DetailMenu = () => {
     },
   ];
 
+ 
+
   return (
     <Suspense fallback={<LoadingCpn />}>
       <Modal title="Title" open={open} onOk={handleOK} onCancel={handleCancel}>
@@ -168,8 +170,8 @@ const DetailMenu = () => {
         <Table
           columns={columns}
           dataSource={
-            /* menuDetail.children */
-            data
+            menuDetail.children
+            // data
           }
         />
       ) : null}
