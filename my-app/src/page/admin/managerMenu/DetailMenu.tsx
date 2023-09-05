@@ -84,6 +84,7 @@ const DetailMenu = () => {
     }
 
     if (menuDetail && menuDetail.children) {
+      // const ss = () => {}
       const data = menuDetail.children.map((data: any) => {
         return {
           ...data,
@@ -94,7 +95,7 @@ const DetailMenu = () => {
       setData(data)
     }
 
-  }, [dispatch, pathId, setData, data]);
+  }, [dispatch, pathId]);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -171,8 +172,8 @@ const DetailMenu = () => {
         <Table
           columns={columns}
           dataSource={
-            // menuDetail.children
-            data
+            menuDetail.children
+            // data
           }
         />
       ) : null}
