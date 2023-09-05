@@ -164,6 +164,7 @@ const Dashboard = () => {
                           <PlusSquareOutlined />
                         </Tooltip>
                       </Link>
+
                       <Link to={"/admin/delete&update-menu"}>
                         <Tooltip title="Delete/Update Menu">
                           <SettingFilled spin />

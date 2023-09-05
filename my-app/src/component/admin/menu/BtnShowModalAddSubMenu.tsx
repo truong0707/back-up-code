@@ -10,6 +10,7 @@ import {
   addChildToMenu,
   addChildToParentById,
 } from "../../../untils/handleArrayMenu";
+import { parserStringToNumber } from "../../../untils/parserStringToNumber";
 
 export interface MyInputSubMenu {
   title: string;
@@ -61,7 +62,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
 
   /* Handle submit form - Call api */
   const handleOk = () => {
-    const idMenu = parseInt(props.idMenu);
+    const idMenu = parserStringToNumber(props.idMenu);
 
     /* check input empty */
     if (inputs.title === "") {
@@ -72,7 +73,8 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
       /* add sub menu */
       if (menuDetail && menuDetail.children) {
         if (props.idSubMenu) {
-          const idMenuSub = parseInt(props.idSubMenu);
+          const idMenuSub = parserStringToNumber(props.idSubMenu);
+
           let resultAddSub = addChildToParentById(
             props.listDataMenu,
             idMenuSub,
@@ -99,6 +101,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
       }
     }
     setIsModalOpen(false);
+
     setInputs({
       title: "",
       url: "",

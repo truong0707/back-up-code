@@ -32,9 +32,9 @@ const TreeMenu: React.FC = () => {
       return {
         title: (
           // <Link className="link" to={`/admin${childMenu.url}/${childMenu.id}`}>
-          <b key={childMenu.id} onClick={() => handleClick(childMenu.id)}>
+          <p key={childMenu.id} onClick={() => handleClick(childMenu.id)}>
             {childMenu.title}
-          </b>
+          </p>
           // </Link>
         ),
         key: childMenu.id,
@@ -64,9 +64,7 @@ const TreeMenu: React.FC = () => {
         key: data.id,
         icon: (
           <p key={data.id}>
-            <FontAwesomeIcon
-              icon={checkIcons(data.iconClass)}
-            />
+            <FontAwesomeIcon icon={checkIcons(data.iconClass)} />
           </p>
         ),
         children: showChildtreeMenu(data.children),
@@ -80,10 +78,7 @@ const TreeMenu: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div
-      id="scrollableDiv"
-      className={Styles.ScrollBar}
-    >
+    <div id="scrollableDiv" className={Styles.ScrollBar}>
       <Tree
         className={Styles.treeData}
         showIcon

@@ -33,31 +33,37 @@ export const menuReducer = (
     case UPDATE_FIELD_DATA_MENU:
       const currentData = [...state.listDataMenu];
       const newDataUpate = action.payload;
-      
-      const newDataMenu = currentData.map((menu: {
-        id: number,
-        name: string,
-        iconClass: string,
-        children: []
-      }) => {
-        if (menu.id === newDataUpate.id) {
-          return {
-            id: newDataUpate.id,
-            name: newDataUpate.name,
-            iconClass: newDataUpate.iconClass,
-            children: newDataUpate.children,
-          };
+
+      const newDataMenu = currentData.map(
+        (menu: {
+          id: number;
+          name: string;
+          iconClass: string;
+          children: [];
+        }) => {
+          if (menu.id === newDataUpate.id) {
+            return {
+              id: newDataUpate.id,
+              name: newDataUpate.name,
+              iconClass: newDataUpate.iconClass,
+              children: newDataUpate.children,
+            };
+          }
+          return menu;
         }
-        return menu;
-      });
-      return { ...state, listDataMenu: newDataMenu, menuDetail: action.payload };
+      );
+      return {
+        ...state,
+        listDataMenu: newDataMenu,
+        menuDetail: action.payload,
+      };
     case DELETE_DATA_MENU:
       const dataCurrentMenuList = [...state.listDataMenu];
       const newListMenu = DeleteMenuByID(dataCurrentMenuList, action.payload);
       return {
         ...state,
-        listDataMenu: newListMenu
-      }
+        listDataMenu: newListMenu,
+      };
     case ADD_DATA_MENU:
       const currentlistDataMenu: {}[] = [...state.listDataMenu];
       const payload = action.payload;
@@ -66,17 +72,24 @@ export const menuReducer = (
     case DELETE_SUB_DATA_MENU:
       const currentlistData = [...state.listDataMenu];
       const newData = action.payload.data;
-      const findData = currentlistData.map((menu: { id: number, name: string, iconClass: string, children: [] }) => {
-        if (menu.id === newData.id) {
-          return {
-            id: newData.id,
-            name: newData.name,
-            iconClass: newData.iconClass,
-            children: newData.children,
-          };
-        } 
-        return menu;
-      });
+      const findData = currentlistData.map(
+        (menu: {
+          id: number;
+          name: string;
+          iconClass: string;
+          children: [];
+        }) => {
+          if (menu.id === newData.id) {
+            return {
+              id: newData.id,
+              name: newData.name,
+              iconClass: newData.iconClass,
+              children: newData.children,
+            };
+          }
+          return menu;
+        }
+      );
 
       return {
         ...state,

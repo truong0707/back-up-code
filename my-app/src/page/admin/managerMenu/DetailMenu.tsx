@@ -144,7 +144,7 @@ const DetailMenu = () => {
         };
       });
 
-      return data
+      return data;
     }
 
     return undefined;

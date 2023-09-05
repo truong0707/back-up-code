@@ -53,20 +53,19 @@
       "iconClass": "quyen",
       "children": [
         {
-          "id": 2390760334,
           "title": "Quản lý danh hiệu & mô hìnhvh",
-          "url": "/Quản_lý_các_danh_hiệu_&_mô_hình_văn_hoá",
+          "id": 2390760334,
           "children": [
             {
               "title": "Quản lý bạo lực",
               "id": 2436563508,
               "children": [
                 {
-                  "title": "Quản lý As",
+                  "title": "Quản lý A",
                   "id": 3360595989,
                   "children": [
                     {
-                      "title": "đa",
+                      "title": "Test1",
                       "id": 1461087430,
                       "children": [
                         {
@@ -97,7 +96,7 @@
                           "url": "/test"
                         }
                       ],
-                      "url": "/ad"
+                      "url": "/Test1"
                     }
                   ],
                   "url": "/Quản_lý_A"
@@ -105,12 +104,20 @@
               ],
               "url": "/Quản_lý_bạo_lực"
             }
-          ]
+          ],
+          "url": "/Quản_lý_các_danh_hiệu_&_mô_hình_văn_hoá"
         },
         {
           "title": "Quản lý thiết chế văn hoá",
           "id": 3547635537,
-          "children": [],
+          "children": [
+            {
+              "title": "Quản lý thiết chế văn hoáA",
+              "url": "/Quản-lý-thiết-chế-văn-hoáA",
+              "children": [],
+              "id": 1167947834
+            }
+          ],
           "url": "/Quản-lý-thiết-chế-văn-hoá"
         },
         {
@@ -122,7 +129,14 @@
         {
           "title": "Quản lý dịch vụ văn hoá",
           "id": 1229769943,
-          "children": [],
+          "children": [
+            {
+              "title": "Quản lý dịch vụ văn hóa",
+              "id": 2698388950,
+              "children": [],
+              "url": "/Quảnly"
+            }
+          ],
           "url": "/Quản-lý-dịch-vụ-văn-hoá"
         },
         {
@@ -134,7 +148,14 @@
         {
           "title": "Khu vực",
           "id": 3199428424,
-          "children": [],
+          "children": [
+            {
+              "id": 424786181,
+              "title": "Khu vực A",
+              "url": "/Khu vực",
+              "children": []
+            }
+          ],
           "url": "/Khu-vực"
         }
       ],
@@ -195,7 +216,7 @@
         {
           "id": 4209891024,
           "title": "Quản lý A",
-          "url": "/Quản-lý-As",
+          "url": "/Quản-lý-A",
           "children": []
         }
       ],
