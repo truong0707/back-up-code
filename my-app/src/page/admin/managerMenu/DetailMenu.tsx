@@ -1,5 +1,5 @@
 import { Alert, Modal, Space, Table } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { deleteMenuAction, getDetailMenuAction } from "../../../store/redux/actions/menuActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,14 @@ import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
-import BtnShowModalUpdateMenu from "../../../component/admin/menu/BtnShowModalUpdateSubMenu";
-import BtnShowModalAddSubMenu from "../../../component/admin/menu/BtnShowModalAddSubMenu";
+import LoadingCpn from "../../../component/spin/LoadingCpn";
+const BtnShowModalAddSubMenu = lazy(
+  () => import("../../../component/admin/menu/BtnShowModalAddSubMenu")
+);
+const BtnShowModalUpdateMenu = lazy(
+  () => import("../../../component/admin/menu/BtnShowModalUpdateSubMenu")
+);
+
 
 interface DataType {
   url: string;
@@ -20,7 +26,7 @@ interface DataType {
   tags: string[];
 }
 
-export default function DetailMenu() {
+const DetailMenu = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
@@ -123,7 +129,7 @@ export default function DetailMenu() {
   ];
 
   return (
-    <>
+      <Suspense fallback={<LoadingCpn />}>
       <Modal
         title="Title"
         open={open}
@@ -148,7 +154,9 @@ export default function DetailMenu() {
       {getMenu && menuDetail ? (
         <Table columns={columns} dataSource={menuDetail.children} />
       ) : null}
-    </>
+    </Suspense>
   );
 }
+
+export default DetailMenu;
 

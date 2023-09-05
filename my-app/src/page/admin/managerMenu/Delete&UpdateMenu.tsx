@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Modal, Tooltip, Tree } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,9 @@ import {
 import Styles from "./managerMenu.module.scss";
 import { useTranslation } from "react-i18next";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
-import ModalUpdateMenu from "../../../component/admin/menu/ModalUpdateMenu";
+const ModalUpdateMenu = lazy(
+  () => import("../../../component/admin/menu/ModalUpdateMenu")
+);
 
 const DeleteMenu = () => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
@@ -32,19 +34,17 @@ const DeleteMenu = () => {
   useEffect(() => {
     const dataMenuPromise = getMenuAction();
     dataMenuPromise(dispatch);
-
   }, [dispatch]);
 
   const handleClickDelete = (id: string | number) => {
-    setId(id)
+    setId(id);
     setOpen(true);
   };
 
   const handleClickUpdate = (data: object) => {
-    setDataUpdateCurrent(data)
+    setDataUpdateCurrent(data);
     setOpenModalUpdate(true);
-    console.log(data, "data")
-  }
+  };
 
   const handleOK = () => {
     if (id) {
@@ -52,24 +52,24 @@ const DeleteMenu = () => {
       deleteMenuPromise(dispatch);
     }
     setOpen(false);
-  }
+  };
 
   const handleOKUpdate = (id: string | number | undefined) => {
-    console.log(id, "ád")
-  }
+    console.log(id, "ád");
+  };
 
   const handleCancel = () => {
     setOpen(false);
     setOpenModalUpdate(false);
-  }
+  };
 
   const getListDataMenu = listDataMenu.map(
     (data: {
-      id: string | number,
-      name: string,
-      url: string,
-      iconClass: string,
-      children: [],
+      id: string | number;
+      name: string;
+      url: string;
+      iconClass: string;
+      children: [];
     }) => {
       return {
         title: (
@@ -82,7 +82,17 @@ const DeleteMenu = () => {
             </Tooltip>
 
             <Tooltip title={t(`MenuAdmin.repair_menu`)}>
-              <ScissorOutlined onClick={() => handleClickUpdate({ id: data.id, name: data.name, iconClass: data.iconClass, url: data.url })} className={Styles.IconUpdate} />
+              <ScissorOutlined
+                onClick={() =>
+                  handleClickUpdate({
+                    id: data.id,
+                    name: data.name,
+                    iconClass: data.iconClass,
+                    url: data.url,
+                  })
+                }
+                className={Styles.IconUpdate}
+              />
             </Tooltip>
 
             <b>{data.name}</b>
@@ -102,12 +112,7 @@ const DeleteMenu = () => {
 
   return (
     <Suspense fallback={<LoadingCpn />}>
-      <Modal
-        title="Title"
-        open={open}
-        onOk={handleOK}
-        onCancel={handleCancel}
-      >
+      <Modal title="Title" open={open} onOk={handleOK} onCancel={handleCancel}>
         <Alert
           message="Bạn có chắc muốn xoá menu này? Toàn bộ sub menu của menu này cũng sẽ mất!"
           type="warning"
@@ -115,11 +120,21 @@ const DeleteMenu = () => {
         />
       </Modal>
 
-      {
-        openModalUpdate && dataUpdateCurrent ? <>   <ModalUpdateMenu handleOK={() => handleOKUpdate(dataUpdateCurrent.id)} openModalUpdate={openModalUpdate} handleCancel={handleCancel} setOpenModalUpdate={setOpenModalUpdate} idMenu={dataUpdateCurrent.id} nameMenu={dataUpdateCurrent.name} urlMenu={dataUpdateCurrent.url} iconClass={dataUpdateCurrent.iconClass} /></> : null
-      }
-
-
+      {openModalUpdate && dataUpdateCurrent ? (
+        <>
+          {" "}
+          <ModalUpdateMenu
+            handleOK={() => handleOKUpdate(dataUpdateCurrent.id)}
+            openModalUpdate={openModalUpdate}
+            handleCancel={handleCancel}
+            setOpenModalUpdate={setOpenModalUpdate}
+            idMenu={dataUpdateCurrent.id}
+            nameMenu={dataUpdateCurrent.name}
+            urlMenu={dataUpdateCurrent.url}
+            iconClass={dataUpdateCurrent.iconClass}
+          />
+        </>
+      ) : null}
 
       {getListDataMenu.length === 0 ? (
         <>Chưa có menu nào trong database! - Hãy thêm menu</>

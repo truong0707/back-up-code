@@ -139,10 +139,10 @@
       "iconClass": "phone",
       "children": [
         {
+          "id": 4209891024,
           "title": "Quản lý A",
-          "url": "/Quản-lý-A",
-          "children": [],
-          "id": 4209891024
+          "url": "/Quản-lý-As",
+          "children": []
         }
       ],
       "id": 4

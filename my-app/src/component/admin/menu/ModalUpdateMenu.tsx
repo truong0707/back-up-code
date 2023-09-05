@@ -22,7 +22,7 @@ interface MyUpdatePropsMenu {
   iconClass: string
 }
 
-export default function ModalUpdateMenu(props: MyUpdatePropsMenu) {
+const  ModalUpdateMenu = (props: MyUpdatePropsMenu) =>  {
   const { t } = useTranslation(["homeAdmin"]);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -133,3 +133,5 @@ export default function ModalUpdateMenu(props: MyUpdatePropsMenu) {
     </Modal>
   );
 }
+
+export default ModalUpdateMenu;

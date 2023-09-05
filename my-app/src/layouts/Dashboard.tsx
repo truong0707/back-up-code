@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Styles from "../page/admin/Doahboard.module.scss";
 import {
@@ -12,15 +12,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../store/redux/Store";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import BreadcrumbNav from "../component/Breadcrumb/BreadcrumbNav";
 import { getMenuAction } from "../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../untils/checkIcons";
-import TreeMenu, { childrenData } from "../component/tree/TreeMenu";
+import { childrenData } from "../component/tree/TreeMenu";
 import {
   PlusSquareOutlined,
   SettingFilled,
 } from "@ant-design/icons";
+import LoadingCpn from "../component/spin/LoadingCpn";
+
+const TreeMenu = lazy(
+  () => import("../component/tree/TreeMenu")
+);
+const BreadcrumbNav = lazy(
+  () => import("../component/Breadcrumb/BreadcrumbNav")
+);
+
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -138,7 +146,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <>
+    <Suspense fallback={<LoadingCpn />}>
       {getUser ? (
         <>
           {isAdmin ? (
@@ -189,7 +197,7 @@ const Dashboard = () => {
       ) : (
         <Navigate to="/login" />
       )}
-    </>
+    </Suspense>
   );
 };
 export default Dashboard;
