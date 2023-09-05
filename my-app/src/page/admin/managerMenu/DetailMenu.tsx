@@ -77,25 +77,16 @@ const DetailMenu = () => {
     setOpen(false);
   };
 
+
+
   useEffect(() => {
     if (pathId) {
       const dataDetailMenuPromise = getDetailMenuAction(pathId);
       dataDetailMenuPromise(dispatch);
     }
+     
 
-    if (menuDetail && menuDetail.children) {
-      // const ss = () => {}
-      const data = menuDetail.children.map((data: any) => {
-        return {
-          ...data,
-          key: data.id
-        }
-      });
-  
-      setData(data)
-    }
-
-  }, [dispatch, pathId]);
+  }, [dispatch, pathId, setData]);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -148,7 +139,18 @@ const DetailMenu = () => {
     },
   ];
 
- 
+  // const ss = (menu:any) => {
+  //   alert("có")
+  //   const data = menu.map((data: any) => {
+  //     return {
+  //       ...data,
+  //       key: data.id
+  //     }
+  //   });
+    
+  //   return data
+  // }
+  
 
   return (
     <Suspense fallback={<LoadingCpn />}>
@@ -168,12 +170,13 @@ const DetailMenu = () => {
         menuDetail={menuDetail}
       />
 
-      {getMenu && menuDetail && data ? (
+      {getMenu && menuDetail ? (
         <Table
           columns={columns}
           dataSource={
             menuDetail.children
             // data
+            // ss(menuDetail.children)
           }
         />
       ) : null}
