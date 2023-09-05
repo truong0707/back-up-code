@@ -1,5 +1,5 @@
 import { Alert, Modal, Space, Table } from "antd";
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Children, Suspense, lazy, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   deleteMenuAction,
@@ -39,7 +39,6 @@ const DetailMenu = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showChildtreeMenu = (children: childrenData[] | undefined): {}[] => {
@@ -77,16 +76,12 @@ const DetailMenu = () => {
     setOpen(false);
   };
 
-
-
   useEffect(() => {
     if (pathId) {
       const dataDetailMenuPromise = getDetailMenuAction(pathId);
       dataDetailMenuPromise(dispatch);
     }
-     
-
-  }, [dispatch, pathId, setData]);
+  }, [dispatch, pathId]);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -139,18 +134,21 @@ const DetailMenu = () => {
     },
   ];
 
-  // const ss = (menu:any) => {
-  //   alert("có")
-  //   const data = menu.map((data: any) => {
-  //     return {
-  //       ...data,
-  //       key: data.id
-  //     }
-  //   });
-    
-  //   return data
-  // }
-  
+  const handleData = (menu: []) => {
+    if (menu) {
+      const data = menu.map((dataMenu: { id: string; children: [] }): any => {
+        return {
+          ...dataMenu,
+          key: dataMenu.id,
+          children: handleData(dataMenu.children),
+        };
+      });
+
+      return data
+    }
+
+    return undefined;
+  };
 
   return (
     <Suspense fallback={<LoadingCpn />}>
@@ -174,9 +172,9 @@ const DetailMenu = () => {
         <Table
           columns={columns}
           dataSource={
-            menuDetail.children
+            // menuDetail.children
             // data
-            // ss(menuDetail.children)
+            handleData(menuDetail.children)
           }
         />
       ) : null}
