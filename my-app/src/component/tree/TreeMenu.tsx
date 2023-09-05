@@ -66,7 +66,6 @@ const TreeMenu: React.FC = () => {
           <p key={data.id}>
             <FontAwesomeIcon
               icon={checkIcons(data.iconClass)}
-              //   className={Styles.icon}
             />
           </p>
         ),
@@ -86,7 +85,7 @@ const TreeMenu: React.FC = () => {
       className={Styles.ScrollBar}
     >
       <Tree
-        style={{ background: "#001529", color: "#a0a3a5" }}
+        className={Styles.treeData}
         showIcon
         defaultExpandAll
         defaultSelectedKeys={["0-0-0"]}

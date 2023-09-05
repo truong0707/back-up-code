@@ -9,6 +9,7 @@
   &::-webkit-scrollbar {
     width: 15px;
   }
+
   @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
     // For Google Chrome
     &::-webkit-scrollbar {
@@ -23,11 +24,10 @@
     &::-webkit-scrollbar-track {
       background: $background-color;
     }
-  
-    // For Internet Explorer
-    // & {
-    //   scrollbar-face-color: $foreground-color;
-    //   scrollbar-track-color: $background-color;
-    // }
   }
+}
+
+.treeData {
+  background: #001529;
+  color: #a0a3a5;
 }

@@ -6,7 +6,10 @@ import { addSubMenuAction } from "../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../store/redux/Store";
 import { v4 as uuidv4 } from "uuid";
 import { PlusOutlined } from "@ant-design/icons";
-import { addChildToMenu, addChildToParentById } from "../../../untils/handleArrayMenu";
+import {
+  addChildToMenu,
+  addChildToParentById,
+} from "../../../untils/handleArrayMenu";
 
 export interface MyInputSubMenu {
   title: string;
@@ -17,16 +20,16 @@ export interface MyInputSubMenu {
 interface MyBtnShowMenuSubProps {
   idSubMenu?: string;
   menuDetail?: {
-    id: number | number,
-    name: string,
-    url: string,
-    iconClass: string,
-    children: [],
+    id: number | number;
+    name: string;
+    url: string;
+    iconClass: string;
+    children: [];
   }[];
   listDataMenu: [];
   idMenu: string;
-  contenBtn?: string,
-  parentType?: boolean,
+  contenBtn?: string;
+  parentType?: boolean;
 }
 
 const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
@@ -36,7 +39,6 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   const dispatch = useDispatch();
   const uuidV4 = uuidv4();
   const parserNumber = parseInt(uuidV4.replace(/- +/g, ""), 16);
-
 
   /* Sub menu */
   const [inputs, setInputs] = useState<MyInputSubMenu>({
@@ -62,16 +64,20 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
     const idMenu = parseInt(props.idMenu);
 
     /* check input empty */
-    if (inputs.title === '') {
+    if (inputs.title === "") {
       message.error("Hãy điền name cho sub menu!", 3);
-    } else if (inputs.url === '') {
+    } else if (inputs.url === "") {
       message.error("Hãy điền url cho sub menu!", 3);
     } else {
       /* add sub menu */
       if (menuDetail && menuDetail.children) {
         if (props.idSubMenu) {
           const idMenuSub = parseInt(props.idSubMenu);
-          let resultAddSub = addChildToParentById(props.listDataMenu, idMenuSub, inputs);
+          let resultAddSub = addChildToParentById(
+            props.listDataMenu,
+            idMenuSub,
+            inputs
+          );
           // eslint-disable-next-line array-callback-return
           const newData = resultAddSub.filter((menu) => {
             if (menu.id === idMenu) {
@@ -80,15 +86,16 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           });
           const addSubMenuActionPromise = addSubMenuAction(idMenu, newData[0]);
           addSubMenuActionPromise(dispatch);
-        } 
-        
-        if (props.parentType) {
-          let resultAddSub = addChildToMenu(props.listDataMenu, idMenu, inputs);
-          const addSubMenuActionPromise = addSubMenuAction(idMenu, resultAddSub);
-          addSubMenuActionPromise(dispatch);
         }
 
-       
+        if (props.parentType) {
+          let resultAddSub = addChildToMenu(props.listDataMenu, idMenu, inputs);
+          const addSubMenuActionPromise = addSubMenuAction(
+            idMenu,
+            resultAddSub
+          );
+          addSubMenuActionPromise(dispatch);
+        }
       }
     }
     setIsModalOpen(false);
@@ -96,7 +103,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
       title: "",
       url: "",
       children: [],
-    })  
+    });
   };
   /* handle Cancel */
   const handleCancel = () => {
@@ -105,15 +112,11 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-  useEffect(() => { }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        {
-          props.contenBtn ? <>
-            {props.contenBtn}
-          </> : <PlusOutlined />
-        }
+        {props.contenBtn ? <>{props.contenBtn}</> : <PlusOutlined />}
       </Button>
 
       <Modal

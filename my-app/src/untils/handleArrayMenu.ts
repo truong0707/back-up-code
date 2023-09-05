@@ -49,7 +49,7 @@ export const addChildToMenu = (
 export const findDataDetailSumenu = (
   children: childrenData[] | undefined,
   idSub: number
-): any[] => {
+): {}[] => {
   const newChildren: childrenData[] = [];
 
   if (!children || children.length === 0) {
@@ -78,7 +78,7 @@ export const handleUpdateChildtreeMenu = (
   titleSub: string,
   idSub: number | string,
   urlSub: string
-): any[] => {
+): {}[] => {
   if (!children || children.length === 0) {
     return [];
   }
@@ -115,7 +115,10 @@ export const handleUpdateChildtreeMenu = (
 
 
 export function DeleteMenuByID(arr: never[], idDelete: string | number) {
-  return arr.filter((item: any) => {
+  return arr.filter((item: {
+    id: string,
+    children: never[]
+  }) => {
     if (item.id === idDelete) {
       return false;
     }

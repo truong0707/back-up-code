@@ -6,11 +6,6 @@ import { updateMenuAction } from "../../../store/redux/actions/menuActions";
 import Styles from "../../../page/admin/managerMenu/managerMenu.module.scss";
 import { v4 as uuidv4 } from "uuid";
 
-interface MyInputSubMenu {
-  title: string;
-  urlSubMenu: string;
-}
-
 interface MyUpdatePropsMenu {
   handleOK: () => void,
   openModalUpdate: boolean | undefined,
@@ -29,7 +24,7 @@ const  ModalUpdateMenu = (props: MyUpdatePropsMenu) =>  {
   const uuidV4 = uuidv4();
   const parserNumber = parseInt(uuidV4.replace(/- +/g, ""), 16);
 
-  const [valueA, setValue] = useState<any>({
+  const [valueA, setValue] = useState<{name: string, url: string, iconClass: string}>({
     name: props.nameMenu,
     url: props.urlMenu,
     iconClass: props.iconClass
@@ -77,7 +72,7 @@ const  ModalUpdateMenu = (props: MyUpdatePropsMenu) =>  {
     const nameInput = e.target.name;
     let valueInput = e.target.value;
 
-    setValue((state: MyInputSubMenu) => ({
+    setValue((state) => ({
       ...state,
       id: parserNumber,
       [nameInput]: valueInput,

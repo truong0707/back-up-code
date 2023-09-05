@@ -11,6 +11,8 @@ import {
 } from "../constants/menuContans";
 import menuServices from "../../../services/menu";
 import { message } from "antd";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { AxiosError } from "axios";
 
 export function getMenuAction() {
   return async (dispatch: Dispatch) => {
@@ -19,7 +21,7 @@ export function getMenuAction() {
       const { data } = await menuServices.getMenuApi();
 
       dispatch({ type: GET_DATA_MENU, payload: data });
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       console.log(error, "err");
     }
   };
@@ -44,7 +46,7 @@ export function addMenuAction(dataOjb: DataMenuOjb) {
 
       dispatch({ type: ADD_DATA_MENU, payload: data });
       message.success("Thêm menu thành công!", 3);
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("Thêm menu thất bại! - kiểm tra server ", 3);
       console.log(error, "Lỗi");
     }
@@ -59,7 +61,7 @@ export function deleteMenuAction(id: string | number) {
 
       dispatch({ type: DELETE_DATA_MENU, payload: id });
       message.success("Xóa menu thành công!", 2.5);
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("Lỗi Xóa menu! - xem log ở tab", 2.5);
       console.log(error, "Lỗi");
     }
@@ -72,7 +74,7 @@ export function getDetailMenuAction(id: string | number) {
       const { data } = await menuServices.getMenuByIdApi(id);
 
       dispatch({ type: GET_DATA_DETAIL_MENU, payload: data });
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("get detail thất bại! - kiểm tra server", 3);
       console.log(error, "Lỗi");
     }
@@ -80,7 +82,10 @@ export function getDetailMenuAction(id: string | number) {
 }
 
 /* update menu */
-export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
+export function updateMenuAction(
+  id: string | number,
+  dataOjb: { name: string; url: string; iconClass: string }
+) {
   return async (dispatch: Dispatch) => {
     try {
       if (id === 9) {
@@ -92,7 +97,7 @@ export function updateMenuAction(id: string | number, dataOjb: DataMenuOjb) {
         dispatch({ type: UPDATE_DATA_MENU, payload: data });
         message.success("Cập nhật thành công!", 3);
       }
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("Cập nhật thất bại!", 3);
       console.log(error, "Lỗi");
     }
@@ -106,7 +111,7 @@ export function updateFieldMenuAction(id: string | number, inputData: {}) {
 
       dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
       message.success(`Đã cập nhật sub cho menu có id cha: ${id} !`, 3);
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("Cập nhật thất bại! - có lỗi ở server", 5);
       console.log(error, "Lỗi");
     }
@@ -115,8 +120,7 @@ export function updateFieldMenuAction(id: string | number, inputData: {}) {
 
 export function deleteSubdMenuAction(
   id: string | number,
-  inputData: {},
-  // dataCurrent: any
+  inputData: {}
 ) {
   return async (dispatch: Dispatch) => {
     try {
@@ -127,7 +131,7 @@ export function deleteSubdMenuAction(
         payload: { data: data, idMenu: id },
       });
       message.success(`Xoá sub cho menu có id cha là: ${id} thành công !`, 3);
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("Xoá sub menu thất bại! - có lỗi ở server", 5);
       console.log(error, "Lỗi");
     }
@@ -141,7 +145,7 @@ export function addSubMenuAction(id: string | number, dataInput: {}) {
 
       dispatch({ type: UPDATE_FIELD_DATA_MENU, payload: data });
       message.success(`Đã thêm sub cho menu có id cha là: ${id} !`, 3);
-    } catch (error: any) {
+    } catch (error: AxiosError | any) {
       message.error("Thêm sub menu thất bại! - có lỗi Server", 5);
       console.log(error, "Lỗi");
     }

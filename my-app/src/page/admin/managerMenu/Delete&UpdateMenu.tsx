@@ -56,9 +56,7 @@ const DeleteMenu = () => {
     setOpen(false);
   };
 
-  const handleOKUpdate = (id: string | number | undefined) => {
-    console.log(id, "ád");
-  };
+  const handleOKUpdate = (id: string | number | undefined) => {};
 
   const handleCancel = () => {
     setOpen(false);
@@ -124,7 +122,6 @@ const DeleteMenu = () => {
 
       {openModalUpdate && dataUpdateCurrent ? (
         <>
-          {" "}
           <ModalUpdateMenu
             handleOK={() => handleOKUpdate(dataUpdateCurrent.id)}
             openModalUpdate={openModalUpdate}

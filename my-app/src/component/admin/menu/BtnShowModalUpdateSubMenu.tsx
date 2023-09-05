@@ -21,7 +21,7 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
-  const { menuDetail }: any = getMenu;
+  const { menuDetail } = getMenu;
 
   /* get sub id */
   const [inputs, setInputs] = useState({
@@ -49,18 +49,6 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
 
   const handleOK = () => {
     if (menuDetail && menuDetail.children) {
-      // menuServices.updateFieldMenuApi(
-      //   pathId,
-      //   /* inputDataAdd */
-      //   {
-      //     //   id: 1,
-      //     //   name: "Menu 2 4",
-      //     //   url: "/menu1",
-      //     //   iconClass: "folder-open",
-      //     children: newSubmenu,
-      //   }
-      // );
-
       /* Bắn dispatch */
       const updateFielMenuActionPromise = updateFieldMenuAction(pathId, {
         //   id: 1,
@@ -140,19 +128,6 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
               placeholder="url"
             />
           </Form.Item>
-
-          {/* <Form.Item
-            name="iconClass"
-            label="iconClass"
-            rules={[{ required: true }, { type: "string", min: 1 }]}
-          >
-            <Input
-              type="numberPhone"
-              name="numberPhone"
-              onChange={handleInputChange}
-              placeholder="iconClass"
-            />
-          </Form.Item> */}
 
           <Form.Item>
             {/* <Space>
