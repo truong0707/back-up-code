@@ -93,7 +93,8 @@ const DetailMenu = () => {
   
       setData(data)
     }
-  }, [dispatch, pathId]);
+
+  }, [dispatch, pathId, setData, data]);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -170,8 +171,8 @@ const DetailMenu = () => {
         <Table
           columns={columns}
           dataSource={
-            menuDetail.children
-            // data
+            // menuDetail.children
+            data
           }
         />
       ) : null}
