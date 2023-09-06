@@ -1,5 +1,11 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Button, Input, Modal, message } from "antd";
+import React, {
+  Dispatch,
+  SetStateAction,
+  Suspense,
+  useEffect,
+  useState,
+} from "react";
+import { Button, Form, FormInstance, Input, Modal, Space, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingCpn from "../../spin/LoadingCpn";
 import { addSubMenuAction } from "../../../store/redux/actions/menuActions";
@@ -19,6 +25,8 @@ export interface MyInputSubMenu {
 }
 
 interface MyBtnShowMenuSubProps {
+  openModalAddSubMenu: boolean;
+  setopenModalAddSubMenu: Dispatch<SetStateAction<boolean>>;
   idSubMenu?: string;
   menuDetail?: {
     id: number | number;
@@ -33,7 +41,7 @@ interface MyBtnShowMenuSubProps {
   parentType?: boolean;
 }
 
-const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
+const ModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { menuDetail } = getMenu;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,13 +69,34 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
   };
 
   /* Handle submit form - Call api */
-  const handleOk = () => {
+  const formRef = React.useRef<FormInstance>(null);
+  const [form] = Form.useForm();
+  const handleOk = () => {};
+  /* handle Cancel */
+  const handleCancel = () => {
+    props.setopenModalAddSubMenu(false);
+  };
+  useEffect(() => {}, [dispatch]);
+
+  const onFinish = (value: {
+    id: number;
+    title: string;
+    url: string;
+    children: never[];
+  }) => {
+    const newValue = {
+      id: parserNumber,
+      title: value.title,
+      url: value.url,
+      children: [],
+    };
+
     const idMenu = parserStringToNumber(props.idMenu);
 
     /* check input empty */
-    if (inputs.title === "") {
+    if (newValue.title === "") {
       message.error("Hãy điền name cho sub menu!", 3);
-    } else if (inputs.url === "") {
+    } else if (newValue.url === "") {
       message.error("Hãy điền url cho sub menu!", 3);
     } else {
       /* add sub menu */
@@ -78,7 +107,7 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
           let resultAddSub = addChildToParentById(
             props.listDataMenu,
             idMenuSub,
-            inputs
+            newValue
           );
           // eslint-disable-next-line array-callback-return
           const newData = resultAddSub.filter((menu) => {
@@ -91,16 +120,20 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
         }
 
         if (props.parentType) {
-          let resultAddSub = addChildToMenu(props.listDataMenu, idMenu, inputs);
+          let resultAddSub = addChildToMenu(
+            props.listDataMenu,
+            idMenu,
+            newValue
+          );
           const addSubMenuActionPromise = addSubMenuAction(
             idMenu,
             resultAddSub
           );
           addSubMenuActionPromise(dispatch);
+          setIsModalOpen(false);
         }
       }
     }
-    setIsModalOpen(false);
 
     setInputs({
       title: "",
@@ -108,48 +141,71 @@ const BtnShowModalAddSubMenu = (props: MyBtnShowMenuSubProps) => {
       children: [],
     });
   };
-  /* handle Cancel */
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  useEffect(() => {}, [dispatch]);
+
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      {/* <Button type="primary" onClick={showModal}>
         {props.contenBtn ? <>{props.contenBtn}</> : <PlusOutlined />}
-      </Button>
+      </Button> */}
 
       <Modal
         title="Thêm mới sub menu"
-        open={isModalOpen}
-        onOk={handleOk}
+        open={props.openModalAddSubMenu}
+        // onOk={handleOk}
+        footer={null}
         onCancel={handleCancel}
       >
-        <Suspense fallback={<LoadingCpn />}>
-          <div>
-            <h4>Title</h4>
+        <Form
+          ref={formRef}
+          form={form}
+          layout="vertical"
+          onFinish={onFinish}
+          autoComplete="off"
+        >
+          <Form.Item
+            name="title"
+            label="url"
+            rules={[{ required: true }, { type: "string", min: 1 }]}
+          >
             <Input
               name="title"
               onChange={handleInputChangeSubMenu}
-              placeholder="name Menu"
-              defaultValue={inputs.title}
+              placeholder="title menu"
             />
+          </Form.Item>
 
-            <h4>url</h4>
+          <Form.Item
+            name="url"
+            label="url"
+            rules={[{ required: true }, { type: "string", min: 1 }]}
+            // initialValue={inputsCurrent.title}
+          >
             <Input
               name="url"
               defaultValue={"/"}
               onChange={handleInputChangeSubMenu}
               placeholder="url"
             />
-          </div>
-        </Suspense>
+          </Form.Item>
+
+          <Form.Item>
+            <Space style={{ marginTop: "10px" }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+
+              <Button
+              // onClick={() => props.setopenModalUpdateSubMenu(false)}
+              // type="primary"
+              >
+                Cancel
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );
 };
 
-export default BtnShowModalAddSubMenu;
+export default ModalAddSubMenu;

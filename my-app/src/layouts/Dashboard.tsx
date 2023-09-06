@@ -150,7 +150,7 @@ const Dashboard = () => {
                       defaultSelectedKeys={["1"]}
                       defaultOpenKeys={["sub1"]}
                       mode="inline"
-                      theme="dark"
+                      theme="light"
                       inlineCollapsed={collapsed}
                       items={items}
                     />
@@ -175,8 +175,8 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div style={{ width: "100%", display: "flex" }}>
-                  <div style={{ width: "26%" }}></div>
+                <div className={Styles.wrapperCRUDUser}>
+                  <div className={Styles.cushion}></div>
                   {/* CRUD USER */}
                   <div className={Styles.wrapperContentDoashBoard}>
                     <BreadcrumbNav />

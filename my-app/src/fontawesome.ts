@@ -11,6 +11,7 @@ import {
   faUserGraduate,
   faScaleUnbalancedFlip,
   faCoins,
+  faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -24,4 +25,5 @@ library.add(
   faFolderOpen,
   faSuitcaseMedical,
   faCoins,
+  faPenToSquare
 );

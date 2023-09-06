@@ -1,4 +1,4 @@
-import { Alert, Modal, Space, Table } from "antd";
+import { Alert, Button, Modal, Space, Table } from "antd";
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -12,24 +12,14 @@ import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
-const BtnShowModalAddSubMenu = lazy(
-  () => import("../../../component/admin/menu/BtnShowModalAddSubMenu")
-);
-const BtnShowModalUpdateMenu = lazy(
-  () => import("../../../component/admin/menu/BtnShowModalUpdateSubMenu")
-);
+import { DataTypecolumnsMenu, typeMenuHaveId } from "../../../types/Menu";
 
-interface DataType {
-  url: string;
-  title: string;
-  id: string;
-  // name: string;
-  // numberPhone: string;
-  // tags: string[];
-  children: any[];
-  key: number;
-}
-
+const ModalAddSubMenu = lazy(
+  () => import("../../../component/admin/menu/ModalAddSubMenu")
+);
+const ModalUpdateSubMenu = lazy(
+  () => import("../../../component/admin/menu/ModalUpdateSubMenu")
+);
 const DetailMenu = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
@@ -47,15 +37,6 @@ const DetailMenu = () => {
     }
 
     return children.map((childMenu: childrenData) => {
-      // if (childMenu.id === 44) {
-      //   return {
-      //     id: "55",
-      //     title: "Da sua",
-      //     url: "/menu1/subA",
-      //     children: [],
-      //   };
-      // }
-
       return {
         title: childMenu.title,
         id: childMenu.id,
@@ -65,7 +46,7 @@ const DetailMenu = () => {
     });
   };
 
-  const handleOK = () => {
+  const handleOKDelete = () => {
     const deleteMenuPromise = deleteMenuAction(pathId);
     deleteMenuPromise(dispatch);
 
@@ -83,7 +64,25 @@ const DetailMenu = () => {
     }
   }, [dispatch, pathId]);
 
-  const columns: ColumnsType<DataType> = [
+  console.log(pathId, "path uid")
+
+  const [openModalUpdateSubMenu, setopenModalUpdateSubMenu] = useState(false);
+  const [openModalAddSubMenu, setopenModalAddSubMenu] = useState(false);
+  const [dataUpdateCurrent, setDataUpdateCurrent] = useState<any>();
+  const [dataAddCurrent, setDataAddCurrent] = useState<any>();
+
+
+  const handleClickUpdate = (data: object) => {
+    setDataUpdateCurrent(data);
+    setopenModalUpdateSubMenu(true);
+  };
+
+  const handleClickAdd = (data: any) => {
+    setDataAddCurrent(data);
+    setopenModalAddSubMenu(true);
+  };
+
+  const columns: ColumnsType<DataTypecolumnsMenu> = [
     {
       title: "Id",
       dataIndex: "id",
@@ -94,7 +93,6 @@ const DetailMenu = () => {
       title: `${t(`adminHome.name`)} Sub`,
       dataIndex: "name",
       key: "name",
-      // render: (text) => <Link >{text}</Link>,
       render: (_, record) => (
         <Link to={`/admin${record.url}`} key={record.id}>
           {record.title}
@@ -111,12 +109,27 @@ const DetailMenu = () => {
       key: "action",
       render: (_, record) => (
         <Space align="center" key={record.id} size="middle">
-          <BtnShowModalAddSubMenu
+          {/* <ModalAddSubMenu
             idMenu={pathId}
             idSubMenu={record.id}
             listDataMenu={listDataMenu}
             menuDetail={menuDetail}
-          />
+          /> */}
+
+          <Button
+            onClick={() =>
+              handleClickAdd({
+                idMenu: pathId,
+                idSubMenu: record.id,
+                listDataMenu: listDataMenu,
+                menuDetail: menuDetail,
+              })
+            }
+            type="primary"
+            htmlType="submit"
+          >
+           add
+          </Button>
 
           <ModalBtnDelete
             typeDelete="subMenu"
@@ -124,11 +137,20 @@ const DetailMenu = () => {
             id={record.id}
             nameOjbDelete={record.title}
           />
-          <BtnShowModalUpdateMenu
-            titleSub={record.title}
-            id={record.id}
-            url={record.url}
-          />
+
+          <Button
+            onClick={() =>
+              handleClickUpdate({
+                titleSub: record.title,
+                id: record.id,
+                url: record.url,
+              })
+            }
+            type="primary"
+            htmlType="submit"
+          >
+            update
+          </Button>
         </Space>
       ),
     },
@@ -136,23 +158,27 @@ const DetailMenu = () => {
 
   const handleData = (menu: []) => {
     if (menu) {
-      const data = menu.map((dataMenu: { id: string; children: [] }): any => {
+      const data = menu.map((dataMenu: typeMenuHaveId): any => {
         return {
           ...dataMenu,
           key: dataMenu.id,
           children: handleData(dataMenu.children),
         };
       });
-
       return data;
     }
-
     return undefined;
   };
 
+
   return (
     <Suspense fallback={<LoadingCpn />}>
-      <Modal title="Title" open={open} onOk={handleOK} onCancel={handleCancel}>
+      <Modal
+        title="Title"
+        open={open}
+        onOk={handleOKDelete}
+        onCancel={handleCancel}
+      >
         <Alert
           message="Bạn có chắc muốn xoá menu này? Toàn bộ sub menu của menu này cũng sẽ mất!"
           type="warning"
@@ -160,23 +186,41 @@ const DetailMenu = () => {
         />
       </Modal>
 
-      <BtnShowModalAddSubMenu
-        parentType={true}
-        contenBtn="Thêm mới"
-        idMenu={pathId}
-        listDataMenu={listDataMenu}
-        menuDetail={menuDetail}
-      />
+      {/* {openModalAddSubMenu ? (
+        <ModalAddSubMenu
+          parentType={true}
+          contenBtn="Thêm mới"
+          idMenu={pathId}
+          listDataMenu={listDataMenu}
+          menuDetail={menuDetail}
+        />
+      ) : null} */}
+
+      {openModalAddSubMenu ? (
+        <ModalAddSubMenu
+          // parentType={true}
+          openModalAddSubMenu={openModalAddSubMenu}
+          setopenModalAddSubMenu={setopenModalAddSubMenu}
+          contenBtn="Thêm mới"
+          idMenu={pathId}
+          listDataMenu={dataAddCurrent.listDataMenu}
+          menuDetail={dataAddCurrent.menuDetail}
+          idSubMenu={dataAddCurrent.idSubMenu}
+        />
+      ) : null}
+
+      {openModalUpdateSubMenu ? (
+        <ModalUpdateSubMenu
+          openModalUpdateSubMenu={openModalUpdateSubMenu}
+          setopenModalUpdateSubMenu={setopenModalUpdateSubMenu}
+          titleSub={dataUpdateCurrent.titleSub}
+          id={dataUpdateCurrent.id}
+          url={dataUpdateCurrent.url}
+        />
+      ) : null}
 
       {getMenu && menuDetail ? (
-        <Table
-          columns={columns}
-          dataSource={
-            // menuDetail.children
-            // data
-            handleData(menuDetail.children)
-          }
-        />
+        <Table columns={columns} dataSource={handleData(menuDetail.children)} />
       ) : null}
     </Suspense>
   );

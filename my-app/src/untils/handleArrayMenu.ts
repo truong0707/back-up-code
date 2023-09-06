@@ -1,4 +1,4 @@
-import { MyInputSubMenu } from "../component/admin/menu/BtnShowModalAddSubMenu";
+import { MyInputSubMenu } from "../component/admin/menu/ModalAddSubMenu";
 import { childrenData } from "../component/tree/TreeMenu";
 
 export const addChildToParentById = (
@@ -33,7 +33,12 @@ export const addChildToMenu = (
     id: number;
   }[],
   idmenu: number,
-  inputData: MyInputSubMenu
+  inputData: {
+    id: number
+    title: string;
+    url: string;
+    children: never[];
+  }
 ) => {
   // eslint-disable-next-line array-callback-return
   const filterData: any = currentData.filter((menu) => {

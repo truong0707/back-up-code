@@ -3,21 +3,29 @@ $default-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   .BoxMenu {
     padding: 10px;
     padding-top: 0;
-    color: #1677FF;
+    color: #1677ff;
     .titleMenu {
-      padding: 10px;
+      padding: 17px;
+      color: #000;
     }
   }
 }
-
 .wrapperDoashBoard {
   display: flex;
+  .wrapperCRUDUser {
+    width: 100%;
+    display: flex;
+    .cushion {
+      width: 26%;
+    }
+  }
 }
 .menuDoashBoard {
   width: 25%;
   height: 100%;
-  background: #001529;
+  background: #FFFFFF;
   position: fixed;
+  border-right: 1px solid rgb(236, 237, 238);
 }
 .wrapperContentDoashBoard {
   width: 71.6%;
@@ -37,22 +45,153 @@ $default-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   &::-webkit-scrollbar {
     width: 0;
   }
-  
 
-  @mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  @mixin scrollbars(
+    $size,
+    $foreground-color,
+    $background-color: mix($foreground-color, white, 50%)
+  ) {
     // For Google Chrome
     &::-webkit-scrollbar {
-      width:  $size;
+      width: $size;
       height: $size;
     }
-  
+
     &::-webkit-scrollbar-thumb {
       background: $foreground-color;
     }
-  
+
     &::-webkit-scrollbar-track {
       background: $background-color;
     }
   }
 }
 
+/* res */
+/* Mixin */
+/* Set các giá trị với màn hình tương ứng */
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+// p {
+//   font-size: 14px;
+//   @include mobile {
+//     font-size: 12px;
+//   }
+//   @include table {
+//     font-size: 13px;
+//     background: pink;
+//   }
+// }
+
+// .ss {
+
+//   @include mobile {
+//     font-size: 12px;
+//   }
+//   @include table {
+//     font-size: 13px;
+//     background: pink;
+//   }
+
+// }
+
+// @mixin mobile {
+//   @media (max-width: #{$mobile -width - 1px}) {
+//     @content;
+//   }
+// }
+
+// @mixin tablet {
+//   @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+//     @content;
+//   }
+// }
+
+// @mixin desktop {
+//   @media (min-width: #{$desktop-width}) {
+//     @content;
+//   }
+// }
+
+$res_320: "only screen and (min-width: 320px) and (max-width: 374px)";
+$res_375: "only screen and (min-width: 375px) and (max-width: 424px)";
+$res_425: "only screen and (min-width: 425px) and (max-width: 767px)";
+$res_768: "only screen and (min-width: 768px) and (max-width: 991px)";
+$res_992: "only screen and (min-width: 992px) and (max-width: 1023px)";
+$res_1024: "only screen and (min-width: 1024px) and (max-width: 1999px)";
+$res_1200: "only screen and (min-width: 1200px)";
+
+@mixin responsive_320() {
+  @media #{$res_320} {
+    @content;
+  }
+}
+@mixin responsive_375() {
+  @media #{$res_375} {
+    @content;
+  }
+}
+@mixin responsive_425() {
+  @media #{$res_425} {
+    @content;
+  }
+}
+@mixin responsive_768() {
+  @media #{$res_768} {
+    @content;
+  }
+}
+@mixin responsive_992() {
+  @media #{$res_992} {
+    @content;
+  }
+}
+@mixin responsive_1024() {
+  @media #{$res_1024} {
+    @content;
+  }
+}
+@mixin responsive_1200() {
+  @media #{$res_1200} {
+    @content;
+  }
+}
+
+@include responsive_320 {
+}
+
+@include responsive_375 {
+}
+
+@include responsive_425 {
+}
+
+@include responsive_768 {
+}
+
+@include responsive_992 {
+  .menuDoashBoard {
+    width: 100%;
+    position: relative;
+  }
+  .wrapperContentDoashBoard {
+    width: 100%;
+  }
+
+  .wrapperDoashBoard {
+    flex-wrap: wrap;
+    .wrapperCRUDUser {
+      .cushion {
+        display: none;
+      }
+    }
+  }
+}
+
+@include responsive_1024 {
+}
+
+@include responsive_1200 {
+}

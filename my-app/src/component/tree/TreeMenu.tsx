@@ -31,11 +31,9 @@ const TreeMenu: React.FC = () => {
     return children.map((childMenu: childrenData) => {
       return {
         title: (
-          // <Link className="link" to={`/admin${childMenu.url}/${childMenu.id}`}>
           <p key={childMenu.id} onClick={() => handleClick(childMenu.id)}>
             {childMenu.title}
           </p>
-          // </Link>
         ),
         key: childMenu.id,
         children: showChildtreeMenu(childMenu.children),
@@ -58,13 +56,16 @@ const TreeMenu: React.FC = () => {
             className="link"
             to={`/admin/DetailMenu/${data.id}`}
           >
-            <b>{data.name}</b>
+            <b style={{ color: "#000", fontWeight: "500" }}>{data.name}</b>
           </Link>
         ),
         key: data.id,
         icon: (
           <p key={data.id}>
-            <FontAwesomeIcon icon={checkIcons(data.iconClass)} />
+            <FontAwesomeIcon
+              className={Styles.iconStyle}
+              icon={checkIcons(data.iconClass)}
+            />
           </p>
         ),
         children: showChildtreeMenu(data.children),
