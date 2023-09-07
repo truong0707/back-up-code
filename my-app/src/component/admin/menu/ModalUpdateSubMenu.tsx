@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FormInstance, Modal, Space, message } from "antd";
+import { FormInstance, Modal, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input } from "antd";
 import { StateStore } from "../../../store/redux/Store";
@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { handleUpdateChildtreeMenu } from "../../../untils/handleArrayMenu";
 import { updateFieldMenuAction } from "../../../store/redux/actions/menuActions";
-import { checkStringEmpty } from "../../../untils/checkStringEmpty";
 import { TypeSubmenu } from "../../../types/Menu";
 
 interface myBtnShowModalUpdate {
@@ -46,16 +45,9 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
       props.id,
       `${value.url}`
     );
-    /* Check input empty */
-    const checkTitleEmpty = checkStringEmpty(value.title);
-    const checkUrlEmpty = checkStringEmpty(value.url);
 
     if (menuDetail && menuDetail.children) {
-      if (checkTitleEmpty.length === 2) {
-        message.error("Không thể để Title trống!");
-      } else if (checkUrlEmpty.length === 2) {
-        message.error("không thể để trống url");
-      } else {
+
         const updateFielMenuActionPromise = updateFieldMenuAction(pathId, {
           //   id: 1,
           //   name: "Menu 2 4",
@@ -67,7 +59,6 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
         props.setopenModalUpdateSubMenu(false);
         formRef.current?.resetFields();
       }
-    }
   };
 
   return (

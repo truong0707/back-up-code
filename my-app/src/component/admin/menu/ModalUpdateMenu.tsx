@@ -1,10 +1,9 @@
-import { Button, Form, FormInstance, Input, Modal, Space, message } from "antd";
+import { Button, Form, FormInstance, Input, Modal, Space } from "antd";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { updateMenuAction } from "../../../store/redux/actions/menuActions";
 import Styles from "../../../page/admin/managerMenu/managerMenu.module.scss";
-import { checkStringEmpty } from "../../../untils/checkStringEmpty";
 import { typeMenu, typeMenuNoChildren } from "../../../types/Menu";
 
 interface MyUpdatePropsMenu {
@@ -35,25 +34,11 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
     props.nameMenu,
     props.openModalUpdate,
   ]);
-
-  /* Handle submit form - Call api */
   const formRef = React.useRef<FormInstance>(null);
   const onHandleSave = (value: typeMenu) => {
-    const nameEmpty = checkStringEmpty(value.name);
-    const urlEmpty = checkStringEmpty(value.url);
-    const iconClassEmpty = checkStringEmpty(value.iconClass);
-
-    if (nameEmpty.length === 2) {
-      message.error("Không thể để name trống!", 2.5);
-    } else if (urlEmpty.length === 2) {
-      message.error("Không thể để url trống!", 2.5);
-    } else if (iconClassEmpty.length === 2) {
-      message.error("Không thể để icon trống!", 2.5);
-    } else {
-      const updateMenuActionPromise = updateMenuAction(props.idMenu, value);
-      updateMenuActionPromise(dispatch);
-      props.setOpenModalUpdate(false);
-    }
+    const updateMenuActionPromise = updateMenuAction(props.idMenu, value);
+    updateMenuActionPromise(dispatch);
+    props.setOpenModalUpdate(false);
   };
 
   return (
@@ -74,7 +59,10 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
         <Form.Item
           name="name"
           label={t(`MenuAdmin.name_menu`)}
-          rules={[{ required: true, whitespace: true, }, { type: "string", min: 1 }]}
+          rules={[
+            { required: true, whitespace: true },
+            { type: "string", min: 1 },
+          ]}
           initialValue={value.name}
         >
           <Input placeholder="vd: Menu1" />
@@ -82,7 +70,10 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
 
         <Form.Item
           label={t(`MenuAdmin.url`)}
-          rules={[{ required: true, whitespace: true, }, { type: "string", min: 1 }]}
+          rules={[
+            { required: true, whitespace: true },
+            { type: "string", min: 1 },
+          ]}
           initialValue={value.url}
           name="url"
         >
@@ -91,7 +82,10 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
 
         <Form.Item
           label={t(`MenuAdmin.icon_class`)}
-          rules={[{ required: true, whitespace: true, }, { type: "string", min: 1 }]}
+          rules={[
+            { required: true, whitespace: true },
+            { type: "string", min: 1 },
+          ]}
           initialValue={value.iconClass}
           name="iconClass"
         >
