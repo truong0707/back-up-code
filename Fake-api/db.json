@@ -24,6 +24,26 @@
       "email": "dá",
       "password": "đa",
       "id": 6
+    },
+    {
+      "email": "truong@gmail.com",
+      "password": "123123",
+      "id": 7
+    },
+    {
+      "email": "truong@gmail.com",
+      "password": "123456",
+      "id": 8
+    },
+    {
+      "email": "truong@gmial.ocm",
+      "password": "ádas",
+      "id": 9
+    },
+    {
+      "email": "truong@gmail.com",
+      "password": "1",
+      "id": 10
     }
   ],
   "register": [
@@ -34,21 +54,62 @@
       "confirmPass": "41414141",
       "numberPhone": "014044041",
       "id": 1
+    },
+    {
+      "name": "s",
+      "email": "s@gmail.com",
+      "password": "s",
+      "confirmPass": "s",
+      "numberPhone": "12312312",
+      "id": 2
+    },
+    {
+      "name": " Truong",
+      "email": "truong@gmail.com",
+      "password": "1111111",
+      "confirmPass": "1111111",
+      "numberPhone": "11111",
+      "id": 3
+    },
+    {
+      "name": "sssss",
+      "email": "ssss@gmail.ocm",
+      "password": "qqqqqqq",
+      "confirmPass": "qqqqqqq",
+      "numberPhone": "2341423424",
+      "id": 4
+    },
+    {
+      "name": "Truong",
+      "email": "sssss@gmail.com",
+      "password": "22222",
+      "confirmPass": "22222",
+      "numberPhone": "222222222222",
+      "id": 5
+    },
+    {
+      "name": "sss",
+      "email": "sss@gmail.com",
+      "password": "aaaa",
+      "confirmPass": "aaaa",
+      "numberPhone": "2312313",
+      "id": 6
+    },
+    {
+      "name": "sss",
+      "email": "sss@gmail.com",
+      "password": "aaa",
+      "confirmPass": "aaa",
+      "numberPhone": "3234234234",
+      "id": 7
     }
   ],
   "users": [
     {
-      "name": "truong1",
+      "name": "Truong Thanh",
       "email": "truong@gmail.com",
-      "numberPhone": "322323",
+      "numberPhone": "0707241906",
       "id": 1
-    },
-    {
-      "name": "dâdadad",
-      "email": "truongnguyen@gmail.com",
-      "numberPhone": "14456464654",
-      "password": "rwrwradsdas",
-      "id": 2
     }
   ],
   "menus": [
@@ -58,7 +119,7 @@
       "iconClass": "quyen",
       "children": [
         {
-          "title": "Quản lý dịch vụ văn hoá",
+          "title": "Quản lý dịch vụ văn hóa",
           "id": 1229769943,
           "children": [
             {
@@ -68,32 +129,53 @@
               "url": "/Quảnly"
             }
           ],
-          "url": "/Quản-lý-dịch-vụ-văn-hoá"
+          "url": "/Quản_lý dịch_vụ_văn_hóa"
         },
         {
-          "title": "Văn hoá thể thao",
           "id": 1427838883,
-          "children": [],
-          "url": "/Văn-hoá-thể-thao"
+          "title": "Văn hoá thể thao",
+          "url": "/Văn-hoá-thể-thao",
+          "children": []
         },
         {
-          "id": 3199428424,
           "title": "Khu vực",
-          "url": "/Khu-vực",
+          "id": 3199428424,
           "children": [
             {
               "title": "Khu vực A",
               "id": 424786181,
-              "children": [],
+              "children": [
+                {
+                  "title": "da",
+                  "id": 2282732585,
+                  "children": [],
+                  "url": "/ad"
+                }
+              ],
               "url": "/Khu vực"
             }
-          ]
+          ],
+          "url": "/Khu-vực"
         },
         {
-          "title": "d",
-          "url": "/d",
-          "children": [],
-          "id": 570219084
+          "title": "testssss",
+          "id": 2038266585,
+          "children": [
+            {
+              "title": "test chlld",
+              "id": 1164265422,
+              "children": [
+                {
+                  "id": 2295826433,
+                  "title": "s",
+                  "url": "/ád",
+                  "children": []
+                }
+              ],
+              "url": "/ád"
+            }
+          ],
+          "url": "/ád"
         }
       ],
       "id": 1
@@ -117,16 +199,29 @@
           "url": "/ad"
         },
         {
-          "id": 2476877036,
           "title": "Tài chính loại A",
-          "url": "/d",
-          "children": []
+          "id": 2476877036,
+          "children": [],
+          "url": "/d"
         },
         {
           "title": "Tài chính loại A",
           "id": 2017709167,
           "children": [],
           "url": "/Tài_chính_loại_A"
+        },
+        {
+          "id": 1156825405,
+          "title": "đasssss",
+          "url": "/ádss",
+          "children": [
+            {
+              "id": 2074318914,
+              "title": "ss",
+              "url": "/ss",
+              "children": []
+            }
+          ]
         }
       ],
       "id": 2
@@ -154,7 +249,14 @@
           "id": 4209891024,
           "title": "Quản lý A",
           "url": "/Quản-lý-A",
-          "children": []
+          "children": [
+            {
+              "id": 1217756425,
+              "title": "đa",
+              "url": "/ad",
+              "children": []
+            }
+          ]
         }
       ],
       "id": 4
@@ -186,20 +288,6 @@
         }
       ],
       "id": 6
-    },
-    {
-      "name": "asd",
-      "url": "/da",
-      "iconClass": "ad",
-      "children": [],
-      "id": 7
-    },
-    {
-      "name": "ssss",
-      "url": "/ss",
-      "iconClass": "ssad",
-      "children": [],
-      "id": 8
     }
   ],
   "profile": {
