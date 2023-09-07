@@ -74,7 +74,7 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
         <Form.Item
           name="name"
           label={t(`MenuAdmin.name_menu`)}
-          rules={[{ required: true }, { type: "string", min: 1 }]}
+          rules={[{ required: true, whitespace: true, }, { type: "string", min: 1 }]}
           initialValue={value.name}
         >
           <Input placeholder="vd: Menu1" />
@@ -82,7 +82,7 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
 
         <Form.Item
           label={t(`MenuAdmin.url`)}
-          rules={[{ required: true }, { type: "string", min: 1 }]}
+          rules={[{ required: true, whitespace: true, }, { type: "string", min: 1 }]}
           initialValue={value.url}
           name="url"
         >
@@ -91,7 +91,7 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
 
         <Form.Item
           label={t(`MenuAdmin.icon_class`)}
-          rules={[{ required: true }, { type: "string", min: 1 }]}
+          rules={[{ required: true, whitespace: true, }, { type: "string", min: 1 }]}
           initialValue={value.iconClass}
           name="iconClass"
         >

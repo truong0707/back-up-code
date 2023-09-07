@@ -27,14 +27,13 @@ const Login = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
-  const { error, /* loading, */ userInfo } = userLogin;
+  const userLogin = useSelector((state: StateStore) => state.userLogin);
+  const { error, userInfo } = userLogin;
   const redirect = location.search
     ? location.search.split("=")[1]
     : "/admin/home"; // cut path
   const { t } = useTranslation("loginAndRegis");
 
-  /* handle navigate khi Login */
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);
@@ -81,7 +80,15 @@ const Login = () => {
               label={`${t("login and regis.username")}`}
               name="username"
               rules={[
-                { required: true, message: "Please input your username!" },
+                {
+                  required: true,
+                  message: "Please input your username!",
+                  whitespace: true,
+                },
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!",
+                },
               ]}
             >
               <Input />
@@ -91,7 +98,11 @@ const Login = () => {
               label={`${t("login and regis.password")}`}
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                {
+                  required: true,
+                  message: "Please input your password!",
+                  whitespace: true,
+                },
               ]}
             >
               <Input.Password />

@@ -15,7 +15,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
-  /* faMoneyBill */ 
   faUserGraduate,
   faScaleUnbalancedFlip,
   faCode,

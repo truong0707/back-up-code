@@ -31,3 +31,9 @@ export interface TypeSubmenu {
   url: string
   children: any[];
 }
+
+export interface  TypeSubMenuDontChilden {
+  id: string | number;
+  title: string;
+  url: string
+}

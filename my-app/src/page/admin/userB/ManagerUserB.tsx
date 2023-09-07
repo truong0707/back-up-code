@@ -26,8 +26,8 @@ interface DataType {
 
 const ManagerUserB = () => {
   const { t } = useTranslation(["homeAdmin"]);
-  const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
-  const { /* loading, */ error, listDataUsers } = dataUsers;
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers); 
+  const { error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,7 +46,6 @@ const ManagerUserB = () => {
       title: `${t(`adminHome.name`)} B`,
       dataIndex: "name",
       key: "name",
-      // render: (text) => <Link >{text}</Link>,
       render: (_, record) => (
         <Link to={`/admin/user-detail/${record.id}`} key={record.id}>
           {record.name}

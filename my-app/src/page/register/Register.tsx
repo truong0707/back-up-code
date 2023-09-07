@@ -3,7 +3,7 @@ import { register } from "../../store/redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { StateStore } from "../../store/redux/Store";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Styles from "../login/Form.module.scss";
 import AlertNotificate from "../../component/alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
@@ -11,16 +11,11 @@ import React from "react";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
-  const userLogin = useSelector((state: StateStore) => state.userLogin); // get data store
-  const { error, /*  loading, */ userInfo } = userLogin;
-  const redirect = location.search ? location.search.split("=")[1] : "/admin"; // cut path
+  const userLogin = useSelector((state: StateStore) => state.userLogin); 
+  const { error, userInfo } = userLogin;
   const { t } = useTranslation("loginAndRegis");
 
-  useEffect(() => {}, [userInfo, navigate, redirect]);
-
-  /* SUbmit */
   const handleSubmitRegister = (values: {
     name: string;
     email: string;
@@ -39,16 +34,8 @@ const Register = () => {
     registerPromise(dispatch);
   };
 
-  const onFinishFailed = (errorInfo: any) => {};
-
-  type FieldType = {
-    name?: string;
-    email?: string;
-    password?: string;
-    remember?: string;
-    numberPhone?: number;
-    confirmPass?: string;
-  };
+  useEffect(() => {
+  }, [userInfo, navigate]);
 
   return (
     <>
@@ -65,80 +52,101 @@ const Register = () => {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 500, background: "" }}
+          style={{ maxWidth: 500 }}
           initialValues={{ remember: true }}
           onFinish={handleSubmitRegister}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item<FieldType>
+          <Form.Item
             label={`${t("login and regis.name")}`}
             name="name"
             rules={[
-              { required: true, message: t("login and regis.input_your_name") },
+              {
+                required: true,
+                message: t("login and regis.input_your_name"),
+                whitespace: true,
+              },
             ]}
           >
             <Input />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item
             label={`${t("login and regis.email")}`}
             name="email"
             rules={[
               {
+                type: "email",
+                message: "The input is not valid E-mail!",
+              },
+              {
                 required: true,
-                message: t("login and regis.input_your_email"),
+                message: "Please input your E-mail!",
               },
             ]}
           >
-            <Input type="email" />
+            <Input />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item
             label={`${t("login and regis.number_phone")}`}
             name="numberPhone"
             rules={[
               {
                 required: true,
                 message: t("login and regis.input_your_numberPhone"),
+                whitespace: true,
               },
             ]}
           >
             <Input type="number" />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item
             label={`${t("login and regis.password")}`}
             name="password"
             rules={[
               {
                 required: true,
-                message: t("login and regis.input_your_password"),
+                message: "Please input your password!",
               },
             ]}
+            hasFeedback
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item
             label={`${t("login and regis.confirm_password")}`}
             name="confirmPass"
+            dependencies={["password"]}
+            hasFeedback
             rules={[
               {
                 required: true,
                 message: t("login and regis.input_your_passwordConfirm"),
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("The new password that you entered do not match!")
+                  );
+                },
+              }),
             ]}
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item
             name="remember"
             valuePropName="checked"
             wrapperCol={{ offset: 8, span: 16 }}
           >
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox checked>Remember me</Checkbox>
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -150,5 +158,5 @@ const Register = () => {
       </div>
     </>
   );
-}
+};
 export default Register;

@@ -68,7 +68,7 @@ export const register =
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 
       /// save localStorage
-      document.location.href = "/admin";
+      document.location.href = "/admin/home";
       localStorage.setItem("userInfo", JSON.stringify(data));
       alert(
         "Chào mừng bạn đã đến với trang web của tôi!"

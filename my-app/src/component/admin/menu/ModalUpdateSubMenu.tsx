@@ -87,7 +87,10 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
         <Form.Item
           name="title"
           label="name"
-          rules={[{ required: true }, { type: "string", min: 1 }]}
+          rules={[
+            { required: true, whitespace: true },
+            { type: "string", min: 1 },
+          ]}
           initialValue={inputsCurrent.title}
         >
           <Input placeholder="name" />
@@ -97,7 +100,10 @@ const BtnShowModalUpdate = (props: myBtnShowModalUpdate) => {
           name="url"
           label="Url"
           initialValue={inputsCurrent.url}
-          rules={[{ required: true }, { type: "string", min: 1 }]}
+          rules={[
+            { required: true, whitespace: true },
+            { type: "string", min: 1 },
+          ]}
         >
           <Input placeholder="url" defaultValue={"/"} />
         </Form.Item>

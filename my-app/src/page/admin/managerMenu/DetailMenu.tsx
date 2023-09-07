@@ -1,10 +1,6 @@
 import { Alert, Button, Modal, Space, Table } from "antd";
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  deleteMenuAction,
-  getDetailMenuAction,
-} from "../../../store/redux/actions/menuActions";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../../store/redux/Store";
 import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete";
@@ -12,14 +8,24 @@ import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
 import LoadingCpn from "../../../component/spin/LoadingCpn";
-import { DataTypecolumnsMenu, typeMenuHaveId } from "../../../types/Menu";
-
+import {
+  DataTypecolumnsMenu,
+  TypeSubMenuDontChilden,
+  typeMenuHaveId,
+} from "../../../types/Menu";
+import { PlusOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  deleteMenuAction,
+  getDetailMenuAction,
+} from "../../../store/redux/actions/menuActions";
 const ModalAddSubMenu = lazy(
   () => import("../../../component/admin/menu/ModalAddSubMenu")
 );
 const ModalUpdateSubMenu = lazy(
   () => import("../../../component/admin/menu/ModalUpdateSubMenu")
 );
+
 const DetailMenu = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
@@ -30,7 +36,6 @@ const DetailMenu = () => {
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showChildtreeMenu = (children: childrenData[] | undefined): {}[] => {
     if (!children || children.length === 0) {
       return [];
@@ -64,21 +69,35 @@ const DetailMenu = () => {
     }
   }, [dispatch, pathId]);
 
-  console.log(pathId, "path uid")
-
   const [openModalUpdateSubMenu, setopenModalUpdateSubMenu] = useState(false);
   const [openModalAddSubMenu, setopenModalAddSubMenu] = useState(false);
   const [dataUpdateCurrent, setDataUpdateCurrent] = useState<any>();
   const [dataAddCurrent, setDataAddCurrent] = useState<any>();
+  const [typeParent, setTypeParent] = useState(false);
 
-
-  const handleClickUpdate = (data: object) => {
+  const handleClickUpdate = (data: TypeSubMenuDontChilden) => {
     setDataUpdateCurrent(data);
     setopenModalUpdateSubMenu(true);
   };
 
-  const handleClickAdd = (data: any) => {
+  const handleClickAdd = (data: {
+    idMenu: string;
+    idSubMenu: string;
+    listDataMenu: [];
+    menuDetail: {};
+  }) => {
     setDataAddCurrent(data);
+    setopenModalAddSubMenu(true);
+  };
+
+  const handleOpenAddSubMenuFirst = (data: {
+    idMenu: string;
+    parentType: boolean;
+    listDataMenu: [];
+    menuDetail: {};
+  }) => {
+    setDataAddCurrent(data);
+    setTypeParent(false);
     setopenModalAddSubMenu(true);
   };
 
@@ -109,13 +128,6 @@ const DetailMenu = () => {
       key: "action",
       render: (_, record) => (
         <Space align="center" key={record.id} size="middle">
-          {/* <ModalAddSubMenu
-            idMenu={pathId}
-            idSubMenu={record.id}
-            listDataMenu={listDataMenu}
-            menuDetail={menuDetail}
-          /> */}
-
           <Button
             onClick={() =>
               handleClickAdd({
@@ -128,7 +140,7 @@ const DetailMenu = () => {
             type="primary"
             htmlType="submit"
           >
-           add
+            <PlusOutlined />
           </Button>
 
           <ModalBtnDelete
@@ -141,7 +153,7 @@ const DetailMenu = () => {
           <Button
             onClick={() =>
               handleClickUpdate({
-                titleSub: record.title,
+                title: record.title,
                 id: record.id,
                 url: record.url,
               })
@@ -149,7 +161,7 @@ const DetailMenu = () => {
             type="primary"
             htmlType="submit"
           >
-            update
+            <FontAwesomeIcon icon={"pen-to-square"} />
           </Button>
         </Space>
       ),
@@ -170,7 +182,6 @@ const DetailMenu = () => {
     return undefined;
   };
 
-
   return (
     <Suspense fallback={<LoadingCpn />}>
       <Modal
@@ -186,19 +197,35 @@ const DetailMenu = () => {
         />
       </Modal>
 
-      {/* {openModalAddSubMenu ? (
+      <Button
+        onClick={() =>
+          handleOpenAddSubMenuFirst({
+            idMenu: pathId,
+            parentType: true,
+            listDataMenu: listDataMenu,
+            menuDetail: menuDetail,
+          })
+        }
+        type="primary"
+        htmlType="submit"
+      >
+        Thêm mới
+      </Button>
+
+      {openModalAddSubMenu && typeParent ? (
         <ModalAddSubMenu
-          parentType={true}
-          contenBtn="Thêm mới"
-          idMenu={pathId}
-          listDataMenu={listDataMenu}
-          menuDetail={menuDetail}
+          parentType={typeParent}
+          setTypeParent={setTypeParent}
+          idMenu={dataAddCurrent.pathId}
+          listDataMenu={dataAddCurrent.listDataMenu}
+          menuDetail={dataAddCurrent.menuDetail}
+          setopenModalAddSubMenu={setopenModalAddSubMenu}
+          openModalAddSubMenu={openModalAddSubMenu}
         />
-      ) : null} */}
+      ) : null}
 
       {openModalAddSubMenu ? (
         <ModalAddSubMenu
-          // parentType={true}
           openModalAddSubMenu={openModalAddSubMenu}
           setopenModalAddSubMenu={setopenModalAddSubMenu}
           contenBtn="Thêm mới"
@@ -213,7 +240,7 @@ const DetailMenu = () => {
         <ModalUpdateSubMenu
           openModalUpdateSubMenu={openModalUpdateSubMenu}
           setopenModalUpdateSubMenu={setopenModalUpdateSubMenu}
-          titleSub={dataUpdateCurrent.titleSub}
+          titleSub={dataUpdateCurrent.title}
           id={dataUpdateCurrent.id}
           url={dataUpdateCurrent.url}
         />
