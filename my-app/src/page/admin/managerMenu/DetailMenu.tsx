@@ -1,5 +1,5 @@
 import { Alert, Button, Modal, Space, Table } from "antd";
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../../store/redux/Store";
@@ -7,7 +7,6 @@ import ModalBtnDelete from "../../../component/btnShowModalDelete/ModalBtnDelete
 import { ColumnsType } from "antd/es/table";
 import { useTranslation } from "react-i18next";
 import { childrenData } from "../../../component/tree/TreeMenu";
-import LoadingCpn from "../../../component/spin/LoadingCpn";
 import {
   DataTypecolumnsMenu,
   TypeSubMenuDontChilden,
@@ -19,12 +18,7 @@ import {
   deleteMenuAction,
   getDetailMenuAction,
 } from "../../../store/redux/actions/menuActions";
-const ModalAddSubMenu = lazy(
-  () => import("../../../component/admin/menu/ModalAddSubMenu")
-);
-const ModalUpdateSubMenu = lazy(
-  () => import("../../../component/admin/menu/ModalUpdateSubMenu")
-);
+import ModalAddUpdateSubMenu from "../../../component/admin/menu/ModalAddAndUpdateSubMenu";
 
 const DetailMenu = () => {
   const location = useLocation();
@@ -35,7 +29,13 @@ const DetailMenu = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
+  const [openModalUpdateSubMenu, setopenModalUpdateSubMenu] = useState(false);
+  const [openModalAddSubMenu, setopenModalAddSubMenu] = useState(false);
+  const [dataUpdateCurrent, setDataUpdateCurrent] = useState<any>();
+  const [dataAddCurrent, setDataAddCurrent] = useState<any>();
+  const [typeParent, setTypeParent] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const showChildtreeMenu = (children: childrenData[] | undefined): {}[] => {
     if (!children || children.length === 0) {
       return [];
@@ -68,12 +68,6 @@ const DetailMenu = () => {
       dataDetailMenuPromise(dispatch);
     }
   }, [dispatch, pathId]);
-
-  const [openModalUpdateSubMenu, setopenModalUpdateSubMenu] = useState(false);
-  const [openModalAddSubMenu, setopenModalAddSubMenu] = useState(false);
-  const [dataUpdateCurrent, setDataUpdateCurrent] = useState<any>();
-  const [dataAddCurrent, setDataAddCurrent] = useState<any>();
-  const [typeParent, setTypeParent] = useState(false);
 
   const handleClickUpdate = (data: TypeSubMenuDontChilden) => {
     setDataUpdateCurrent(data);
@@ -154,8 +148,9 @@ const DetailMenu = () => {
             onClick={() =>
               handleClickUpdate({
                 title: record.title,
-                id: record.id,
-                url: record.url,
+                idSubMenu: record.id,
+                urlSubMenu: record.url,
+                listDataMenu: listDataMenu,
               })
             }
             type="primary"
@@ -183,7 +178,7 @@ const DetailMenu = () => {
   };
 
   return (
-    <Suspense fallback={<LoadingCpn />}>
+    <>
       <Modal
         title="Title"
         open={open}
@@ -212,8 +207,23 @@ const DetailMenu = () => {
         Thêm mới
       </Button>
 
+      {/* if Update  */}
+      {openModalUpdateSubMenu ? (
+        <ModalAddUpdateSubMenu
+          idMenu={pathId}
+          listDataMenu={dataUpdateCurrent.listDataMenu}
+          idSubMenu={dataUpdateCurrent.idSubMenu}
+          openModalUpdateSubMenu={openModalUpdateSubMenu}
+          setopenModalUpdateSubMenu={setopenModalUpdateSubMenu}
+          titleSub={dataUpdateCurrent.title}
+          urlSubMenu={dataUpdateCurrent.urlSubMenu}
+          typeForm={"update"}
+        />
+      ) : null}
+
+      {/* if Add  */}
       {openModalAddSubMenu && typeParent ? (
-        <ModalAddSubMenu
+        <ModalAddUpdateSubMenu
           parentType={typeParent}
           setTypeParent={setTypeParent}
           idMenu={dataAddCurrent.pathId}
@@ -221,14 +231,15 @@ const DetailMenu = () => {
           menuDetail={dataAddCurrent.menuDetail}
           setopenModalAddSubMenu={setopenModalAddSubMenu}
           openModalAddSubMenu={openModalAddSubMenu}
+          typeForm={"add"}
         />
       ) : null}
 
       {openModalAddSubMenu ? (
-        <ModalAddSubMenu
+        <ModalAddUpdateSubMenu
+          typeForm={"add"}
           openModalAddSubMenu={openModalAddSubMenu}
           setopenModalAddSubMenu={setopenModalAddSubMenu}
-          contenBtn="Thêm mới"
           idMenu={pathId}
           listDataMenu={dataAddCurrent.listDataMenu}
           menuDetail={dataAddCurrent.menuDetail}
@@ -236,20 +247,10 @@ const DetailMenu = () => {
         />
       ) : null}
 
-      {openModalUpdateSubMenu ? (
-        <ModalUpdateSubMenu
-          openModalUpdateSubMenu={openModalUpdateSubMenu}
-          setopenModalUpdateSubMenu={setopenModalUpdateSubMenu}
-          titleSub={dataUpdateCurrent.title}
-          id={dataUpdateCurrent.id}
-          url={dataUpdateCurrent.url}
-        />
-      ) : null}
-
       {getMenu && menuDetail ? (
         <Table columns={columns} dataSource={handleData(menuDetail.children)} />
       ) : null}
-    </Suspense>
+    </>
   );
 };
 

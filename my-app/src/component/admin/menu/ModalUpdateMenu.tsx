@@ -47,7 +47,7 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
       onCancel={props.handleCancel}
       footer={null}
     >
-      <h4 className={Styles.titleContent}>Update Menu 2</h4>
+      <h4 className={Styles.titleContent}>Update Menu</h4>
       <Form
         name="basic"
         ref={formRef}
@@ -55,6 +55,11 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
         layout="vertical"
         onFinish={onHandleSave}
         autoComplete="off"
+        initialValues={{
+          name: value.name,
+          url: value.url,
+          iconClass: value.iconClass,
+        }}
       >
         <Form.Item
           name="name"
@@ -63,7 +68,6 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
             { required: true, whitespace: true },
             { type: "string", min: 1 },
           ]}
-          initialValue={value.name}
         >
           <Input placeholder="vd: Menu1" />
         </Form.Item>
@@ -74,7 +78,6 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
             { required: true, whitespace: true },
             { type: "string", min: 1 },
           ]}
-          initialValue={value.url}
           name="url"
         >
           <Input placeholder="vd: /menu1 " />
@@ -86,7 +89,6 @@ const ModalUpdateMenu = (props: MyUpdatePropsMenu) => {
             { required: true, whitespace: true },
             { type: "string", min: 1 },
           ]}
-          initialValue={value.iconClass}
           name="iconClass"
         >
           <Input placeholder="vd: user, code, folder-open, phone" />

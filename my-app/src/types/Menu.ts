@@ -33,7 +33,8 @@ export interface TypeSubmenu {
 }
 
 export interface  TypeSubMenuDontChilden {
-  id: string | number;
+  idSubMenu: string | number;
   title: string;
-  url: string
+  urlSubMenu: string
+  listDataMenu: any
 }

@@ -13,7 +13,6 @@ export interface childrenData {
   id: number | string;
   title: string;
   url: string;
-  // iconClass?: string,
   children?: [];
 }
 

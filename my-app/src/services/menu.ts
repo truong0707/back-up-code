@@ -6,7 +6,6 @@ const menuServices = {
     return response;
   },
   postMenuApi: async (
-    // idMenu: number,
     nameMenu: string,
     urlMenu: string,
     iconClass: string,
@@ -29,17 +28,19 @@ const menuServices = {
     const response = await axiosClient.get(`/menus/${id}`);
     return response;
   },
-  updateMenuApi: async (id: number | string, inputData: {
-    name: string,
-    url: string,
-    iconClass: string
-  }) => {
+  updateMenuApi: async (
+    id: number | string,
+    inputData: {
+      name: string;
+      url: string;
+      iconClass: string;
+    }
+  ) => {
     const response = await axiosClient.patch(`/menus/${id}`, {
       id: id,
       name: inputData.name,
       url: inputData.url,
       iconClass: inputData.iconClass,
-      // children: inputData.children,
     });
 
     return response;

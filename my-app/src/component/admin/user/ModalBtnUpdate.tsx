@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormInstance, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input, message, Space } from "antd";
+import { Button, Form, Input, Space } from "antd";
 import { updateDataUser } from "../../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../../page/login/Login";
 import { StateStore } from "../../../store/redux/Store";
@@ -61,10 +61,7 @@ const ModalBtnUpdate = (props: { idUser: string }) => {
     );
     updateUserPromise(dispatch);
     formRef.current?.resetFields();
-
-    const myTimeout = setTimeout(() => {
-      setIsModalOpen(false);
-    }, 1000);
+    setIsModalOpen(false);
   };
 
   useEffect(() => {}, [dispatch]);
@@ -81,25 +78,25 @@ const ModalBtnUpdate = (props: { idUser: string }) => {
         onCancel={handleCancel}
         footer={null}
       >
-        {dataUsers.msgUpdateSuccess ? (
-          <AlertNotificate msg={"Update thành công"} type={""} />
-        ) : null}
-
         <Form
           ref={formRef}
           form={form}
           layout="vertical"
           onFinish={onFinish}
           autoComplete="off"
+          initialValues={{
+            name: inputs.name,
+            email: inputs.email,
+            numberPhone: inputs.numberPhone,
+          }}
         >
           <Form.Item
-            name={`${t("adminHome.name")}`}
+            name="name"
             label={`${t("adminHome.name")}`}
             rules={[
               { required: true, whitespace: true },
               { type: "string", min: 4 },
             ]}
-            initialValue={inputs.name}
           >
             <Input
               type="name"
@@ -110,9 +107,8 @@ const ModalBtnUpdate = (props: { idUser: string }) => {
           </Form.Item>
 
           <Form.Item
-            name={`${t("adminHome.email")}`}
+            name="email"
             label={`${t("adminHome.email")}`}
-            initialValue={inputs.email}
             rules={[
               { required: true },
               { type: "string", min: 4 },
@@ -131,9 +127,8 @@ const ModalBtnUpdate = (props: { idUser: string }) => {
           </Form.Item>
 
           <Form.Item
-            name={`${t("adminHome.phoneNumber")}`}
+            name="numberPhone"
             label={`${t("adminHome.phoneNumber")}`}
-            initialValue={inputs.numberPhone}
             rules={[{ required: true }, { type: "string", min: 6 }]}
           >
             <Input

@@ -17,6 +17,7 @@ import {
   UPDATE_USER_SUCCESS,
 } from "../constants/dataUserContans";
 import userServices from "../../../services/user";
+import { message } from "antd";
 
 export function listDataUser() {
   return async (dispatch: Dispatch) => {
@@ -120,6 +121,7 @@ export function updateDataUser(
           mesg: data,
         },
       });
+      message.success("Cập nhật user thành công!", 3);
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -170,6 +172,7 @@ export function addDataUser(
           message: data,
         },
       }); // payload ở đây e thấy json server trả về {} nên e truyền vào luôn
+      message.success("Thêm user thành công!", 3);
 
       /* Trường hợp 2 */
       /* Ở đây e nghĩ còn cách gọi lại data vì ko còn cách nào để lấy id của product 
@@ -179,6 +182,7 @@ export function addDataUser(
       const dataRefresh = await userServices.getUserApi();
       dispatch({ type: GET_DATA_USER_RESQUEST });
       dispatch({ type: GET_DATA_USER_SUCCESS, payload: dataRefresh.data });
+
     } catch (error: any) {
       if (error.message) {
         dispatch({

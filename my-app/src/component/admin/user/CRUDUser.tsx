@@ -16,7 +16,7 @@ interface MyCRUDUserProps {
 }
 
 const CRUDUser = (props: MyCRUDUserProps) => {
-  const dataUsers = useSelector((state: StateStore) => state.dataUsers); 
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const { msgDeleteError } = dataUsers;
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const CRUDUser = (props: MyCRUDUserProps) => {
         };
       });
 
-      return data
+      return data;
     }
 
     return undefined;
@@ -56,7 +56,10 @@ const CRUDUser = (props: MyCRUDUserProps) => {
             </>
           ) : null}
         </div>
-        <Table columns={props.columnsTitle} dataSource={handleData(props.data)} />
+        <Table
+          columns={props.columnsTitle}
+          dataSource={handleData(props.data)}
+        />
       </Suspense>
     </>
   );

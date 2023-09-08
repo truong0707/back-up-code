@@ -110,6 +110,12 @@
       "email": "truong@gmail.com",
       "numberPhone": "0707241906",
       "id": 1
+    },
+    {
+      "name": "sssssssssssssss",
+      "email": "ssssss@gmail.com",
+      "numberPhone": "546354354321",
+      "id": 2
     }
   ],
   "menus": [
@@ -119,63 +125,61 @@
       "iconClass": "quyen",
       "children": [
         {
-          "title": "Quản lý dịch vụ văn hóa",
+          "title": "Quản lý dịch vụ văn hóas",
           "id": 1229769943,
           "children": [
             {
               "title": "Quản lý dịch vụ văn hóa",
               "id": 2698388950,
-              "children": [],
+              "children": [
+                {
+                  "title": "ss",
+                  "id": 1184753860,
+                  "children": [],
+                  "url": "/s"
+                }
+              ],
               "url": "/Quảnly"
+            },
+            {
+              "title": "sa",
+              "id": 2146115943,
+              "children": [
+                {
+                  "title": "ssss",
+                  "id": 1511309462,
+                  "children": [],
+                  "url": "/ss"
+                }
+              ],
+              "url": "/da"
+            },
+            {
+              "title": "s",
+              "id": 1586953760,
+              "children": [],
+              "url": "/s"
+            },
+            {
+              "title": "ád",
+              "id": 626696153,
+              "children": [],
+              "url": "ád"
             }
           ],
           "url": "/Quản_lý dịch_vụ_văn_hóa"
         },
         {
+          "title": "Văn hoá thể thaos",
           "id": 1427838883,
-          "title": "Văn hoá thể thao",
-          "url": "/Văn-hoá-thể-thao",
-          "children": []
+          "children": [],
+          "url": "/Văn-hoá-thể-thao"
         },
         {
           "title": "Khu vực",
           "id": 3199428424,
-          "children": [
-            {
-              "title": "Khu vực A",
-              "id": 424786181,
-              "children": [
-                {
-                  "title": "da",
-                  "id": 2282732585,
-                  "children": [],
-                  "url": "/ad"
-                }
-              ],
-              "url": "/Khu vực"
-            }
-          ],
+          "children": [],
           "url": "/Khu-vực"
-        },
-        {
-          "title": "testssss",
-          "id": 2038266585,
-          "children": [
-            {
-              "title": "test chlld",
-              "id": 1164265422,
-              "children": [
-                {
-                  "id": 2295826433,
-                  "title": "s",
-                  "url": "/ád",
-                  "children": []
-                }
-              ],
-              "url": "/ád"
-            }
-          ],
-          "url": "/ád"
         }
       ],
       "id": 1
@@ -186,17 +190,24 @@
       "iconClass": "medical",
       "children": [
         {
-          "title": "Kinh tế loại A",
           "id": 153685545,
+          "title": "đa",
+          "url": "/ đa",
           "children": [
             {
               "title": "Tài chính loại B",
               "id": 3833154566,
-              "children": [],
+              "children": [
+                {
+                  "title": "ss",
+                  "id": 3591718276,
+                  "children": [],
+                  "url": "/đá"
+                }
+              ],
               "url": "/đaad"
             }
-          ],
-          "url": "/ad"
+          ]
         },
         {
           "title": "Tài chính loại A",
@@ -207,21 +218,15 @@
         {
           "title": "Tài chính loại A",
           "id": 2017709167,
-          "children": [],
-          "url": "/Tài_chính_loại_A"
-        },
-        {
-          "id": 1156825405,
-          "title": "đasssss",
-          "url": "/ádss",
           "children": [
             {
-              "id": 2074318914,
-              "title": "ss",
-              "url": "/ss",
-              "children": []
+              "title": "tests",
+              "id": 1545580066,
+              "children": [],
+              "url": "/test"
             }
-          ]
+          ],
+          "url": "/Tài_chính_loại_A"
         }
       ],
       "id": 2
@@ -230,14 +235,7 @@
       "name": "Giáo dục",
       "url": "/giao-duc",
       "iconClass": "education",
-      "children": [
-        {
-          "title": "ds",
-          "url": "/đa",
-          "children": [],
-          "id": 2847378073
-        }
-      ],
+      "children": [],
       "id": 3
     },
     {
@@ -249,14 +247,7 @@
           "id": 4209891024,
           "title": "Quản lý A",
           "url": "/Quản-lý-A",
-          "children": [
-            {
-              "id": 1217756425,
-              "title": "đa",
-              "url": "/ad",
-              "children": []
-            }
-          ]
+          "children": []
         }
       ],
       "id": 4

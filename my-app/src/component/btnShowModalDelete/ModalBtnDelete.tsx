@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import { deleteDataUser } from "../../store/redux/actions/dataUserActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { StateStore } from "../../store/redux/Store";
 import { useLocation } from "react-router-dom";
-import {
-  deleteSubdMenuAction,
-  updateFieldMenuAction,
-} from "../../store/redux/actions/menuActions";
+import { deleteSubdMenuAction } from "../../store/redux/actions/menuActions";
 import { DeleteOutlined } from "@ant-design/icons";
 
 interface MyModalBtn {
@@ -23,10 +19,9 @@ const ModalBtn = (props: MyModalBtn) => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const { menuDetail, listDataMenu }: any = getMenu;
+  const { menuDetail }: any = getMenu;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const { t } = useTranslation(["homeAdmin"]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -42,9 +37,9 @@ const ModalBtn = (props: MyModalBtn) => {
       deleteUserPromise(dispatch);
     } else if (props.typeDelete === "subMenu") {
       /* Delete sub menu */
-      const removeItemById = (menuData: any, targetId: string | number) => {
+      const removeItemById = (menuData: [], targetId: string | number) => {
         const updatedMenuData = menuData.filter(
-          (item: any) => item.id !== targetId
+          (item: { id: string }) => item.id !== targetId
         );
 
         updatedMenuData.forEach((item: any) => {
@@ -57,7 +52,7 @@ const ModalBtn = (props: MyModalBtn) => {
       };
 
       const newSubmenu = removeItemById(menuDetail.children, props.id);
-      console.log(newSubmenu,"áda")
+      console.log(newSubmenu, "áda");
 
       if (menuDetail && menuDetail.children) {
         const DeleteSubMenuActionPromise = deleteSubdMenuAction(
@@ -68,7 +63,7 @@ const ModalBtn = (props: MyModalBtn) => {
             //   url: "/menu1",
             //   iconClass: "folder-open",
             children: newSubmenu,
-          },
+          }
           // listDataMenu
         );
         DeleteSubMenuActionPromise(dispatch);
@@ -81,7 +76,6 @@ const ModalBtn = (props: MyModalBtn) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
 
   return (
     <>

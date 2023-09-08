@@ -33,6 +33,7 @@ const AddMenu: React.FC = () => {
   return (
     <Suspense fallback={<LoadingCpn />}>
       <h4 className={Styles.titleContent}>Menu</h4>
+      
       <Form
         ref={formRef}
         form={form}
