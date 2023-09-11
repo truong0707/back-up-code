@@ -18,6 +18,7 @@ import { checkIcons } from "../untils/checkIcons";
 import { childrenData } from "../component/tree/TreeMenu";
 import { PlusSquareOutlined, SettingFilled } from "@ant-design/icons";
 import LoadingCpn from "../component/spin/LoadingCpn";
+import ModalCRUDMenu from "../component/admin/menu/ModalCRUDMenu";
 
 const TreeMenu = lazy(() => import("../component/tree/TreeMenu"));
 const BreadcrumbNav = lazy(
@@ -49,6 +50,11 @@ const Dashboard = () => {
   const [collapsed] = useState(false);
   const dispatch = useDispatch();
   const isAdmin = true;
+  const [openModalAddMenu, setopenModalAddMenu] = useState(false);
+
+  const handleOpenModalAddMenu = () => {
+    setopenModalAddMenu(true);
+  };
 
   useEffect(() => {
     const dataMenuPromise = getMenuAction();
@@ -159,11 +165,11 @@ const Dashboard = () => {
                   <div className={Styles.BoxMenu}>
                     <Space>
                       <p className={Styles.titleMenu}>Manager menu</p>
-                      <Link to={"/admin/add-menu"}>
-                        <Tooltip title="Add new Menu">
-                          <PlusSquareOutlined />
-                        </Tooltip>
-                      </Link>
+                      {/* <Link to={"/admin/add-menu"}> */}
+                      <Tooltip title="Add new Menu">
+                        <PlusSquareOutlined onClick={handleOpenModalAddMenu} />
+                      </Tooltip>
+                      {/* </Link> */}
 
                       <Link to={"/admin/delete&update-menu"}>
                         <Tooltip title="Delete/Update Menu">
@@ -180,6 +186,18 @@ const Dashboard = () => {
                   {/* CRUD USER */}
                   <div className={Styles.wrapperContentDoashBoard}>
                     <BreadcrumbNav />
+                    {openModalAddMenu ? (
+                      <>
+                        <ModalCRUDMenu
+                          titleModal={"Update Menu"}
+                          typeModal={"add-menu"}
+                          listDataMenu={[]}
+                          idMenu={""}
+                          openModalAddMenu={openModalAddMenu}
+                          setopenModalAddMenu={setopenModalAddMenu}
+                        />
+                      </>
+                    ) : null}
                     <Outlet />
                   </div>
                 </div>

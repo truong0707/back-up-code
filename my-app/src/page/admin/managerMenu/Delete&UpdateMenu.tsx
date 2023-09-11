@@ -18,10 +18,7 @@ import {
   ScissorOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-
-const ModalUpdateMenu = lazy(
-  () => import("../../../component/admin/menu/ModalUpdateMenu")
-);
+import ModalCRUDMenu from "../../../component/admin/menu/ModalCRUDMenu";
 
 const DeleteMenu = () => {
   const getMenu = useSelector(
@@ -32,7 +29,7 @@ const DeleteMenu = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
-  const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [openModalUpdateMenu, setOpenModalUpdateMenu] = useState(false);
   const [id, setId] = useState<number | string>();
   const [dataUpdateCurrent, setDataUpdateCurrent] = useState<any>();
 
@@ -49,7 +46,8 @@ const DeleteMenu = () => {
 
   const handleClickUpdate = (data: object) => {
     setDataUpdateCurrent(data);
-    setOpenModalUpdate(true);
+    console.log(dataUpdateCurrent, "dataUpdateCurrent");
+    setOpenModalUpdateMenu(true);
   };
 
   const handleOK = () => {
@@ -62,7 +60,6 @@ const DeleteMenu = () => {
 
   const handleCancel = () => {
     setOpen(false);
-    setOpenModalUpdate(false);
   };
 
   const getListDataMenu = listDataMenu.map((data: typeMenuHaveId) => {
@@ -114,18 +111,18 @@ const DeleteMenu = () => {
         />
       </Modal>
 
-      {openModalUpdate && dataUpdateCurrent ? (
-        <>
-          <ModalUpdateMenu
-            openModalUpdate={openModalUpdate}
-            handleCancel={handleCancel}
-            setOpenModalUpdate={setOpenModalUpdate}
-            idMenu={dataUpdateCurrent.id}
-            nameMenu={dataUpdateCurrent.name}
-            urlMenu={dataUpdateCurrent.url}
-            iconClass={dataUpdateCurrent.iconClass}
-          />
-        </>
+      {openModalUpdateMenu && dataUpdateCurrent ? (
+        <ModalCRUDMenu
+          openModalUpdateMenu={openModalUpdateMenu}
+          setOpenModalUpdateMenu={setOpenModalUpdateMenu}
+          titleModal={"update menu"}
+          typeModal={"update-menu"}
+          listDataMenu={[]}
+          idMenu={dataUpdateCurrent.id}
+          namedefault={dataUpdateCurrent.name}
+          urlDefault={dataUpdateCurrent.url}
+          iconDefault={dataUpdateCurrent.iconClass}
+        />
       ) : null}
 
       {getListDataMenu.length === 0 ? (

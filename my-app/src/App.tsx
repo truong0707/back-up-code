@@ -13,7 +13,6 @@ import Admin from "./page/admin/Admin";
 import Navbar from "./component/NavBar/Navbar";
 import Login from "./page/login/Login";
 import Register from "./page/register/Register";
-import AddMenu from "./page/admin/managerMenu/AddMenu";
 import DeleDeleteUpdateMenu from "./page/admin/managerMenu/Delete&UpdateMenu";
 import DetailMenu from "./page/admin/managerMenu/DetailMenu";
 
@@ -35,7 +34,6 @@ const App = () => {
             <Route path="managerUserB" element={<ManagerUserB />} />
             <Route path="home" element={<Admin ifoUser={getUser} />} />
             <Route path="user-detail/:id" element={<UserDetail />} />
-            <Route path="add-menu" element={<AddMenu />} />
             <Route
               path="delete&update-menu"
               element={<DeleDeleteUpdateMenu />}

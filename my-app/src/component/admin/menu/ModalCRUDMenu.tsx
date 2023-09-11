@@ -1,9 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Button, Form, FormInstance, Input, Modal, Space } from "antd";
+import { Button, Form, FormInstance, Input, Modal, Space, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addMenuAction,
   addSubMenuAction,
   updateFieldMenuAction,
+  updateMenuAction,
 } from "../../../store/redux/actions/menuActions";
 import { StateStore } from "../../../store/redux/Store";
 import { v4 as uuidv4 } from "uuid";
@@ -13,6 +15,7 @@ import {
   handleUpdateChildtreeMenu,
 } from "../../../untils/handleArrayMenu";
 import { parserStringToNumber } from "../../../untils/parserStringToNumber";
+import { typeMenu } from "../../../types/Menu";
 
 export interface MyInputSubMenu {
   title: string;
@@ -21,7 +24,8 @@ export interface MyInputSubMenu {
 }
 
 interface MyBtnShowMenuSubProps {
-  typeForm: string;
+  titleModal: string;
+  typeModal: string;
   openModalAddSubMenu?: boolean;
   setopenModalAddSubMenu?: Dispatch<SetStateAction<boolean>>;
   idSubMenu?: string;
@@ -38,11 +42,16 @@ interface MyBtnShowMenuSubProps {
   setTypeParent?: Dispatch<SetStateAction<boolean>>;
   openModalUpdateSubMenu?: boolean;
   setopenModalUpdateSubMenu?: Dispatch<SetStateAction<boolean>>;
-  titleSub?: string;
-  urlSubMenu?: string;
+  namedefault?: string;
+  urlDefault?: string;
+  iconDefault?: string;
+  openModalAddMenu?: boolean;
+  setopenModalAddMenu?: Dispatch<SetStateAction<boolean>>;
+  openModalUpdateMenu?: boolean;
+  setOpenModalUpdateMenu?: Dispatch<SetStateAction<boolean>>;
 }
 
-const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
+const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
   const { menuDetail } = getMenu;
   const dispatch = useDispatch();
@@ -51,19 +60,12 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
   const formRef = React.useRef<FormInstance>(null);
   const [form] = Form.useForm();
 
-  /* updtate  */
   const [inputsCurrent] = useState({
-    title: props.titleSub,
-    url: props.urlSubMenu,
+    title: props.namedefault,
+    urlDefault: props.urlDefault,
+    iconDefault: props.iconDefault,
   });
 
-  const handleCancel = () => {
-    if (props.setopenModalAddSubMenu) {
-      props.setopenModalAddSubMenu(false);
-    } else if (props.setopenModalUpdateSubMenu) {
-      props.setopenModalUpdateSubMenu(false);
-    }
-  };
   useEffect(() => {}, [
     dispatch,
     props,
@@ -77,22 +79,66 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
     title: string;
     url: string;
     children: never[];
+    iconClass: string;
   }) => {
     const newValue = {
       id: parserNumber,
       title: value.title,
       url: value.url,
+      iconClass: value.iconClass,
       children: [],
     };
+    
+    /* update menu */
+    if (props.typeModal === "update-menu") {
+      if (value) {
+        const NewMenu = {
+          name: value.title,
+          url: value.url,
+          iconClass: value.iconClass,
+        };
 
-    if (props.typeForm === "update") {
+        const updateMenuActionPromise = updateMenuAction(props.idMenu, NewMenu);
+        updateMenuActionPromise(dispatch);
+
+        if (props.setOpenModalUpdateMenu) {
+          props.setOpenModalUpdateMenu(false);
+        }
+      } else {
+        message.error("Hãy điền thông tin!", 2.5);
+      }
+    }
+
+    /* add menu */
+    if (props.typeModal === "add-menu") {
+      if (value) {
+        const newValue: typeMenu = {
+          name: value.title,
+          url: value.url,
+          iconClass: value.iconClass,
+          children: [],
+        };
+        const addMenuActionPromise = addMenuAction(newValue);
+        addMenuActionPromise(dispatch);
+        formRef.current?.resetFields();
+        if (props.setopenModalAddMenu) {
+          props.setopenModalAddMenu(false);
+        }
+      } else {
+        message.error("Hãy điền thông tin!", 2.5);
+      }
+    }
+
+    /* update Sub */
+    if (props.typeModal === "update") {
       if (props.idSubMenu) {
-        /* update */
+        console.log(newValue);
         const newSubmenu = handleUpdateChildtreeMenu(
           menuDetail.children,
           `${value.title}`,
           props.idSubMenu,
-          `${value.url}`
+          `${value.url}`,
+          `${value.iconClass}`
         );
 
         if (menuDetail && menuDetail.children) {
@@ -115,9 +161,10 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
       }
     }
 
-    /* Add menu */
-    if (props.typeForm === "add") {
+    /* Add sub menu */
+    if (props.typeModal === "add") {
       const idMenu = parserStringToNumber(props.idMenu);
+
       if (menuDetail && menuDetail.children) {
         if (props.idSubMenu) {
           const idMenuSub = parserStringToNumber(props.idSubMenu);
@@ -127,7 +174,7 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
             idMenuSub,
             newValue
           );
-          // eslint-disable-next-line array-callback-return
+
           const newData = resultAddSub.filter((menu) => {
             if (menu.id === idMenu) {
               return menu;
@@ -163,25 +210,36 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
     }
   };
 
+  /* handle cancle */
   const handleClose = () => {
     if (props.setopenModalAddSubMenu) {
       props.setopenModalAddSubMenu(false);
+    } else if (props.setopenModalAddMenu) {
+      props.setopenModalAddMenu(false);
+    } else if (props.setopenModalUpdateSubMenu) {
+      props.setopenModalUpdateSubMenu(false);
+    } else if (props.setOpenModalUpdateMenu) {
+      props.setOpenModalUpdateMenu(false);
     }
   };
 
   return (
     <>
       <Modal
-        title="Thêm mới sub menu"
+        title={props.titleModal}
         open={
           props.openModalAddSubMenu
             ? props.openModalAddSubMenu
             : props.openModalUpdateSubMenu
             ? props.openModalUpdateSubMenu
+            : props.openModalAddMenu
+            ? props.openModalAddMenu
+            : props.openModalUpdateMenu
+            ? props.openModalUpdateMenu
             : undefined
         }
         footer={null}
-        onCancel={handleCancel}
+        onCancel={handleClose}
       >
         <Form
           ref={formRef}
@@ -191,12 +249,13 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
           autoComplete="off"
           initialValues={{
             title: inputsCurrent.title,
-            url: inputsCurrent.url,
+            url: inputsCurrent.urlDefault,
+            iconClass: inputsCurrent.iconDefault,
           }}
         >
           <Form.Item
             name="title"
-            label="url"
+            label="name"
             rules={[
               {
                 required: true,
@@ -209,6 +268,19 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
           </Form.Item>
 
           <Form.Item
+            name="iconClass"
+            label="iconClass"
+            rules={[
+              {
+                required: true,
+                whitespace: true /* message:'Hãy diền title!' */,
+              },
+              { type: "string", min: 1 },
+            ]}
+          >
+            <Input name="title" placeholder="title menu" />
+          </Form.Item>
+          <Form.Item
             name="url"
             label="url"
             rules={[
@@ -218,7 +290,6 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
           >
             <Input name="url" placeholder="url" />
           </Form.Item>
-
           <Form.Item>
             <Space style={{ marginTop: "10px" }}>
               <Button type="primary" htmlType="submit">
@@ -236,4 +307,4 @@ const ModalAddAndUpdateSubMenu = (props: MyBtnShowMenuSubProps) => {
   );
 };
 
-export default ModalAddAndUpdateSubMenu;
+export default ModalCRUDMenu;

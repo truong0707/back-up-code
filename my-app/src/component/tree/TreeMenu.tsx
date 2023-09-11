@@ -10,6 +10,7 @@ import { checkIcons } from "../../untils/checkIcons";
 import Styles from "./TreeMenu.module.scss";
 
 export interface childrenData {
+  iconClass: string;
   id: number | string;
   title: string;
   url: string;

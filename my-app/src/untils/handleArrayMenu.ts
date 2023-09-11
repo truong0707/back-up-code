@@ -80,7 +80,8 @@ export const handleUpdateChildtreeMenu = (
   children: childrenData[] | undefined,
   titleSub: string,
   idSub: number | string,
-  urlSub: string
+  urlSub: string,
+  iconClass: string,
 ): {}[] => {
   if (!children || children.length === 0) {
     return [];
@@ -92,11 +93,13 @@ export const handleUpdateChildtreeMenu = (
         id: idSub,
         title: titleSub,
         url: urlSub,
+        iconClass: iconClass,
         children: handleUpdateChildtreeMenu(
           childMenu.children,
           titleSub,
           idSub,
-          urlSub
+          urlSub,
+          iconClass,
         ),
       };
     }
@@ -108,9 +111,11 @@ export const handleUpdateChildtreeMenu = (
         childMenu.children,
         titleSub,
         idSub,
-        urlSub
+        urlSub,
+        iconClass
       ),
       url: childMenu.url,
+      iconClass: childMenu.iconClass
     };
   });
 };

@@ -24,26 +24,6 @@
       "email": "dá",
       "password": "đa",
       "id": 6
-    },
-    {
-      "email": "truong@gmail.com",
-      "password": "123123",
-      "id": 7
-    },
-    {
-      "email": "truong@gmail.com",
-      "password": "123456",
-      "id": 8
-    },
-    {
-      "email": "truong@gmial.ocm",
-      "password": "ádas",
-      "id": 9
-    },
-    {
-      "email": "truong@gmail.com",
-      "password": "1",
-      "id": 10
     }
   ],
   "register": [
@@ -120,165 +100,57 @@
   ],
   "menus": [
     {
-      "name": "Văn hoá - Thông tin",
-      "url": "/văn-hoá-Thông-tin",
-      "iconClass": "quyen",
+      "name": "Văn hóa - thông tin ",
+      "url": "/aaaaas",
+      "iconClass": "folder",
       "children": [
         {
-          "title": "Quản lý dịch vụ văn hóas",
-          "id": 1229769943,
+          "title": "Quản lý danh hiệu",
+          "id": 1726991647,
           "children": [
             {
-              "title": "Quản lý dịch vụ văn hóa",
-              "id": 2698388950,
+              "id": 1870854039,
+              "title": "sub con",
+              "url": "/ádad",
+              "iconClass": "đấ",
               "children": [
                 {
-                  "title": "ss",
-                  "id": 1184753860,
+                  "title": "aas",
+                  "id": 1157798149,
                   "children": [],
-                  "url": "/s"
+                  "url": "â",
+                  "iconClass": "aaa"
                 }
-              ],
-              "url": "/Quảnly"
-            },
-            {
-              "title": "sa",
-              "id": 2146115943,
-              "children": [
-                {
-                  "title": "ssss",
-                  "id": 1511309462,
-                  "children": [],
-                  "url": "/ss"
-                }
-              ],
-              "url": "/da"
-            },
-            {
-              "title": "s",
-              "id": 1586953760,
-              "children": [],
-              "url": "/s"
-            },
-            {
-              "title": "ád",
-              "id": 626696153,
-              "children": [],
-              "url": "ád"
+              ]
             }
           ],
-          "url": "/Quản_lý dịch_vụ_văn_hóa"
+          "url": "/ss",
+          "iconClass": "user"
         },
         {
-          "title": "Văn hoá thể thaos",
-          "id": 1427838883,
+          "title": "Mô hình văn hóa",
+          "id": 1861324931,
           "children": [],
-          "url": "/Văn-hoá-thể-thao"
-        },
-        {
-          "title": "Khu vực",
-          "id": 3199428424,
-          "children": [],
-          "url": "/Khu-vực"
+          "url": "/đá",
+          "iconClass": "code"
         }
       ],
       "id": 1
     },
     {
-      "name": "Y Tế",
-      "url": "/y-te",
-      "iconClass": "medical",
-      "children": [
-        {
-          "id": 153685545,
-          "title": "đa",
-          "url": "/ đa",
-          "children": [
-            {
-              "title": "Tài chính loại B",
-              "id": 3833154566,
-              "children": [
-                {
-                  "title": "ss",
-                  "id": 3591718276,
-                  "children": [],
-                  "url": "/đá"
-                }
-              ],
-              "url": "/đaad"
-            }
-          ]
-        },
-        {
-          "title": "Tài chính loại A",
-          "id": 2476877036,
-          "children": [],
-          "url": "/d"
-        },
-        {
-          "title": "Tài chính loại A",
-          "id": 2017709167,
-          "children": [
-            {
-              "title": "tests",
-              "id": 1545580066,
-              "children": [],
-              "url": "/test"
-            }
-          ],
-          "url": "/Tài_chính_loại_A"
-        }
-      ],
-      "id": 2
-    },
-    {
-      "name": "Giáo dục",
-      "url": "/giao-duc",
-      "iconClass": "education",
-      "children": [],
-      "id": 3
-    },
-    {
-      "name": "Quản lý Số điện thoại",
-      "url": "/Quản_lý_số_điện_thoại",
-      "iconClass": "phone",
-      "children": [
-        {
-          "id": 4209891024,
-          "title": "Quản lý A",
-          "url": "/Quản-lý-A",
-          "children": []
-        }
-      ],
-      "id": 4
-    },
-    {
-      "name": "Tư pháp",
-      "url": "/tu-phap",
-      "iconClass": "Justice",
-      "children": [
-        {
-          "title": "Quản lý A",
-          "url": "/Quản_lý_A",
-          "children": [],
-          "id": 1127137184
-        }
-      ],
-      "id": 5
-    },
-    {
-      "name": "Tài chính - kế hoạch",
-      "url": "/Tài-chính-kế-hoạch",
+      "name": "Quản Lý thiết chết văn hóa",
+      "url": "/đa",
       "iconClass": "coin",
       "children": [
         {
-          "title": "Quản lý tài chính",
-          "url": "/Quản_lý_tài_chính",
-          "children": [],
-          "id": 2214427725
+          "id": 2925461288,
+          "title": "test",
+          "url": "/ad",
+          "iconClass": "education",
+          "children": []
         }
       ],
-      "id": 6
+      "id": 2
     }
   ],
   "profile": {

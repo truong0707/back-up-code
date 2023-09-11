@@ -1,5 +1,5 @@
 import { Alert, Button, Modal, Space, Table } from "antd";
-import React, { lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../../store/redux/Store";
@@ -18,7 +18,8 @@ import {
   deleteMenuAction,
   getDetailMenuAction,
 } from "../../../store/redux/actions/menuActions";
-import ModalAddUpdateSubMenu from "../../../component/admin/menu/ModalAddAndUpdateSubMenu";
+import ModalCRUDMenu from "../../../component/admin/menu/ModalCRUDMenu";
+import { checkIcons } from "../../../untils/checkIcons";
 
 const DetailMenu = () => {
   const location = useLocation();
@@ -70,6 +71,7 @@ const DetailMenu = () => {
   }, [dispatch, pathId]);
 
   const handleClickUpdate = (data: TypeSubMenuDontChilden) => {
+    console.log(data, "updat");
     setDataUpdateCurrent(data);
     setopenModalUpdateSubMenu(true);
   };
@@ -118,6 +120,17 @@ const DetailMenu = () => {
       key: "url",
     },
     {
+      title: `icon`,
+      dataIndex: "iconClass",
+      key: "iconClass",
+      render: (_, record) => (
+        <FontAwesomeIcon
+          className={"icon"}
+          icon={checkIcons(record.iconClass)}
+        />
+      ),
+    },
+    {
       title: `Thao tác`,
       key: "action",
       render: (_, record) => (
@@ -150,6 +163,7 @@ const DetailMenu = () => {
                 title: record.title,
                 idSubMenu: record.id,
                 urlSubMenu: record.url,
+                iconClassSub: record.iconClass,
                 listDataMenu: listDataMenu,
               })
             }
@@ -207,23 +221,26 @@ const DetailMenu = () => {
         Thêm mới
       </Button>
 
-      {/* if Update  */}
+      {/* if Update sub menu  */}
       {openModalUpdateSubMenu ? (
-        <ModalAddUpdateSubMenu
+        <ModalCRUDMenu
+          titleModal={"Update Submenu"}
           idMenu={pathId}
           listDataMenu={dataUpdateCurrent.listDataMenu}
           idSubMenu={dataUpdateCurrent.idSubMenu}
           openModalUpdateSubMenu={openModalUpdateSubMenu}
           setopenModalUpdateSubMenu={setopenModalUpdateSubMenu}
-          titleSub={dataUpdateCurrent.title}
-          urlSubMenu={dataUpdateCurrent.urlSubMenu}
-          typeForm={"update"}
+          namedefault={dataUpdateCurrent.title}
+          urlDefault={dataUpdateCurrent.urlSubMenu}
+          iconDefault={dataUpdateCurrent.iconClassSub}
+          typeModal={"update"}
         />
       ) : null}
 
-      {/* if Add  */}
+      {/* if Add first sub menu  */}
       {openModalAddSubMenu && typeParent ? (
-        <ModalAddUpdateSubMenu
+        <ModalCRUDMenu
+          titleModal={"Add sub menu"}
           parentType={typeParent}
           setTypeParent={setTypeParent}
           idMenu={dataAddCurrent.pathId}
@@ -231,13 +248,15 @@ const DetailMenu = () => {
           menuDetail={dataAddCurrent.menuDetail}
           setopenModalAddSubMenu={setopenModalAddSubMenu}
           openModalAddSubMenu={openModalAddSubMenu}
-          typeForm={"add"}
+          typeModal={"add"}
         />
       ) : null}
 
+       {/* if Add follow sub menu  */}
       {openModalAddSubMenu ? (
-        <ModalAddUpdateSubMenu
-          typeForm={"add"}
+        <ModalCRUDMenu
+          titleModal={"Add sub menu"}
+          typeModal={"add"}
           openModalAddSubMenu={openModalAddSubMenu}
           setopenModalAddSubMenu={setopenModalAddSubMenu}
           idMenu={pathId}

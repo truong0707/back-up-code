@@ -21,6 +21,7 @@ export interface DataTypecolumnsMenu {
   id: string;
   children: any[];
   key: number;
+  iconClass: string
 }
 
 
@@ -35,6 +36,7 @@ export interface TypeSubmenu {
 export interface  TypeSubMenuDontChilden {
   idSubMenu: string | number;
   title: string;
+  iconClassSub: string;
   urlSubMenu: string
   listDataMenu: any
 }
