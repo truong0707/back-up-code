@@ -88,7 +88,7 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
       iconClass: value.iconClass,
       children: [],
     };
-    
+
     /* update menu */
     if (props.typeModal === "update-menu") {
       if (value) {
@@ -175,6 +175,7 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
             newValue
           );
 
+          // eslint-disable-next-line array-callback-return
           const newData = resultAddSub.filter((menu) => {
             if (menu.id === idMenu) {
               return menu;
@@ -210,7 +211,7 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
     }
   };
 
-  /* handle cancle */
+  /* handle cancle  */
   const handleClose = () => {
     if (props.setopenModalAddSubMenu) {
       props.setopenModalAddSubMenu(false);

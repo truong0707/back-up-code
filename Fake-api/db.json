@@ -24,6 +24,11 @@
       "email": "dá",
       "password": "đa",
       "id": 6
+    },
+    {
+      "email": "sss@gmail.com",
+      "password": "s",
+      "id": 7
     }
   ],
   "register": [
@@ -86,12 +91,6 @@
   ],
   "users": [
     {
-      "name": "Truong Thanh",
-      "email": "truong@gmail.com",
-      "numberPhone": "0707241906",
-      "id": 1
-    },
-    {
       "name": "sssssssssssssss",
       "email": "ssssss@gmail.com",
       "numberPhone": "546354354321",
@@ -100,19 +99,17 @@
   ],
   "menus": [
     {
-      "name": "Văn hóa - thông tin ",
+      "name": "Văn hóa - Thông tin ",
       "url": "/aaaaas",
       "iconClass": "folder",
       "children": [
         {
-          "title": "Quản lý danh hiệu",
+          "title": "Quản lý danh hiệu & Mô hình",
           "id": 1726991647,
           "children": [
             {
-              "id": 1870854039,
               "title": "sub con",
-              "url": "/ádad",
-              "iconClass": "đấ",
+              "id": 1870854039,
               "children": [
                 {
                   "title": "aas",
@@ -121,26 +118,86 @@
                   "url": "â",
                   "iconClass": "aaa"
                 }
-              ]
+              ],
+              "url": "/ádad",
+              "iconClass": "đấ"
             }
           ],
           "url": "/ss",
           "iconClass": "user"
         },
         {
-          "title": "Mô hình văn hóa",
           "id": 1861324931,
+          "title": "Quản lý thiết chế  văn hóa",
+          "url": "/quan-ly-thiet-che-van-hoa",
+          "iconClass": "code",
+          "children": [
+            {
+              "title": "test",
+              "id": 2728824585,
+              "children": [],
+              "url": "/ss",
+              "iconClass": "ss"
+            }
+          ]
+        },
+        {
+          "title": "Quản lý da đình - bạo lực",
+          "id": 560811782,
+          "children": [
+            {
+              "id": 1200169956,
+              "title": "test",
+              "url": "/s",
+              "iconClass": "sss",
+              "children": []
+            }
+          ],
+          "url": "/ss",
+          "iconClass": "education"
+        },
+        {
+          "title": "Quản lý dịch vụ văn hóa",
+          "id": 423791788,
           "children": [],
-          "url": "/đá",
-          "iconClass": "code"
+          "url": "/quan-ly-dich-vu-van-hoa",
+          "iconClass": "s"
+        },
+        {
+          "id": 2235140532,
+          "title": "Văn hóa thể thao",
+          "url": "/Văn-hóa-thể-thao",
+          "iconClass": "sss",
+          "children": []
+        },
+        {
+          "id": 615571635,
+          "title": "Di tích văn hóa",
+          "url": "/di-tich-van-hoa",
+          "iconClass": "ss",
+          "children": []
+        },
+        {
+          "id": 3412309432,
+          "title": "Quản lý  quảng cáo",
+          "url": "/s",
+          "iconClass": "ss",
+          "children": []
+        },
+        {
+          "id": 1266008823,
+          "title": "s",
+          "url": "/s",
+          "iconClass": "s",
+          "children": []
         }
       ],
       "id": 1
     },
     {
-      "name": "Quản Lý thiết chết văn hóa",
-      "url": "/đa",
-      "iconClass": "coin",
+      "name": "Dân tộc",
+      "url": "/dan-toc",
+      "iconClass": "user",
       "children": [
         {
           "id": 2925461288,
@@ -151,6 +208,130 @@
         }
       ],
       "id": 2
+    },
+    {
+      "name": "Y tế",
+      "url": "/y-te",
+      "iconClass": "medical",
+      "children": [
+        {
+          "id": 107686053,
+          "title": "ss",
+          "url": "/ss",
+          "iconClass": "ss",
+          "children": []
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "Lao động - Thương binh xã hội",
+      "url": "/lao-dong-thuong-binh-xa-hoi",
+      "iconClass": "ss",
+      "children": [
+        {
+          "id": 2995539325,
+          "title": "ss",
+          "url": "/ss",
+          "iconClass": "ss",
+          "children": []
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Tài chính - Kế hoạch",
+      "url": "Tài-chính-Kế-hoạch",
+      "iconClass": "coin",
+      "children": [
+        {
+          "id": 1916043691,
+          "title": "ss",
+          "url": "/ss",
+          "iconClass": "ss",
+          "children": []
+        }
+      ],
+      "id": 5
+    },
+    {
+      "name": "Kinh tế",
+      "url": "/kinh-te",
+      "iconClass": "code",
+      "children": [
+        {
+          "id": 3892488402,
+          "title": "ss",
+          "url": "/sss",
+          "iconClass": "sss",
+          "children": []
+        }
+      ],
+      "id": 6
+    },
+    {
+      "name": "Quản lý văn bản pháp luật",
+      "url": "/Quản-lý-văn-bản-pháp-luật",
+      "iconClass": "ss",
+      "children": [
+        {
+          "id": 2856107660,
+          "title": "ss",
+          "url": "/s",
+          "iconClass": "ss",
+          "children": []
+        }
+      ],
+      "id": 7
+    },
+    {
+      "name": "Quản lý đô thị",
+      "url": "/Quản-lý-đô-thị",
+      "iconClass": "ss",
+      "children": [],
+      "id": 8
+    },
+    {
+      "name": "Nội vụ",
+      "url": "/noi-vu",
+      "iconClass": "s",
+      "children": [],
+      "id": 9
+    },
+    {
+      "name": "Tư pháp",
+      "url": "/tu-phap",
+      "iconClass": "Justice",
+      "children": [],
+      "id": 10
+    },
+    {
+      "name": "Giáo dục - đào tạo",
+      "url": "/giao-duc-dao-tao",
+      "iconClass": "education",
+      "children": [],
+      "id": 11
+    },
+    {
+      "name": "Quản lý chợ",
+      "url": "/quan-ly-cho",
+      "iconClass": "s",
+      "children": [],
+      "id": 12
+    },
+    {
+      "name": "Hội đồng nhân dân",
+      "url": "/Hội-đồng-nhân-dân",
+      "iconClass": "ss",
+      "children": [],
+      "id": 13
+    },
+    {
+      "name": "Quản lý dự án đầu tư  xây dựng",
+      "url": "/Quản-lý-dự-án-đầu-tư-xây-dựng",
+      "iconClass": "ss",
+      "children": [],
+      "id": 14
     }
   ],
   "profile": {

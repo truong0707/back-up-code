@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { DownOutlined } from "@ant-design/icons";
-import { Tree } from "antd";
+import { Tooltip, Tree } from "antd";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { StateStore } from "../../store/redux/Store";
@@ -8,6 +8,7 @@ import { getMenuAction } from "../../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../../untils/checkIcons";
 import Styles from "./TreeMenu.module.scss";
+import TooltipStyle from "../tooltip/TooltipStyle";
 
 export interface childrenData {
   iconClass: string;
@@ -56,7 +57,9 @@ const TreeMenu: React.FC = () => {
             className="link"
             to={`/admin/DetailMenu/${data.id}`}
           >
-            <b style={{ color: "#000", fontWeight: "500" }}>{data.name}</b>
+            <Tooltip title="Click vào để crud sub" color={"#2db7f5"}>
+              <b style={{ color: "#000", fontWeight: "500" }}>{data.name}</b>
+            </Tooltip>
           </Link>
         ),
         key: data.id,
