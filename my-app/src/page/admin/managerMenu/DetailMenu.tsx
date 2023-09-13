@@ -267,7 +267,7 @@ const DetailMenu = () => {
       ) : null}
 
       {getMenu && menuDetail ? (
-        <Table columns={columns} dataSource={handleData(menuDetail.children)} />
+        <Table  pagination={false} columns={columns} dataSource={handleData(menuDetail.children)} />
       ) : null}
     </>
   );

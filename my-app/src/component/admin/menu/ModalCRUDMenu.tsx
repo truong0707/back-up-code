@@ -265,7 +265,7 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
               { type: "string", min: 1 },
             ]}
           >
-            <Input name="title" placeholder="title menu" />
+            <Input placeholder="title menu" />
           </Form.Item>
 
           <Form.Item
@@ -274,12 +274,12 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
             rules={[
               {
                 required: true,
-                whitespace: true /* message:'Hãy diền title!' */,
-              },
+                whitespace: true,
+              },  
               { type: "string", min: 1 },
             ]}
           >
-            <Input name="title" placeholder="title menu" />
+            <Input placeholder="title menu" />
           </Form.Item>
           <Form.Item
             name="url"

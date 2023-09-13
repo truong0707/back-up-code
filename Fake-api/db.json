@@ -200,11 +200,11 @@
       "iconClass": "user",
       "children": [
         {
-          "id": 2925461288,
           "title": "test",
+          "id": 2925461288,
+          "children": [],
           "url": "/ad",
-          "iconClass": "education",
-          "children": []
+          "iconClass": "education"
         }
       ],
       "id": 2
