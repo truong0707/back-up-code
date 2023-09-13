@@ -9,6 +9,7 @@ import {
 } from "../constants/UserContants";
 import { Dispatch } from "redux";
 import userServices from "../../../services/user";
+import { message } from "antd";
 
 /* Login */
 export function login(email: string, password: string) {
@@ -19,6 +20,7 @@ export function login(email: string, password: string) {
 
       /// save localStorage
       localStorage.setItem("userInfo", JSON.stringify(data));
+      message.info("Hi user!")
     } catch (error: any) {
       if (error.message) {
         dispatch({
@@ -43,7 +45,6 @@ export const logout = () => (dispatch: Dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   document.location.href = "/login";
-  alert("bye user");
 };
 
 // register
@@ -70,9 +71,7 @@ export const register =
       /// save localStorage
       document.location.href = "/admin/home";
       localStorage.setItem("userInfo", JSON.stringify(data));
-      alert(
-        "Chào mừng bạn đã đến với trang web của tôi!"
-      );
+      message.info("welcome!")
     } catch (error: any) {
       if (error.message) {
         dispatch({

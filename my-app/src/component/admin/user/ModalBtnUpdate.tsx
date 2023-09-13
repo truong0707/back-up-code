@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { FormInstance, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Form, Input, Space } from "antd";
 import { updateDataUser } from "../../../store/redux/actions/dataUserActions";
 import { TypeObjectInput } from "../../../page/login/Login";
-import { StateStore } from "../../../store/redux/Store";
-import AlertNotificate from "../../alert/AlertNotificate";
 import { useTranslation } from "react-i18next";
 import userServices from "../../../services/user";
 
 const ModalBtnUpdate = (props: { idUser: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState<TypeObjectInput>({});
-  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
 

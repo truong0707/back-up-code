@@ -26,8 +26,8 @@ interface DataType {
 
 const ManagerUserA = () => {
   const { t } = useTranslation(["homeAdmin"]);
-  const dataUsers = useSelector((state: StateStore) => state.dataUsers); // lấy dữ liệu từ kho redux
-  const { /* loading, */ error, listDataUsers } = dataUsers;
+  const dataUsers = useSelector((state: StateStore) => state.dataUsers);
+  const { error, listDataUsers } = dataUsers;
   const dispatch = useDispatch();
 
   const columns: ColumnsType<DataType> = [

@@ -118,10 +118,7 @@ export function updateFieldMenuAction(id: string | number, inputData: {}) {
   };
 }
 
-export function deleteSubdMenuAction(
-  id: string | number,
-  inputData: {}
-) {
+export function deleteSubdMenuAction(id: string | number, inputData: {}) {
   return async (dispatch: Dispatch) => {
     try {
       const { data } = await menuServices.updateFieldMenuApi(id, inputData);

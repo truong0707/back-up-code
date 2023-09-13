@@ -12,8 +12,8 @@ const UserDetail = () => {
   const dispatch = useDispatch();
   const dataUsers = useSelector((state: StateStore) => state.dataUsers);
   const location = useLocation();
-  const pathId = location.pathname.split("/")[3]; /* cat id  params*/
-  const { dataUserDetail }: any = dataUsers;
+  const pathId = location.pathname.split("/")[3];
+  const { dataUserDetail } = dataUsers;
 
   useEffect(() => {
     const getUserDetailPromise = getDataDetailUser(pathId);
@@ -24,17 +24,8 @@ const UserDetail = () => {
     <>
       <Suspense fallback={<LoadingCpn />}>
         {dataUserDetail ? (
-          <Card
-            hoverable
-            style={{ width: "100%" }}
-            // cover={
-            //   <img
-            //     alt="example"
-            //     src=""
-            //   />
-            // }
-          >
-            <Meta title="User Detail" /* description="www.instagram.com" */ />
+          <Card hoverable style={{ width: "100%" }}>
+            <Meta title="User Detail" />
             <p>name: {`${dataUserDetail.name}`}</p>
             <p>id: {`${dataUserDetail.id}`}</p>
             <p>email: {`${dataUserDetail.email}`}</p>

@@ -30,7 +30,11 @@ export interface StateStore {
     msgAddSuccess: string;
     msgDeleteSuccess: string;
     msgDeleteError: string;
-    dataUserDetail: [];
+    dataUserDetail: {
+      name: string,
+      id: string,
+      email: string
+    };
   };
   userLogin: {
     loading: boolean;

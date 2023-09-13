@@ -25,8 +25,8 @@ const DetailMenu = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[3];
   const getMenu = useSelector((state: StateStore) => state.MenuAdmin);
-  const { menuDetail }: any = getMenu;
-  const { listDataMenu }: any = getMenu;
+  const { menuDetail } = getMenu;
+  const { listDataMenu } = getMenu;
   const dispatch = useDispatch();
   const { t } = useTranslation(["homeAdmin"]);
   const [open, setOpen] = useState(false);
@@ -71,7 +71,6 @@ const DetailMenu = () => {
   }, [dispatch, pathId]);
 
   const handleClickUpdate = (data: TypeSubMenuDontChilden) => {
-    console.log(data, "updat");
     setDataUpdateCurrent(data);
     setopenModalUpdateSubMenu(true);
   };
@@ -252,7 +251,7 @@ const DetailMenu = () => {
         />
       ) : null}
 
-       {/* if Add follow sub menu  */}
+      {/* if Add follow sub menu  */}
       {openModalAddSubMenu ? (
         <ModalCRUDMenu
           titleModal={"Add sub menu"}
@@ -266,8 +265,12 @@ const DetailMenu = () => {
         />
       ) : null}
 
-      {getMenu && menuDetail ? (
-        <Table  pagination={false} columns={columns} dataSource={handleData(menuDetail.children)} />
+      {menuDetail ? (
+        <Table
+          pagination={false}
+          columns={columns}
+          dataSource={handleData(menuDetail.children)}
+        />
       ) : null}
     </>
   );

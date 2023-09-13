@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Modal, Tooltip, Tree } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,7 +46,6 @@ const DeleteMenu = () => {
 
   const handleClickUpdate = (data: object) => {
     setDataUpdateCurrent(data);
-    console.log(dataUpdateCurrent, "dataUpdateCurrent");
     setOpenModalUpdateMenu(true);
   };
 

@@ -260,7 +260,8 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
             rules={[
               {
                 required: true,
-                whitespace: true /* message:'Hãy diền title!' */,
+                whitespace: true,
+                message: "'name' is required!",
               },
               { type: "string", min: 1 },
             ]}
@@ -275,7 +276,7 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
               {
                 required: true,
                 whitespace: true,
-              },  
+              },
               { type: "string", min: 1 },
             ]}
           >
@@ -297,7 +298,7 @@ const ModalCRUDMenu = (props: MyBtnShowMenuSubProps) => {
                 Submit
               </Button>
 
-              <Button onClick={handleClose} type="primary">
+              <Button onClick={handleClose} type="primary" ghost>
                 Cancel
               </Button>
             </Space>

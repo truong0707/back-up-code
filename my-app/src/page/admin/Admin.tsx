@@ -34,6 +34,7 @@ const Admin = (props: MypropsAmin) => {
           </p>
 
           <SelectOptionLan />
+          
           <Button onClick={handleLogOut} type="primary">
             {t("adminHome.log_out")}
           </Button>

@@ -16,7 +16,7 @@ import { getMenuAction } from "../store/redux/actions/menuActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { checkIcons } from "../untils/checkIcons";
 import { childrenData } from "../component/tree/TreeMenu";
-import { PlusSquareOutlined, SettingFilled, InfoCircleOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined, SettingFilled } from "@ant-design/icons";
 import LoadingCpn from "../component/spin/LoadingCpn";
 import ModalCRUDMenu from "../component/admin/menu/ModalCRUDMenu";
 
@@ -130,9 +130,7 @@ const Dashboard = () => {
       <Space>{t(`MenuAdmin.menu_dynamic`)}</Space>,
       "4",
       <AppstoreOutlined />,
-
       ItemDataMenu()
-
       // [
       //   getItem("Option 9", "9"),
       //   getItem("Submenu", "sub3", null, [
@@ -165,21 +163,20 @@ const Dashboard = () => {
                   <div className={Styles.BoxMenu}>
                     <Space>
                       <p className={Styles.titleMenu}>Manager menu</p>
-                      <Tooltip  color="#2db7f5" defaultOpen title="Add new Menu">
+                      <Tooltip color="#2db7f5" defaultOpen title="Add new Menu">
                         <PlusSquareOutlined onClick={handleOpenModalAddMenu} />
                       </Tooltip>
 
                       <Link to={"/admin/delete&update-menu"}>
-                        <Tooltip placement="right" color="#2db7f5" defaultOpen title="Delete/Update Menu">
+                        <Tooltip
+                          placement="right"
+                          color="#2db7f5"
+                          defaultOpen
+                          title="Delete/Update Menu"
+                        >
                           <SettingFilled spin />
                         </Tooltip>
                       </Link>
-
-                      {/* <Link to={"/admin/delete&update-menu"}>
-                        <Tooltip title="you can scoll menu" placement="right" defaultOpen color="#2db7f5">
-                          <InfoCircleOutlined />
-                        </Tooltip>
-                      </Link> */}
                     </Space>
                     <TreeMenu />
                   </div>

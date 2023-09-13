@@ -29,6 +29,26 @@
       "email": "sss@gmail.com",
       "password": "s",
       "id": 7
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "aa",
+      "id": 8
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "sss",
+      "id": 9
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "ss",
+      "id": 10
+    },
+    {
+      "email": "user@gmaill.com",
+      "password": "sss",
+      "id": 11
     }
   ],
   "register": [
@@ -87,6 +107,14 @@
       "confirmPass": "aaa",
       "numberPhone": "3234234234",
       "id": 7
+    },
+    {
+      "name": "User",
+      "email": "user@gmail.com",
+      "password": "aaaaaa",
+      "confirmPass": "aaaaaa",
+      "numberPhone": "123113123",
+      "id": 8
     }
   ],
   "users": [
@@ -108,29 +136,35 @@
           "id": 1726991647,
           "children": [
             {
-              "title": "sub con",
               "id": 1870854039,
+              "title": "sub con",
+              "url": "/ádad",
+              "iconClass": "Justice",
               "children": [
                 {
                   "title": "aas",
                   "id": 1157798149,
-                  "children": [],
+                  "children": [
+                    {
+                      "id": 3537183024,
+                      "title": "test",
+                      "url": "/ad",
+                      "iconClass": "ss",
+                      "children": []
+                    }
+                  ],
                   "url": "â",
                   "iconClass": "aaa"
                 }
-              ],
-              "url": "/ádad",
-              "iconClass": "đấ"
+              ]
             }
           ],
           "url": "/ss",
           "iconClass": "user"
         },
         {
-          "id": 1861324931,
           "title": "Quản lý thiết chế  văn hóa",
-          "url": "/quan-ly-thiet-che-van-hoa",
-          "iconClass": "code",
+          "id": 1861324931,
           "children": [
             {
               "title": "test",
@@ -139,18 +173,20 @@
               "url": "/ss",
               "iconClass": "ss"
             }
-          ]
+          ],
+          "url": "/quan-ly-thiet-che-van-hoa",
+          "iconClass": "code"
         },
         {
           "title": "Quản lý da đình - bạo lực",
           "id": 560811782,
           "children": [
             {
-              "id": 1200169956,
               "title": "test",
+              "id": 1200169956,
+              "children": [],
               "url": "/s",
-              "iconClass": "sss",
-              "children": []
+              "iconClass": "sss"
             }
           ],
           "url": "/ss",
@@ -161,35 +197,28 @@
           "id": 423791788,
           "children": [],
           "url": "/quan-ly-dich-vu-van-hoa",
-          "iconClass": "s"
+          "iconClass": "coin"
         },
         {
-          "id": 2235140532,
           "title": "Văn hóa thể thao",
+          "id": 2235140532,
+          "children": [],
           "url": "/Văn-hóa-thể-thao",
-          "iconClass": "sss",
-          "children": []
+          "iconClass": "medical"
         },
         {
-          "id": 615571635,
           "title": "Di tích văn hóa",
+          "id": 615571635,
+          "children": [],
           "url": "/di-tich-van-hoa",
-          "iconClass": "ss",
-          "children": []
+          "iconClass": "ss"
         },
         {
-          "id": 3412309432,
           "title": "Quản lý  quảng cáo",
+          "id": 3412309432,
+          "children": [],
           "url": "/s",
-          "iconClass": "ss",
-          "children": []
-        },
-        {
-          "id": 1266008823,
-          "title": "s",
-          "url": "/s",
-          "iconClass": "s",
-          "children": []
+          "iconClass": "ss"
         }
       ],
       "id": 1
